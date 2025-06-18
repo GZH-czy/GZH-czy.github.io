@@ -231,10 +231,3 @@ new ParticleBackground(document.body, {
 
 }();
 
-// 移动端推荐配置
-new ParticleBackground(container, {
-    particleCount: 60,
-    maxDistance: 4000,
-    lineWidth: 0.8
-})
-
