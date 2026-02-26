@@ -6,7 +6,7 @@
   <link href="https://love.gzh-czy.icu/atom.xml" rel="self"/>
   
   <link href="https://love.gzh-czy.icu/"/>
-  <updated>2025-07-05T13:04:16.946Z</updated>
+  <updated>2026-02-26T13:59:27.902Z</updated>
   <id>https://love.gzh-czy.icu/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>阮阮宝点我</title>
+    <title>阮宝宝专属</title>
     <link href="https://love.gzh-czy.icu/posts/60cbaead.html"/>
     <id>https://love.gzh-czy.icu/posts/60cbaead.html</id>
     <published>2025-06-19T13:55:57.000Z</published>
-    <updated>2025-07-05T13:04:16.946Z</updated>
+    <updated>2026-02-26T13:59:27.902Z</updated>
     
     <content type="html"><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, 密码错了，检查一下好吗～" data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">  <script id="hbeData" type="hbeData" data-hmacdigest="41694e9f5e8e9881272b772b3f64c539ac99d18c8e39c17a0eed8668cb62ae6e">87d203d759bafe2c59c878c2b239cc7aef8461e09766c52ffa028b8cedc5e99ccfd1f4a2251f062ecf10a6a31e7a57f2f3a91eefe4751b7f5a3d3632340ecf8925c3823a9dbc7f68037a3d2ecc1c933ff49bd3806691b576faf9db8e27480e94bd1cfff719e8fe6f895f600877263041f8c2e1b65b00bb69b4bd713be8f59f28fda509fbd614c075db439f75ea4b0a94</script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-shrink">      <input class="hbe hbe-input-field hbe-input-field-shrink" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-shrink" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-shrink">Hey, 这篇文章被加密了，请输入密码！</span>      </label>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
     
@@ -79,26 +79,6 @@
     
     
     <category term="生活" scheme="https://love.gzh-czy.icu/tags/%E7%94%9F%E6%B4%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://love.gzh-czy.icu/posts/4a17b156.html"/>
-    <id>https://love.gzh-czy.icu/posts/4a17b156.html</id>
-    <published>2024-03-31T15:30:11.348Z</published>
-    <updated>2025-04-18T07:43:56.278Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>!Check <a href="https://hexo.io/docs/">documentation</a> for more info. You can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;!Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. You can find the an</summary>
-      
-    
-    
-    
     
   </entry>
   
