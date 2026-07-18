@@ -1081,16 +1081,6 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
 anzhiyu.changeMusicBg(false);]]></content>
   </entry>
   <entry>
-    <title>友情链接</title>
-    <url>/link/index.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>music</title>
-    <url>/music/index.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title></title>
     <url>/js/mvtitle.js</url>
     <content><![CDATA[//动态标题
@@ -1110,6 +1100,16 @@ document.addEventListener("visibilitychange", function () {
     }, 2000);
   }
 });]]></content>
+  </entry>
+  <entry>
+    <title>友情链接</title>
+    <url>/link/index.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>music</title>
+    <url>/music/index.html</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title></title>
