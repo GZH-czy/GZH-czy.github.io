@@ -44,99 +44,6 @@
   </entry>
   <entry>
     <title></title>
-    <url>/js/anzhiyu.js</url>
-    <content><![CDATA[var anzhiyu = {
-  // 音乐节目切换背景
-  changeMusicBg: function (isChangeBg = true) {
-    if (window.location.pathname != "/music/") {
-      return;
-    }
-    const anMusicBg = document.getElementById("an_music_bg");
-
-    if (isChangeBg) {
-      // player listswitch 会进入此处
-      const musiccover = document.querySelector("#anMusic-page .aplayer-pic");
-      anMusicBg.style.backgroundImage = musiccover.style.backgroundImage;
-    } else {
-      // 第一次进入，绑定事件，改背景
-      let timer = setInterval(() => {
-        const musiccover = document.querySelector("#anMusic-page .aplayer-pic");
-        // 确保player加载完成
-        console.info(anMusicBg);
-        if (musiccover) {
-          clearInterval(timer);
-          anMusicBg.style.backgroundImage = musiccover.style.backgroundImage;
-          // 绑定事件
-          anzhiyu.addEventListenerChangeMusicBg();
-
-          // 暂停nav的音乐
-          if (
-            document.querySelector("#nav-music meting-js").aplayer &&
-            !document.querySelector("#nav-music meting-js").aplayer.audio.paused
-          ) {
-            anzhiyu.musicToggle();
-          }
-        }
-      }, 100);
-    }
-  },
-  addEventListenerChangeMusicBg: function () {
-    const anMusicPage = document.getElementById("anMusic-page");
-    const aplayerIconMenu = anMusicPage.querySelector(".aplayer-info .aplayer-time .aplayer-icon-menu");
-
-    anMusicPage.querySelector("meting-js").aplayer.on("loadeddata", function () {
-      anzhiyu.changeMusicBg();
-      console.info("player loadeddata");
-    });
-
-    aplayerIconMenu.addEventListener("click", function () {
-      document.getElementById("menu-mask").style.display = "block";
-      document.getElementById("menu-mask").style.animation = "0.5s ease 0s 1 normal none running to_show";
-    });
-
-    document.getElementById("menu-mask").addEventListener("click", function () {
-      if (window.location.pathname != "/music/") return;
-      anMusicPage.querySelector(".aplayer-list").classList.remove("aplayer-list-hide");
-    });
-  },
-};
-
-// 调用
-anzhiyu.changeMusicBg(false);]]></content>
-  </entry>
-  <entry>
-    <title>music</title>
-    <url>/music/index.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/js/mvtitle.js</url>
-    <content><![CDATA[//动态标题
-var OriginTitile = document.title;
-var titleTime;
-document.addEventListener("visibilitychange", function () {
-  if (document.hidden) {
-    //离开当前页面时标签显示内容
-    document.title = "w(ﾟДﾟ)w 不要走！再看看嘛！";
-    clearTimeout(titleTime);
-  } else {
-    //返回当前页面时标签显示内容
-    document.title = "♪(^∇^*)欢迎肥来！" + OriginTitile;
-    //两秒后变回正常标题
-    titleTime = setTimeout(function () {
-      document.title = OriginTitile;
-    }, 2000);
-  }
-});]]></content>
-  </entry>
-  <entry>
-    <title>友情链接</title>
-    <url>/link/index.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title></title>
     <url>/css/custom.css</url>
     <content><![CDATA[/* @font-face {
   font-family: Candyhome;
@@ -1043,6 +950,166 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
     left: -66px;
   }
 }]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/js/anzhiyu.js</url>
+    <content><![CDATA[var anzhiyu = {
+  // 音乐节目切换背景
+  changeMusicBg: function (isChangeBg = true) {
+    if (window.location.pathname != "/music/") {
+      return;
+    }
+    const anMusicBg = document.getElementById("an_music_bg");
+
+    if (isChangeBg) {
+      // player listswitch 会进入此处
+      const musiccover = document.querySelector("#anMusic-page .aplayer-pic");
+      anMusicBg.style.backgroundImage = musiccover.style.backgroundImage;
+    } else {
+      // 第一次进入，绑定事件，改背景
+      let timer = setInterval(() => {
+        const musiccover = document.querySelector("#anMusic-page .aplayer-pic");
+        // 确保player加载完成
+        console.info(anMusicBg);
+        if (musiccover) {
+          clearInterval(timer);
+          anMusicBg.style.backgroundImage = musiccover.style.backgroundImage;
+          // 绑定事件
+          anzhiyu.addEventListenerChangeMusicBg();
+
+          // 暂停nav的音乐
+          if (
+            document.querySelector("#nav-music meting-js").aplayer &&
+            !document.querySelector("#nav-music meting-js").aplayer.audio.paused
+          ) {
+            anzhiyu.musicToggle();
+          }
+        }
+      }, 100);
+    }
+  },
+  addEventListenerChangeMusicBg: function () {
+    const anMusicPage = document.getElementById("anMusic-page");
+    const aplayerIconMenu = anMusicPage.querySelector(".aplayer-info .aplayer-time .aplayer-icon-menu");
+
+    anMusicPage.querySelector("meting-js").aplayer.on("loadeddata", function () {
+      anzhiyu.changeMusicBg();
+      console.info("player loadeddata");
+    });
+
+    aplayerIconMenu.addEventListener("click", function () {
+      document.getElementById("menu-mask").style.display = "block";
+      document.getElementById("menu-mask").style.animation = "0.5s ease 0s 1 normal none running to_show";
+    });
+
+    document.getElementById("menu-mask").addEventListener("click", function () {
+      if (window.location.pathname != "/music/") return;
+      anMusicPage.querySelector(".aplayer-list").classList.remove("aplayer-list-hide");
+    });
+  },
+};
+
+// 调用
+anzhiyu.changeMusicBg(false);]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/js/ali_font.js</url>
+    <content><![CDATA[!(function (c) {
+  var l,
+    h,
+    a,
+    t,
+    i,
+    v =
+      '',
+    o = (o = document.getElementsByTagName("script"))[o.length - 1].getAttribute("data-injectcss"),
+    p = function (c, l) {
+      l.parentNode.insertBefore(c, l);
+    };
+  if (o && !c.__iconfont__svg__cssinject__) {
+    c.__iconfont__svg__cssinject__ = !0;
+    try {
+      document.write(
+        ".svgfont {display: inline-block;width: 1em;height: 1em;fill: currentColor;vertical-align: -0.1em;font-size:16px;}"
+      );
+    } catch (c) {
+      console && console.log(c);
+    }
+  }
+  function d() {
+    i || ((i = !0), a());
+  }
+  function m() {
+    try {
+      t.documentElement.doScroll("left");
+    } catch (c) {
+      return void setTimeout(m, 50);
+    }
+    d();
+  }
+  (l = function () {
+    var c,
+      l = document.createElement("div");
+    (l.innerHTML = v),
+      (v = null),
+      (l = l.getElementsByTagName("svg")[0]) &&
+        (l.setAttribute("aria-hidden", "true"),
+        (l.style.position = "absolute"),
+        (l.style.width = 0),
+        (l.style.height = 0),
+        (l.style.overflow = "hidden"),
+        (l = l),
+        (c = document.body).firstChild ? p(l, c.firstChild) : c.appendChild(l));
+  }),
+    document.addEventListener
+      ? ~["complete", "loaded", "interactive"].indexOf(document.readyState)
+        ? setTimeout(l, 0)
+        : ((h = function () {
+            document.removeEventListener("DOMContentLoaded", h, !1), l();
+          }),
+          document.addEventListener("DOMContentLoaded", h, !1))
+      : document.attachEvent &&
+        ((a = l),
+        (t = c.document),
+        (i = !1),
+        m(),
+        (t.onreadystatechange = function () {
+          "complete" == t.readyState && ((t.onreadystatechange = null), d());
+        }));
+})(window);]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/js/mvtitle.js</url>
+    <content><![CDATA[//动态标题
+var OriginTitile = document.title;
+var titleTime;
+document.addEventListener("visibilitychange", function () {
+  if (document.hidden) {
+    //离开当前页面时标签显示内容
+    document.title = "w(ﾟДﾟ)w 不要走！再看看嘛！";
+    clearTimeout(titleTime);
+  } else {
+    //返回当前页面时标签显示内容
+    document.title = "♪(^∇^*)欢迎肥来！" + OriginTitile;
+    //两秒后变回正常标题
+    titleTime = setTimeout(function () {
+      document.title = OriginTitile;
+    }, 2000);
+  }
+});]]></content>
+  </entry>
+  <entry>
+    <title>友情链接</title>
+    <url>/link/index.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>music</title>
+    <url>/music/index.html</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title></title>
