@@ -7,12 +7,12 @@
      data-hbe-format="4"
      data-wpm="Oh, 密码错了，检查一下好吗～"
      data-whm="Oh, 密码错了，检查一下好吗～"
-     data-salt="ff53f9d9fe808a6c10d9b7f20621825e4ed5fca3ecd0f518e41ee877907c2bc2"
-     data-nonce="6e9c78996af8716088a8398c"
+     data-salt="a224f609f1cf6e459d7fe651878a0a1d4bbae78262f4991338c754796fd9d58a"
+     data-nonce="fadc5bad719e19471ed2510b"
      data-kdf-iterations="250000"
      data-auto-save="false">
   <script id="hbeData" type="hbeData">
-    f177af9af3fbe933899143355b16a8b098289a9544609189eecace8ab6d730c93c30c299d4d33fd00b8e33ab1b11e3c6db8d33eaee1c73f8a74a433e3d65603d03b1ebfe2f645efa31db600110e98ee07979229b236e464ea08898fdf3e19fb411eeeccacc4940e6c25739e6b86079bd08d00167d4f4a73a1c208b3d
+    fb473fa5a3dc77195b234fd21c4acf63831a3f16b5e3b24c58436b5783ca8073a7e3f39840859415512b97aeef522b900fe9b2f40095e1d009c0ca50427d8a8d176ae0ea0004aa462d7140b8308c54d51473a719ed9a6974131fc86d317f21561b07f22c24a9db4fb1a0170715653ecd02f5b43590559dd8b06f55c4
   </script>
   <div class="hbe hbe-content">
     <form id="hbeForm" class="hbe hbe-form" onsubmit="return false">
@@ -971,37 +971,6 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
   </entry>
   <entry>
     <title></title>
-    <url>/js/mvtitle.js</url>
-    <content><![CDATA[//动态标题
-var OriginTitile = document.title;
-var titleTime;
-document.addEventListener("visibilitychange", function () {
-  if (document.hidden) {
-    //离开当前页面时标签显示内容
-    document.title = "w(ﾟДﾟ)w 不要走！再看看嘛！";
-    clearTimeout(titleTime);
-  } else {
-    //返回当前页面时标签显示内容
-    document.title = "♪(^∇^*)欢迎肥来！" + OriginTitile;
-    //两秒后变回正常标题
-    titleTime = setTimeout(function () {
-      document.title = OriginTitile;
-    }, 2000);
-  }
-});]]></content>
-  </entry>
-  <entry>
-    <title>友情链接</title>
-    <url>/link/index.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>music</title>
-    <url>/music/index.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title></title>
     <url>/js/anzhiyu.js</url>
     <content><![CDATA[var anzhiyu = {
   // 音乐节目切换背景
@@ -1061,6 +1030,32 @@ document.addEventListener("visibilitychange", function () {
 
 // 调用
 anzhiyu.changeMusicBg(false);]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/js/mvtitle.js</url>
+    <content><![CDATA[//动态标题
+var OriginTitile = document.title;
+var titleTime;
+document.addEventListener("visibilitychange", function () {
+  if (document.hidden) {
+    //离开当前页面时标签显示内容
+    document.title = "w(ﾟДﾟ)w 不要走！再看看嘛！";
+    clearTimeout(titleTime);
+  } else {
+    //返回当前页面时标签显示内容
+    document.title = "♪(^∇^*)欢迎肥来！" + OriginTitile;
+    //两秒后变回正常标题
+    titleTime = setTimeout(function () {
+      document.title = OriginTitile;
+    }, 2000);
+  }
+});]]></content>
+  </entry>
+  <entry>
+    <title>友情链接</title>
+    <url>/link/index.html</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title></title>
@@ -1285,6 +1280,11 @@ anzhiyu.changeMusicBg(false);]]></content>
     transform: rotate();
   }
 }]]></content>
+  </entry>
+  <entry>
+    <title>music</title>
+    <url>/music/index.html</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title></title>
@@ -1593,6 +1593,100 @@ new ParticleBackground(document.body, {
   </entry>
   <entry>
     <title></title>
+    <url>/js/coin/coin.js</url>
+    <content><![CDATA[var tipButtons = document.querySelectorAll(".tip-button");
+
+function coinAudio() {
+  var coinAudio = document.getElementById("coinAudio");
+  if (coinAudio) {
+    coinAudio.play(); //有音频时播放
+  }
+}
+// Loop through all buttons (allows for multiple buttons on page)
+tipButtons.forEach(button => {
+  var coin = button.querySelector(".coin");
+
+  // The larger the number, the slower the animation
+  coin.maxMoveLoopCount = 90;
+
+  button.addEventListener("click", () => {
+    if (/Android|webOS|BlackBerry/i.test(navigator.userAgent)) return true; //媒体选择
+    if (button.clicked) return;
+    button.classList.add("clicked");
+
+    // Wait to start flipping th coin because of the button tilt animation
+    setTimeout(() => {
+      // Randomize the flipping speeds just for fun
+      coin.sideRotationCount = Math.floor(Math.random() * 5) * 90;
+      coin.maxFlipAngle = (Math.floor(Math.random() * 4) + 3) * Math.PI;
+      button.clicked = true;
+      flipCoin();
+      coinAudio();
+    }, 50);
+  });
+
+  var flipCoin = () => {
+    coin.moveLoopCount = 0;
+    flipCoinLoop();
+  };
+
+  var resetCoin = () => {
+    coin.style.setProperty("--coin-x-multiplier", 0);
+    coin.style.setProperty("--coin-scale-multiplier", 0);
+    coin.style.setProperty("--coin-rotation-multiplier", 0);
+    coin.style.setProperty("--shine-opacity-multiplier", 0.4);
+    coin.style.setProperty("--shine-bg-multiplier", "50%");
+    coin.style.setProperty("opacity", 1);
+    // Delay to give the reset animation some time before you can click again
+    setTimeout(() => {
+      button.clicked = false;
+    }, 300);
+  };
+
+  var flipCoinLoop = () => {
+    coin.moveLoopCount++;
+    var percentageCompleted = coin.moveLoopCount / coin.maxMoveLoopCount;
+    coin.angle = -coin.maxFlipAngle * Math.pow(percentageCompleted - 1, 2) + coin.maxFlipAngle;
+
+    // Calculate the scale and position of the coin moving through the air
+    coin.style.setProperty("--coin-y-multiplier", -11 * Math.pow(percentageCompleted * 2 - 1, 4) + 11);
+    coin.style.setProperty("--coin-x-multiplier", percentageCompleted);
+    coin.style.setProperty("--coin-scale-multiplier", percentageCompleted * 0.6);
+    coin.style.setProperty("--coin-rotation-multiplier", percentageCompleted * coin.sideRotationCount);
+
+    // Calculate the scale and position values for the different coin faces
+    // The math uses sin/cos wave functions to similate the circular motion of 3D spin
+    coin.style.setProperty("--front-scale-multiplier", Math.max(Math.cos(coin.angle), 0));
+    coin.style.setProperty("--front-y-multiplier", Math.sin(coin.angle));
+
+    coin.style.setProperty("--middle-scale-multiplier", Math.abs(Math.cos(coin.angle), 0));
+    coin.style.setProperty("--middle-y-multiplier", Math.cos((coin.angle + Math.PI / 2) % Math.PI));
+
+    coin.style.setProperty("--back-scale-multiplier", Math.max(Math.cos(coin.angle - Math.PI), 0));
+    coin.style.setProperty("--back-y-multiplier", Math.sin(coin.angle - Math.PI));
+
+    coin.style.setProperty("--shine-opacity-multiplier", 4 * Math.sin((coin.angle + Math.PI / 2) % Math.PI) - 3.2);
+    coin.style.setProperty("--shine-bg-multiplier", -40 * (Math.cos((coin.angle + Math.PI / 2) % Math.PI) - 0.5) + "%");
+
+    // Repeat animation loop
+    if (coin.moveLoopCount < coin.maxMoveLoopCount) {
+      if (coin.moveLoopCount === coin.maxMoveLoopCount - 6) button.classList.add("shrink-landing");
+      window.requestAnimationFrame(flipCoinLoop);
+    } else {
+      button.classList.add("coin-landed");
+      coin.style.setProperty("opacity", 0);
+      setTimeout(() => {
+        button.classList.remove("clicked", "shrink-landing", "coin-landed");
+        setTimeout(() => {
+          resetCoin();
+        }, 300);
+      }, 1500);
+    }
+  };
+});]]></content>
+  </entry>
+  <entry>
+    <title></title>
     <url>/js/mouse/cursor.js</url>
     <content><![CDATA[var CURSOR;
 
@@ -1699,99 +1793,5 @@ function createtime() {
  </i>`, document.getElementById("workboard") && (document.getElementById("workboard").innerHTML = g)
 } setInterval((() => { createtime() }), 250);
 ]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/js/coin/coin.js</url>
-    <content><![CDATA[var tipButtons = document.querySelectorAll(".tip-button");
-
-function coinAudio() {
-  var coinAudio = document.getElementById("coinAudio");
-  if (coinAudio) {
-    coinAudio.play(); //有音频时播放
-  }
-}
-// Loop through all buttons (allows for multiple buttons on page)
-tipButtons.forEach(button => {
-  var coin = button.querySelector(".coin");
-
-  // The larger the number, the slower the animation
-  coin.maxMoveLoopCount = 90;
-
-  button.addEventListener("click", () => {
-    if (/Android|webOS|BlackBerry/i.test(navigator.userAgent)) return true; //媒体选择
-    if (button.clicked) return;
-    button.classList.add("clicked");
-
-    // Wait to start flipping th coin because of the button tilt animation
-    setTimeout(() => {
-      // Randomize the flipping speeds just for fun
-      coin.sideRotationCount = Math.floor(Math.random() * 5) * 90;
-      coin.maxFlipAngle = (Math.floor(Math.random() * 4) + 3) * Math.PI;
-      button.clicked = true;
-      flipCoin();
-      coinAudio();
-    }, 50);
-  });
-
-  var flipCoin = () => {
-    coin.moveLoopCount = 0;
-    flipCoinLoop();
-  };
-
-  var resetCoin = () => {
-    coin.style.setProperty("--coin-x-multiplier", 0);
-    coin.style.setProperty("--coin-scale-multiplier", 0);
-    coin.style.setProperty("--coin-rotation-multiplier", 0);
-    coin.style.setProperty("--shine-opacity-multiplier", 0.4);
-    coin.style.setProperty("--shine-bg-multiplier", "50%");
-    coin.style.setProperty("opacity", 1);
-    // Delay to give the reset animation some time before you can click again
-    setTimeout(() => {
-      button.clicked = false;
-    }, 300);
-  };
-
-  var flipCoinLoop = () => {
-    coin.moveLoopCount++;
-    var percentageCompleted = coin.moveLoopCount / coin.maxMoveLoopCount;
-    coin.angle = -coin.maxFlipAngle * Math.pow(percentageCompleted - 1, 2) + coin.maxFlipAngle;
-
-    // Calculate the scale and position of the coin moving through the air
-    coin.style.setProperty("--coin-y-multiplier", -11 * Math.pow(percentageCompleted * 2 - 1, 4) + 11);
-    coin.style.setProperty("--coin-x-multiplier", percentageCompleted);
-    coin.style.setProperty("--coin-scale-multiplier", percentageCompleted * 0.6);
-    coin.style.setProperty("--coin-rotation-multiplier", percentageCompleted * coin.sideRotationCount);
-
-    // Calculate the scale and position values for the different coin faces
-    // The math uses sin/cos wave functions to similate the circular motion of 3D spin
-    coin.style.setProperty("--front-scale-multiplier", Math.max(Math.cos(coin.angle), 0));
-    coin.style.setProperty("--front-y-multiplier", Math.sin(coin.angle));
-
-    coin.style.setProperty("--middle-scale-multiplier", Math.abs(Math.cos(coin.angle), 0));
-    coin.style.setProperty("--middle-y-multiplier", Math.cos((coin.angle + Math.PI / 2) % Math.PI));
-
-    coin.style.setProperty("--back-scale-multiplier", Math.max(Math.cos(coin.angle - Math.PI), 0));
-    coin.style.setProperty("--back-y-multiplier", Math.sin(coin.angle - Math.PI));
-
-    coin.style.setProperty("--shine-opacity-multiplier", 4 * Math.sin((coin.angle + Math.PI / 2) % Math.PI) - 3.2);
-    coin.style.setProperty("--shine-bg-multiplier", -40 * (Math.cos((coin.angle + Math.PI / 2) % Math.PI) - 0.5) + "%");
-
-    // Repeat animation loop
-    if (coin.moveLoopCount < coin.maxMoveLoopCount) {
-      if (coin.moveLoopCount === coin.maxMoveLoopCount - 6) button.classList.add("shrink-landing");
-      window.requestAnimationFrame(flipCoinLoop);
-    } else {
-      button.classList.add("coin-landed");
-      coin.style.setProperty("opacity", 0);
-      setTimeout(() => {
-        button.classList.remove("clicked", "shrink-landing", "coin-landed");
-        setTimeout(() => {
-          resetCoin();
-        }, 300);
-      }, 1500);
-    }
-  };
-});]]></content>
   </entry>
 </search>
