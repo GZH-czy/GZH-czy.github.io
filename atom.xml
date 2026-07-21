@@ -10,23 +10,22 @@
   <rights>All rights reserved 2026, GZH</rights>
   <subtitle>生活明朗，万物可爱</subtitle>
   <title>子涵'blog</title>
-  <updated>2026-07-19T21:41:36.720Z</updated>
+  <updated>2026-07-21T11:46:06.000Z</updated>
   <entry>
     <author>
       <name>GZH</name>
     </author>
+    <category term="日记" scheme="https://love.gzh-czy.cc.cd/tags/%E6%97%A5%E8%AE%B0/"/>
+    <category term="测试" scheme="https://love.gzh-czy.cc.cd/tags/%E6%B5%8B%E8%AF%95/"/>
     <content>
       <![CDATA[<h1 id="写给软阮的信"><a href="#写给软阮的信" class="headerlink" title="写给软阮的信"></a>写给软阮的信</h1><p>亲爱的软阮：</p><p>见字如面。</p><p>提笔时窗外天色正好，风轻轻吹过窗帘，像你指尖的温度。想说的话太多，落到纸上，反倒不知从何说起。</p><p>认识你之后，日子好像变得柔软了许多。那些细碎的、不值一提的小事，因为有你分享，都成了值得记住的瞬间。你笑起来的样子，总让我觉得这个世界其实很温柔。</p><p>有时候我在想，一个人能遇到另一个让自己心甘情愿变得更好的人，是多幸运的事。你就是那个人。</p><p>谢谢你出现在我的生命里。谢谢你包容我的笨拙和固执，也谢谢你让我看到自己身上那些被忽略的美好。</p><p>往后的日子，我想和你一起走。春日看花，夏夜听雨，秋天捡落叶，冬天窝在沙发上喝热茶。不需要多轰轰烈烈，平平淡淡的陪伴，就是我想要的未来。</p><p>等你忙完，我们一起吃顿饭吧。我做菜，你洗碗。</p><p>想你了。</p><p>此致<br>爱你</p><hr><p><em>写于一个想你的午后</em><br>Simplicity is the ultimate form of sophistication.</p>]]>
     </content>
     <id>https://love.gzh-czy.cc.cd/posts/0.html</id>
     <link href="https://love.gzh-czy.cc.cd/posts/0.html"/>
-    <published>2026-07-20T16:43:49.489Z</published>
-    <summary>
-      <![CDATA[<h1 id="写给软阮的信"><a href="#写给软阮的信" class="headerlink" title="写给软阮的信"></a>写给软阮的信</h1><p>亲爱的软阮：</p>
-<p>见字如面。</p>
-<p>提笔时窗外天色正好，风轻轻吹过窗帘，像你指尖的温度。想]]>
-    </summary>
-    <updated>2026-07-19T21:41:36.720Z</updated>
+    <published>2026-07-21T11:46:06.000Z</published>
+    <summary>A Simple and Card UI Design theme for Hexo</summary>
+    <title>写给软阮的信</title>
+    <updated>2026-07-21T11:46:06.000Z</updated>
   </entry>
   <entry>
     <author>
@@ -34,7 +33,7 @@
     </author>
     <category term="生活" scheme="https://love.gzh-czy.cc.cd/tags/%E7%94%9F%E6%B4%BB/"/>
     <content>
-      <![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt"     data-hbe-format="4"     data-wpm="Oh, 密码错了，检查一下好吗～"     data-whm="Oh, 密码错了，检查一下好吗～"     data-salt="d1c9fad1081aeed97ad2174dc2059d4a83a19598c6628acecbc5c3fa07ebec6c"     data-nonce="7bd3812d035e44ab912678ef"     data-kdf-iterations="600000"     data-auto-save="false">  <script id="hbeData" type="hbeData">    bf62ef02d797c9a29832d15defdb1c2c836b79dc13f7afdfd835606386ece59f0e989d80a8e564c76a3267f48fac65faa9b4684264e3a4ec4cd92efab2c053438146fc129b2d2aacafd1853be28f7127fa55371b136157c57e363b4badd82135f63c2cac87efcb61ce2b56e42e6a2cfd52afb14a77febd212132760b9d  </script>  <div class="hbe hbe-content">    <form id="hbeForm" class="hbe hbe-form" onsubmit="return false">      <div class="hbe hbe-input hbe-input-shrink">      <input class="hbe hbe-input-field hbe-input-field-shrink" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-shrink" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-shrink">Hey, 这篇文章被加密了，请输入密码！</span>      </label>    </div>      <button class="hbe hbe-button" type="submit">Decrypt</button>      <div class="hbe hbe-error" role="alert" aria-live="polite"></div>    </form>  </div></div><script data-pjax src="/lib/hbe.9e70f1e1d2.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]>
+      <![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt"     data-hbe-format="4"     data-wpm="Oh, 密码错了，检查一下好吗～"     data-whm="Oh, 密码错了，检查一下好吗～"     data-salt="0ef63afc58a5b81adb21cccbf79a645bbc4530764b9632af1ddc840061c2fb8e"     data-nonce="da12288301bdc7a12357809e"     data-kdf-iterations="600000"     data-auto-save="false">  <script id="hbeData" type="hbeData">    dcf896b19c1cc5742fd3830ae939274b3f8b916a86a98de5820675421a83f8521d06675ae452cc34ccad4d89ba6c3383ff89a653d316b33573fb8cd5b223101cfb14a0ec04163cae296bbaa5010413d023e72a57b0e0b73c706d7e266f8ecd9aa3f10320ababa07cabbea584b9d0ae9ade1b241d23c2d8118381ab47bc  </script>  <div class="hbe hbe-content">    <form id="hbeForm" class="hbe hbe-form" onsubmit="return false">      <div class="hbe hbe-input hbe-input-shrink">      <input class="hbe hbe-input-field hbe-input-field-shrink" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-shrink" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-shrink">Hey, 这篇文章被加密了，请输入密码！</span>      </label>    </div>      <button class="hbe hbe-button" type="submit">Decrypt</button>      <div class="hbe hbe-error" role="alert" aria-live="polite"></div>    </form>  </div></div><script data-pjax src="/lib/hbe.9e70f1e1d2.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]>
     </content>
     <id>https://love.gzh-czy.cc.cd/posts/60cbaead.html</id>
     <link href="https://love.gzh-czy.cc.cd/posts/60cbaead.html"/>
