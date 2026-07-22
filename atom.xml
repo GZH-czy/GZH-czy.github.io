@@ -18,7 +18,7 @@
     <category term="日记" scheme="https://love.gzh-czy.cc.cd/tags/%E6%97%A5%E8%AE%B0/"/>
     <category term="测试" scheme="https://love.gzh-czy.cc.cd/tags/%E6%B5%8B%E8%AF%95/"/>
     <content>
-      <![CDATA[<h1 id="写给软阮的信"><a href="#写给软阮的信" class="headerlink" title="写给软阮的信"></a>写给软阮的信</h1><p>亲爱的软阮：</p><p>见字如面。</p><p>提笔时窗外天色正好，风轻轻吹过窗帘，像你指尖的温度。想说的话太多，落到纸上，反倒不知从何说起。</p><p>认识你之后，日子好像变得柔软了许多。那些细碎的、不值一提的小事，因为有你分享，都成了值得记住的瞬间。你笑起来的样子，总让我觉得这个世界其实很温柔。</p><p>有时候我在想，一个人能遇到另一个让自己心甘情愿变得更好的人，是多幸运的事。你就是那个人。</p><p>谢谢你出现在我的生命里。谢谢你包容我的笨拙和固执，也谢谢你让我看到自己身上那些被忽略的美好。</p><p>往后的日子，我想和你一起走。春日看花，夏夜听雨，秋天捡落叶，冬天窝在沙发上喝热茶。不需要多轰轰烈烈，平平淡淡的陪伴，就是我想要的未来。</p><p>等你忙完，我们一起吃顿饭吧。我做菜，你洗碗。</p><p>想你了。</p><p>此致<br>爱你</p><hr><p><em>写于一个想你的午后</em><br>Simplicity is the ultimate form of sophistication.</p>]]>
+      <![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="写给软阮的信"><a href="#写给软阮的信" class="headerlink" title="写给软阮的信"></a>写给软阮的信</h1><p>亲爱的软阮：</p><p>见字如面。</p><p>提笔时窗外天色正好，风轻轻吹过窗帘，像你指尖的温度。想说的话太多，落到纸上，反倒不知从何说起。</p><p>认识你之后，日子好像变得柔软了许多。那些细碎的、不值一提的小事，因为有你分享，都成了值得记住的瞬间。你笑起来的样子，总让我觉得这个世界其实很温柔。</p><p>有时候我在想，一个人能遇到另一个让自己心甘情愿变得更好的人，是多幸运的事。你就是那个人。</p><p>谢谢你出现在我的生命里。谢谢你包容我的笨拙和固执，也谢谢你让我看到自己身上那些被忽略的美好。</p><p>往后的日子，我想和你一起走。春日看花，夏夜听雨，秋天捡落叶，冬天窝在沙发上喝热茶。不需要多轰轰烈烈，平平淡淡的陪伴，就是我想要的未来。</p><p>等你忙完，我们一起吃顿饭吧。我做菜，你洗碗。</p><p>想你了。</p><p>此致<br>爱你</p><hr><p><em>写于一个想你的午后</em><br>Simplicity is the ultimate form of sophistication.</p>]]>
     </content>
     <id>https://love.gzh-czy.cc.cd/posts/0.html</id>
     <link href="https://love.gzh-czy.cc.cd/posts/0.html"/>
@@ -33,7 +33,7 @@
     </author>
     <category term="生活" scheme="https://love.gzh-czy.cc.cd/tags/%E7%94%9F%E6%B4%BB/"/>
     <content>
-      <![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt"     data-hbe-format="4"     data-wpm="Oh, 密码错了，检查一下好吗～"     data-whm="Oh, 密码错了，检查一下好吗～"     data-salt="50f5b6f42f30b5c7e465c468790401c89178ab034e11979bac01117cb969a56b"     data-nonce="f18d0356c66eb54bd956ec0c"     data-kdf-iterations="600000"     data-auto-save="false">  <script id="hbeData" type="hbeData">    65e800c4185875258ce4646ef3e28ffa3f6b3ed10311a9d85448b11db898db90371fb0ee65cef99db245c0e0b47a6928f51de541c0155455fac790c15dfa7ea323a6c08230423aae3311ff39723d721368ddb4c0bbf1d988990f64c471e53b13ee3bf47ceee6fbdddc5589437c2e20c40b07c6dac5eb6046ff5df2be2b  </script>  <div class="hbe hbe-content">    <form id="hbeForm" class="hbe hbe-form" onsubmit="return false">      <div class="hbe hbe-input hbe-input-shrink">      <input class="hbe hbe-input-field hbe-input-field-shrink" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-shrink" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-shrink">Hey, 这篇文章被加密了，请输入密码！</span>      </label>    </div>      <button class="hbe hbe-button" type="submit">Decrypt</button>      <div class="hbe hbe-error" role="alert" aria-live="polite"></div>    </form>  </div></div><script data-pjax src="/lib/hbe.9e70f1e1d2.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]>
+      <![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt"     data-hbe-format="4"     data-wpm="Oh, 密码错了，检查一下好吗～"     data-whm="Oh, 密码错了，检查一下好吗～"     data-salt="7403f7031dcd79ed7b2404c51d0d4c428d4e3dfe8205f617ae2b3059d6577603"     data-nonce="3b5080890f6f5ceee889a853"     data-kdf-iterations="600000"     data-auto-save="false">  <script id="hbeData" type="hbeData">    dfac647ed851c8fc1d9fa671e6363f35b26a1120effde68bea4c599fd36fc92f30213e669e4a298d420a14180fcddf897790cdbc18df55674af116f49685a4bf7f931bb18fedd3f9bb3064f174435fa1c3f61d2bdc15fa46556f1d3817726cc6f718ccba399e0df9db192c7b9f7b56700942b6871ebcf7abb97ad4310ecbfed0b15519ec86d770f41f0802a50fafd00de6785b685de222edb2ac16489ca75bec829ca662fa21fc08a53439b91d308dc5352fe5a5c8637d93bb6fe7832eeeb8894effeef616dee841566623e88058e07bf62147dcc515bae895ed6712d0ea73dafd1e88355f7b4b3a881f1a82e6643975d1911b03eb8b6f7aa6593c72f46024169f960cdf70ed2e219888a951d989c78b6e6ee5059ba07fdc8877f823186c72c0c57d4602f402ce406a211503df50ae8576033d1d080cb1af2ffa9e53ee39d2d4bc0a46e339e5ed55fdc232c280551d5a1a3cfa59020f6ec689ee936646c0b879d3cc9cc69cb71e834fca12b1c0b3ef1f6edb65c502258dd901d6fca82f598c5996234a62b77c5d865ad490e73033  </script>  <div class="hbe hbe-content">    <form id="hbeForm" class="hbe hbe-form" onsubmit="return false">      <div class="hbe hbe-input hbe-input-shrink">      <input class="hbe hbe-input-field hbe-input-field-shrink" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-shrink" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-shrink">Hey, 这篇文章被加密了，请输入密码！</span>      </label>    </div>      <button class="hbe hbe-button" type="submit">Decrypt</button>      <div class="hbe hbe-error" role="alert" aria-live="polite"></div>    </form>  </div></div><script data-pjax src="/lib/hbe.9e70f1e1d2.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]>
     </content>
     <id>https://love.gzh-czy.cc.cd/posts/60cbaead.html</id>
     <link href="https://love.gzh-czy.cc.cd/posts/60cbaead.html"/>
@@ -48,14 +48,13 @@
     </author>
     <category term="生活" scheme="https://love.gzh-czy.cc.cd/tags/%E7%94%9F%E6%B4%BB/"/>
     <content>
-      <![CDATA[<div class="note primary flat"><p>晨雾未散时，玻璃瓶里的桂花蜜已凝成琥珀。她习惯性将温水注入瓷杯，金属壶口与杯沿相碰的清响惊醒了看报人。老花镜片映着秋阳，在皱纹里折出细碎的光。</p><p>雨突至的午后，墨绿伞柄上缠绕的医用胶布洇着水痕。她摸到衣袋里发潮的姜糖，想起出门时玄关处重叠的鞋刷声与挂钟滴答。</p><p>烧得混沌的深夜，额间温毛巾像永不融化的雪。朦胧间听见冰袋碰撞声，如同二十年前月台上绿皮火车的汽笛——那时他攥着连夜排队买的站票，军大衣口袋里藏着捂化的桂花糕。</p><p>此刻晨光漫过床头药盒，她忽然看清那些散落在岁月里的碎片：总在充电宝满格的手机，永远提前十分钟的早餐，深夜里留着缝的防盗链。原来爱从未隐身，只是化作氧气般的寻常。</p><p>楼下的桂花又开了，甜香漫过二十年晨昏，在相扣的指缝里酿成永恒的金色。</p></div>]]>
+      <![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><div class="note primary flat"><p>晨雾未散时，玻璃瓶里的桂花蜜已凝成琥珀。她习惯性将温水注入瓷杯，金属壶口与杯沿相碰的清响惊醒了看报人。老花镜片映着秋阳，在皱纹里折出细碎的光。</p><p>雨突至的午后，墨绿伞柄上缠绕的医用胶布洇着水痕。她摸到衣袋里发潮的姜糖，想起出门时玄关处重叠的鞋刷声与挂钟滴答。</p><p>烧得混沌的深夜，额间温毛巾像永不融化的雪。朦胧间听见冰袋碰撞声，如同二十年前月台上绿皮火车的汽笛——那时他攥着连夜排队买的站票，军大衣口袋里藏着捂化的桂花糕。</p><p>此刻晨光漫过床头药盒，她忽然看清那些散落在岁月里的碎片：总在充电宝满格的手机，永远提前十分钟的早餐，深夜里留着缝的防盗链。原来爱从未隐身，只是化作氧气般的寻常。</p><p>楼下的桂花又开了，甜香漫过二十年晨昏，在相扣的指缝里酿成永恒的金色。</p></div>]]>
     </content>
     <id>https://love.gzh-czy.cc.cd/posts/eec2a1c9.html</id>
     <link href="https://love.gzh-czy.cc.cd/posts/eec2a1c9.html"/>
     <published>2025-04-15T04:16:57.000Z</published>
     <summary>
-      <![CDATA[<div class="note primary flat"><p>晨雾未散时，玻璃瓶里的桂花蜜已凝成琥珀。她习惯性将温水注入瓷杯，金属壶口与杯沿相碰的清响惊醒了看报人。老花镜片映着秋阳，在皱纹里折出细碎的光。</p>
-<p>雨突至的午后，墨绿伞柄上缠绕的医用胶布洇着水痕。她摸到]]>
+      <![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" cla]]>
     </summary>
     <title>有时候我们看不见爱，只是因为一直在爱里</title>
     <updated>2025-06-01T21:02:57.113Z</updated>
@@ -66,14 +65,13 @@
     </author>
     <category term="生活" scheme="https://love.gzh-czy.cc.cd/tags/%E7%94%9F%E6%B4%BB/"/>
     <content>
-      <![CDATA[<div class="note primary flat"><p>一生时间很短<br>短到不过是两颗心之间的距离<br>一生的时间也很长<br>不如我们试着走走看</p></div>]]>
+      <![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><div class="note primary flat"><p>一生时间很短<br>短到不过是两颗心之间的距离<br>一生的时间也很长<br>不如我们试着走走看</p></div>]]>
     </content>
     <id>https://love.gzh-czy.cc.cd/posts/65847e45.html</id>
     <link href="https://love.gzh-czy.cc.cd/posts/65847e45.html"/>
     <published>2025-04-12T10:01:12.000Z</published>
     <summary>
-      <![CDATA[<div class="note primary flat"><p>一生时间很短<br>短到不过是两颗心之间的距离<br>一生的时间也很长<br>不如我们试着走走看</p>
-</div>]]>
+      <![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" cla]]>
     </summary>
     <title>阳光不噪，微风正好</title>
     <updated>2025-06-01T21:02:58.707Z</updated>
