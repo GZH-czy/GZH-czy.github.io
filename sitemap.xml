@@ -74,7 +74,7 @@
   </url>
   
   <url>
-    <loc>https://love.gzh-czy.cc.cd/about/Docker%20%E4%B8%8E%20Nextcloud%20%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97(%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%9B%98).html</loc>
+    <loc>https://love.gzh-czy.cc.cd/posts/0.html</loc>
     
     <lastmod>2026-07-15</lastmod>
     
@@ -126,6 +126,41 @@
     <priority>1.0</priority>
   </url>
 
+  
+  <url>
+    <loc>https://love.gzh-czy.cc.cd/tags/Docker/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://love.gzh-czy.cc.cd/tags/Ubuntu/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://love.gzh-czy.cc.cd/tags/Nextcloud/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://love.gzh-czy.cc.cd/tags/%E5%AE%B9%E5%99%A8/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://love.gzh-czy.cc.cd/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
   <url>
     <loc>https://love.gzh-czy.cc.cd/tags/%E6%97%A5%E8%AE%B0/</loc>
