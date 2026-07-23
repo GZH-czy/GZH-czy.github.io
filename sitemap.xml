@@ -2,15 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://love.gzh-czy.cc.cd/posts/0.html</loc>
-    
-    <lastmod>2026-07-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://love.gzh-czy.cc.cd/Gallery/dailyimg/index.html</loc>
     
     <lastmod>2026-07-23</lastmod>
@@ -126,41 +117,6 @@
     <priority>1.0</priority>
   </url>
 
-  
-  <url>
-    <loc>https://love.gzh-czy.cc.cd/tags/Docker/</loc>
-    <lastmod>2026-07-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://love.gzh-czy.cc.cd/tags/Ubuntu/</loc>
-    <lastmod>2026-07-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://love.gzh-czy.cc.cd/tags/Nextcloud/</loc>
-    <lastmod>2026-07-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://love.gzh-czy.cc.cd/tags/%E5%AE%B9%E5%99%A8/</loc>
-    <lastmod>2026-07-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://love.gzh-czy.cc.cd/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/</loc>
-    <lastmod>2026-07-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
   
   <url>
     <loc>https://love.gzh-czy.cc.cd/tags/%E6%97%A5%E8%AE%B0/</loc>
