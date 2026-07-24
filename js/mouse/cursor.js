@@ -1,7 +1,5 @@
 (function fairyDustCursor() {
-  // 1. 定义平滑色域（彩虹渐变）
-  const startHue = 200;    // 起始色相（蓝青色）
-  const hueRange = 180;    // 色相范围（蓝到紫红）
+  // 不再需要固定的色相范围，颜色将完全由鼠标位置驱动
   
   var width = window.innerWidth;
   var height = window.innerHeight;
@@ -40,21 +38,20 @@
   }
   
   function addParticle(x, y) {
-    // 2. 固定初始大小，并在生命周期中平滑缩小
     const INITIAL_SIZE = 10;
-    const LIFE_SPEED = 0.05;
+    const LIFE_SPEED = 0.04;
     
-    // 3. 分配平滑色域 (基于粒子数量)
-    // 注意：亮度将在绘制时根据 life 动态调整
-    const hue = (startHue + (particles.length % 180) * 2) % 360;
-    // 颜色基座 (饱和度80%，亮度将在绘制时变化)
-    const colorBase = `hsl(${hue}, 80%, 60%)`;
+    // 核心改动：颜色完全由鼠标位置 (x, y) 决定
+    // 将 x/y 坐标映射到 0-360 的色相范围
+    const hue = ( (x / width) * 360 + (y / height) * 360 ) % 360;
+    // 或者你可以用时间变化，让它自动流转
+    // const hue = (Date.now() / 20) % 360;
     
+    // 亮度仍然会在绘制时动态变化，但这里我们保存色相
     var particle = {
       x: x,
       y: y,
-      colorBase: colorBase,  // 存储基础颜色
-      hue: hue,              // 存储色相，用于亮度渐变
+      hue: hue,              // 存储色相，用于绘制
       size: INITIAL_SIZE,
       life: 1,
       speed: LIFE_SPEED
@@ -71,7 +68,7 @@
   function updateParticles() {
     for( var i = 0; i < particles.length; i++ ) {
       var p = particles[i];
-      p.size *= 0.985;      // 平滑缩小
+      p.size *= 0.985;
       p.life -= p.speed;
       
       if( p.life <= 0 || p.size < 0.5 ) {
@@ -82,7 +79,6 @@
   }
   
   function drawParticles() {
-    // 创建/更新 Canvas
     var canvas = document.getElementById('fairy-dust-canvas');
     if( !canvas ) {
       canvas = document.createElement('canvas');
@@ -99,20 +95,18 @@
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, width, height);
     
-    // 绘制粒子 (从旧到新，让新粒子覆盖旧粒子，或者反之)
+    // 从旧到新绘制粒子
     for( var i = 0; i < particles.length; i++ ) {
       var p = particles[i];
       
-      // 4. 亮度衰减：从高亮 (70%) 逐渐降低到暗 (10%)
-      // 生命初期明亮，后期变暗
-      var lightness = 70 - (1 - p.life) * 60; // 70% → 10%
-      var color = `hsl(${p.hue}, 80%, ${lightness}%)`;
+      // 亮度根据生命周期衰减：从明亮到暗淡
+      var lightness = 70 - (1 - p.life) * 60;
+      var color = `hsl(${p.hue}, 90%, ${lightness}%)`;
       
-      // 5. 光晕效果 (Glow)
-      // 在粒子周围添加发光阴影，并让光晕强度随生命衰减
+      // 光晕效果
       ctx.save();
       ctx.shadowColor = color;
-      ctx.shadowBlur = p.size * 0.6;  // 光晕大小随粒子大小变化
+      ctx.shadowBlur = p.size * 0.5;
       
       ctx.globalAlpha = p.life;
       ctx.fillStyle = color;
@@ -120,17 +114,15 @@
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fill();
       
-      // 6. 额外内发光 (可选，使中心更亮)
-      // 在粒子内部再画一个小一点的圆，增加层次感
+      // 内发光 (可选)
       if( p.life > 0.3 ) {
-        ctx.shadowBlur = 0; // 内圈不再发光，避免过度
-        ctx.globalAlpha = p.life * 0.6;
+        ctx.shadowBlur = 0;
+        ctx.globalAlpha = p.life * 0.5;
         ctx.fillStyle = `hsl(${p.hue}, 100%, 90%)`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size * 0.3, 0, Math.PI * 2);
         ctx.fill();
       }
-      
       ctx.restore();
     }
   }
