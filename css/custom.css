@@ -903,3 +903,12 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
     left: -66px;
   }
 }
+
+
+/* 为通知栏添加光晕效果 */
+.snackbar {
+  box-shadow: 0 0 20px rgba(176, 25, 210, 0.8), 0 0 60px rgba(176, 25, 210, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(10px) !important;
+  background: rgba(176, 25, 210, 0.85) !important; /* 半透明背景配合光晕 */
+}
