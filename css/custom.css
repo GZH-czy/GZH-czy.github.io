@@ -371,14 +371,11 @@
 
 
   /* 鼠标样式 */
-   /*
 #cursor {
   position: fixed;
   width: 16px;
   height: 16px;
-   */
   /* 这里改变跟随的底色 */
-   /*
   background: rgb(57, 197, 187);
   border-radius: 8px;
   opacity: 0.25;
@@ -386,9 +383,8 @@
   pointer-events: none;
   transition: 0.2s ease-in-out;
   transition-property: background, opacity, transform;
-} 
-  */
-/*
+}
+
 #cursor.hidden {
   opacity: 0;
 }
@@ -410,7 +406,7 @@
   -ms-transform: scale(0.5);
   -o-transform: scale(0.5);
 }
-*/
+
 
 /* 侧边栏个人信息卡片动态渐变色 */
 #aside-content > .card-widget.card-info {
