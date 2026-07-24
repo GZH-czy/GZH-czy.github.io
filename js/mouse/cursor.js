@@ -43,9 +43,9 @@
     
     // 核心改动：颜色完全由鼠标位置 (x, y) 决定
     // 将 x/y 坐标映射到 0-360 的色相范围
-    const hue = ( (x / width) * 360 + (y / height) * 360 ) % 360;
+    // const hue = ( (x / width) * 360 + (y / height) * 360 ) % 360;
     // 或者你可以用时间变化，让它自动流转
-    // const hue = (Date.now() / 20) % 360;
+    const hue = (Date.now() / 20) % 360;
     
     // 亮度仍然会在绘制时动态变化，但这里我们保存色相
     var particle = {
@@ -115,13 +115,13 @@
       ctx.fill();
       
       // 内发光 (可选)
-      if( p.life > 0.3 ) {
-        ctx.shadowBlur = 0;
-        ctx.globalAlpha = p.life * 0.5;
-        ctx.fillStyle = `hsl(${p.hue}, 100%, 90%)`;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 0.3, 0, Math.PI * 2);
-        ctx.fill();
+      // if( p.life > 0.3 ) {
+      //   ctx.shadowBlur = 0;
+      //   ctx.globalAlpha = p.life * 0.5;
+      //   ctx.fillStyle = `hsl(${p.hue}, 100%, 90%)`;
+      //   ctx.beginPath();
+      //   ctx.arc(p.x, p.y, p.size * 0.3, 0, Math.PI * 2);
+      //   ctx.fill();
       }
       ctx.restore();
     }
