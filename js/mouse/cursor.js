@@ -42,7 +42,7 @@
   function addParticle(x, y) {
     // 2. 固定初始大小，并在生命周期中平滑缩小
     const INITIAL_SIZE = 10;
-    const LIFE_SPEED = 0.008;
+    const LIFE_SPEED = 0.015;
     
     // 3. 分配平滑色域 (基于粒子数量)
     // 注意：亮度将在绘制时根据 life 动态调整
