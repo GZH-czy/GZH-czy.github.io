@@ -18,7 +18,7 @@ select,
 summary,
 [role="button"],
 [onclick] {
-  cursor: url('/cursors/HK/normal.cur') 0 0, pointer;
+  cursor: url('/cursors/HK/link.cur') 0 0, pointer;
 }
 
 /* 文本输入区域 */
@@ -30,7 +30,7 @@ input[type="tel"],
 input[type="url"],
 textarea,
 [contenteditable="true"] {
-  cursor: url('/cursors/HK/normal.cur') 0 0, text;
+  cursor: url('/cursors/HK/text.cur') 0 0, text;
 }
 
 /* 忙碌状态（加载中） */
@@ -42,19 +42,19 @@ textarea,
 /* 水平调整大小 */
 .col-resize,
 [data-resize="horizontal"] {
-  cursor: url('/cursors/HK/normal.cur') 0 0, ew-resize;
+  cursor: url('/cursors/HK/horiz.cur') 0 0, ew-resize;
 }
 
 /* 垂直调整大小 */
 .row-resize,
 [data-resize="vertical"] {
-  cursor: url('/cursors/HK/normal.cur') 0 0, ns-resize;
+  cursor: url('/cursors/HK/vert.cur') 0 0, ns-resize;
 }
 
 /* 移动/拖拽 */
 .move,
 [draggable="true"] {
-  cursor: url('/cursors/HK/normal.cur') 0 0, move;
+  cursor: url('/cursors/HK/move.cur') 0 0, move;
 }
 
 /* 精确选择/十字光标 */
@@ -71,6 +71,6 @@ textarea,
 
 /* 帮助选择 */
 .help-select {
-  cursor: url('/cursors/HK/normal.cur') 0 0, help;
+  cursor: url('/cursors/HK/help.cur') 0 0, help;
 }
 CSS
