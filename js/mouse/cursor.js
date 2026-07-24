@@ -1,9 +1,12 @@
 (function fairyDustCursor() {
+  // 1. 定义平滑色域（彩虹渐变）
+  // 可以调整起始色相 (startHue) 和范围 (hueRange) 来改变整体色调
+  const startHue = 0;      // 起始色相 (0=红)
+  const hueRange = 360;    // 色相范围 (360=全彩虹)
   
-  var possibleColors = ["#D61C59", "#E7D84B", "#1B8798"];
   var width = window.innerWidth;
   var height = window.innerHeight;
-  var cursor = { x: width/2, y: width/2 };
+  var cursor = { x: width/2, y: height/2 };
   var particles = [];
   
   function init() {
@@ -11,7 +14,6 @@
     loop();
   }
   
-  // 绑定事件
   function bindEvents() {
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('touchmove', onTouchMove);
@@ -19,7 +21,7 @@
     window.addEventListener('resize', onWindowResize);
   }
   
-  function onWindowResize(e) {
+  function onWindowResize() {
     width = window.innerWidth;
     height = window.innerHeight;
   }
@@ -27,7 +29,7 @@
   function onTouchMove(e) {
     if( e.touches.length > 0 ) {
       for( var i = 0; i < e.touches.length; i++ ) {
-        addParticle( e.touches[i].clientX, e.touches[i].clientY, possibleColors[Math.floor(Math.random() * possibleColors.length)] );
+        addParticle( e.touches[i].clientX, e.touches[i].clientY );
       }
     }
   }
@@ -35,17 +37,28 @@
   function onMouseMove(e) {
     cursor.x = e.clientX;
     cursor.y = e.clientY;
-    addParticle( cursor.x, cursor.y, possibleColors[Math.floor(Math.random() * possibleColors.length)] );
+    addParticle( cursor.x, cursor.y );
   }
   
-  function addParticle(x, y, color) {
+  function addParticle(x, y) {
+    // 2. 固定初始大小，并在生命周期中平滑缩小
+    // 设置统一的初始大小 (例如 30)
+    const INITIAL_SIZE = 30;
+    // 粒子生命衰减速度 (越小消失越慢)
+    const LIFE_SPEED = 0.008;
+    
+    // 3. 分配平滑色域 (基于当前时间或粒子数量)
+    // 这里使用一个计数器来让颜色随移动变化
+    const hue = (startHue + (particles.length % 180) * 2) % 360;
+    const color = `hsl(${hue}, 80%, 60%)`;
+    
     var particle = {
       x: x,
       y: y,
       color: color,
-      size: Math.random() * 15 + 5,
+      size: INITIAL_SIZE,
       life: 1,
-      speed: 0.02
+      speed: LIFE_SPEED
     };
     particles.push(particle);
   }
@@ -59,8 +72,11 @@
   function updateParticles() {
     for( var i = 0; i < particles.length; i++ ) {
       var p = particles[i];
-      p.life -= p.speed;
+      // 4. 逐渐缩小: 每帧乘以 0.98，实现平滑缩小
       p.size *= 0.98;
+      p.life -= p.speed;
+      
+      // 当粒子太小或生命结束，移除
       if( p.life <= 0 || p.size < 0.5 ) {
         particles.splice(i, 1);
         i--;
@@ -85,11 +101,13 @@
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, width, height);
     
+    // 绘制粒子 (按生命顺序绘制，让新粒子覆盖旧粒子)
     for( var i = 0; i < particles.length; i++ ) {
       var p = particles[i];
       ctx.globalAlpha = p.life;
       ctx.fillStyle = p.color;
       ctx.beginPath();
+      // 5. 绘制圆形
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fill();
     }
