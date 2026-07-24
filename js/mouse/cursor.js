@@ -122,7 +122,7 @@
       //   ctx.beginPath();
       //   ctx.arc(p.x, p.y, p.size * 0.3, 0, Math.PI * 2);
       //   ctx.fill();
-      }
+      // }
       ctx.restore();
     }
   }
