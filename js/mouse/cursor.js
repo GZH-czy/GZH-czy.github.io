@@ -1,5 +1,103 @@
-/*
-var CURSOR;
+(function fairyDustCursor() {
+  
+  var possibleColors = ["#D61C59", "#E7D84B", "#1B8798"];
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+  var cursor = { x: width/2, y: width/2 };
+  var particles = [];
+  
+  function init() {
+    bindEvents();
+    loop();
+  }
+  
+  // 绑定事件
+  function bindEvents() {
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('touchmove', onTouchMove);
+    document.addEventListener('touchstart', onTouchMove);
+    window.addEventListener('resize', onWindowResize);
+  }
+  
+  function onWindowResize(e) {
+    width = window.innerWidth;
+    height = window.innerHeight;
+  }
+  
+  function onTouchMove(e) {
+    if( e.touches.length > 0 ) {
+      for( var i = 0; i < e.touches.length; i++ ) {
+        addParticle( e.touches[i].clientX, e.touches[i].clientY, possibleColors[Math.floor(Math.random() * possibleColors.length)] );
+      }
+    }
+  }
+  
+  function onMouseMove(e) {
+    cursor.x = e.clientX;
+    cursor.y = e.clientY;
+    addParticle( cursor.x, cursor.y, possibleColors[Math.floor(Math.random() * possibleColors.length)] );
+  }
+  
+  function addParticle(x, y, color) {
+    var particle = {
+      x: x,
+      y: y,
+      color: color,
+      size: Math.random() * 15 + 5,
+      life: 1,
+      speed: 0.02
+    };
+    particles.push(particle);
+  }
+  
+  function loop() {
+    updateParticles();
+    drawParticles();
+    requestAnimationFrame(loop);
+  }
+  
+  function updateParticles() {
+    for( var i = 0; i < particles.length; i++ ) {
+      var p = particles[i];
+      p.life -= p.speed;
+      p.size *= 0.98;
+      if( p.life <= 0 || p.size < 0.5 ) {
+        particles.splice(i, 1);
+        i--;
+      }
+    }
+  }
+  
+  function drawParticles() {
+    var canvas = document.getElementById('fairy-dust-canvas');
+    if( !canvas ) {
+      canvas = document.createElement('canvas');
+      canvas.id = 'fairy-dust-canvas';
+      canvas.style.position = 'fixed';
+      canvas.style.top = '0';
+      canvas.style.left = '0';
+      canvas.style.pointerEvents = 'none';
+      canvas.style.zIndex = '9999';
+      document.body.appendChild(canvas);
+    }
+    canvas.width = width;
+    canvas.height = height;
+    var ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, width, height);
+    
+    for( var i = 0; i < particles.length; i++ ) {
+      var p = particles[i];
+      ctx.globalAlpha = p.life;
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+  
+  init();
+})();
+/*var CURSOR;
 
 Math.lerp = (a, b, n) => (1 - n) * a + n * b;
 
