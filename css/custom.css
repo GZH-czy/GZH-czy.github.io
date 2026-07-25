@@ -913,8 +913,10 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
   --main-font: 'Microsoft YaHei', sans-serif;
 }
 
-/* 应用全局圆角 */
-.card-widget, .recent-post-item, .layout-page, .post-block {
+/* 应用全局圆角到更多元素 */
+.card-widget, .recent-post-item, .layout-page, .post-block,
+.recent-post-item, .card, .post, .article, .entry, .blog-card,
+.layout, .main, .container, .content, .page {
   border-radius: var(--main-radius) !important;
 }
 
@@ -931,7 +933,7 @@ body {
   font-family: var(--main-font) !important;
 }
 
-/* --- 滤镜效果（作用于整个屏幕） --- */
+/* 滤镜效果 */
 html.filter-dark {
   filter: brightness(0.7);
 }
@@ -940,4 +942,48 @@ html.filter-sunset {
 }
 html.filter-grayscale {
   filter: grayscale(1);
+}
+
+/* 面板动画 */
+#custom-control-panel.panel-hidden {
+  opacity: 0 !important;
+  transform: scale(0.9) translateY(10px) !important;
+  pointer-events: none !important;
+}
+
+#custom-control-panel.panel-visible {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+  pointer-events: auto !important;
+}
+
+/* 手机端适配 */
+@media (max-width: 768px) {
+  #custom-control-panel {
+    width: calc(100vw - 30px) !important;
+    max-width: 360px !important;
+    right: 15px !important;
+    bottom: 80px !important;
+    padding: 16px !important;
+    font-size: 13px !important;
+    max-height: 70vh !important;
+  }
+  #custom-control-panel h3 {
+    font-size: 15px !important;
+  }
+  .color-swatch {
+    width: 24px !important;
+    height: 24px !important;
+  }
+  .filter-btn {
+    padding: 3px 10px !important;
+    font-size: 11px !important;
+  }
+  #custom-control-panel input[type="range"] {
+    height: 4px !important;
+  }
+  #custom-control-panel select {
+    font-size: 12px !important;
+    padding: 5px !important;
+  }
 }
