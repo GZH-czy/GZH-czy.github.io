@@ -544,7 +544,7 @@
         const panelHTML = `
             <div id="custom-control-panel" class="panel-hidden" style="position:fixed; bottom:70px; right:10px; width:300px; max-width:calc(100vw - 20px); background:#fff; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,0.25); padding:20px; z-index:99999; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#333; max-height:80vh; overflow-y:auto; opacity:0; transform:scale(0.9) translateY(10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events:none; transform-origin: bottom right; font-size:14px;">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
-                    <h3 style="margin:0; font-size:16px; font-weight:600; color:#49B1F5;">🎨 实时自定义</h3>
+                    <h3 style="margin:0; font-size:16px; font-weight:600; color:#49B1F5;">自定义</h3>
                     <button id="close-panel-btn" style="background:none; border:none; font-size:20px; cursor:pointer; color:#888; padding:0 6px; transition:color 0.3s;" aria-label="关闭面板">✕</button>
                 </div>
                 
@@ -561,7 +561,7 @@
                 <!-- 颜色选择器（二级面板） -->
                 <div id="color-picker-panel" class="picker-hidden" style="position:fixed; bottom:70px; right:10px; width:300px; max-width:calc(100vw - 20px); background:#fff; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,0.3); padding:20px; z-index:100000; opacity:0; transform:scale(0.9) translateY(10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events:none; transform-origin: bottom right; font-size:14px;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
-                        <h4 style="margin:0; font-size:15px; font-weight:600; color:#49B1F5;">🎯 选择颜色</h4>
+                        <h4 style="margin:0; font-size:15px; font-weight:600; color:#49B1F5;">选择主题色</h4>
                         <button id="close-color-picker-btn" style="background:none; border:none; font-size:18px; cursor:pointer; color:#888; padding:0 4px; transition:color 0.3s;" aria-label="关闭颜色选择器">✕</button>
                     </div>
                     
