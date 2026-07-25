@@ -71,7 +71,7 @@
     function applyThemeToElements() {
         const color = getSettings().color;
         
-        // 1. 应用到目录（TOC）
+        // 1. 应用到目录（TOC）文字颜色
         document.querySelectorAll('.toc-item a, .toc-link, .toc-text, .toc-number').forEach(el => {
             el.style.color = color;
         });
@@ -80,38 +80,28 @@
             el.style.borderColor = color;
         });
         
-        // 2. 应用到导航栏
-        // 导航链接
-        document.querySelectorAll('#nav .nav-link, #nav a, .navbar a, .menus a, .nav-list a').forEach(el => {
-            el.style.color = color;
-            el.style.transition = 'color 0.3s ease';
+        // 2. 应用到导航栏背景色
+        document.querySelectorAll('#nav, .navbar, .nav, .menus, .header-nav, .site-nav').forEach(el => {
+            el.style.background = color;
+            el.style.setProperty('--nav-bg', color);
         });
-        // 导航栏激活状态
-        document.querySelectorAll('#nav .nav-link.active, #nav .current, .navbar .active').forEach(el => {
-            el.style.color = color;
+        // 导航栏边框
+        document.querySelectorAll('#nav, .navbar, .nav').forEach(el => {
             el.style.borderColor = color;
         });
-        // 导航栏悬停效果
-        document.querySelectorAll('#nav .nav-link, #nav a, .navbar a, .menus a, .nav-list a').forEach(el => {
-            el.onmouseenter = function() { 
-                this.style.color = color; 
-                this.style.opacity = '0.8';
-            };
-            el.onmouseleave = function() { 
-                this.style.color = color; 
-                this.style.opacity = '1';
-            };
+        // 导航栏底部阴影/强调线
+        document.querySelectorAll('#nav::after, .navbar::after, .nav::after').forEach(el => {
+            el.style.background = color;
         });
-        // 导航栏Logo
-        document.querySelectorAll('#nav .logo, #nav .site-name, .navbar-brand, .logo a').forEach(el => {
-            el.style.color = color;
+        // 导航栏菜单背景（移动端）
+        document.querySelectorAll('.menus, .nav-list, .menu-list').forEach(el => {
+            el.style.background = color;
         });
         
         // 3. 应用到文章标题
         document.querySelectorAll('.post-title, .article-title, .post-title a, .recent-post-item .title, .blog-post-title').forEach(el => {
             el.style.color = color;
         });
-        // 文章标题悬停
         document.querySelectorAll('.post-title a, .article-title a, .recent-post-item .title a').forEach(el => {
             el.onmouseenter = function() { 
                 this.style.color = color; 
@@ -121,6 +111,10 @@
                 this.style.color = color; 
                 this.style.opacity = '1';
             };
+        });
+        // 文章标题装饰线
+        document.querySelectorAll('.post-title::after, .article-title::after, .recent-post-item .title::after').forEach(el => {
+            el.style.background = color;
         });
         
         // 4. 应用到面板自身

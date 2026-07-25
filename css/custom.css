@@ -929,8 +929,8 @@ img {
   border-radius: 0px !important;
 }
 
-/* 主题色 - 应用于目录、导航栏、文章标题 */
-/* 目录 */
+/* 主题色 - 应用于目录文字、导航栏背景、文章标题 */
+/* 目录文字颜色 */
 .toc-item a,
 .toc-link,
 .toc-text,
@@ -949,38 +949,37 @@ img {
   border-color: var(--main-color) !important;
 }
 
-/* 导航栏 */
-#nav .nav-link,
-#nav a,
-.navbar a,
-.menus a,
-.nav-list a {
-  color: var(--main-color) !important;
+/* 导航栏背景色 */
+#nav,
+.navbar,
+.nav,
+.menus,
+.header-nav,
+.site-nav {
+  background: var(--main-color) !important;
 }
 
-#nav .nav-link:hover,
-#nav a:hover,
-.navbar a:hover,
-.menus a:hover {
-  color: var(--main-color) !important;
-  opacity: 0.8;
-}
-
-#nav .nav-link.active,
-#nav .current,
-.navbar .active {
-  color: var(--main-color) !important;
+/* 导航栏边框 */
+#nav,
+.navbar,
+.nav {
   border-color: var(--main-color) !important;
 }
 
-#nav .logo,
-#nav .site-name,
-.navbar-brand,
-.logo a {
-  color: var(--main-color) !important;
+/* 导航栏底部装饰线 */
+#nav::after,
+.navbar::after {
+  background: var(--main-color) !important;
 }
 
-/* 文章标题 */
+/* 导航栏菜单（移动端）背景 */
+.menus,
+.nav-list,
+.menu-list {
+  background: var(--main-color) !important;
+}
+
+/* 文章标题颜色 */
 .post-title,
 .article-title,
 .post-title a,
@@ -994,6 +993,13 @@ img {
 .recent-post-item .title a:hover {
   color: var(--main-color) !important;
   opacity: 0.8;
+}
+
+/* 文章标题装饰线 */
+.post-title::after,
+.article-title::after,
+.recent-post-item .title::after {
+  background: var(--main-color) !important;
 }
 
 /* 字体 */
