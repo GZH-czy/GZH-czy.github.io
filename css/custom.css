@@ -906,7 +906,6 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
 
 
 /*myscript*/
-
 /* source/css/custom.css */
 :root {
   --main-radius: 10px;
@@ -929,7 +928,6 @@ img {
   border-radius: 0px !important;
 }
 
-/* 主题色 - 应用于目录文字、文章标题 */
 /* 目录文字颜色 */
 .toc-item a,
 .toc-link,
@@ -949,11 +947,10 @@ img {
   border-color: var(--main-color) !important;
 }
 
-/* 导航栏 - 使用CSS滤镜改变颜色，保留所有原有样式 */
+/* 导航栏 - 滤镜由JavaScript动态设置 */
 #nav,
 .navbar,
 .nav {
-  /* 滤镜由JavaScript动态设置，保留所有原有样式 */
   transition: filter 0.3s ease;
 }
 
@@ -973,19 +970,16 @@ img {
   opacity: 0.8;
 }
 
-/* 文章标题装饰线 */
 .post-title::after,
 .article-title::after,
 .recent-post-item .title::after {
   background: var(--main-color) !important;
 }
 
-/* 字体 */
 body {
   font-family: var(--main-font) !important;
 }
 
-/* 滤镜 */
 html.filter-dark {
   filter: brightness(0.7);
 }
@@ -996,7 +990,6 @@ html.filter-grayscale {
   filter: grayscale(1);
 }
 
-/* 面板动画 */
 #custom-control-panel.panel-hidden {
   opacity: 0 !important;
   transform: scale(0.9) translateY(10px) !important;
@@ -1008,7 +1001,6 @@ html.filter-grayscale {
   pointer-events: auto !important;
 }
 
-/* 颜色选择器动画 */
 #color-picker-panel.picker-hidden {
   opacity: 0 !important;
   transform: scale(0.9) translateY(10px) !important;
@@ -1020,7 +1012,6 @@ html.filter-grayscale {
   pointer-events: auto !important;
 }
 
-/* 手机端适配 */
 @media (max-width: 768px) {
   #custom-control-panel,
   #color-picker-panel {
