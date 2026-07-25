@@ -80,22 +80,27 @@
             el.style.borderColor = color;
         });
         
-        // 2. 应用到导航栏背景色
-        document.querySelectorAll('#nav, .navbar, .nav, .menus, .header-nav, .site-nav').forEach(el => {
-            el.style.background = color;
-            el.style.setProperty('--nav-bg', color);
+        // 2. 应用到导航栏 - 使用CSS变量方式保留透明和毛玻璃效果
+        // 设置主题色变量，供CSS使用
+        document.documentElement.style.setProperty('--nav-theme-color', color);
+        
+        // 导航栏背景色 - 使用rgba保留透明度
+        const navElements = document.querySelectorAll('#nav, .navbar, .nav, .header-nav, .site-nav');
+        navElements.forEach(el => {
+            // 获取当前背景色
+            const currentBg = window.getComputedStyle(el).background;
+            // 如果已有背景色（包括透明），只修改颜色值
+            el.style.setProperty('--nav-bg-color', color);
+            // 添加一个半透明覆盖层，而不是完全覆盖
+            el.style.background = `linear-gradient(135deg, ${color}33, ${color}22)`;
+            el.style.backdropFilter = 'blur(20px)';
+            el.style.webkitBackdropFilter = 'blur(20px)';
         });
-        // 导航栏边框
-        document.querySelectorAll('#nav, .navbar, .nav').forEach(el => {
-            el.style.borderColor = color;
-        });
-        // 导航栏底部阴影/强调线
-        document.querySelectorAll('#nav::after, .navbar::after, .nav::after').forEach(el => {
-            el.style.background = color;
-        });
-        // 导航栏菜单背景（移动端）
-        document.querySelectorAll('.menus, .nav-list, .menu-list').forEach(el => {
-            el.style.background = color;
+        
+        // 导航栏底部边框/阴影
+        document.querySelectorAll('#nav, .navbar').forEach(el => {
+            el.style.borderBottom = `2px solid ${color}44`;
+            el.style.boxShadow = `0 2px 20px ${color}22`;
         });
         
         // 3. 应用到文章标题

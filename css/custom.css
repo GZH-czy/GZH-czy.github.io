@@ -912,6 +912,7 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
   --main-radius: 10px;
   --main-color: #49B1F5;
   --main-font: 'Microsoft YaHei', sans-serif;
+  --nav-theme-color: #49B1F5;
 }
 
 /* 全局圆角 */
@@ -949,34 +950,22 @@ img {
   border-color: var(--main-color) !important;
 }
 
-/* 导航栏背景色 */
-#nav,
-.navbar,
-.nav,
-.menus,
-.header-nav,
-.site-nav {
-  background: var(--main-color) !important;
-}
-
-/* 导航栏边框 */
+/* 导航栏 - 保留透明和毛玻璃效果，只改变色调 */
 #nav,
 .navbar,
 .nav {
-  border-color: var(--main-color) !important;
+  background: linear-gradient(135deg, var(--nav-theme-color, #49B1F5)33, var(--nav-theme-color, #49B1F5)22) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 2px solid var(--nav-theme-color, #49B1F5)44 !important;
+  box-shadow: 0 2px 20px var(--nav-theme-color, #49B1F5)22 !important;
 }
 
-/* 导航栏底部装饰线 */
-#nav::after,
-.navbar::after {
-  background: var(--main-color) !important;
-}
-
-/* 导航栏菜单（移动端）背景 */
-.menus,
-.nav-list,
-.menu-list {
-  background: var(--main-color) !important;
+/* 导航栏文字颜色 - 保留原有文字颜色，不强制修改 */
+#nav .nav-link,
+#nav a,
+.navbar a {
+  /* 不强制修改文字颜色，保留原样 */
 }
 
 /* 文章标题颜色 */
