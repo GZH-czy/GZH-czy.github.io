@@ -931,13 +931,13 @@ body {
   font-family: var(--main-font) !important;
 }
 
-/* --- 滤镜效果 --- */
-.filter-dark #body-wrap {
+/* --- 滤镜效果（作用于整个屏幕） --- */
+html.filter-dark {
   filter: brightness(0.7);
 }
-.filter-sunset #body-wrap {
-  filter: sepia(0.5) brightness(1.1) saturate(1.3);
+html.filter-sunset {
+  filter: sepia(0.6) brightness(1.1) saturate(1.4) hue-rotate(-10deg);
 }
-.filter-grayscale #body-wrap {
+html.filter-grayscale {
   filter: grayscale(1);
 }

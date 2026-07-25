@@ -1,4 +1,4 @@
-// source/js/custom-control-panel.js
+// source/js/ccp.js
 (function() {
     document.addEventListener('DOMContentLoaded', function() {
         loadSettings();
@@ -29,7 +29,7 @@
     function getSettings() {
         const defaultSettings = {
             radius: 10,
-            color: '#49B1F5', // Butterfly 默认主题色
+            color: '#49B1F5',
             font: "'Microsoft YaHei', sans-serif",
             filter: 'none'
         };
@@ -45,24 +45,22 @@
         localStorage.setItem('myBlogSettings', JSON.stringify(settings));
     }
 
+    // 修改滤镜实现：作用于整个屏幕，并调整日落色调
     function applyFilter(filterType) {
-        const bg = document.getElementById('body-wrap');
-        if (!bg) return;
         // 移除所有滤镜类
-        bg.classList.remove('filter-dark', 'filter-sunset', 'filter-grayscale');
-        if (filterType === 'dark') {
-            bg.classList.add('filter-dark');
-        } else if (filterType === 'sunset') {
-            bg.classList.add('filter-sunset');
-        } else if (filterType === 'grayscale') {
-            bg.classList.add('filter-grayscale');
+        document.documentElement.classList.remove('filter-dark', 'filter-sunset', 'filter-grayscale');
+        if (filterType !== 'none') {
+            document.documentElement.classList.add('filter-' + filterType);
         }
     }
 
     function createControlPanel() {
         const panelHTML = `
             <div id="custom-control-panel" style="display:none; position:fixed; bottom:80px; right:20px; width:320px; background:#fff; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,0.25); padding:24px; z-index:99999; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#333; max-height:80vh; overflow-y:auto;">
-                <h3 style="margin:0 0 20px 0; text-align:center; font-size:18px; font-weight:600; border-bottom:2px solid #f0f0f0; padding-bottom:12px;">🎨 实时自定义</h3>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:2px solid #f0f0f0; padding-bottom:12px;">
+                    <h3 style="margin:0; font-size:18px; font-weight:600;">🎨 实时自定义</h3>
+                    <button id="close-panel-btn" style="background:none; border:none; font-size:22px; cursor:pointer; color:#888; padding:0 8px;" aria-label="关闭面板">✕</button>
+                </div>
                 
                 <!-- 主题色 -->
                 <div style="margin-bottom:20px;">
@@ -81,7 +79,7 @@
 
                 <!-- 滤镜 -->
                 <div style="margin-bottom:20px;">
-                    <label style="display:block; font-size:14px; margin-bottom:8px; font-weight:600;">背景滤镜</label>
+                    <label style="display:block; font-size:14px; margin-bottom:8px; font-weight:600;">屏幕滤镜</label>
                     <div id="filter-options" style="display:flex; flex-wrap:wrap; gap:8px;">
                         ${[
                             {id: 'none', label: '关闭'},
@@ -129,6 +127,12 @@
         const resetBtn = document.getElementById('reset-default-btn');
         const currentColorDisplay = document.getElementById('current-color-display');
         const currentColorHex = document.getElementById('current-color-hex');
+        const closeBtn = document.getElementById('close-panel-btn');
+
+        // 关闭按钮事件
+        closeBtn.addEventListener('click', function() {
+            panel.style.display = 'none';
+        });
 
         // 加载保存的设置
         const settings = getSettings();
@@ -239,8 +243,6 @@
             currentColorHex.textContent = defaultSettings.color.toUpperCase();
             saveSettings(defaultSettings);
         });
-
-        // 点击齿轮按钮切换面板（已经在 initCustomPanelButton 中处理）
     }
 
     function initCustomPanelButton() {
@@ -256,20 +258,4 @@
             });
         }
     }
-
-    // 确保 rightside.pug 中的按钮能触发
-    // 这个函数会在 DOM 加载完成后被调用
-    window.initCustomPanel = function() {
-        const panelBtn = document.getElementById('custom-panel-btn');
-        if (panelBtn) {
-            panelBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const panel = document.getElementById('custom-control-panel');
-                if (panel) {
-                    const isHidden = panel.style.display === 'none';
-                    panel.style.display = isHidden ? 'block' : 'none';
-                }
-            });
-        }
-    };
 })();
