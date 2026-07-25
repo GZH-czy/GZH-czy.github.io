@@ -929,7 +929,8 @@ img {
   border-radius: 0px !important;
 }
 
-/* 主题色 - 仅应用于目录（TOC） */
+/* 主题色 - 应用于目录、导航栏、文章标题 */
+/* 目录 */
 .toc-item a,
 .toc-link,
 .toc-text,
@@ -946,6 +947,53 @@ img {
 .toc-link.active {
   color: var(--main-color) !important;
   border-color: var(--main-color) !important;
+}
+
+/* 导航栏 */
+#nav .nav-link,
+#nav a,
+.navbar a,
+.menus a,
+.nav-list a {
+  color: var(--main-color) !important;
+}
+
+#nav .nav-link:hover,
+#nav a:hover,
+.navbar a:hover,
+.menus a:hover {
+  color: var(--main-color) !important;
+  opacity: 0.8;
+}
+
+#nav .nav-link.active,
+#nav .current,
+.navbar .active {
+  color: var(--main-color) !important;
+  border-color: var(--main-color) !important;
+}
+
+#nav .logo,
+#nav .site-name,
+.navbar-brand,
+.logo a {
+  color: var(--main-color) !important;
+}
+
+/* 文章标题 */
+.post-title,
+.article-title,
+.post-title a,
+.recent-post-item .title,
+.blog-post-title {
+  color: var(--main-color) !important;
+}
+
+.post-title a:hover,
+.article-title a:hover,
+.recent-post-item .title a:hover {
+  color: var(--main-color) !important;
+  opacity: 0.8;
 }
 
 /* 字体 */
