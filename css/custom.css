@@ -947,13 +947,6 @@ img {
   border-color: var(--main-color) !important;
 }
 
-/* 导航栏 - 滤镜由JavaScript动态设置 */
-#nav,
-.navbar,
-.nav {
-  transition: filter 0.3s ease;
-}
-
 /* 文章标题颜色 */
 .post-title,
 .article-title,

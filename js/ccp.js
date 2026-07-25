@@ -67,35 +67,6 @@
         }
     });
 
-    // 将颜色转换为CSS滤镜
-    function hexToFilter(color) {
-        const r = parseInt(color.slice(1, 3), 16) / 255;
-        const g = parseInt(color.slice(3, 5), 16) / 255;
-        const b = parseInt(color.slice(5, 7), 16) / 255;
-        
-        const max = Math.max(r, g, b);
-        const min = Math.min(r, g, b);
-        let h = 0;
-        
-        if (max !== min) {
-            const d = max - min;
-            if (max === r) {
-                h = ((g - b) / d) % 6;
-            } else if (max === g) {
-                h = (b - r) / d + 2;
-            } else {
-                h = (r - g) / d + 4;
-            }
-            h = h * 60;
-            if (h < 0) h += 360;
-        }
-        
-        const saturation = (max - min) / max * 100;
-        const lightness = (max + min) / 2 * 100;
-        
-        return `hue-rotate(${h}deg) saturate(${saturation + 50}%) brightness(${lightness / 40})`;
-    }
-
     // 应用主题色到各个元素（实时更新）
     function applyThemeToElements() {
         const color = getSettings().color;
@@ -109,14 +80,7 @@
             el.style.borderColor = color;
         });
         
-        // 2. 应用到导航栏 - 使用CSS滤镜
-        const navElements = document.querySelectorAll('#nav, .navbar, .nav, .header-nav, .site-nav');
-        const filter = hexToFilter(color);
-        navElements.forEach(el => {
-            el.style.filter = filter;
-        });
-        
-        // 3. 应用到文章标题
+        // 2. 应用到文章标题
         document.querySelectorAll('.post-title, .article-title, .post-title a, .recent-post-item .title, .blog-post-title').forEach(el => {
             el.style.color = color;
         });
@@ -134,7 +98,7 @@
             el.style.background = color;
         });
         
-        // 4. 应用到面板自身
+        // 3. 应用到面板自身
         const panel = document.getElementById('custom-control-panel');
         if (panel) {
             const title = panel.querySelector('h3');
@@ -172,7 +136,7 @@
             }
         }
         
-        // 5. 颜色选择器
+        // 4. 颜色选择器
         const picker = document.getElementById('color-picker-panel');
         if (picker) {
             const title = picker.querySelector('h4');
@@ -185,14 +149,14 @@
             }
         }
         
-        // 6. 齿轮按钮
+        // 5. 齿轮按钮
         const gearBtn = document.getElementById('custom-panel-btn');
         if (gearBtn) {
             gearBtn.style.color = color;
             gearBtn.style.borderColor = color;
         }
         
-        // 7. 更新CSS变量
+        // 6. 更新CSS变量
         document.documentElement.style.setProperty('--main-color', color);
     }
 
@@ -324,7 +288,6 @@
             newEl.addEventListener('click', function() {
                 const color = this.dataset.color;
                 applyColor(color);
-                // 不关闭颜色选择器，让用户继续选择
             });
         });
 
@@ -337,7 +300,6 @@
                 const color = this.value;
                 document.getElementById('color-hex-input').value = color;
                 applyColor(color);
-                // 色环拖动时实时应用
             });
         }
 
@@ -352,7 +314,6 @@
                     if (/^#[0-9a-fA-F]{6}$/.test(val)) {
                         document.getElementById('color-wheel').value = val;
                         applyColor(val);
-                        // 输入完整颜色时立即应用
                     }
                 }
             });
@@ -499,16 +460,11 @@
     }
 
     function applyColor(color) {
-        // 更新CSS变量
         document.documentElement.style.setProperty('--main-color', color);
-        
-        // 更新显示
         document.getElementById('current-color-display').style.background = color;
         document.getElementById('current-color-hex').textContent = color.toUpperCase();
         document.getElementById('color-wheel').value = color;
         document.getElementById('color-hex-input').value = color;
-        
-        // 高亮选中的预设色块
         document.querySelectorAll('.picker-swatch').forEach(s => {
             s.style.borderColor = 'transparent';
             if (s.dataset.color === color) {
@@ -516,10 +472,8 @@
             }
         });
         
-        // 立即应用主题到所有元素
         applyThemeToElements();
         
-        // 保存设置
         const newSettings = getSettings();
         newSettings.color = color;
         saveSettings(newSettings);
@@ -681,16 +635,13 @@
             document.getElementById('current-color-display').click();
         });
 
-        // 预设色块 - 点击后立即应用，不关闭选择器
         document.querySelectorAll('.picker-swatch').forEach(el => {
             el.addEventListener('click', function() {
                 const color = this.dataset.color;
                 applyColor(color);
-                // 不关闭颜色选择器
             });
         });
 
-        // 色环 - 拖动时实时应用
         const colorWheel = document.getElementById('color-wheel');
         if (colorWheel) {
             colorWheel.addEventListener('input', function() {
@@ -700,7 +651,6 @@
             });
         }
 
-        // 十六进制输入 - 输入时实时应用
         const hexInput = document.getElementById('color-hex-input');
         if (hexInput) {
             hexInput.addEventListener('input', function() {
