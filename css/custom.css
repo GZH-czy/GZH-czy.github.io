@@ -940,7 +940,7 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
     --main-radius: 10px;
     --main-color: #49B1F5;
     --main-font: 'Microsoft YaHei', sans-serif;
-    --lyx-theme: #49B1F5;  /* 导航栏主题色，由JS动态更新 */
+    --lyx-theme: #49B1F5;
 }
 
 /* 全局圆角 */
@@ -1000,9 +1000,9 @@ img {
 }
 
 /* ==================== 导航栏自定义 ==================== */
+/* 基础样式在 CSS 中定义，背景色由 JS 动态覆盖 */
 #site-name::before {
     opacity: 0;
-    background-color: var(--lyx-theme) !important;
     border-radius: 8px;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
@@ -1019,12 +1019,12 @@ img {
     width: 100%;
     height: 100%;
     content: "\f015";
-    box-shadow: 0 0 5px var(--lyx-theme);
     font-family: "Font Awesome 6 Free";
     text-align: center;
     color: white;
     line-height: 34px;
     font-size: 18px;
+    /* background-color 和 box-shadow 由 JS 动态注入 */
 }
 
 #site-name:hover::before {

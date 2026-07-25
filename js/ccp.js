@@ -102,8 +102,27 @@
         });
         
         // 3. 应用到导航栏自定义主题色（site-name 的 ::before 伪元素）
-        // 更新 CSS 变量 --lyx-theme
+        // 方法1：更新 CSS 变量
         document.documentElement.style.setProperty('--lyx-theme', color);
+        
+        // 方法2：直接创建 style 标签覆盖伪元素样式（确保生效）
+        const styleId = 'dynamic-site-name-style';
+        let styleEl = document.getElementById(styleId);
+        if (!styleEl) {
+            styleEl = document.createElement('style');
+            styleEl.id = styleId;
+            document.head.appendChild(styleEl);
+        }
+        styleEl.textContent = `
+            #site-name::before {
+                background-color: ${color} !important;
+                box-shadow: 0 0 5px ${color} !important;
+            }
+            #site-name:hover::before {
+                background-color: ${color} !important;
+                box-shadow: 0 0 5px ${color} !important;
+            }
+        `;
         
         // 4. 应用到面板自身
         const panel = document.getElementById('custom-control-panel');
