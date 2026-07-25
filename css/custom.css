@@ -912,7 +912,6 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
   --main-radius: 10px;
   --main-color: #49B1F5;
   --main-font: 'Microsoft YaHei', sans-serif;
-  --nav-theme-color: #49B1F5;
 }
 
 /* 全局圆角 */
@@ -930,7 +929,7 @@ img {
   border-radius: 0px !important;
 }
 
-/* 主题色 - 应用于目录文字、导航栏背景、文章标题 */
+/* 主题色 - 应用于目录文字、文章标题 */
 /* 目录文字颜色 */
 .toc-item a,
 .toc-link,
@@ -950,22 +949,13 @@ img {
   border-color: var(--main-color) !important;
 }
 
-/* 导航栏 - 保留透明和毛玻璃效果，只改变色调 */
+/* 导航栏 - 保留原有透明度，只替换颜色 */
 #nav,
 .navbar,
 .nav {
-  background: linear-gradient(135deg, var(--nav-theme-color, #49B1F5)33, var(--nav-theme-color, #49B1F5)22) !important;
+  /* 背景色由JavaScript动态设置，保留透明度 */
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
-  border-bottom: 2px solid var(--nav-theme-color, #49B1F5)44 !important;
-  box-shadow: 0 2px 20px var(--nav-theme-color, #49B1F5)22 !important;
-}
-
-/* 导航栏文字颜色 - 保留原有文字颜色，不强制修改 */
-#nav .nav-link,
-#nav a,
-.navbar a {
-  /* 不强制修改文字颜色，保留原样 */
 }
 
 /* 文章标题颜色 */

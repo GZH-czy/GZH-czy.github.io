@@ -67,6 +67,33 @@
         }
     });
 
+    // 将颜色转换为rgba，保留透明度
+    function hexToRgba(hex, alpha) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    // 提取背景色的透明度
+    function getBackgroundAlpha(element) {
+        const bg = window.getComputedStyle(element).background;
+        // 尝试匹配rgba或hsla中的透明度
+        const rgbaMatch = bg.match(/rgba?\([^)]+\)/);
+        if (rgbaMatch) {
+            const parts = rgbaMatch[0].match(/[\d.]+/g);
+            if (parts && parts.length >= 4) {
+                return parseFloat(parts[3]);
+            }
+        }
+        // 如果是透明或没有背景，返回0
+        if (bg === 'transparent' || bg === 'none' || bg === 'rgba(0, 0, 0, 0)') {
+            return 0;
+        }
+        // 默认返回0.3（透明背景）
+        return 0.3;
+    }
+
     // 应用主题色到各个元素（实时更新）
     function applyThemeToElements() {
         const color = getSettings().color;
@@ -80,27 +107,30 @@
             el.style.borderColor = color;
         });
         
-        // 2. 应用到导航栏 - 使用CSS变量方式保留透明和毛玻璃效果
-        // 设置主题色变量，供CSS使用
-        document.documentElement.style.setProperty('--nav-theme-color', color);
-        
-        // 导航栏背景色 - 使用rgba保留透明度
+        // 2. 应用到导航栏 - 保留原有的透明度
         const navElements = document.querySelectorAll('#nav, .navbar, .nav, .header-nav, .site-nav');
         navElements.forEach(el => {
-            // 获取当前背景色
-            const currentBg = window.getComputedStyle(el).background;
-            // 如果已有背景色（包括透明），只修改颜色值
-            el.style.setProperty('--nav-bg-color', color);
-            // 添加一个半透明覆盖层，而不是完全覆盖
-            el.style.background = `linear-gradient(135deg, ${color}33, ${color}22)`;
+            // 获取原有背景色的透明度
+            const alpha = getBackgroundAlpha(el);
+            // 应用新颜色，保留透明度
+            const rgbaColor = hexToRgba(color, alpha);
+            // 保留原有的背景样式（如渐变、毛玻璃等），只替换颜色值
+            const currentBg = window.getComputedStyle(el).backgroundImage;
+            if (currentBg && currentBg !== 'none') {
+                // 如果有渐变背景，尝试替换颜色
+                el.style.background = `linear-gradient(135deg, ${hexToRgba(color, alpha)}, ${hexToRgba(color, alpha * 0.7)})`;
+            } else {
+                // 纯色背景
+                el.style.background = rgbaColor;
+            }
+            // 保留backdrop-filter毛玻璃效果
             el.style.backdropFilter = 'blur(20px)';
             el.style.webkitBackdropFilter = 'blur(20px)';
-        });
-        
-        // 导航栏底部边框/阴影
-        document.querySelectorAll('#nav, .navbar').forEach(el => {
-            el.style.borderBottom = `2px solid ${color}44`;
-            el.style.boxShadow = `0 2px 20px ${color}22`;
+            
+            // 边框颜色也应用主题色，保留透明度
+            const borderAlpha = 0.4;
+            el.style.borderBottom = `2px solid ${hexToRgba(color, borderAlpha)}`;
+            el.style.boxShadow = `0 2px 20px ${hexToRgba(color, 0.15)}`;
         });
         
         // 3. 应用到文章标题
