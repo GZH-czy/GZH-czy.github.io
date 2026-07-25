@@ -1,11 +1,11 @@
 // source/js/ccp.js
 (function() {
-    // 初始化函数
     function initCustomPanel() {
         if (document.getElementById('custom-control-panel')) {
             rebindEvents();
-            // 重新应用圆角（页面切换后重新应用）
-            applyRadius();
+            applyRadiusToAll();
+            // 同时更新面板本身的圆角
+            applyPanelRadius();
             return;
         }
         loadSettings();
@@ -26,7 +26,6 @@
         });
     }
 
-    // 页面加载时初始化
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initCustomPanel);
     } else {
@@ -34,25 +33,53 @@
     }
 
     document.addEventListener('pjax:complete', function() {
-        initCustomPanel();
+        setTimeout(function() {
+            initCustomPanel();
+        }, 50);
     });
 
     document.addEventListener('pjax:success', function() {
-        initCustomPanel();
+        setTimeout(function() {
+            initCustomPanel();
+        }, 50);
     });
 
-    // 重新应用圆角到所有卡片
-    function applyRadius() {
+    // 应用面板本身的圆角
+    function applyPanelRadius() {
+        const radius = getSettings().radius;
+        const panel = document.getElementById('custom-control-panel');
+        if (panel) {
+            panel.style.borderRadius = radius + 'px';
+        }
+    }
+
+    function applyRadiusToAll() {
         const radius = getSettings().radius;
         document.documentElement.style.setProperty('--main-radius', radius + 'px');
-        // 直接应用到元素
-        document.querySelectorAll('.card-widget, .recent-post-item, .layout-page, .post-block, .recent-post-item, .card, .post, .article, .entry, .blog-card').forEach(el => {
-            el.style.borderRadius = radius + 'px';
+        // 更全面的选择器覆盖
+        const selectors = [
+            '.card-widget', '.recent-post-item', '.layout-page', '.post-block',
+            '.recent-post-item', '.card', '.post', '.article', '.entry', '.blog-card',
+            '.layout', '.main', '.container', '.content', '.page',
+            // 文章页面的背景
+            '.post-content', '.article-container', '.post-body', '.markdown-body',
+            '.page-content', '.main-content', '.content-area',
+            // Butterfly 特有的
+            '#post', '.post-wrap', '.article-wrap', '.blog-post',
+            '.post-main', '.post-container', '.post-inner',
+            // 任何包含 .post 的元素
+            '[class*="post"]', '[class*="article"]', '[class*="content"]'
+        ];
+        selectors.forEach(sel => {
+            document.querySelectorAll(sel).forEach(el => {
+                el.style.borderRadius = radius + 'px';
+            });
         });
+        // 同时更新面板
+        applyPanelRadius();
     }
 
     function rebindEvents() {
-        // 重新绑定齿轮按钮
         const panelBtn = document.getElementById('custom-panel-btn');
         if (panelBtn) {
             panelBtn.replaceWith(panelBtn.cloneNode(true));
@@ -70,7 +97,6 @@
             });
         }
 
-        // 重新绑定关闭按钮
         const closeBtn = document.getElementById('close-panel-btn');
         if (closeBtn) {
             closeBtn.replaceWith(closeBtn.cloneNode(true));
@@ -81,7 +107,6 @@
             });
         }
 
-        // 重新绑定颜色
         document.querySelectorAll('.color-swatch').forEach(el => {
             el.replaceWith(el.cloneNode(true));
         });
@@ -103,7 +128,6 @@
             });
         });
 
-        // 重新绑定滤镜
         document.querySelectorAll('.filter-btn').forEach(el => {
             el.replaceWith(el.cloneNode(true));
         });
@@ -123,7 +147,6 @@
             });
         });
 
-        // 重新绑定滑动条
         const radiusSlider = document.getElementById('radius-slider');
         if (radiusSlider) {
             radiusSlider.replaceWith(radiusSlider.cloneNode(true));
@@ -131,14 +154,13 @@
             newSlider.addEventListener('input', function() {
                 const val = this.value;
                 document.getElementById('radius-value').textContent = val + 'px';
-                applyRadiusToAll(val);
+                applyRadiusToAllWithValue(val);
                 const newSettings = getSettings();
                 newSettings.radius = parseInt(val);
                 saveSettings(newSettings);
             });
         }
 
-        // 重新绑定字体
         const fontSelect = document.getElementById('font-select');
         if (fontSelect) {
             fontSelect.replaceWith(fontSelect.cloneNode(true));
@@ -152,7 +174,6 @@
             });
         }
 
-        // 重新绑定重置按钮
         const resetBtn = document.getElementById('reset-default-btn');
         if (resetBtn) {
             resetBtn.replaceWith(resetBtn.cloneNode(true));
@@ -162,7 +183,7 @@
                 document.getElementById('radius-slider').value = defaultSettings.radius;
                 document.getElementById('radius-value').textContent = defaultSettings.radius + 'px';
                 document.getElementById('font-select').value = "'Microsoft YaHei', sans-serif";
-                applyRadiusToAll(defaultSettings.radius);
+                applyRadiusToAllWithValue(defaultSettings.radius);
                 document.documentElement.style.setProperty('--main-color', defaultSettings.color);
                 document.documentElement.style.setProperty('--main-font', defaultSettings.font);
                 applyFilter('none');
@@ -188,20 +209,32 @@
             });
         }
 
-        // 重新应用已保存的设置
         const settings = getSettings();
-        applyRadiusToAll(settings.radius);
+        applyRadiusToAllWithValue(settings.radius);
         applyFilter(settings.filter);
         document.documentElement.style.setProperty('--main-color', settings.color);
         document.documentElement.style.setProperty('--main-font', settings.font);
+        applyPanelRadius();
     }
 
-    function applyRadiusToAll(radius) {
+    function applyRadiusToAllWithValue(radius) {
         document.documentElement.style.setProperty('--main-radius', radius + 'px');
-        const elements = document.querySelectorAll('.card-widget, .recent-post-item, .layout-page, .post-block, .recent-post-item, .card, .post, .article, .entry, .blog-card, .layout, .main, .container, .content, .page');
-        elements.forEach(el => {
-            el.style.borderRadius = radius + 'px';
+        const selectors = [
+            '.card-widget', '.recent-post-item', '.layout-page', '.post-block',
+            '.recent-post-item', '.card', '.post', '.article', '.entry', '.blog-card',
+            '.layout', '.main', '.container', '.content', '.page',
+            '.post-content', '.article-container', '.post-body', '.markdown-body',
+            '.page-content', '.main-content', '.content-area',
+            '#post', '.post-wrap', '.article-wrap', '.blog-post',
+            '.post-main', '.post-container', '.post-inner',
+            '[class*="post"]', '[class*="article"]', '[class*="content"]'
+        ];
+        selectors.forEach(sel => {
+            document.querySelectorAll(sel).forEach(el => {
+                el.style.borderRadius = radius + 'px';
+            });
         });
+        applyPanelRadius();
     }
 
     function loadSettings() {
@@ -210,8 +243,10 @@
         document.documentElement.style.setProperty('--main-color', settings.color);
         document.documentElement.style.setProperty('--main-font', settings.font);
         applyFilter(settings.filter);
-        // 延迟一下应用圆角，确保 DOM 完全加载
-        setTimeout(() => applyRadiusToAll(settings.radius), 100);
+        setTimeout(function() {
+            applyRadiusToAllWithValue(settings.radius);
+            applyPanelRadius();
+        }, 100);
     }
 
     function getSettings() {
@@ -392,7 +427,7 @@
         radiusSlider.addEventListener('input', function() {
             const val = this.value;
             radiusValue.textContent = val + 'px';
-            applyRadiusToAll(val);
+            applyRadiusToAllWithValue(val);
             const newSettings = getSettings();
             newSettings.radius = parseInt(val);
             saveSettings(newSettings);
@@ -411,7 +446,7 @@
             radiusSlider.value = defaultSettings.radius;
             radiusValue.textContent = defaultSettings.radius + 'px';
             fontSelect.value = "'Microsoft YaHei', sans-serif";
-            applyRadiusToAll(defaultSettings.radius);
+            applyRadiusToAllWithValue(defaultSettings.radius);
             document.documentElement.style.setProperty('--main-color', defaultSettings.color);
             document.documentElement.style.setProperty('--main-font', defaultSettings.font);
             applyFilter('none');
@@ -435,6 +470,9 @@
             currentColorHex.textContent = defaultSettings.color.toUpperCase();
             saveSettings(defaultSettings);
         });
+
+        // 立即应用面板圆角
+        applyPanelRadius();
     }
 
     function initCustomPanelButton() {

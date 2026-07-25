@@ -905,6 +905,7 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
 }
 
 
+/*myscript*/
 
 /* source/css/custom.css */
 :root {
@@ -913,10 +914,15 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
   --main-font: 'Microsoft YaHei', sans-serif;
 }
 
-/* 应用全局圆角到更多元素 */
+/* 应用全局圆角到所有容器，包括文章背景 */
 .card-widget, .recent-post-item, .layout-page, .post-block,
 .recent-post-item, .card, .post, .article, .entry, .blog-card,
-.layout, .main, .container, .content, .page {
+.layout, .main, .container, .content, .page,
+.post-content, .article-container, .post-body, .markdown-body,
+.page-content, .main-content, .content-area,
+#post, .post-wrap, .article-wrap, .blog-post,
+.post-main, .post-container, .post-inner,
+[class*="post"], [class*="article"], [class*="content"] {
   border-radius: var(--main-radius) !important;
 }
 
