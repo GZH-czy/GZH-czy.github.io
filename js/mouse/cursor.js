@@ -115,14 +115,14 @@
       ctx.fill();
       
       // 内发光 (可选)
-      // if( p.life > 0.3 ) {
-      //   ctx.shadowBlur = 0;
-      //   ctx.globalAlpha = p.life * 0.5;
-      //   ctx.fillStyle = `hsl(${p.hue}, 100%, 90%)`;
-      //   ctx.beginPath();
-      //   ctx.arc(p.x, p.y, p.size * 0.3, 0, Math.PI * 2);
-      //   ctx.fill();
-      // }
+      if( p.life > 0.3 ) {
+        ctx.shadowBlur = 0;
+        ctx.globalAlpha = p.life * 0.5;
+        ctx.fillStyle = `hsl(${p.hue}, 100%, 90%)`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size * 0.3, 0, Math.PI * 2);
+        ctx.fill();
+      }
       ctx.restore();
     }
   }

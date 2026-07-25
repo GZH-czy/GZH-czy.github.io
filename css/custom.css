@@ -904,11 +904,31 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
   }
 }
 
+/* 修改整个 Swiper 轮播容器的背景 */
+.swiper-container {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  padding: 20px 0 !important;
+  border-radius: 12px !important;
+}
 
-/* 为通知栏添加光晕效果 */
-.snackbar {
-  box-shadow: 0 0 20px rgba(176, 25, 210, 0.8), 0 0 60px rgba(176, 25, 210, 0.4) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+/* 修改“人潮汹涌”效果中单张卡片的背景 */
+.swiper-slide .card {
+  background: rgba(255, 255, 255, 0.9) !important;
   backdrop-filter: blur(10px) !important;
-  background: rgba(176, 25, 210, 0.85) !important; /* 半透明背景配合光晕 */
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+/* 如果你使用的是图片轮播，想给图片加一层渐变遮罩 */
+.swiper-slide img {
+  position: relative;
+}
+.swiper-slide::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+  pointer-events: none;
 }
