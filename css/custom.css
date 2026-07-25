@@ -929,7 +929,7 @@ img {
   border-radius: 0px !important;
 }
 
-/* 主题色 - 仅应用于目录（TOC）和面板自身 */
+/* 主题色 - 仅应用于目录（TOC） */
 .toc-item a,
 .toc-link,
 .toc-text,

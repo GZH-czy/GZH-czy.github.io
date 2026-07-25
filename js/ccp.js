@@ -67,7 +67,7 @@
         }
     });
 
-    // 应用主题色到目录和面板自身
+    // 应用主题色到目录和面板自身（实时更新）
     function applyThemeToElements() {
         const color = getSettings().color;
         
@@ -82,57 +82,80 @@
             el.style.borderColor = color;
         });
         
-        // 应用到面板自身
+        // 应用到面板自身（实时更新）
         const panel = document.getElementById('custom-control-panel');
         if (panel) {
+            // 标题
             const title = panel.querySelector('h3');
             if (title) title.style.color = color;
+            
+            // 所有标签
             panel.querySelectorAll('label').forEach(label => {
                 label.style.color = color;
             });
-            // 关闭按钮悬停
+            
+            // 关闭按钮
             const closeBtn = panel.querySelector('#close-panel-btn');
             if (closeBtn) {
+                closeBtn.style.color = '#888';
                 closeBtn.onmouseover = function() { this.style.color = color; };
                 closeBtn.onmouseout = function() { this.style.color = '#888'; };
             }
+            
+            // 滤镜按钮 - 更新激活状态的颜色
+            panel.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.dataset.filter === getSettings().filter) {
+                    btn.style.borderColor = color;
+                    btn.style.background = color + '22';
+                    btn.style.color = color;
+                }
+            });
+            
+            // 滑块
+            const slider = panel.querySelector('#radius-slider');
+            if (slider) {
+                slider.style.accentColor = color;
+            }
+            
+            // 字体选择框
+            const fontSelect = panel.querySelector('#font-select');
+            if (fontSelect) {
+                fontSelect.style.accentColor = color;
+            }
+            
+            // 重置按钮
+            const resetBtn = panel.querySelector('#reset-default-btn');
+            if (resetBtn) {
+                resetBtn.onmouseover = function() { 
+                    this.style.background = '#e0e0e0'; 
+                    this.style.color = color; 
+                };
+                resetBtn.onmouseout = function() { 
+                    this.style.background = '#f0f0f0'; 
+                    this.style.color = '#333'; 
+                };
+            }
         }
         
-        // 颜色选择器标题
+        // 颜色选择器
         const picker = document.getElementById('color-picker-panel');
         if (picker) {
             const title = picker.querySelector('h4');
             if (title) title.style.color = color;
+            
             const closeColorBtn = picker.querySelector('#close-color-picker-btn');
             if (closeColorBtn) {
+                closeColorBtn.style.color = '#888';
                 closeColorBtn.onmouseover = function() { this.style.color = color; };
                 closeColorBtn.onmouseout = function() { this.style.color = '#888'; };
             }
         }
         
-        // 重置按钮悬停
-        const resetBtn = document.getElementById('reset-default-btn');
-        if (resetBtn) {
-            resetBtn.onmouseover = function() { 
-                this.style.background = '#e0e0e0'; 
-                this.style.color = color; 
-            };
-            resetBtn.onmouseout = function() { 
-                this.style.background = '#f0f0f0'; 
-                this.style.color = '#333'; 
-            };
-        }
-        
-        // 滑块颜色
-        const slider = document.getElementById('radius-slider');
-        if (slider) {
-            slider.style.accentColor = color;
-        }
-        
-        // 字体选择框
-        const fontSelect = document.getElementById('font-select');
-        if (fontSelect) {
-            fontSelect.style.accentColor = color;
+        // 齿轮按钮
+        const gearBtn = document.getElementById('custom-panel-btn');
+        if (gearBtn) {
+            gearBtn.style.color = color;
+            gearBtn.style.borderColor = color;
         }
     }
 
@@ -356,7 +379,7 @@
                 const defaultSettings = { radius: 10, color: '#49B1F5', font: "'Microsoft YaHei', sans-serif", filter: 'none' };
                 document.getElementById('radius-slider').value = defaultSettings.radius;
                 document.getElementById('radius-value').textContent = defaultSettings.radius + 'px';
-                document.getElementById('font-select').value = "'Microsoft YaHei', sans-serif";
+                document.getElementById('font-select').value = defaultSettings.font;
                 applyRadiusToAllWithValue(defaultSettings.radius);
                 document.documentElement.style.setProperty('--main-color', defaultSettings.color);
                 document.documentElement.style.setProperty('--main-font', defaultSettings.font);
@@ -372,18 +395,8 @@
                     }
                 });
                 saveSettings(defaultSettings);
+                // 实时应用主题
                 applyThemeToElements();
-                // 重置滤镜按钮
-                document.querySelectorAll('.filter-btn').forEach(b => {
-                    b.style.borderColor = '#e0e0e0';
-                    b.style.background = 'transparent';
-                    b.style.color = '#333';
-                    if (b.dataset.filter === 'none') {
-                        b.style.borderColor = defaultSettings.color;
-                        b.style.background = defaultSettings.color + '22';
-                        b.style.color = defaultSettings.color;
-                    }
-                });
             });
         }
 
@@ -393,21 +406,13 @@
         document.documentElement.style.setProperty('--main-color', settings.color);
         document.documentElement.style.setProperty('--main-font', settings.font);
         applyPanelRadius();
+        // 实时应用主题
         applyThemeToElements();
         // 更新颜色显示
         document.getElementById('current-color-display').style.background = settings.color;
         document.getElementById('current-color-hex').textContent = settings.color.toUpperCase();
         document.getElementById('color-wheel').value = settings.color;
         document.getElementById('color-hex-input').value = settings.color;
-        
-        // 更新滤镜按钮样式
-        document.querySelectorAll('.filter-btn').forEach(b => {
-            if (b.dataset.filter === settings.filter) {
-                b.style.borderColor = settings.color;
-                b.style.background = settings.color + '22';
-                b.style.color = settings.color;
-            }
-        });
     }
 
     function togglePanel() {
@@ -427,6 +432,7 @@
         if (panel) {
             panel.classList.remove('panel-hidden');
             panel.classList.add('panel-visible');
+            // 打开时立即应用主题
             applyThemeToElements();
         }
     }
@@ -445,6 +451,7 @@
         if (picker) {
             picker.classList.remove('picker-hidden');
             picker.classList.add('picker-visible');
+            // 打开时立即应用主题
             applyThemeToElements();
         }
     }
@@ -458,11 +465,16 @@
     }
 
     function applyColor(color) {
+        // 更新CSS变量
         document.documentElement.style.setProperty('--main-color', color);
+        
+        // 更新显示
         document.getElementById('current-color-display').style.background = color;
         document.getElementById('current-color-hex').textContent = color.toUpperCase();
         document.getElementById('color-wheel').value = color;
         document.getElementById('color-hex-input').value = color;
+        
+        // 高亮选中的预设色块
         document.querySelectorAll('.picker-swatch').forEach(s => {
             s.style.borderColor = 'transparent';
             if (s.dataset.color === color) {
@@ -470,17 +482,10 @@
             }
         });
         
+        // 实时应用主题到所有元素
         applyThemeToElements();
         
-        // 更新滤镜按钮颜色
-        document.querySelectorAll('.filter-btn').forEach(b => {
-            if (b.dataset.filter === getSettings().filter) {
-                b.style.borderColor = color;
-                b.style.background = color + '22';
-                b.style.color = color;
-            }
-        });
-        
+        // 保存设置
         const newSettings = getSettings();
         newSettings.color = color;
         saveSettings(newSettings);
@@ -495,6 +500,7 @@
         setTimeout(function() {
             applyRadiusToAllWithValue(settings.radius);
             applyPanelRadius();
+            // 加载时应用主题
             applyThemeToElements();
         }, 100);
     }
@@ -773,21 +779,12 @@
                 }
             });
             saveSettings(defaultSettings);
+            // 实时应用主题
             applyThemeToElements();
-            // 重置滤镜按钮
-            document.querySelectorAll('.filter-btn').forEach(b => {
-                b.style.borderColor = '#e0e0e0';
-                b.style.background = 'transparent';
-                b.style.color = '#333';
-                if (b.dataset.filter === 'none') {
-                    b.style.borderColor = defaultSettings.color;
-                    b.style.background = defaultSettings.color + '22';
-                    b.style.color = defaultSettings.color;
-                }
-            });
         });
 
         applyPanelRadius();
+        // 初始化时应用主题
         applyThemeToElements();
     }
 
