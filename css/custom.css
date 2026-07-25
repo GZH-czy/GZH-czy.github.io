@@ -904,3 +904,29 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
   }
 }
 
+
+
+/* 在 source/css/custom.css 中 */
+:root {
+  --main-radius: 10px;
+  --main-color: #49B1F5;
+  --main-font: 'Microsoft YaHei', sans-serif;
+}
+
+/* 应用圆角到主要卡片元素 */
+.card-widget, .recent-post-item, .layout-page, .post-block {
+  border-radius: var(--main-radius) !important;
+}
+
+/* 应用主题色到链接和按钮 */
+a, .btn, .button {
+  color: var(--main-color) !important;
+}
+.btn, .button {
+  background: var(--main-color) !important;
+}
+
+/* 应用字体到全局 */
+body {
+  font-family: var(--main-font) !important;
+}
