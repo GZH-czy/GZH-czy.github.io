@@ -911,24 +911,3 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
   border-radius: 12px !important;
 }
 
-/* 修改“人潮汹涌”效果中单张卡片的背景 */
-.swiper-slide .card {
-  background: rgba(255, 255, 255, 0.9) !important;
-  backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-}
-
-/* 如果你使用的是图片轮播，想给图片加一层渐变遮罩 */
-.swiper-slide img {
-  position: relative;
-}
-.swiper-slide::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
-  pointer-events: none;
-}
