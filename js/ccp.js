@@ -1,5 +1,6 @@
 // source/js/ccp.js
 (function() {
+    // ---- 预设主题色 ----
     const PRESET_COLORS = [
         '#49B1F5', '#FF6B6B', '#4ECDC4', '#FF9F43', '#A29BFE',
         '#FD79A8', '#00B894', '#E17055', '#0984E3', '#6C5CE7',
@@ -72,7 +73,6 @@
         if (colorPicker) colorPicker.style.borderRadius = radius + 'px';
     }
 
-    // 只应用圆角，不覆盖字体和文字颜色
     function applyRadiusToAll() {
         const radius = getSettings().radius;
         document.documentElement.style.setProperty('--main-radius', radius + 'px');
@@ -120,42 +120,6 @@
             img.style.borderRadius = '0px !important';
         });
         applyPanelRadius();
-    }
-
-    // 应用主题色到特定交互元素
-    function applyThemeColorToElements(color) {
-        // 只应用于链接、按钮、滑块等交互元素
-        document.querySelectorAll('a, .btn, .button, .read-more, .more-link, .post-more-link, .page-link, .pagination a, .pagination .current, .pagination .extend, .pagination .space, .pagination .page-number, button, input[type="submit"], input[type="button"], .search-btn, .comment-btn, .submit-btn, .tag, .category, .post-tag, .post-category, .gallery, .swiper-button-next, .swiper-button-prev, .slider, .range-slider, .color-swatch, .picker-swatch, #custom-panel-btn, #close-panel-btn, #close-color-picker-btn, .filter-btn, #reset-default-btn, #current-color-display, #color-wheel, #color-hex-input, #font-select, #radius-slider').forEach(el => {
-            if (el.tagName === 'A' || el.classList.contains('btn') || el.classList.contains('button')) {
-                el.style.color = color;
-            }
-            if (el.tagName === 'BUTTON' || el.tagName === 'INPUT' || el.classList.contains('btn') || el.classList.contains('button')) {
-                el.style.backgroundColor = color;
-                el.style.borderColor = color;
-            }
-            if (el.id === 'current-color-display' || el.id === 'color-wheel') {
-                el.style.backgroundColor = color;
-            }
-            if (el.classList.contains('color-swatch') || el.classList.contains('picker-swatch')) {
-                if (el.dataset.color === color) {
-                    el.style.borderColor = color;
-                }
-            }
-            if (el.classList.contains('filter-btn') || el.id === 'reset-default-btn' || el.id === 'close-panel-btn' || el.id === 'close-color-picker-btn' || el.id === 'custom-panel-btn') {
-                el.style.backgroundColor = 'transparent';
-                el.style.color = '#333';
-                if (el.id === 'custom-panel-btn') {
-                    el.style.color = '#fff';
-                    el.style.backgroundColor = color;
-                }
-            }
-            if (el.id === 'radius-slider' || el.id === 'font-select' || el.id === 'color-hex-input') {
-                el.style.borderColor = color;
-                el.style.outlineColor = color;
-            }
-        });
-        // 设置主色变量供CSS使用
-        document.documentElement.style.setProperty('--main-color', color);
     }
 
     function rebindEvents() {
@@ -233,7 +197,7 @@
             });
         });
 
-        // 色环
+        // 色环输入
         const colorWheel = document.getElementById('color-wheel');
         if (colorWheel) {
             const newWheel = colorWheel.cloneNode(true);
@@ -318,8 +282,10 @@
                 const defaultSettings = { radius: 10, color: '#49B1F5', font: "'Microsoft YaHei', sans-serif", filter: 'none' };
                 document.getElementById('radius-slider').value = defaultSettings.radius;
                 document.getElementById('radius-value').textContent = defaultSettings.radius + 'px';
-                document.getElementById('font-select').value = defaultSettings.font;
+                document.getElementById('font-select').value = "'Microsoft YaHei', sans-serif";
                 applyRadiusToAllWithValue(defaultSettings.radius);
+                document.documentElement.style.setProperty('--main-color', defaultSettings.color);
+                document.documentElement.style.setProperty('--main-font', defaultSettings.font);
                 applyFilter('none');
                 document.getElementById('current-color-display').style.background = defaultSettings.color;
                 document.getElementById('current-color-hex').textContent = defaultSettings.color.toUpperCase();
@@ -331,7 +297,6 @@
                         s.style.borderColor = '#333';
                     }
                 });
-                applyColor(defaultSettings.color);
                 saveSettings(defaultSettings);
             });
         }
@@ -339,8 +304,14 @@
         const settings = getSettings();
         applyRadiusToAllWithValue(settings.radius);
         applyFilter(settings.filter);
-        applyColor(settings.color);
+        document.documentElement.style.setProperty('--main-color', settings.color);
+        document.documentElement.style.setProperty('--main-font', settings.font);
         applyPanelRadius();
+        // 更新颜色显示
+        document.getElementById('current-color-display').style.background = settings.color;
+        document.getElementById('current-color-hex').textContent = settings.color.toUpperCase();
+        document.getElementById('color-wheel').value = settings.color;
+        document.getElementById('color-hex-input').value = settings.color;
     }
 
     function togglePanel() {
@@ -389,21 +360,17 @@
     }
 
     function applyColor(color) {
-        // 应用到交互元素（链接、按钮等）
-        applyThemeColorToElements(color);
-        // 更新显示
+        document.documentElement.style.setProperty('--main-color', color);
         document.getElementById('current-color-display').style.background = color;
         document.getElementById('current-color-hex').textContent = color.toUpperCase();
         document.getElementById('color-wheel').value = color;
         document.getElementById('color-hex-input').value = color;
-        // 高亮预设颜色
         document.querySelectorAll('.picker-swatch').forEach(s => {
             s.style.borderColor = 'transparent';
             if (s.dataset.color === color) {
                 s.style.borderColor = '#333';
             }
         });
-        // 保存设置
         const newSettings = getSettings();
         newSettings.color = color;
         saveSettings(newSettings);
@@ -412,11 +379,12 @@
     function loadSettings() {
         const settings = getSettings();
         document.documentElement.style.setProperty('--main-radius', settings.radius + 'px');
+        document.documentElement.style.setProperty('--main-color', settings.color);
+        document.documentElement.style.setProperty('--main-font', settings.font);
         applyFilter(settings.filter);
         setTimeout(function() {
             applyRadiusToAllWithValue(settings.radius);
             applyPanelRadius();
-            applyColor(settings.color);
         }, 100);
     }
 
@@ -447,8 +415,259 @@
     }
 
     function createControlPanel() {
-        // ... (面板HTML和事件绑定，与之前完全相同，此处省略以节省空间) ...
-        // 注意：需要保留之前的 createControlPanel 完整代码
+        const panelHTML = `
+            <div id="custom-control-panel" class="panel-hidden" style="position:fixed; bottom:70px; right:10px; width:300px; max-width:calc(100vw - 20px); background:#fff; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,0.25); padding:20px; z-index:99999; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#333; max-height:80vh; overflow-y:auto; opacity:0; transform:scale(0.9) translateY(10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events:none; transform-origin: bottom right; font-size:14px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
+                    <h3 style="margin:0; font-size:16px; font-weight:600;">🎨 实时自定义</h3>
+                    <button id="close-panel-btn" style="background:none; border:none; font-size:20px; cursor:pointer; color:#888; padding:0 6px;" aria-label="关闭面板">✕</button>
+                </div>
+                
+                <!-- 主题色 -->
+                <div style="margin-bottom:16px;">
+                    <label style="display:block; font-size:13px; margin-bottom:6px; font-weight:600;">主题色</label>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <span id="current-color-display" style="display:inline-block; width:36px; height:36px; border-radius:8px; background:#49B1F5; border:2px solid #ddd; cursor:pointer; transition: all 0.2s;" title="点击选择颜色"></span>
+                        <span id="current-color-hex" style="font-size:13px; font-family:monospace; color:#555; cursor:pointer;" onclick="document.getElementById('current-color-display').click()">#49B1F5</span>
+                        <span style="font-size:12px; color:#999; margin-left:auto;">点击色块选择</span>
+                    </div>
+                </div>
+
+                <!-- 颜色选择器（二级面板） -->
+                <div id="color-picker-panel" class="picker-hidden" style="position:fixed; bottom:70px; right:10px; width:300px; max-width:calc(100vw - 20px); background:#fff; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,0.3); padding:20px; z-index:100000; opacity:0; transform:scale(0.9) translateY(10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events:none; transform-origin: bottom right; font-size:14px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
+                        <h4 style="margin:0; font-size:15px; font-weight:600;">🎯 选择颜色</h4>
+                        <button id="close-color-picker-btn" style="background:none; border:none; font-size:18px; cursor:pointer; color:#888; padding:0 4px;" aria-label="关闭颜色选择器">✕</button>
+                    </div>
+                    
+                    <div style="margin-bottom:12px;">
+                        <label style="font-size:12px; color:#888; display:block; margin-bottom:4px;">预设颜色</label>
+                        <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                            ${PRESET_COLORS.map(c => `
+                                <div class="picker-swatch" data-color="${c}" style="width:30px; height:30px; border-radius:50%; background:${c}; cursor:pointer; border:2px solid transparent; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'"></div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom:12px;">
+                        <label style="font-size:12px; color:#888; display:block; margin-bottom:4px;">色环</label>
+                        <input type="color" id="color-wheel" value="#49B1F5" style="width:100%; height:50px; border:1px solid #ddd; border-radius:8px; cursor:pointer; padding:2px;">
+                    </div>
+                    
+                    <div>
+                        <label style="font-size:12px; color:#888; display:block; margin-bottom:4px;">十六进制</label>
+                        <input type="text" id="color-hex-input" value="#49B1F5" style="width:100%; padding:6px 10px; border:1px solid #ddd; border-radius:6px; font-family:monospace; font-size:14px;" placeholder="#RRGGBB">
+                    </div>
+                </div>
+
+                <!-- 滤镜 -->
+                <div style="margin-bottom:16px;">
+                    <label style="display:block; font-size:13px; margin-bottom:6px; font-weight:600;">屏幕滤镜</label>
+                    <div id="filter-options" style="display:flex; flex-wrap:wrap; gap:6px;">
+                        ${[
+                            {id: 'none', label: '关闭'},
+                            {id: 'dark', label: '暗化'},
+                            {id: 'sunset', label: '日落'},
+                            {id: 'grayscale', label: '灰度'}
+                        ].map(f => `
+                            <button class="filter-btn" data-filter="${f.id}" style="padding:4px 12px; border:2px solid #e0e0e0; background:transparent; border-radius:16px; cursor:pointer; font-size:12px; transition: all 0.2s; ${f.id === 'none' ? 'border-color:#49B1F5; background:#f0f8ff;' : ''}">${f.label}</button>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <!-- 全局圆角 -->
+                <div style="margin-bottom:16px;">
+                    <label style="display:block; font-size:13px; margin-bottom:4px; font-weight:600;">全局圆角 (px)</label>
+                    <input type="range" id="radius-slider" min="0" max="30" value="10" style="width:100%;">
+                    <span id="radius-value" style="display:inline-block; margin-top:2px; font-size:12px; color:#666;">10px</span>
+                </div>
+
+                <!-- 字体 -->
+                <div style="margin-bottom:16px;">
+                    <label style="display:block; font-size:13px; margin-bottom:4px; font-weight:600;">字体</label>
+                    <select id="font-select" style="width:100%; padding:6px; border:1px solid #ddd; border-radius:6px; font-size:13px;">
+                        <option value="'Microsoft YaHei', sans-serif">微软雅黑</option>
+                        <option value="'PingFang SC', 'Microsoft YaHei', sans-serif">苹方</option>
+                        <option value="'Noto Sans SC', sans-serif">思源黑体</option>
+                        <option value="'Georgia', serif">Georgia (衬线)</option>
+                        <option value="'Courier New', monospace">Courier New (等宽)</option>
+                    </select>
+                </div>
+
+                <button id="reset-default-btn" style="width:100%; padding:8px; background:#f0f0f0; border:none; border-radius:6px; cursor:pointer; font-weight:600; font-size:13px; transition: background 0.2s;" onmouseover="this.style.background='#e0e0e0'" onmouseout="this.style.background='#f0f0f0'">恢复默认设置</button>
+            </div>
+        `;
+
+        const panelContainer = document.createElement('div');
+        panelContainer.innerHTML = panelHTML;
+        document.body.appendChild(panelContainer.firstElementChild);
+
+        // ---- 事件绑定 ----
+        const closeBtn = document.getElementById('close-panel-btn');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function(e) { e.stopPropagation(); hidePanel(); });
+            closeBtn.addEventListener('touchstart', function(e) { e.stopPropagation(); hidePanel(); }, { passive: false });
+        }
+
+        // 关闭颜色选择器
+        const closeColorBtn = document.getElementById('close-color-picker-btn');
+        if (closeColorBtn) {
+            closeColorBtn.addEventListener('click', function(e) { e.stopPropagation(); hideColorPicker(); });
+            closeColorBtn.addEventListener('touchstart', function(e) { e.stopPropagation(); hideColorPicker(); }, { passive: false });
+        }
+
+        // 当前色块点击
+        const colorDisplay = document.getElementById('current-color-display');
+        if (colorDisplay) {
+            colorDisplay.style.cursor = 'pointer';
+            colorDisplay.addEventListener('click', function(e) {
+                e.stopPropagation();
+                showColorPicker();
+            });
+            colorDisplay.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+                showColorPicker();
+            }, { passive: false });
+        }
+        document.getElementById('current-color-hex').style.cursor = 'pointer';
+        document.getElementById('current-color-hex').addEventListener('click', function() {
+            document.getElementById('current-color-display').click();
+        });
+
+        // 预设色块
+        document.querySelectorAll('.picker-swatch').forEach(el => {
+            el.addEventListener('click', function() {
+                const color = this.dataset.color;
+                applyColor(color);
+                hideColorPicker();
+            });
+        });
+
+        // 色环
+        const colorWheel = document.getElementById('color-wheel');
+        if (colorWheel) {
+            colorWheel.addEventListener('input', function() {
+                const color = this.value;
+                document.getElementById('color-hex-input').value = color;
+                applyColor(color);
+            });
+        }
+
+        // 十六进制输入
+        const hexInput = document.getElementById('color-hex-input');
+        if (hexInput) {
+            hexInput.addEventListener('input', function() {
+                let val = this.value.trim();
+                if (val.startsWith('#')) {
+                    if (/^#[0-9a-fA-F]{6}$/.test(val)) {
+                        document.getElementById('color-wheel').value = val;
+                        applyColor(val);
+                    }
+                }
+            });
+        }
+
+        // 加载设置
+        const settings = getSettings();
+        document.getElementById('radius-slider').value = settings.radius;
+        document.getElementById('radius-value').textContent = settings.radius + 'px';
+        document.getElementById('font-select').value = settings.font;
+        document.getElementById('current-color-display').style.background = settings.color;
+        document.getElementById('current-color-hex').textContent = settings.color.toUpperCase();
+        document.getElementById('color-wheel').value = settings.color;
+        document.getElementById('color-hex-input').value = settings.color;
+
+        // 高亮当前颜色
+        document.querySelectorAll('.picker-swatch').forEach(el => {
+            if (el.dataset.color === settings.color) {
+                el.style.borderColor = '#333';
+            }
+        });
+
+        // 高亮当前滤镜
+        document.querySelectorAll('.filter-btn').forEach(el => {
+            if (el.dataset.filter === settings.filter) {
+                el.style.borderColor = '#49B1F5';
+                el.style.background = '#f0f8ff';
+            }
+        });
+
+        // ---- 其他事件绑定 ----
+        document.querySelectorAll('.color-swatch').forEach(el => {
+            el.addEventListener('click', function() {
+                const color = this.dataset.color;
+                document.documentElement.style.setProperty('--main-color', color);
+                document.getElementById('current-color-display').style.background = color;
+                document.getElementById('current-color-hex').textContent = color.toUpperCase();
+                document.getElementById('color-wheel').value = color;
+                document.getElementById('color-hex-input').value = color;
+                document.querySelectorAll('.color-swatch').forEach(s => {
+                    s.style.borderColor = 'transparent';
+                    s.style.transform = 'scale(1)';
+                });
+                this.style.borderColor = '#333';
+                this.style.transform = 'scale(1.1)';
+                const newSettings = getSettings();
+                newSettings.color = color;
+                saveSettings(newSettings);
+            });
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(el => {
+            el.addEventListener('click', function() {
+                const filter = this.dataset.filter;
+                applyFilter(filter);
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.style.borderColor = '#e0e0e0';
+                    b.style.background = 'transparent';
+                });
+                this.style.borderColor = '#49B1F5';
+                this.style.background = '#f0f8ff';
+                const newSettings = getSettings();
+                newSettings.filter = filter;
+                saveSettings(newSettings);
+            });
+        });
+
+        document.getElementById('radius-slider').addEventListener('input', function() {
+            const val = this.value;
+            document.getElementById('radius-value').textContent = val + 'px';
+            applyRadiusToAllWithValue(val);
+            const newSettings = getSettings();
+            newSettings.radius = parseInt(val);
+            saveSettings(newSettings);
+        });
+
+        document.getElementById('font-select').addEventListener('change', function() {
+            const val = this.value;
+            document.documentElement.style.setProperty('--main-font', val);
+            const newSettings = getSettings();
+            newSettings.font = val;
+            saveSettings(newSettings);
+        });
+
+        document.getElementById('reset-default-btn').addEventListener('click', function() {
+            const defaultSettings = { radius: 10, color: '#49B1F5', font: "'Microsoft YaHei', sans-serif", filter: 'none' };
+            document.getElementById('radius-slider').value = defaultSettings.radius;
+            document.getElementById('radius-value').textContent = defaultSettings.radius + 'px';
+            document.getElementById('font-select').value = defaultSettings.font;
+            applyRadiusToAllWithValue(defaultSettings.radius);
+            document.documentElement.style.setProperty('--main-color', defaultSettings.color);
+            document.documentElement.style.setProperty('--main-font', defaultSettings.font);
+            applyFilter('none');
+            document.getElementById('current-color-display').style.background = defaultSettings.color;
+            document.getElementById('current-color-hex').textContent = defaultSettings.color.toUpperCase();
+            document.getElementById('color-wheel').value = defaultSettings.color;
+            document.getElementById('color-hex-input').value = defaultSettings.color;
+            document.querySelectorAll('.picker-swatch').forEach(s => {
+                s.style.borderColor = 'transparent';
+                if (s.dataset.color === defaultSettings.color) {
+                    s.style.borderColor = '#333';
+                }
+            });
+            saveSettings(defaultSettings);
+        });
+
+        applyPanelRadius();
     }
 
     function initCustomPanelButton() {

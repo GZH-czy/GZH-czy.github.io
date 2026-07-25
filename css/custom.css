@@ -914,7 +914,7 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
   --main-font: 'Microsoft YaHei', sans-serif;
 }
 
-/* 圆角 - 仅应用于容器，不覆盖字体颜色 */
+/* 应用全局圆角，排除图片 */
 .card-widget, .recent-post-item, .layout-page, .post-block,
 .recent-post-item, .card, .post, .article, .entry, .blog-card,
 .layout, .main, .container, .content, .page,
@@ -929,30 +929,17 @@ img {
   border-radius: 0px !important;
 }
 
-/* 主题色仅应用于交互元素（由JS动态设置） */
-/* 不再全局设置 body 颜色和字体 */
-
-/* 面板本身保留原样式 */
-#custom-control-panel.panel-hidden {
-  opacity: 0 !important;
-  transform: scale(0.9) translateY(10px) !important;
-  pointer-events: none !important;
+/* 主题色 */
+a, .btn, .button {
+  color: var(--main-color) !important;
 }
-#custom-control-panel.panel-visible {
-  opacity: 1 !important;
-  transform: scale(1) translateY(0) !important;
-  pointer-events: auto !important;
+.btn, .button {
+  background: var(--main-color) !important;
 }
 
-#color-picker-panel.picker-hidden {
-  opacity: 0 !important;
-  transform: scale(0.9) translateY(10px) !important;
-  pointer-events: none !important;
-}
-#color-picker-panel.picker-visible {
-  opacity: 1 !important;
-  transform: scale(1) translateY(0) !important;
-  pointer-events: auto !important;
+/* 字体 */
+body {
+  font-family: var(--main-font) !important;
 }
 
 /* 滤镜 */
@@ -964,6 +951,30 @@ html.filter-sunset {
 }
 html.filter-grayscale {
   filter: grayscale(1);
+}
+
+/* 主面板动画 */
+#custom-control-panel.panel-hidden {
+  opacity: 0 !important;
+  transform: scale(0.9) translateY(10px) !important;
+  pointer-events: none !important;
+}
+#custom-control-panel.panel-visible {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+  pointer-events: auto !important;
+}
+
+/* 颜色选择器动画 */
+#color-picker-panel.picker-hidden {
+  opacity: 0 !important;
+  transform: scale(0.9) translateY(10px) !important;
+  pointer-events: none !important;
+}
+#color-picker-panel.picker-visible {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+  pointer-events: auto !important;
 }
 
 /* 手机端适配 */
