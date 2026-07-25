@@ -67,31 +67,38 @@
         }
     });
 
-    // 将颜色转换为rgba，保留透明度
-    function hexToRgba(hex, alpha) {
-        const r = parseInt(hex.slice(1, 3), 16);
-        const g = parseInt(hex.slice(3, 5), 16);
-        const b = parseInt(hex.slice(5, 7), 16);
-        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-    }
-
-    // 提取背景色的透明度
-    function getBackgroundAlpha(element) {
-        const bg = window.getComputedStyle(element).background;
-        // 尝试匹配rgba或hsla中的透明度
-        const rgbaMatch = bg.match(/rgba?\([^)]+\)/);
-        if (rgbaMatch) {
-            const parts = rgbaMatch[0].match(/[\d.]+/g);
-            if (parts && parts.length >= 4) {
-                return parseFloat(parts[3]);
+    // 将颜色转换为CSS滤镜
+    function hexToFilter(color) {
+        // 将十六进制转换为RGB
+        const r = parseInt(color.slice(1, 3), 16) / 255;
+        const g = parseInt(color.slice(3, 5), 16) / 255;
+        const b = parseInt(color.slice(5, 7), 16) / 255;
+        
+        // 计算色相旋转角度（近似）
+        // 将RGB转换为HSL，提取色相
+        const max = Math.max(r, g, b);
+        const min = Math.min(r, g, b);
+        let h = 0;
+        
+        if (max !== min) {
+            const d = max - min;
+            if (max === r) {
+                h = ((g - b) / d) % 6;
+            } else if (max === g) {
+                h = (b - r) / d + 2;
+            } else {
+                h = (r - g) / d + 4;
             }
+            h = h * 60;
+            if (h < 0) h += 360;
         }
-        // 如果是透明或没有背景，返回0
-        if (bg === 'transparent' || bg === 'none' || bg === 'rgba(0, 0, 0, 0)') {
-            return 0;
-        }
-        // 默认返回0.3（透明背景）
-        return 0.3;
+        
+        // 计算饱和度和亮度调整
+        const saturation = (max - min) / max * 100;
+        const lightness = (max + min) / 2 * 100;
+        
+        // 构建滤镜：色相旋转 + 饱和度 + 亮度
+        return `hue-rotate(${h}deg) saturate(${saturation + 50}%) brightness(${lightness / 40})`;
     }
 
     // 应用主题色到各个元素（实时更新）
@@ -107,30 +114,14 @@
             el.style.borderColor = color;
         });
         
-        // 2. 应用到导航栏 - 保留原有的透明度
+        // 2. 应用到导航栏 - 使用CSS滤镜
         const navElements = document.querySelectorAll('#nav, .navbar, .nav, .header-nav, .site-nav');
+        const filter = hexToFilter(color);
         navElements.forEach(el => {
-            // 获取原有背景色的透明度
-            const alpha = getBackgroundAlpha(el);
-            // 应用新颜色，保留透明度
-            const rgbaColor = hexToRgba(color, alpha);
-            // 保留原有的背景样式（如渐变、毛玻璃等），只替换颜色值
-            const currentBg = window.getComputedStyle(el).backgroundImage;
-            if (currentBg && currentBg !== 'none') {
-                // 如果有渐变背景，尝试替换颜色
-                el.style.background = `linear-gradient(135deg, ${hexToRgba(color, alpha)}, ${hexToRgba(color, alpha * 0.7)})`;
-            } else {
-                // 纯色背景
-                el.style.background = rgbaColor;
-            }
-            // 保留backdrop-filter毛玻璃效果
-            el.style.backdropFilter = 'blur(20px)';
-            el.style.webkitBackdropFilter = 'blur(20px)';
-            
-            // 边框颜色也应用主题色，保留透明度
-            const borderAlpha = 0.4;
-            el.style.borderBottom = `2px solid ${hexToRgba(color, borderAlpha)}`;
-            el.style.boxShadow = `0 2px 20px ${hexToRgba(color, 0.15)}`;
+            // 使用滤镜改变颜色，保留所有原有样式
+            el.style.filter = filter;
+            // 确保子元素不受影响（如果需要）
+            // el.style.filter = filter;
         });
         
         // 3. 应用到文章标题

@@ -949,13 +949,12 @@ img {
   border-color: var(--main-color) !important;
 }
 
-/* 导航栏 - 保留原有透明度，只替换颜色 */
+/* 导航栏 - 使用CSS滤镜改变颜色，保留所有原有样式 */
 #nav,
 .navbar,
 .nav {
-  /* 背景色由JavaScript动态设置，保留透明度 */
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
+  /* 滤镜由JavaScript动态设置，保留所有原有样式 */
+  transition: filter 0.3s ease;
 }
 
 /* 文章标题颜色 */
