@@ -26,7 +26,7 @@
         color: 'rgba(255, 255, 255, 0.9)',
         glowColor: 'rgba(180, 210, 255, 0.3)',
         glowBlur: 15,
-        mouseRadius: 100,
+        mouseRadius: 170,
     };
 
     // ----- 根据屏幕面积计算雪花数量 -----
