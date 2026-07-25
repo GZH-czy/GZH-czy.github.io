@@ -13,6 +13,7 @@
             rebindEvents();
             applyRadiusToAll();
             applyPanelRadius();
+            applyThemeToElements();
             return;
         }
         loadSettings();
@@ -60,10 +61,68 @@
                 if (panel) {
                     applyRadiusToAll();
                     applyPanelRadius();
+                    applyThemeToElements();
                 }
             }, 200);
         }
     });
+
+    function applyThemeToElements() {
+        const color = getSettings().color;
+        // 应用主题色到目录（TOC）
+        document.querySelectorAll('.toc-item, .toc-link, .toc-child, .toc-number, .toc-text').forEach(el => {
+            el.style.setProperty('--toc-color', color);
+        });
+        
+        // 目录链接悬停效果
+        document.querySelectorAll('.toc-link').forEach(el => {
+            el.style.transition = 'color 0.3s ease';
+            el.addEventListener('mouseenter', function() {
+                this.style.color = color;
+            });
+            el.addEventListener('mouseleave', function() {
+                this.style.color = '';
+            });
+        });
+        
+        // 目录激活状态
+        document.querySelectorAll('.toc-link.active, .toc-item.active').forEach(el => {
+            el.style.color = color;
+            el.style.borderColor = color;
+        });
+        
+        // 应用于面板自身的按钮和文字
+        const panel = document.getElementById('custom-control-panel');
+        if (panel) {
+            // 面板标题
+            const title = panel.querySelector('h3');
+            if (title) title.style.color = color;
+            
+            // 面板按钮
+            panel.querySelectorAll('.filter-btn, #reset-default-btn, #close-panel-btn, #close-color-picker-btn').forEach(btn => {
+                btn.style.setProperty('--btn-hover-color', color);
+            });
+            
+            // 面板标签
+            panel.querySelectorAll('label').forEach(label => {
+                label.style.color = color;
+            });
+        }
+        
+        // 颜色选择器标题
+        const picker = document.getElementById('color-picker-panel');
+        if (picker) {
+            const title = picker.querySelector('h4');
+            if (title) title.style.color = color;
+        }
+        
+        // 齿轮按钮
+        const gearBtn = document.getElementById('custom-panel-btn');
+        if (gearBtn) {
+            gearBtn.style.color = color;
+            gearBtn.style.borderColor = color;
+        }
+    }
 
     function applyPanelRadius() {
         const radius = getSettings().radius;
@@ -235,9 +294,11 @@
                 document.querySelectorAll('.filter-btn').forEach(b => {
                     b.style.borderColor = '#e0e0e0';
                     b.style.background = 'transparent';
+                    b.style.color = '#333';
                 });
-                this.style.borderColor = '#49B1F5';
-                this.style.background = '#f0f8ff';
+                this.style.borderColor = getSettings().color;
+                this.style.background = getSettings().color + '22';
+                this.style.color = getSettings().color;
                 const newSettings = getSettings();
                 newSettings.filter = filter;
                 saveSettings(newSettings);
@@ -298,6 +359,33 @@
                     }
                 });
                 saveSettings(defaultSettings);
+                applyThemeToElements();
+                // 重置面板自身样式
+                const panel = document.getElementById('custom-control-panel');
+                if (panel) {
+                    const title = panel.querySelector('h3');
+                    if (title) title.style.color = defaultSettings.color;
+                    panel.querySelectorAll('label').forEach(label => {
+                        label.style.color = defaultSettings.color;
+                    });
+                }
+                // 重置齿轮按钮
+                const gearBtn = document.getElementById('custom-panel-btn');
+                if (gearBtn) {
+                    gearBtn.style.color = defaultSettings.color;
+                    gearBtn.style.borderColor = defaultSettings.color;
+                }
+                // 重置滤镜按钮
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.style.borderColor = '#e0e0e0';
+                    b.style.background = 'transparent';
+                    b.style.color = '#333';
+                    if (b.dataset.filter === 'none') {
+                        b.style.borderColor = defaultSettings.color;
+                        b.style.background = defaultSettings.color + '22';
+                        b.style.color = defaultSettings.color;
+                    }
+                });
             });
         }
 
@@ -307,11 +395,21 @@
         document.documentElement.style.setProperty('--main-color', settings.color);
         document.documentElement.style.setProperty('--main-font', settings.font);
         applyPanelRadius();
+        applyThemeToElements();
         // 更新颜色显示
         document.getElementById('current-color-display').style.background = settings.color;
         document.getElementById('current-color-hex').textContent = settings.color.toUpperCase();
         document.getElementById('color-wheel').value = settings.color;
         document.getElementById('color-hex-input').value = settings.color;
+        
+        // 更新滤镜按钮样式
+        document.querySelectorAll('.filter-btn').forEach(b => {
+            if (b.dataset.filter === settings.filter) {
+                b.style.borderColor = settings.color;
+                b.style.background = settings.color + '22';
+                b.style.color = settings.color;
+            }
+        });
     }
 
     function togglePanel() {
@@ -331,6 +429,7 @@
         if (panel) {
             panel.classList.remove('panel-hidden');
             panel.classList.add('panel-visible');
+            applyThemeToElements();
         }
     }
 
@@ -348,6 +447,7 @@
         if (picker) {
             picker.classList.remove('picker-hidden');
             picker.classList.add('picker-visible');
+            applyThemeToElements();
         }
     }
 
@@ -371,6 +471,37 @@
                 s.style.borderColor = '#333';
             }
         });
+        
+        // 应用主题色到目录
+        applyThemeToElements();
+        
+        // 更新面板自身颜色
+        const panel = document.getElementById('custom-control-panel');
+        if (panel) {
+            const title = panel.querySelector('h3');
+            if (title) title.style.color = color;
+            panel.querySelectorAll('label').forEach(label => {
+                label.style.color = color;
+            });
+        }
+        
+        // 更新齿轮按钮颜色
+        const gearBtn = document.getElementById('custom-panel-btn');
+        if (gearBtn) {
+            gearBtn.style.color = color;
+            gearBtn.style.borderColor = color;
+        }
+        
+        // 更新滤镜按钮颜色
+        const activeFilter = document.querySelector('.filter-btn[style*="border-color"]');
+        document.querySelectorAll('.filter-btn').forEach(b => {
+            if (b.dataset.filter === getSettings().filter) {
+                b.style.borderColor = color;
+                b.style.background = color + '22';
+                b.style.color = color;
+            }
+        });
+        
         const newSettings = getSettings();
         newSettings.color = color;
         saveSettings(newSettings);
@@ -385,6 +516,7 @@
         setTimeout(function() {
             applyRadiusToAllWithValue(settings.radius);
             applyPanelRadius();
+            applyThemeToElements();
         }, 100);
     }
 
@@ -418,13 +550,13 @@
         const panelHTML = `
             <div id="custom-control-panel" class="panel-hidden" style="position:fixed; bottom:70px; right:10px; width:300px; max-width:calc(100vw - 20px); background:#fff; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,0.25); padding:20px; z-index:99999; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#333; max-height:80vh; overflow-y:auto; opacity:0; transform:scale(0.9) translateY(10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events:none; transform-origin: bottom right; font-size:14px;">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
-                    <h3 style="margin:0; font-size:16px; font-weight:600;">🎨 实时自定义</h3>
-                    <button id="close-panel-btn" style="background:none; border:none; font-size:20px; cursor:pointer; color:#888; padding:0 6px;" aria-label="关闭面板">✕</button>
+                    <h3 style="margin:0; font-size:16px; font-weight:600; color:#49B1F5;">🎨 实时自定义</h3>
+                    <button id="close-panel-btn" style="background:none; border:none; font-size:20px; cursor:pointer; color:#888; padding:0 6px; transition:color 0.3s;" aria-label="关闭面板" onmouseover="this.style.color='#49B1F5'" onmouseout="this.style.color='#888'">✕</button>
                 </div>
                 
                 <!-- 主题色 -->
                 <div style="margin-bottom:16px;">
-                    <label style="display:block; font-size:13px; margin-bottom:6px; font-weight:600;">主题色</label>
+                    <label style="display:block; font-size:13px; margin-bottom:6px; font-weight:600; color:#49B1F5;">主题色</label>
                     <div style="display:flex; align-items:center; gap:10px;">
                         <span id="current-color-display" style="display:inline-block; width:36px; height:36px; border-radius:8px; background:#49B1F5; border:2px solid #ddd; cursor:pointer; transition: all 0.2s;" title="点击选择颜色"></span>
                         <span id="current-color-hex" style="font-size:13px; font-family:monospace; color:#555; cursor:pointer;" onclick="document.getElementById('current-color-display').click()">#49B1F5</span>
@@ -435,8 +567,8 @@
                 <!-- 颜色选择器（二级面板） -->
                 <div id="color-picker-panel" class="picker-hidden" style="position:fixed; bottom:70px; right:10px; width:300px; max-width:calc(100vw - 20px); background:#fff; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,0.3); padding:20px; z-index:100000; opacity:0; transform:scale(0.9) translateY(10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events:none; transform-origin: bottom right; font-size:14px;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
-                        <h4 style="margin:0; font-size:15px; font-weight:600;">🎯 选择颜色</h4>
-                        <button id="close-color-picker-btn" style="background:none; border:none; font-size:18px; cursor:pointer; color:#888; padding:0 4px;" aria-label="关闭颜色选择器">✕</button>
+                        <h4 style="margin:0; font-size:15px; font-weight:600; color:#49B1F5;">🎯 选择颜色</h4>
+                        <button id="close-color-picker-btn" style="background:none; border:none; font-size:18px; cursor:pointer; color:#888; padding:0 4px; transition:color 0.3s;" aria-label="关闭颜色选择器" onmouseover="this.style.color='#49B1F5'" onmouseout="this.style.color='#888'">✕</button>
                     </div>
                     
                     <div style="margin-bottom:12px;">
@@ -461,7 +593,7 @@
 
                 <!-- 滤镜 -->
                 <div style="margin-bottom:16px;">
-                    <label style="display:block; font-size:13px; margin-bottom:6px; font-weight:600;">屏幕滤镜</label>
+                    <label style="display:block; font-size:13px; margin-bottom:6px; font-weight:600; color:#49B1F5;">屏幕滤镜</label>
                     <div id="filter-options" style="display:flex; flex-wrap:wrap; gap:6px;">
                         ${[
                             {id: 'none', label: '关闭'},
@@ -469,22 +601,22 @@
                             {id: 'sunset', label: '日落'},
                             {id: 'grayscale', label: '灰度'}
                         ].map(f => `
-                            <button class="filter-btn" data-filter="${f.id}" style="padding:4px 12px; border:2px solid #e0e0e0; background:transparent; border-radius:16px; cursor:pointer; font-size:12px; transition: all 0.2s; ${f.id === 'none' ? 'border-color:#49B1F5; background:#f0f8ff;' : ''}">${f.label}</button>
+                            <button class="filter-btn" data-filter="${f.id}" style="padding:4px 12px; border:2px solid ${f.id === 'none' ? '#49B1F5' : '#e0e0e0'}; background:${f.id === 'none' ? '#49B1F522' : 'transparent'}; border-radius:16px; cursor:pointer; font-size:12px; transition: all 0.2s; color:${f.id === 'none' ? '#49B1F5' : '#333'};">${f.label}</button>
                         `).join('')}
                     </div>
                 </div>
 
                 <!-- 全局圆角 -->
                 <div style="margin-bottom:16px;">
-                    <label style="display:block; font-size:13px; margin-bottom:4px; font-weight:600;">全局圆角 (px)</label>
-                    <input type="range" id="radius-slider" min="0" max="30" value="10" style="width:100%;">
+                    <label style="display:block; font-size:13px; margin-bottom:4px; font-weight:600; color:#49B1F5;">全局圆角 (px)</label>
+                    <input type="range" id="radius-slider" min="0" max="30" value="10" style="width:100%; accent-color:#49B1F5;">
                     <span id="radius-value" style="display:inline-block; margin-top:2px; font-size:12px; color:#666;">10px</span>
                 </div>
 
                 <!-- 字体 -->
                 <div style="margin-bottom:16px;">
-                    <label style="display:block; font-size:13px; margin-bottom:4px; font-weight:600;">字体</label>
-                    <select id="font-select" style="width:100%; padding:6px; border:1px solid #ddd; border-radius:6px; font-size:13px;">
+                    <label style="display:block; font-size:13px; margin-bottom:4px; font-weight:600; color:#49B1F5;">字体</label>
+                    <select id="font-select" style="width:100%; padding:6px; border:1px solid #ddd; border-radius:6px; font-size:13px; accent-color:#49B1F5;">
                         <option value="'Microsoft YaHei', sans-serif">微软雅黑</option>
                         <option value="'PingFang SC', 'Microsoft YaHei', sans-serif">苹方</option>
                         <option value="'Noto Sans SC', sans-serif">思源黑体</option>
@@ -493,7 +625,7 @@
                     </select>
                 </div>
 
-                <button id="reset-default-btn" style="width:100%; padding:8px; background:#f0f0f0; border:none; border-radius:6px; cursor:pointer; font-weight:600; font-size:13px; transition: background 0.2s;" onmouseover="this.style.background='#e0e0e0'" onmouseout="this.style.background='#f0f0f0'">恢复默认设置</button>
+                <button id="reset-default-btn" style="width:100%; padding:8px; background:#f0f0f0; border:none; border-radius:6px; cursor:pointer; font-weight:600; font-size:13px; transition: all 0.2s; color:#333;" onmouseover="this.style.background='#e0e0e0'; this.style.color='#49B1F5'" onmouseout="this.style.background='#f0f0f0'; this.style.color='#333'">恢复默认设置</button>
             </div>
         `;
 
@@ -586,8 +718,9 @@
         // 高亮当前滤镜
         document.querySelectorAll('.filter-btn').forEach(el => {
             if (el.dataset.filter === settings.filter) {
-                el.style.borderColor = '#49B1F5';
-                el.style.background = '#f0f8ff';
+                el.style.borderColor = settings.color;
+                el.style.background = settings.color + '22';
+                el.style.color = settings.color;
             }
         });
 
@@ -595,33 +728,29 @@
         document.querySelectorAll('.color-swatch').forEach(el => {
             el.addEventListener('click', function() {
                 const color = this.dataset.color;
-                document.documentElement.style.setProperty('--main-color', color);
-                document.getElementById('current-color-display').style.background = color;
-                document.getElementById('current-color-hex').textContent = color.toUpperCase();
-                document.getElementById('color-wheel').value = color;
-                document.getElementById('color-hex-input').value = color;
+                applyColor(color);
                 document.querySelectorAll('.color-swatch').forEach(s => {
                     s.style.borderColor = 'transparent';
                     s.style.transform = 'scale(1)';
                 });
                 this.style.borderColor = '#333';
                 this.style.transform = 'scale(1.1)';
-                const newSettings = getSettings();
-                newSettings.color = color;
-                saveSettings(newSettings);
             });
         });
 
         document.querySelectorAll('.filter-btn').forEach(el => {
             el.addEventListener('click', function() {
                 const filter = this.dataset.filter;
+                const color = getSettings().color;
                 applyFilter(filter);
                 document.querySelectorAll('.filter-btn').forEach(b => {
                     b.style.borderColor = '#e0e0e0';
                     b.style.background = 'transparent';
+                    b.style.color = '#333';
                 });
-                this.style.borderColor = '#49B1F5';
-                this.style.background = '#f0f8ff';
+                this.style.borderColor = color;
+                this.style.background = color + '22';
+                this.style.color = color;
                 const newSettings = getSettings();
                 newSettings.filter = filter;
                 saveSettings(newSettings);
@@ -665,24 +794,86 @@
                 }
             });
             saveSettings(defaultSettings);
+            applyThemeToElements();
+            // 重置面板自身样式
+            const panel = document.getElementById('custom-control-panel');
+            if (panel) {
+                const title = panel.querySelector('h3');
+                if (title) title.style.color = defaultSettings.color;
+                panel.querySelectorAll('label').forEach(label => {
+                    label.style.color = defaultSettings.color;
+                });
+            }
+            // 重置齿轮按钮
+            const gearBtn = document.getElementById('custom-panel-btn');
+            if (gearBtn) {
+                gearBtn.style.color = defaultSettings.color;
+                gearBtn.style.borderColor = defaultSettings.color;
+            }
+            // 重置滤镜按钮
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.style.borderColor = '#e0e0e0';
+                b.style.background = 'transparent';
+                b.style.color = '#333';
+                if (b.dataset.filter === 'none') {
+                    b.style.borderColor = defaultSettings.color;
+                    b.style.background = defaultSettings.color + '22';
+                    b.style.color = defaultSettings.color;
+                }
+            });
         });
 
         applyPanelRadius();
+        applyThemeToElements();
     }
 
     function initCustomPanelButton() {
-        const panelBtn = document.getElementById('custom-panel-btn');
-        if (panelBtn) {
-            panelBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                e.preventDefault();
-                togglePanel();
-            });
-            panelBtn.addEventListener('touchstart', function(e) {
-                e.stopPropagation();
-                e.preventDefault();
-                togglePanel();
-            }, { passive: false });
-        }
+        // 创建齿轮按钮
+        const btn = document.createElement('div');
+        btn.id = 'custom-panel-btn';
+        btn.innerHTML = '⚙️';
+        btn.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #fff;
+            color: #49B1F5;
+            border: 2px solid #49B1F5;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 99998;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        `;
+        
+        btn.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.1) rotate(90deg)';
+            this.style.boxShadow = '0 6px 20px rgba(0,0,0,0.2)';
+        });
+        btn.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1) rotate(0deg)';
+            this.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+        });
+        
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            togglePanel();
+        });
+        btn.addEventListener('touchstart', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            togglePanel();
+        }, { passive: false });
+        
+        document.body.appendChild(btn);
     }
 })();

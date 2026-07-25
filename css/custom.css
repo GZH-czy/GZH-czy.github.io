@@ -929,12 +929,26 @@ img {
   border-radius: 0px !important;
 }
 
-/* 主题色 */
-a, .btn, .button {
+/* 主题色 - 仅应用于目录（TOC） */
+.toc-item a,
+.toc-link,
+.toc-text {
   color: var(--main-color) !important;
 }
-.btn, .button {
-  background: var(--main-color) !important;
+
+.toc-link:hover,
+.toc-item.active .toc-link {
+  color: var(--main-color) !important;
+  opacity: 0.8;
+}
+
+.toc-item.active .toc-link {
+  border-color: var(--main-color) !important;
+}
+
+/* 目录数字 */
+.toc-number {
+  color: var(--main-color) !important;
 }
 
 /* 字体 */
@@ -1011,5 +1025,13 @@ html.filter-grayscale {
   #color-picker-panel select {
     font-size: 12px !important;
     padding: 5px !important;
+  }
+  
+  #custom-panel-btn {
+    width: 42px !important;
+    height: 42px !important;
+    font-size: 20px !important;
+    bottom: 15px !important;
+    right: 15px !important;
   }
 }
