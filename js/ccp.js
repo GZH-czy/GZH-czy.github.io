@@ -8,6 +8,9 @@
         '#00B894', '#E17055', '#0984E3', '#A29BFE', '#FD79A8'
     ];
 
+    // 全局存储当前颜色
+    let currentColor = '#49B1F5';
+
     function initCustomPanel() {
         if (document.getElementById('custom-control-panel')) {
             rebindEvents();
@@ -69,7 +72,8 @@
 
     // 应用主题色到各个元素（实时更新）
     function applyThemeToElements() {
-        const color = getSettings().color;
+        // 直接使用全局变量 currentColor，不从设置读取
+        const color = currentColor;
         
         // 1. 应用到目录（TOC）文字颜色
         document.querySelectorAll('.toc-item a, .toc-link, .toc-text, .toc-number').forEach(el => {
@@ -325,7 +329,7 @@
             el.parentNode.replaceChild(newEl, el);
             newEl.addEventListener('click', function() {
                 const filter = this.dataset.filter;
-                const color = getSettings().color;
+                const color = currentColor;
                 applyFilter(filter);
                 document.querySelectorAll('.filter-btn').forEach(b => {
                     b.style.borderColor = '#e0e0e0';
@@ -394,12 +398,15 @@
                         s.style.borderColor = '#333';
                     }
                 });
+                // 更新全局颜色变量
+                currentColor = defaultSettings.color;
                 saveSettings(defaultSettings);
                 applyThemeToElements();
             });
         }
 
         const settings = getSettings();
+        currentColor = settings.color;
         applyRadiusToAllWithValue(settings.radius);
         applyFilter(settings.filter);
         document.documentElement.style.setProperty('--main-color', settings.color);
@@ -460,11 +467,24 @@
     }
 
     function applyColor(color) {
+        // 更新全局颜色变量
+        currentColor = color;
+        
+        // 更新CSS变量
         document.documentElement.style.setProperty('--main-color', color);
-        document.getElementById('current-color-display').style.background = color;
-        document.getElementById('current-color-hex').textContent = color.toUpperCase();
-        document.getElementById('color-wheel').value = color;
-        document.getElementById('color-hex-input').value = color;
+        
+        // 更新显示
+        const display = document.getElementById('current-color-display');
+        const hex = document.getElementById('current-color-hex');
+        const wheel = document.getElementById('color-wheel');
+        const input = document.getElementById('color-hex-input');
+        
+        if (display) display.style.background = color;
+        if (hex) hex.textContent = color.toUpperCase();
+        if (wheel) wheel.value = color;
+        if (input) input.value = color;
+        
+        // 高亮选中的预设色块
         document.querySelectorAll('.picker-swatch').forEach(s => {
             s.style.borderColor = 'transparent';
             if (s.dataset.color === color) {
@@ -472,8 +492,10 @@
             }
         });
         
+        // 立即应用主题到所有元素
         applyThemeToElements();
         
+        // 保存设置
         const newSettings = getSettings();
         newSettings.color = color;
         saveSettings(newSettings);
@@ -481,6 +503,7 @@
 
     function loadSettings() {
         const settings = getSettings();
+        currentColor = settings.color;
         document.documentElement.style.setProperty('--main-radius', settings.radius + 'px');
         document.documentElement.style.setProperty('--main-color', settings.color);
         document.documentElement.style.setProperty('--main-font', settings.font);
@@ -665,6 +688,7 @@
         }
 
         const settings = getSettings();
+        currentColor = settings.color;
         document.getElementById('radius-slider').value = settings.radius;
         document.getElementById('radius-value').textContent = settings.radius + 'px';
         document.getElementById('font-select').value = settings.font;
@@ -703,7 +727,7 @@
         document.querySelectorAll('.filter-btn').forEach(el => {
             el.addEventListener('click', function() {
                 const filter = this.dataset.filter;
-                const color = getSettings().color;
+                const color = currentColor;
                 applyFilter(filter);
                 document.querySelectorAll('.filter-btn').forEach(b => {
                     b.style.borderColor = '#e0e0e0';
@@ -755,6 +779,7 @@
                     s.style.borderColor = '#333';
                 }
             });
+            currentColor = defaultSettings.color;
             saveSettings(defaultSettings);
             applyThemeToElements();
         });
