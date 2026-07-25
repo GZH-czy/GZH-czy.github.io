@@ -4,7 +4,6 @@
         if (document.getElementById('custom-control-panel')) {
             rebindEvents();
             applyRadiusToAll();
-            // 同时更新面板本身的圆角
             applyPanelRadius();
             return;
         }
@@ -32,6 +31,7 @@
         initCustomPanel();
     }
 
+    // Pjax 事件监听
     document.addEventListener('pjax:complete', function() {
         setTimeout(function() {
             initCustomPanel();
@@ -44,7 +44,19 @@
         }, 50);
     });
 
-    // 应用面板本身的圆角
+    // 手机端也监听页面变化
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) {
+            setTimeout(function() {
+                const panel = document.getElementById('custom-control-panel');
+                if (panel) {
+                    applyRadiusToAll();
+                    applyPanelRadius();
+                }
+            }, 200);
+        }
+    });
+
     function applyPanelRadius() {
         const radius = getSettings().radius;
         const panel = document.getElementById('custom-control-panel');
@@ -56,36 +68,67 @@
     function applyRadiusToAll() {
         const radius = getSettings().radius;
         document.documentElement.style.setProperty('--main-radius', radius + 'px');
-        // 更全面的选择器覆盖
+        // 排除图片的选择器
         const selectors = [
             '.card-widget', '.recent-post-item', '.layout-page', '.post-block',
             '.recent-post-item', '.card', '.post', '.article', '.entry', '.blog-card',
             '.layout', '.main', '.container', '.content', '.page',
-            // 文章页面的背景
             '.post-content', '.article-container', '.post-body', '.markdown-body',
             '.page-content', '.main-content', '.content-area',
-            // Butterfly 特有的
             '#post', '.post-wrap', '.article-wrap', '.blog-post',
             '.post-main', '.post-container', '.post-inner',
-            // 任何包含 .post 的元素
-            '[class*="post"]', '[class*="article"]', '[class*="content"]'
+            // 排除图片
+            ':not(img)'
         ];
         selectors.forEach(sel => {
             document.querySelectorAll(sel).forEach(el => {
-                el.style.borderRadius = radius + 'px';
+                // 跳过图片元素
+                if (el.tagName !== 'IMG' && !el.closest('img')) {
+                    el.style.borderRadius = radius + 'px';
+                }
             });
         });
-        // 同时更新面板
+        // 单独处理所有 img，强制取消圆角
+        document.querySelectorAll('img').forEach(img => {
+            img.style.borderRadius = '0px !important';
+        });
+        applyPanelRadius();
+    }
+
+    function applyRadiusToAllWithValue(radius) {
+        document.documentElement.style.setProperty('--main-radius', radius + 'px');
+        const selectors = [
+            '.card-widget', '.recent-post-item', '.layout-page', '.post-block',
+            '.recent-post-item', '.card', '.post', '.article', '.entry', '.blog-card',
+            '.layout', '.main', '.container', '.content', '.page',
+            '.post-content', '.article-container', '.post-body', '.markdown-body',
+            '.page-content', '.main-content', '.content-area',
+            '#post', '.post-wrap', '.article-wrap', '.blog-post',
+            '.post-main', '.post-container', '.post-inner'
+        ];
+        selectors.forEach(sel => {
+            document.querySelectorAll(sel).forEach(el => {
+                if (el.tagName !== 'IMG' && !el.closest('img')) {
+                    el.style.borderRadius = radius + 'px';
+                }
+            });
+        });
+        document.querySelectorAll('img').forEach(img => {
+            img.style.borderRadius = '0px !important';
+        });
         applyPanelRadius();
     }
 
     function rebindEvents() {
+        // 重新绑定齿轮按钮（修复手机端）
         const panelBtn = document.getElementById('custom-panel-btn');
         if (panelBtn) {
-            panelBtn.replaceWith(panelBtn.cloneNode(true));
-            const newBtn = document.getElementById('custom-panel-btn');
+            // 移除所有旧监听器
+            const newBtn = panelBtn.cloneNode(true);
+            panelBtn.parentNode.replaceChild(newBtn, panelBtn);
             newBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
+                e.preventDefault();
                 const panel = document.getElementById('custom-control-panel');
                 if (panel) {
                     if (panel.classList.contains('panel-hidden')) {
@@ -95,23 +138,40 @@
                     }
                 }
             });
+            // 也支持 touch 事件
+            newBtn.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                const panel = document.getElementById('custom-control-panel');
+                if (panel) {
+                    if (panel.classList.contains('panel-hidden')) {
+                        showPanel();
+                    } else {
+                        hidePanel();
+                    }
+                }
+            }, { passive: false });
         }
 
         const closeBtn = document.getElementById('close-panel-btn');
         if (closeBtn) {
-            closeBtn.replaceWith(closeBtn.cloneNode(true));
-            const newCloseBtn = document.getElementById('close-panel-btn');
+            const newCloseBtn = closeBtn.cloneNode(true);
+            closeBtn.parentNode.replaceChild(newCloseBtn, closeBtn);
             newCloseBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 hidePanel();
             });
+            newCloseBtn.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+                hidePanel();
+            }, { passive: false });
         }
 
+        // 重新绑定颜色
         document.querySelectorAll('.color-swatch').forEach(el => {
-            el.replaceWith(el.cloneNode(true));
-        });
-        document.querySelectorAll('.color-swatch').forEach(el => {
-            el.addEventListener('click', function() {
+            const newEl = el.cloneNode(true);
+            el.parentNode.replaceChild(newEl, el);
+            newEl.addEventListener('click', function() {
                 const color = this.dataset.color;
                 document.documentElement.style.setProperty('--main-color', color);
                 document.getElementById('current-color-display').style.background = color;
@@ -128,11 +188,11 @@
             });
         });
 
+        // 重新绑定滤镜
         document.querySelectorAll('.filter-btn').forEach(el => {
-            el.replaceWith(el.cloneNode(true));
-        });
-        document.querySelectorAll('.filter-btn').forEach(el => {
-            el.addEventListener('click', function() {
+            const newEl = el.cloneNode(true);
+            el.parentNode.replaceChild(newEl, el);
+            newEl.addEventListener('click', function() {
                 const filter = this.dataset.filter;
                 applyFilter(filter);
                 document.querySelectorAll('.filter-btn').forEach(b => {
@@ -149,8 +209,8 @@
 
         const radiusSlider = document.getElementById('radius-slider');
         if (radiusSlider) {
-            radiusSlider.replaceWith(radiusSlider.cloneNode(true));
-            const newSlider = document.getElementById('radius-slider');
+            const newSlider = radiusSlider.cloneNode(true);
+            radiusSlider.parentNode.replaceChild(newSlider, radiusSlider);
             newSlider.addEventListener('input', function() {
                 const val = this.value;
                 document.getElementById('radius-value').textContent = val + 'px';
@@ -163,9 +223,9 @@
 
         const fontSelect = document.getElementById('font-select');
         if (fontSelect) {
-            fontSelect.replaceWith(fontSelect.cloneNode(true));
-            const newFontSelect = document.getElementById('font-select');
-            newFontSelect.addEventListener('change', function() {
+            const newSelect = fontSelect.cloneNode(true);
+            fontSelect.parentNode.replaceChild(newSelect, fontSelect);
+            newSelect.addEventListener('change', function() {
                 const val = this.value;
                 document.documentElement.style.setProperty('--main-font', val);
                 const newSettings = getSettings();
@@ -176,8 +236,8 @@
 
         const resetBtn = document.getElementById('reset-default-btn');
         if (resetBtn) {
-            resetBtn.replaceWith(resetBtn.cloneNode(true));
-            const newResetBtn = document.getElementById('reset-default-btn');
+            const newResetBtn = resetBtn.cloneNode(true);
+            resetBtn.parentNode.replaceChild(newResetBtn, resetBtn);
             newResetBtn.addEventListener('click', function() {
                 const defaultSettings = { radius: 10, color: '#49B1F5', font: "'Microsoft YaHei', sans-serif", filter: 'none' };
                 document.getElementById('radius-slider').value = defaultSettings.radius;
@@ -214,26 +274,6 @@
         applyFilter(settings.filter);
         document.documentElement.style.setProperty('--main-color', settings.color);
         document.documentElement.style.setProperty('--main-font', settings.font);
-        applyPanelRadius();
-    }
-
-    function applyRadiusToAllWithValue(radius) {
-        document.documentElement.style.setProperty('--main-radius', radius + 'px');
-        const selectors = [
-            '.card-widget', '.recent-post-item', '.layout-page', '.post-block',
-            '.recent-post-item', '.card', '.post', '.article', '.entry', '.blog-card',
-            '.layout', '.main', '.container', '.content', '.page',
-            '.post-content', '.article-container', '.post-body', '.markdown-body',
-            '.page-content', '.main-content', '.content-area',
-            '#post', '.post-wrap', '.article-wrap', '.blog-post',
-            '.post-main', '.post-container', '.post-inner',
-            '[class*="post"]', '[class*="article"]', '[class*="content"]'
-        ];
-        selectors.forEach(sel => {
-            document.querySelectorAll(sel).forEach(el => {
-                el.style.borderRadius = radius + 'px';
-            });
-        });
         applyPanelRadius();
     }
 
@@ -358,6 +398,10 @@
                 e.stopPropagation();
                 hidePanel();
             });
+            closeBtn.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+                hidePanel();
+            }, { passive: false });
         }
 
         const settings = getSettings();
@@ -471,15 +515,16 @@
             saveSettings(defaultSettings);
         });
 
-        // 立即应用面板圆角
         applyPanelRadius();
     }
 
     function initCustomPanelButton() {
         const panelBtn = document.getElementById('custom-panel-btn');
         if (panelBtn) {
+            // 同时支持 click 和 touchstart
             panelBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
+                e.preventDefault();
                 const panel = document.getElementById('custom-control-panel');
                 if (panel) {
                     if (panel.classList.contains('panel-hidden')) {
@@ -489,6 +534,18 @@
                     }
                 }
             });
+            panelBtn.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                const panel = document.getElementById('custom-control-panel');
+                if (panel) {
+                    if (panel.classList.contains('panel-hidden')) {
+                        showPanel();
+                    } else {
+                        hidePanel();
+                    }
+                }
+            }, { passive: false });
         }
     }
 })();
