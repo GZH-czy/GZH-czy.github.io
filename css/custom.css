@@ -904,12 +904,3 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
   }
 }
 
-/* 让卡片强制使用纯色背景，忽略图片 */
-.swiper-slide .card .card-cover {
-  display: none !important;
-}
-.swiper-slide .card .card-info {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
-  border-radius: 12px !important;
-  padding: 20px !important;
-}
