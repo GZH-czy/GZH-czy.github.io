@@ -914,7 +914,7 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
   --main-font: 'Microsoft YaHei', sans-serif;
 }
 
-/* 应用全局圆角到所有容器，但排除图片 */
+/* 应用全局圆角，排除图片 */
 .card-widget, .recent-post-item, .layout-page, .post-block,
 .recent-post-item, .card, .post, .article, .entry, .blog-card,
 .layout, .main, .container, .content, .page,
@@ -925,12 +925,11 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
   border-radius: var(--main-radius) !important;
 }
 
-/* 强制所有图片无圆角 */
 img {
   border-radius: 0px !important;
 }
 
-/* 应用主题色 */
+/* 主题色 */
 a, .btn, .button {
   color: var(--main-color) !important;
 }
@@ -938,12 +937,12 @@ a, .btn, .button {
   background: var(--main-color) !important;
 }
 
-/* 应用字体 */
+/* 字体 */
 body {
   font-family: var(--main-font) !important;
 }
 
-/* 滤镜效果 */
+/* 滤镜 */
 html.filter-dark {
   filter: brightness(0.7);
 }
@@ -954,14 +953,25 @@ html.filter-grayscale {
   filter: grayscale(1);
 }
 
-/* 面板动画 */
+/* 主面板动画 */
 #custom-control-panel.panel-hidden {
   opacity: 0 !important;
   transform: scale(0.9) translateY(10px) !important;
   pointer-events: none !important;
 }
-
 #custom-control-panel.panel-visible {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+  pointer-events: auto !important;
+}
+
+/* 颜色选择器动画 */
+#color-picker-panel.picker-hidden {
+  opacity: 0 !important;
+  transform: scale(0.9) translateY(10px) !important;
+  pointer-events: none !important;
+}
+#color-picker-panel.picker-visible {
   opacity: 1 !important;
   transform: scale(1) translateY(0) !important;
   pointer-events: auto !important;
@@ -969,7 +979,8 @@ html.filter-grayscale {
 
 /* 手机端适配 */
 @media (max-width: 768px) {
-  #custom-control-panel {
+  #custom-control-panel,
+  #color-picker-panel {
     width: calc(100vw - 30px) !important;
     max-width: 360px !important;
     right: 15px !important;
@@ -981,18 +992,23 @@ html.filter-grayscale {
   #custom-control-panel h3 {
     font-size: 15px !important;
   }
-  .color-swatch {
-    width: 24px !important;
-    height: 24px !important;
+  #color-picker-panel h4 {
+    font-size: 14px !important;
+  }
+  .picker-swatch {
+    width: 26px !important;
+    height: 26px !important;
   }
   .filter-btn {
     padding: 3px 10px !important;
     font-size: 11px !important;
   }
-  #custom-control-panel input[type="range"] {
+  #custom-control-panel input[type="range"],
+  #color-picker-panel input[type="range"] {
     height: 4px !important;
   }
-  #custom-control-panel select {
+  #custom-control-panel select,
+  #color-picker-panel select {
     font-size: 12px !important;
     padding: 5px !important;
   }

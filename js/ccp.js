@@ -1,5 +1,13 @@
 // source/js/ccp.js
 (function() {
+    // ---- 预设主题色 ----
+    const PRESET_COLORS = [
+        '#49B1F5', '#FF6B6B', '#4ECDC4', '#FF9F43', '#A29BFE',
+        '#FD79A8', '#00B894', '#E17055', '#0984E3', '#6C5CE7',
+        '#FDCB6E', '#E84393', '#00CEC9', '#D63031', '#6C5CE7',
+        '#00B894', '#E17055', '#0984E3', '#A29BFE', '#FD79A8'
+    ];
+
     function initCustomPanel() {
         if (document.getElementById('custom-control-panel')) {
             rebindEvents();
@@ -17,9 +25,15 @@
         document.addEventListener('click', function(e) {
             const panel = document.getElementById('custom-control-panel');
             const btn = document.getElementById('custom-panel-btn');
+            const colorPicker = document.getElementById('color-picker-panel');
             if (panel && btn) {
                 if (!panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
                     hidePanel();
+                }
+            }
+            if (colorPicker) {
+                if (!colorPicker.contains(e.target) && e.target.id !== 'current-color-display') {
+                    hideColorPicker();
                 }
             }
         });
@@ -31,20 +45,14 @@
         initCustomPanel();
     }
 
-    // Pjax 事件监听
     document.addEventListener('pjax:complete', function() {
-        setTimeout(function() {
-            initCustomPanel();
-        }, 50);
+        setTimeout(function() { initCustomPanel(); }, 50);
     });
 
     document.addEventListener('pjax:success', function() {
-        setTimeout(function() {
-            initCustomPanel();
-        }, 50);
+        setTimeout(function() { initCustomPanel(); }, 50);
     });
 
-    // 手机端也监听页面变化
     document.addEventListener('visibilitychange', function() {
         if (!document.hidden) {
             setTimeout(function() {
@@ -60,15 +68,14 @@
     function applyPanelRadius() {
         const radius = getSettings().radius;
         const panel = document.getElementById('custom-control-panel');
-        if (panel) {
-            panel.style.borderRadius = radius + 'px';
-        }
+        const colorPicker = document.getElementById('color-picker-panel');
+        if (panel) panel.style.borderRadius = radius + 'px';
+        if (colorPicker) colorPicker.style.borderRadius = radius + 'px';
     }
 
     function applyRadiusToAll() {
         const radius = getSettings().radius;
         document.documentElement.style.setProperty('--main-radius', radius + 'px');
-        // 排除图片的选择器
         const selectors = [
             '.card-widget', '.recent-post-item', '.layout-page', '.post-block',
             '.recent-post-item', '.card', '.post', '.article', '.entry', '.blog-card',
@@ -76,19 +83,15 @@
             '.post-content', '.article-container', '.post-body', '.markdown-body',
             '.page-content', '.main-content', '.content-area',
             '#post', '.post-wrap', '.article-wrap', '.blog-post',
-            '.post-main', '.post-container', '.post-inner',
-            // 排除图片
-            ':not(img)'
+            '.post-main', '.post-container', '.post-inner'
         ];
         selectors.forEach(sel => {
             document.querySelectorAll(sel).forEach(el => {
-                // 跳过图片元素
                 if (el.tagName !== 'IMG' && !el.closest('img')) {
                     el.style.borderRadius = radius + 'px';
                 }
             });
         });
-        // 单独处理所有 img，强制取消圆角
         document.querySelectorAll('img').forEach(img => {
             img.style.borderRadius = '0px !important';
         });
@@ -120,39 +123,24 @@
     }
 
     function rebindEvents() {
-        // 重新绑定齿轮按钮（修复手机端）
+        // 齿轮按钮
         const panelBtn = document.getElementById('custom-panel-btn');
         if (panelBtn) {
-            // 移除所有旧监听器
             const newBtn = panelBtn.cloneNode(true);
             panelBtn.parentNode.replaceChild(newBtn, panelBtn);
             newBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 e.preventDefault();
-                const panel = document.getElementById('custom-control-panel');
-                if (panel) {
-                    if (panel.classList.contains('panel-hidden')) {
-                        showPanel();
-                    } else {
-                        hidePanel();
-                    }
-                }
+                togglePanel();
             });
-            // 也支持 touch 事件
             newBtn.addEventListener('touchstart', function(e) {
                 e.stopPropagation();
                 e.preventDefault();
-                const panel = document.getElementById('custom-control-panel');
-                if (panel) {
-                    if (panel.classList.contains('panel-hidden')) {
-                        showPanel();
-                    } else {
-                        hidePanel();
-                    }
-                }
+                togglePanel();
             }, { passive: false });
         }
 
+        // 关闭主面板
         const closeBtn = document.getElementById('close-panel-btn');
         if (closeBtn) {
             const newCloseBtn = closeBtn.cloneNode(true);
@@ -167,28 +155,77 @@
             }, { passive: false });
         }
 
-        // 重新绑定颜色
-        document.querySelectorAll('.color-swatch').forEach(el => {
+        // 关闭颜色选择器
+        const closeColorBtn = document.getElementById('close-color-picker-btn');
+        if (closeColorBtn) {
+            const newClose = closeColorBtn.cloneNode(true);
+            closeColorBtn.parentNode.replaceChild(newClose, closeColorBtn);
+            newClose.addEventListener('click', function(e) {
+                e.stopPropagation();
+                hideColorPicker();
+            });
+            newClose.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+                hideColorPicker();
+            }, { passive: false });
+        }
+
+        // 当前色块点击打开颜色选择器
+        const colorDisplay = document.getElementById('current-color-display');
+        if (colorDisplay) {
+            const newDisplay = colorDisplay.cloneNode(true);
+            colorDisplay.parentNode.replaceChild(newDisplay, colorDisplay);
+            newDisplay.style.cursor = 'pointer';
+            newDisplay.addEventListener('click', function(e) {
+                e.stopPropagation();
+                showColorPicker();
+            });
+            newDisplay.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+                showColorPicker();
+            }, { passive: false });
+        }
+
+        // 颜色选择器中的预设色块
+        document.querySelectorAll('.picker-swatch').forEach(el => {
             const newEl = el.cloneNode(true);
             el.parentNode.replaceChild(newEl, el);
             newEl.addEventListener('click', function() {
                 const color = this.dataset.color;
-                document.documentElement.style.setProperty('--main-color', color);
-                document.getElementById('current-color-display').style.background = color;
-                document.getElementById('current-color-hex').textContent = color.toUpperCase();
-                document.querySelectorAll('.color-swatch').forEach(s => {
-                    s.style.borderColor = 'transparent';
-                    s.style.transform = 'scale(1)';
-                });
-                this.style.borderColor = '#333';
-                this.style.transform = 'scale(1.1)';
-                const newSettings = getSettings();
-                newSettings.color = color;
-                saveSettings(newSettings);
+                applyColor(color);
+                hideColorPicker();
             });
         });
 
-        // 重新绑定滤镜
+        // 色环输入
+        const colorWheel = document.getElementById('color-wheel');
+        if (colorWheel) {
+            const newWheel = colorWheel.cloneNode(true);
+            colorWheel.parentNode.replaceChild(newWheel, colorWheel);
+            newWheel.addEventListener('input', function() {
+                const color = this.value;
+                document.getElementById('color-hex-input').value = color;
+                applyColor(color);
+            });
+        }
+
+        // 十六进制输入
+        const hexInput = document.getElementById('color-hex-input');
+        if (hexInput) {
+            const newInput = hexInput.cloneNode(true);
+            hexInput.parentNode.replaceChild(newInput, hexInput);
+            newInput.addEventListener('input', function() {
+                let val = this.value.trim();
+                if (val.startsWith('#')) {
+                    if (/^#[0-9a-fA-F]{6}$/.test(val)) {
+                        document.getElementById('color-wheel').value = val;
+                        applyColor(val);
+                    }
+                }
+            });
+        }
+
+        // 滤镜
         document.querySelectorAll('.filter-btn').forEach(el => {
             const newEl = el.cloneNode(true);
             el.parentNode.replaceChild(newEl, el);
@@ -207,6 +244,7 @@
             });
         });
 
+        // 圆角滑块
         const radiusSlider = document.getElementById('radius-slider');
         if (radiusSlider) {
             const newSlider = radiusSlider.cloneNode(true);
@@ -221,6 +259,7 @@
             });
         }
 
+        // 字体
         const fontSelect = document.getElementById('font-select');
         if (fontSelect) {
             const newSelect = fontSelect.cloneNode(true);
@@ -234,6 +273,7 @@
             });
         }
 
+        // 重置按钮
         const resetBtn = document.getElementById('reset-default-btn');
         if (resetBtn) {
             const newResetBtn = resetBtn.cloneNode(true);
@@ -247,24 +287,16 @@
                 document.documentElement.style.setProperty('--main-color', defaultSettings.color);
                 document.documentElement.style.setProperty('--main-font', defaultSettings.font);
                 applyFilter('none');
-                document.querySelectorAll('.color-swatch').forEach(s => {
-                    s.style.borderColor = 'transparent';
-                    s.style.transform = 'scale(1)';
-                    if (s.dataset.color === defaultSettings.color) {
-                        s.style.borderColor = '#333';
-                        s.style.transform = 'scale(1.1)';
-                    }
-                });
-                document.querySelectorAll('.filter-btn').forEach(b => {
-                    b.style.borderColor = '#e0e0e0';
-                    b.style.background = 'transparent';
-                    if (b.dataset.filter === 'none') {
-                        b.style.borderColor = '#49B1F5';
-                        b.style.background = '#f0f8ff';
-                    }
-                });
                 document.getElementById('current-color-display').style.background = defaultSettings.color;
                 document.getElementById('current-color-hex').textContent = defaultSettings.color.toUpperCase();
+                document.getElementById('color-wheel').value = defaultSettings.color;
+                document.getElementById('color-hex-input').value = defaultSettings.color;
+                document.querySelectorAll('.picker-swatch').forEach(s => {
+                    s.style.borderColor = 'transparent';
+                    if (s.dataset.color === defaultSettings.color) {
+                        s.style.borderColor = '#333';
+                    }
+                });
                 saveSettings(defaultSettings);
             });
         }
@@ -275,6 +307,73 @@
         document.documentElement.style.setProperty('--main-color', settings.color);
         document.documentElement.style.setProperty('--main-font', settings.font);
         applyPanelRadius();
+        // 更新颜色显示
+        document.getElementById('current-color-display').style.background = settings.color;
+        document.getElementById('current-color-hex').textContent = settings.color.toUpperCase();
+        document.getElementById('color-wheel').value = settings.color;
+        document.getElementById('color-hex-input').value = settings.color;
+    }
+
+    function togglePanel() {
+        const panel = document.getElementById('custom-control-panel');
+        if (panel) {
+            if (panel.classList.contains('panel-hidden')) {
+                showPanel();
+            } else {
+                hidePanel();
+                hideColorPicker();
+            }
+        }
+    }
+
+    function showPanel() {
+        const panel = document.getElementById('custom-control-panel');
+        if (panel) {
+            panel.classList.remove('panel-hidden');
+            panel.classList.add('panel-visible');
+        }
+    }
+
+    function hidePanel() {
+        const panel = document.getElementById('custom-control-panel');
+        if (panel) {
+            panel.classList.remove('panel-visible');
+            panel.classList.add('panel-hidden');
+        }
+        hideColorPicker();
+    }
+
+    function showColorPicker() {
+        const picker = document.getElementById('color-picker-panel');
+        if (picker) {
+            picker.classList.remove('picker-hidden');
+            picker.classList.add('picker-visible');
+        }
+    }
+
+    function hideColorPicker() {
+        const picker = document.getElementById('color-picker-panel');
+        if (picker) {
+            picker.classList.remove('picker-visible');
+            picker.classList.add('picker-hidden');
+        }
+    }
+
+    function applyColor(color) {
+        document.documentElement.style.setProperty('--main-color', color);
+        document.getElementById('current-color-display').style.background = color;
+        document.getElementById('current-color-hex').textContent = color.toUpperCase();
+        document.getElementById('color-wheel').value = color;
+        document.getElementById('color-hex-input').value = color;
+        document.querySelectorAll('.picker-swatch').forEach(s => {
+            s.style.borderColor = 'transparent';
+            if (s.dataset.color === color) {
+                s.style.borderColor = '#333';
+            }
+        });
+        const newSettings = getSettings();
+        newSettings.color = color;
+        saveSettings(newSettings);
     }
 
     function loadSettings() {
@@ -315,22 +414,6 @@
         }
     }
 
-    function showPanel() {
-        const panel = document.getElementById('custom-control-panel');
-        if (panel) {
-            panel.classList.remove('panel-hidden');
-            panel.classList.add('panel-visible');
-        }
-    }
-
-    function hidePanel() {
-        const panel = document.getElementById('custom-control-panel');
-        if (panel) {
-            panel.classList.remove('panel-visible');
-            panel.classList.add('panel-hidden');
-        }
-    }
-
     function createControlPanel() {
         const panelHTML = `
             <div id="custom-control-panel" class="panel-hidden" style="position:fixed; bottom:70px; right:10px; width:300px; max-width:calc(100vw - 20px); background:#fff; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,0.25); padding:20px; z-index:99999; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#333; max-height:80vh; overflow-y:auto; opacity:0; transform:scale(0.9) translateY(10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events:none; transform-origin: bottom right; font-size:14px;">
@@ -339,20 +422,44 @@
                     <button id="close-panel-btn" style="background:none; border:none; font-size:20px; cursor:pointer; color:#888; padding:0 6px;" aria-label="关闭面板">✕</button>
                 </div>
                 
+                <!-- 主题色 -->
                 <div style="margin-bottom:16px;">
                     <label style="display:block; font-size:13px; margin-bottom:6px; font-weight:600;">主题色</label>
-                    <div id="color-palette" style="display:flex; flex-wrap:wrap; gap:6px;">
-                        ${['#49B1F5', '#FF6B6B', '#4ECDC4', '#FF9F43', '#A29BFE', '#FD79A8', '#00B894', '#E17055', '#0984E3', '#6C5CE7'].map(c => `
-                            <div class="color-swatch" data-color="${c}" style="width:28px; height:28px; border-radius:50%; background:${c}; cursor:pointer; border:2px solid transparent; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onmouseover="this.style.transform='scale(1.12)'" onmouseout="this.style.transform='scale(1)'"></div>
-                        `).join('')}
-                    </div>
-                    <div style="margin-top:6px; display:flex; align-items:center; gap:8px;">
-                        <span style="font-size:12px; color:#888;">当前:</span>
-                        <span id="current-color-display" style="display:inline-block; width:20px; height:20px; border-radius:4px; background:#49B1F5; border:1px solid #ddd;"></span>
-                        <span id="current-color-hex" style="font-size:12px; font-family:monospace; color:#555;">#49B1F5</span>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <span id="current-color-display" style="display:inline-block; width:36px; height:36px; border-radius:8px; background:#49B1F5; border:2px solid #ddd; cursor:pointer; transition: all 0.2s;" title="点击选择颜色"></span>
+                        <span id="current-color-hex" style="font-size:13px; font-family:monospace; color:#555; cursor:pointer;" onclick="document.getElementById('current-color-display').click()">#49B1F5</span>
+                        <span style="font-size:12px; color:#999; margin-left:auto;">点击色块选择</span>
                     </div>
                 </div>
 
+                <!-- 颜色选择器（二级面板） -->
+                <div id="color-picker-panel" class="picker-hidden" style="position:fixed; bottom:70px; right:10px; width:300px; max-width:calc(100vw - 20px); background:#fff; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,0.3); padding:20px; z-index:100000; opacity:0; transform:scale(0.9) translateY(10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events:none; transform-origin: bottom right; font-size:14px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
+                        <h4 style="margin:0; font-size:15px; font-weight:600;">🎯 选择颜色</h4>
+                        <button id="close-color-picker-btn" style="background:none; border:none; font-size:18px; cursor:pointer; color:#888; padding:0 4px;" aria-label="关闭颜色选择器">✕</button>
+                    </div>
+                    
+                    <div style="margin-bottom:12px;">
+                        <label style="font-size:12px; color:#888; display:block; margin-bottom:4px;">预设颜色</label>
+                        <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                            ${PRESET_COLORS.map(c => `
+                                <div class="picker-swatch" data-color="${c}" style="width:30px; height:30px; border-radius:50%; background:${c}; cursor:pointer; border:2px solid transparent; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'"></div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom:12px;">
+                        <label style="font-size:12px; color:#888; display:block; margin-bottom:4px;">色环</label>
+                        <input type="color" id="color-wheel" value="#49B1F5" style="width:100%; height:50px; border:1px solid #ddd; border-radius:8px; cursor:pointer; padding:2px;">
+                    </div>
+                    
+                    <div>
+                        <label style="font-size:12px; color:#888; display:block; margin-bottom:4px;">十六进制</label>
+                        <input type="text" id="color-hex-input" value="#49B1F5" style="width:100%; padding:6px 10px; border:1px solid #ddd; border-radius:6px; font-family:monospace; font-size:14px;" placeholder="#RRGGBB">
+                    </div>
+                </div>
+
+                <!-- 滤镜 -->
                 <div style="margin-bottom:16px;">
                     <label style="display:block; font-size:13px; margin-bottom:6px; font-weight:600;">屏幕滤镜</label>
                     <div id="filter-options" style="display:flex; flex-wrap:wrap; gap:6px;">
@@ -367,12 +474,14 @@
                     </div>
                 </div>
 
+                <!-- 全局圆角 -->
                 <div style="margin-bottom:16px;">
                     <label style="display:block; font-size:13px; margin-bottom:4px; font-weight:600;">全局圆角 (px)</label>
                     <input type="range" id="radius-slider" min="0" max="30" value="10" style="width:100%;">
                     <span id="radius-value" style="display:inline-block; margin-top:2px; font-size:12px; color:#666;">10px</span>
                 </div>
 
+                <!-- 字体 -->
                 <div style="margin-bottom:16px;">
                     <label style="display:block; font-size:13px; margin-bottom:4px; font-weight:600;">字体</label>
                     <select id="font-select" style="width:100%; padding:6px; border:1px solid #ddd; border-radius:6px; font-size:13px;">
@@ -392,37 +501,89 @@
         panelContainer.innerHTML = panelHTML;
         document.body.appendChild(panelContainer.firstElementChild);
 
+        // ---- 事件绑定 ----
         const closeBtn = document.getElementById('close-panel-btn');
         if (closeBtn) {
-            closeBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                hidePanel();
-            });
-            closeBtn.addEventListener('touchstart', function(e) {
-                e.stopPropagation();
-                hidePanel();
-            }, { passive: false });
+            closeBtn.addEventListener('click', function(e) { e.stopPropagation(); hidePanel(); });
+            closeBtn.addEventListener('touchstart', function(e) { e.stopPropagation(); hidePanel(); }, { passive: false });
         }
 
+        // 关闭颜色选择器
+        const closeColorBtn = document.getElementById('close-color-picker-btn');
+        if (closeColorBtn) {
+            closeColorBtn.addEventListener('click', function(e) { e.stopPropagation(); hideColorPicker(); });
+            closeColorBtn.addEventListener('touchstart', function(e) { e.stopPropagation(); hideColorPicker(); }, { passive: false });
+        }
+
+        // 当前色块点击
+        const colorDisplay = document.getElementById('current-color-display');
+        if (colorDisplay) {
+            colorDisplay.style.cursor = 'pointer';
+            colorDisplay.addEventListener('click', function(e) {
+                e.stopPropagation();
+                showColorPicker();
+            });
+            colorDisplay.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+                showColorPicker();
+            }, { passive: false });
+        }
+        document.getElementById('current-color-hex').style.cursor = 'pointer';
+        document.getElementById('current-color-hex').addEventListener('click', function() {
+            document.getElementById('current-color-display').click();
+        });
+
+        // 预设色块
+        document.querySelectorAll('.picker-swatch').forEach(el => {
+            el.addEventListener('click', function() {
+                const color = this.dataset.color;
+                applyColor(color);
+                hideColorPicker();
+            });
+        });
+
+        // 色环
+        const colorWheel = document.getElementById('color-wheel');
+        if (colorWheel) {
+            colorWheel.addEventListener('input', function() {
+                const color = this.value;
+                document.getElementById('color-hex-input').value = color;
+                applyColor(color);
+            });
+        }
+
+        // 十六进制输入
+        const hexInput = document.getElementById('color-hex-input');
+        if (hexInput) {
+            hexInput.addEventListener('input', function() {
+                let val = this.value.trim();
+                if (val.startsWith('#')) {
+                    if (/^#[0-9a-fA-F]{6}$/.test(val)) {
+                        document.getElementById('color-wheel').value = val;
+                        applyColor(val);
+                    }
+                }
+            });
+        }
+
+        // 加载设置
         const settings = getSettings();
-        const radiusSlider = document.getElementById('radius-slider');
-        const radiusValue = document.getElementById('radius-value');
-        const fontSelect = document.getElementById('font-select');
-        const currentColorDisplay = document.getElementById('current-color-display');
-        const currentColorHex = document.getElementById('current-color-hex');
+        document.getElementById('radius-slider').value = settings.radius;
+        document.getElementById('radius-value').textContent = settings.radius + 'px';
+        document.getElementById('font-select').value = settings.font;
+        document.getElementById('current-color-display').style.background = settings.color;
+        document.getElementById('current-color-hex').textContent = settings.color.toUpperCase();
+        document.getElementById('color-wheel').value = settings.color;
+        document.getElementById('color-hex-input').value = settings.color;
 
-        radiusSlider.value = settings.radius;
-        radiusValue.textContent = settings.radius + 'px';
-        currentColorDisplay.style.background = settings.color;
-        currentColorHex.textContent = settings.color.toUpperCase();
-
-        document.querySelectorAll('.color-swatch').forEach(el => {
+        // 高亮当前颜色
+        document.querySelectorAll('.picker-swatch').forEach(el => {
             if (el.dataset.color === settings.color) {
                 el.style.borderColor = '#333';
-                el.style.transform = 'scale(1.1)';
             }
         });
 
+        // 高亮当前滤镜
         document.querySelectorAll('.filter-btn').forEach(el => {
             if (el.dataset.filter === settings.filter) {
                 el.style.borderColor = '#49B1F5';
@@ -430,16 +591,15 @@
             }
         });
 
-        if (fontSelect.querySelector(`option[value="${settings.font}"]`)) {
-            fontSelect.value = settings.font;
-        }
-
+        // ---- 其他事件绑定 ----
         document.querySelectorAll('.color-swatch').forEach(el => {
             el.addEventListener('click', function() {
                 const color = this.dataset.color;
                 document.documentElement.style.setProperty('--main-color', color);
-                currentColorDisplay.style.background = color;
-                currentColorHex.textContent = color.toUpperCase();
+                document.getElementById('current-color-display').style.background = color;
+                document.getElementById('current-color-hex').textContent = color.toUpperCase();
+                document.getElementById('color-wheel').value = color;
+                document.getElementById('color-hex-input').value = color;
                 document.querySelectorAll('.color-swatch').forEach(s => {
                     s.style.borderColor = 'transparent';
                     s.style.transform = 'scale(1)';
@@ -468,16 +628,16 @@
             });
         });
 
-        radiusSlider.addEventListener('input', function() {
+        document.getElementById('radius-slider').addEventListener('input', function() {
             const val = this.value;
-            radiusValue.textContent = val + 'px';
+            document.getElementById('radius-value').textContent = val + 'px';
             applyRadiusToAllWithValue(val);
             const newSettings = getSettings();
             newSettings.radius = parseInt(val);
             saveSettings(newSettings);
         });
 
-        fontSelect.addEventListener('change', function() {
+        document.getElementById('font-select').addEventListener('change', function() {
             const val = this.value;
             document.documentElement.style.setProperty('--main-font', val);
             const newSettings = getSettings();
@@ -487,31 +647,23 @@
 
         document.getElementById('reset-default-btn').addEventListener('click', function() {
             const defaultSettings = { radius: 10, color: '#49B1F5', font: "'Microsoft YaHei', sans-serif", filter: 'none' };
-            radiusSlider.value = defaultSettings.radius;
-            radiusValue.textContent = defaultSettings.radius + 'px';
-            fontSelect.value = "'Microsoft YaHei', sans-serif";
+            document.getElementById('radius-slider').value = defaultSettings.radius;
+            document.getElementById('radius-value').textContent = defaultSettings.radius + 'px';
+            document.getElementById('font-select').value = defaultSettings.font;
             applyRadiusToAllWithValue(defaultSettings.radius);
             document.documentElement.style.setProperty('--main-color', defaultSettings.color);
             document.documentElement.style.setProperty('--main-font', defaultSettings.font);
             applyFilter('none');
-            document.querySelectorAll('.color-swatch').forEach(s => {
+            document.getElementById('current-color-display').style.background = defaultSettings.color;
+            document.getElementById('current-color-hex').textContent = defaultSettings.color.toUpperCase();
+            document.getElementById('color-wheel').value = defaultSettings.color;
+            document.getElementById('color-hex-input').value = defaultSettings.color;
+            document.querySelectorAll('.picker-swatch').forEach(s => {
                 s.style.borderColor = 'transparent';
-                s.style.transform = 'scale(1)';
                 if (s.dataset.color === defaultSettings.color) {
                     s.style.borderColor = '#333';
-                    s.style.transform = 'scale(1.1)';
                 }
             });
-            document.querySelectorAll('.filter-btn').forEach(b => {
-                b.style.borderColor = '#e0e0e0';
-                b.style.background = 'transparent';
-                if (b.dataset.filter === 'none') {
-                    b.style.borderColor = '#49B1F5';
-                    b.style.background = '#f0f8ff';
-                }
-            });
-            currentColorDisplay.style.background = defaultSettings.color;
-            currentColorHex.textContent = defaultSettings.color.toUpperCase();
             saveSettings(defaultSettings);
         });
 
@@ -521,30 +673,15 @@
     function initCustomPanelButton() {
         const panelBtn = document.getElementById('custom-panel-btn');
         if (panelBtn) {
-            // 同时支持 click 和 touchstart
             panelBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 e.preventDefault();
-                const panel = document.getElementById('custom-control-panel');
-                if (panel) {
-                    if (panel.classList.contains('panel-hidden')) {
-                        showPanel();
-                    } else {
-                        hidePanel();
-                    }
-                }
+                togglePanel();
             });
             panelBtn.addEventListener('touchstart', function(e) {
                 e.stopPropagation();
                 e.preventDefault();
-                const panel = document.getElementById('custom-control-panel');
-                if (panel) {
-                    if (panel.classList.contains('panel-hidden')) {
-                        showPanel();
-                    } else {
-                        hidePanel();
-                    }
-                }
+                togglePanel();
             }, { passive: false });
         }
     }
