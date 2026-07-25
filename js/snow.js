@@ -1,4 +1,4 @@
-// snow.js - 透明背景无拖尾光晕雪花
+// snow.js - 透明背景无拖尾光晕雪花（自适应屏幕）
 (function() {
     // 创建画布（透明背景）
     const canvas = document.createElement('canvas');
@@ -10,28 +10,57 @@
     let width, height;
     let mouseX = -9999, mouseY = -9999;
 
-    // 雪花配置
+    // ----- 自适应配置 -----
+    // 基准：1920x1080 桌面下雪花数量为 150
+    const BASE_COUNT = 170;
+    const BASE_WIDTH = 1920;
+    const BASE_HEIGHT = 1080;
+    const BASE_AREA = BASE_WIDTH * BASE_HEIGHT;
+
+    // 雪花配置（部分参数也可以根据屏幕微调）
     const CONFIG = {
-        count: 120,
         minSize: 3,
-        maxSize: 6,
-        speed: 0.8,
+        maxSize: 7,
+        speed: 0.9,
         wind: 0.3,
         color: 'rgba(255, 255, 255, 0.9)',
         glowColor: 'rgba(180, 210, 255, 0.3)',
         glowBlur: 15,
-        mouseRadius: 150,
+        mouseRadius: 100,
     };
+
+    // ----- 根据屏幕面积计算雪花数量 -----
+    function getSnowflakeCount() {
+        const area = width * height;
+        // 按面积比例计算，但设置上限和下限，避免极端情况
+        let count = Math.round((area / BASE_AREA) * BASE_COUNT);
+        // 限制范围：最少 30 个，最多 200 个
+        return Math.min(200, Math.max(30, count));
+    }
+
+    let snowflakes = [];
 
     function resizeCanvas() {
         width = window.innerWidth;
         height = window.innerHeight;
         canvas.width = width;
         canvas.height = height;
+
+        // 屏幕尺寸变化时，重新生成雪花
+        const newCount = getSnowflakeCount();
+        // 保留现有雪花数量，只增不减（避免闪烁）
+        while (snowflakes.length < newCount) {
+            snowflakes.push(createSnowflake());
+        }
+        // 如果数量过多，随机移除一些
+        while (snowflakes.length > newCount) {
+            const idx = Math.floor(Math.random() * snowflakes.length);
+            snowflakes.splice(idx, 1);
+        }
     }
     window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
 
+    // 鼠标跟踪
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
@@ -52,11 +81,10 @@
         };
     }
 
-    let snowflakes = [];
-    for (let i = 0; i < CONFIG.count; i++) {
-        snowflakes.push(createSnowflake());
-    }
+    // 初始化画布和雪花
+    resizeCanvas();
 
+    // ----- 绘制核心（与之前相同） -----
     function drawSnowflake(s) {
         // 鼠标排斥
         let dx = 0, dy = 0;
@@ -83,9 +111,8 @@
         if (s.x < -50) s.x = width + 50;
         if (s.x > width + 50) s.x = -50;
 
-        // 绘制雪花（带光晕）
+        // 绘制
         ctx.save();
-        // 光晕层
         ctx.shadowColor = CONFIG.glowColor;
         ctx.shadowBlur = CONFIG.glowBlur * (s.radius / 8);
         ctx.globalAlpha = s.opacity * 0.85;
@@ -94,7 +121,6 @@
         ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
         ctx.fill();
 
-        // 高亮核心（可选）
         ctx.shadowBlur = 0;
         ctx.globalAlpha = s.opacity * 0.4;
         ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
@@ -105,9 +131,7 @@
     }
 
     function animate() {
-        // 关键修正：清除画布为完全透明，没有背景色，没有拖尾
         ctx.clearRect(0, 0, width, height);
-
         for (const s of snowflakes) {
             drawSnowflake(s);
         }
