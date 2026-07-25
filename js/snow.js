@@ -14,13 +14,13 @@
     const CONFIG = {
         count: 120,
         minSize: 3,
-        maxSize: 10,
-        speed: 0.5,
+        maxSize: 6,
+        speed: 1.5,
         wind: 0.3,
         color: 'rgba(255, 255, 255, 0.9)',
         glowColor: 'rgba(180, 210, 255, 0.3)',
         glowBlur: 15,
-        mouseRadius: 100,
+        mouseRadius: 150,
     };
 
     function resizeCanvas() {
