@@ -933,45 +933,8 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
   translate:-50%;
 }
 
-
-/* ========================================
-   文章页全局毛玻璃 - 简化版
-   ======================================== */
-
-/* 整个文章页背景毛玻璃 */
-.post-page {
-    background-image: url('https://api.i-meto.com/meting/api?server=netease&type=pic&id=109951165867769764') !important;
-    background-attachment: fixed !important;
-    background-size: cover !important;
-    background-position: center !important;
-}
-
-/* 全屏毛玻璃遮罩 */
-.post-page::before {
-    content: '' !important;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
-    background: rgba(255, 255, 255, 0.10) !important;
-    z-index: 0 !important;
-    pointer-events: none !important;
-}
-
-/* 所有内容在毛玻璃上面 */
-.post-page * {
-    position: relative !important;
-    z-index: 1 !important;
-}
-
-/* 文章主容器半透明 */
-.post-page .post-block {
-    background: rgba(255, 255, 255, 0.10) !important;
-    border-radius: var(--main-radius) !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+.icon-theme {
+    color: var(--main-color);
 }
 
 /*myscript*/
