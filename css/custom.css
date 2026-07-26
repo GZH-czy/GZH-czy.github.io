@@ -999,8 +999,8 @@ img {
     background: var(--main-color) !important;
 }
 
-/* ==================== 导航栏（基础样式，JS 会动态覆盖颜色） ==================== */
-/* 网站标题 */
+/* ==================== 导航栏（JS 动态控制，CSS 只保留基础样式） ==================== */
+/* 网站标题 - 背景色由 JS 控制 */
 .site-name {
     position: relative;
     font-size: 24px;
@@ -1030,12 +1030,12 @@ img {
 
 /* 导航菜单过渡 */
 .menus_item .site-page {
-    transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    transition: color 0.3s ease, border-color 0.3s ease;
 }
 
-/* 二级菜单项过渡 */
+/* 二级菜单过渡 */
 .menus_item .menus_list .site-page.child {
-    transition: all 0.3s ease;
+    transition: color 0.3s ease;
 }
 
 /* blog-info */

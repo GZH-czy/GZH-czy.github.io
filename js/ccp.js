@@ -101,7 +101,7 @@
             el.style.background = color;
         });
         
-        // 3. 应用到导航栏 - 全面覆盖（包括二级菜单）
+        // 3. 应用到导航栏 - 只改文字颜色和下划线，不改背景
         document.documentElement.style.setProperty('--lyx-theme', color);
         
         const styleId = 'dynamic-nav-style';
@@ -112,7 +112,10 @@
             document.head.appendChild(styleEl);
         }
         styleEl.textContent = `
-            /* ===== 网站标题 ===== */
+            /* ===== 网站标题 - hover 背景色保留，但颜色用主题色 ===== */
+            .site-name {
+                color: ${color} !important;
+            }
             .site-name::before {
                 background-color: ${color} !important;
                 box-shadow: 0 0 5px ${color} !important;
@@ -122,59 +125,50 @@
                 box-shadow: 0 0 5px ${color} !important;
             }
             
-            /* ===== 一级菜单 ===== */
+            /* ===== 一级菜单 - 只改文字颜色 ===== */
             .menus_item > .site-page {
+                color: var(--nav-text-color, #eee) !important;
                 transition: color 0.3s ease, border-color 0.3s ease;
             }
             .menus_item > .site-page:hover {
                 color: ${color} !important;
             }
+            /* 当前页面高亮 - 文字颜色 + 下划线 */
             .menus_item > .site-page.current,
             .menus_item > .site-page.active {
                 color: ${color} !important;
-                border-bottom-color: ${color} !important;
+                border-bottom: 2px solid ${color} !important;
             }
             
-            /* ===== 二级菜单（下拉菜单项） ===== */
+            /* ===== 二级菜单（下拉菜单项）- 只改文字颜色 ===== */
             .menus_item .menus_list .site-page.child {
-                transition: all 0.3s ease;
+                color: #555 !important;
+                transition: color 0.3s ease;
             }
             .menus_item .menus_list .site-page.child:hover {
                 color: ${color} !important;
-                background: ${color}11 !important;
             }
-            /* 二级菜单选中状态 - 当前页面 */
+            /* 二级菜单选中状态 - 文字颜色 + 左边框 */
             .menus_item .menus_list .site-page.child.current,
             .menus_item .menus_list .site-page.child.active {
                 color: ${color} !important;
-                background: ${color}22 !important;
                 border-left: 3px solid ${color} !important;
                 font-weight: 600 !important;
             }
-            /* 二级菜单选中状态 - 父级也高亮 */
-            .menus_item .site-page.group.current,
-            .menus_item .site-page.group.active {
-                color: ${color} !important;
-            }
             
-            /* ===== 三级菜单（如有） ===== */
-            .menus_list .menus_list .site-page.child:hover {
-                color: ${color} !important;
-                background: ${color}11 !important;
-            }
-            .menus_list .menus_list .site-page.child.current,
-            .menus_list .menus_list .site-page.child.active {
-                color: ${color} !important;
-                background: ${color}22 !important;
-                border-left: 3px solid ${color} !important;
-            }
-            
-            /* ===== 分组菜单 ===== */
+            /* ===== 分组菜单 - 只改文字颜色 ===== */
             .site-page.group:hover {
+                color: ${color} !important;
+            }
+            .site-page.group.current,
+            .site-page.group.active {
                 color: ${color} !important;
             }
             
             /* ===== blog-info ===== */
+            #blog-info {
+                color: ${color} !important;
+            }
             #blog-info::before {
                 background-color: ${color} !important;
                 box-shadow: 0 0 5px ${color} !important;
@@ -188,11 +182,6 @@
             #nav .menus_item .site-page::after,
             .nav .menus_item .site-page::after {
                 background: ${color} !important;
-            }
-            
-            /* ===== 下拉菜单边框 ===== */
-            .menus .menus_item .menus_list {
-                border-color: ${color}44 !important;
             }
         `;
         
