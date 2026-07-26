@@ -101,9 +101,11 @@
             el.style.background = color;
         });
         
-        // 3. 应用到导航栏 - 只改菜单文字颜色和下划线，不改博客名字
+        // 3. 应用到导航栏 - 只针对文字，不覆盖背景
+        // 更新 CSS 变量
         document.documentElement.style.setProperty('--lyx-theme', color);
         
+        // 动态注入样式，只修改文字颜色，不涉及背景
         const styleId = 'dynamic-nav-style';
         let styleEl = document.getElementById(styleId);
         if (!styleEl) {
@@ -112,50 +114,47 @@
             document.head.appendChild(styleEl);
         }
         styleEl.textContent = `
-            /* ===== 一级菜单 - 只改文字颜色 ===== */
-            .menus_item > .site-page {
-                color: var(--nav-text-color, #eee) !important;
-                transition: color 0.3s ease, border-color 0.3s ease;
+            /* 网站标题 - 只改文字颜色，不改背景 */
+            .site-name {
+                color: ${color} !important;
             }
+            .site-name:hover {
+                color: ${color} !important;
+                opacity: 0.8;
+            }
+            
+            /* 导航菜单项 - 悬停文字颜色 */
+            .menus_item:hover > .site-page,
             .menus_item > .site-page:hover {
                 color: ${color} !important;
             }
-            /* 当前页面高亮 - 文字颜色 + 下划线 */
-            .menus_item > .site-page.current,
-            .menus_item > .site-page.active {
+            
+            /* 导航菜单项 - 当前页面高亮文字颜色 */
+            .menus_item .site-page.current,
+            .menus_item .site-page.active,
+            .site-page.current,
+            .site-page.active {
                 color: ${color} !important;
-                border-bottom: 2px solid ${color} !important;
             }
             
-            /* ===== 二级菜单（下拉菜单项）- 只改文字颜色 ===== */
-            .menus_item .menus_list .site-page.child {
-                color: #555 !important;
-                transition: color 0.3s ease;
-            }
-            .menus_item .menus_list .site-page.child:hover {
+            /* 子菜单项 - 悬停文字颜色 */
+            .site-page.child:hover,
+            .menus_item .child:hover {
                 color: ${color} !important;
-            }
-            /* 二级菜单选中状态 - 文字颜色 + 左边框 */
-            .menus_item .menus_list .site-page.child.current,
-            .menus_item .menus_list .site-page.child.active {
-                color: ${color} !important;
-                border-left: 3px solid ${color} !important;
-                font-weight: 600 !important;
             }
             
-            /* ===== 分组菜单 - 只改文字颜色 ===== */
+            /* 分组菜单 - 悬停文字颜色 */
             .site-page.group:hover {
                 color: ${color} !important;
             }
-            .site-page.group.current,
-            .site-page.group.active {
+            
+            /* blog-info 文字颜色 */
+            #blog-info {
                 color: ${color} !important;
             }
-            
-            /* ===== 导航栏下划线 ===== */
-            #nav .menus_item .site-page::after,
-            .nav .menus_item .site-page::after {
-                background: ${color} !important;
+            #blog-info:hover {
+                color: ${color} !important;
+                opacity: 0.8;
             }
         `;
         

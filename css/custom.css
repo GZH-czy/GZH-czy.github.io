@@ -999,15 +999,48 @@ img {
     background: var(--main-color) !important;
 }
 
-/* ==================== 导航栏 - 只改菜单文字颜色，不改博客名字 ==================== */
-/* 导航菜单过渡 */
-.menus_item .site-page {
-    transition: color 0.3s ease, border-color 0.3s ease;
+/* ==================== 导航栏 - 只改文字颜色，不改背景 ==================== */
+/* 网站标题 - 文字颜色 */
+.site-name {
+    color: var(--lyx-theme) !important;
+    transition: color 0.3s ease;
+}
+.site-name:hover {
+    color: var(--lyx-theme) !important;
+    opacity: 0.8;
 }
 
-/* 二级菜单过渡 */
-.menus_item .menus_list .site-page.child {
+/* 导航菜单项 - 文字颜色 */
+.menus_item .site-page {
     transition: color 0.3s ease;
+}
+.menus_item .site-page:hover {
+    color: var(--lyx-theme) !important;
+}
+.menus_item .site-page.current,
+.menus_item .site-page.active {
+    color: var(--lyx-theme) !important;
+    border-bottom: 2px solid var(--lyx-theme) !important;
+}
+
+/* 子菜单 - 文字颜色 */
+.site-page.child:hover {
+    color: var(--lyx-theme) !important;
+}
+
+/* 分组菜单 - 文字颜色 */
+.site-page.group:hover {
+    color: var(--lyx-theme) !important;
+}
+
+/* blog-info 文字颜色 */
+#blog-info {
+    color: var(--lyx-theme) !important;
+    transition: color 0.3s ease;
+}
+#blog-info:hover {
+    color: var(--lyx-theme) !important;
+    opacity: 0.8;
 }
 
 /* 字体 */
