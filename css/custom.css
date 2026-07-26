@@ -935,127 +935,44 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
 
 
 /* ========================================
-   文章页全局背景毛玻璃特效
+   文章页全局毛玻璃 - 简化版
    ======================================== */
 
-/* 文章页 - 整个页面背景毛玻璃 */
+/* 整个文章页背景毛玻璃 */
 .post-page {
-    position: relative !important;
-    min-height: 100vh !important;
-    /* 背景图 - 可以换成你自己的图片链接 */
     background-image: url('https://api.i-meto.com/meting/api?server=netease&type=pic&id=109951165867769764') !important;
     background-attachment: fixed !important;
     background-size: cover !important;
     background-position: center !important;
 }
 
-/* 毛玻璃叠加层 - 覆盖整个页面 */
+/* 全屏毛玻璃遮罩 */
 .post-page::before {
     content: '' !important;
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
+    width: 100% !important;
+    height: 100% !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
-    background: rgba(255, 255, 255, 0.08) !important;
+    background: rgba(255, 255, 255, 0.10) !important;
     z-index: 0 !important;
     pointer-events: none !important;
 }
 
-/* 确保所有内容在毛玻璃层之上 */
-.post-page .layout-page,
-.post-page .post-block,
-.post-page #post,
-.post-page .article-container,
-.post-page .post-content,
-.post-page .post-title,
-.post-page .toc-container,
-.post-page #post-comment,
-.post-page .post-nav,
-.post-page .post-tags {
+/* 所有内容在毛玻璃上面 */
+.post-page * {
     position: relative !important;
     z-index: 1 !important;
 }
 
-/* 文章内容容器 - 半透明背景让毛玻璃可见 */
-.post-page .post-block,
-.post-page #post {
+/* 文章主容器半透明 */
+.post-page .post-block {
     background: rgba(255, 255, 255, 0.10) !important;
-    backdrop-filter: blur(4px) !important;
-    -webkit-backdrop-filter: blur(4px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
     border-radius: var(--main-radius) !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
 }
-
-/* 文章内容 */
-.post-page .post-content {
-    background: rgba(255, 255, 255, 0.04) !important;
-    padding: 24px !important;
-    border-radius: var(--main-radius) !important;
-}
-
-/* 文章标题 */
-.post-page .post-title {
-    background: rgba(255, 255, 255, 0.06) !important;
-    padding: 16px 24px !important;
-    border-radius: var(--main-radius) !important;
-    border-left: 4px solid var(--main-color) !important;
-}
-
-/* 目录 */
-.post-page .toc-container {
-    background: rgba(255, 255, 255, 0.06) !important;
-    border: 1px solid rgba(255, 255, 255, 0.10) !important;
-    border-radius: var(--main-radius) !important;
-    padding: 16px !important;
-}
-
-/* 评论区 */
-.post-page #post-comment {
-    background: rgba(255, 255, 255, 0.04) !important;
-    border-radius: var(--main-radius) !important;
-    padding: 20px !important;
-    border: 1px solid rgba(255, 255, 255, 0.06) !important;
-}
-
-/* 图片保持圆角 */
-.post-page img {
-    border-radius: var(--main-radius) !important;
-}
-
-/* ========== 深色模式适配 ========== */
-[data-theme="dark"] .post-page::before {
-    background: rgba(0, 0, 0, 0.20) !important;
-}
-
-[data-theme="dark"] .post-page .post-block,
-[data-theme="dark"] .post-page #post {
-    background: rgba(0, 0, 0, 0.30) !important;
-    border-color: rgba(255, 255, 255, 0.06) !important;
-}
-
-[data-theme="dark"] .post-page .post-content {
-    background: rgba(0, 0, 0, 0.15) !important;
-}
-
-[data-theme="dark"] .post-page .post-title {
-    background: rgba(0, 0, 0, 0.20) !important;
-}
-
-[data-theme="dark"] .post-page .toc-container {
-    background: rgba(0, 0, 0, 0.15) !important;
-    border-color: rgba(255, 255, 255, 0.05) !important;
-}
-
-[data-theme="dark"] .post-page #post-comment {
-    background: rgba(0, 0, 0, 0.10) !important;
-}
-
 
 /*myscript*/
 /* source/css/custom.css */
