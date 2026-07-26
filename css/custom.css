@@ -934,6 +934,118 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
 }
 
 
+
+
+
+/* ========================================
+   文章页毛玻璃特效
+   ======================================== */
+
+/* 仅对文章详情页生效 */
+.post-page {
+    /* 确保背景图可见 */
+    background-attachment: fixed !important;
+    background-size: cover !important;
+}
+
+/* 文章主容器 - 毛玻璃 */
+.post-page #post,
+.post-page .post-block {
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    background: rgba(255, 255, 255, 0.10) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: var(--main-radius) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+    overflow: hidden !important;
+}
+
+/* 文章内容 */
+.post-page .post-content {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    padding: 24px !important;
+    border-radius: var(--main-radius) !important;
+}
+
+/* 文章标题 */
+.post-page .post-title {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    padding: 16px 24px !important;
+    border-radius: var(--main-radius) !important;
+    border-left: 4px solid var(--main-color) !important;
+}
+
+/* 文章元信息 */
+.post-page .post-meta {
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    padding: 8px 16px !important;
+    border-radius: 8px !important;
+}
+
+/* 目录 */
+.post-page .toc-container {
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: var(--main-radius) !important;
+    padding: 16px !important;
+}
+
+/* 评论区 */
+.post-page #post-comment {
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    border-radius: var(--main-radius) !important;
+    padding: 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* 文章标签 */
+.post-page .post-tags {
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    padding: 8px 16px !important;
+    border-radius: 8px !important;
+}
+
+/* 上一篇/下一篇 */
+.post-page .post-nav {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    border-radius: var(--main-radius) !important;
+    padding: 12px 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+/* 文章内图片圆角保留，不受毛玻璃影响 */
+.post-page img {
+    border-radius: var(--main-radius) !important;
+}
+
+/* 深色模式适配 */
+[data-theme="dark"] .post-page #post,
+[data-theme="dark"] .post-page .post-block {
+    background: rgba(0, 0, 0, 0.30) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="dark"] .post-page .post-content {
+    background: rgba(0, 0, 0, 0.15) !important;
+}
+
+[data-theme="dark"] .post-page .post-title {
+    background: rgba(0, 0, 0, 0.20) !important;
+}
 /*myscript*/
 /* source/css/custom.css */
 :root {
