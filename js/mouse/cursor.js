@@ -38,7 +38,7 @@
   }
   
   function addParticle(x, y) {
-    const INITIAL_SIZE = 10;
+    const INITIAL_SIZE = 6;
     const LIFE_SPEED = 0.04;
     
     // 核心改动：颜色完全由鼠标位置 (x, y) 决定
