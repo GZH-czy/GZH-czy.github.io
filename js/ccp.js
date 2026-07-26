@@ -101,12 +101,12 @@
             el.style.background = color;
         });
         
-        // 3. 应用到导航栏自定义主题色（site-name 的 ::before 伪元素）
+        // 3. 应用到导航栏自定义主题色 - 使用 .site-name（你主题中的实际类名）
         // 更新 CSS 变量
         document.documentElement.style.setProperty('--lyx-theme', color);
         
-        // 方法：直接创建 style 标签覆盖伪元素样式
-        const styleId = 'dynamic-site-name-style';
+        // 动态注入样式，覆盖 .site-name::before
+        const styleId = 'dynamic-nav-style';
         let styleEl = document.getElementById(styleId);
         if (!styleEl) {
             styleEl = document.createElement('style');
@@ -114,21 +114,24 @@
             document.head.appendChild(styleEl);
         }
         styleEl.textContent = `
-            #site-name::before {
+            .site-name::before {
                 background-color: ${color} !important;
                 box-shadow: 0 0 5px ${color} !important;
             }
-            #site-name:hover::before {
+            .site-name:hover::before {
+                background-color: ${color} !important;
+                box-shadow: 0 0 5px ${color} !important;
+            }
+            /* 也支持 #blog-info 如果它也需要 */
+            #blog-info::before {
+                background-color: ${color} !important;
+                box-shadow: 0 0 5px ${color} !important;
+            }
+            #blog-info:hover::before {
                 background-color: ${color} !important;
                 box-shadow: 0 0 5px ${color} !important;
             }
         `;
-        
-        // 也尝试直接设置 #site-name 的样式（作为备用）
-        const siteName = document.getElementById('site-name');
-        if (siteName) {
-            siteName.style.setProperty('--lyx-theme', color);
-        }
         
         // 4. 应用到面板自身
         const panel = document.getElementById('custom-control-panel');

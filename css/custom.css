@@ -999,14 +999,14 @@ img {
     background: var(--main-color) !important;
 }
 
-/* ==================== 导航栏自定义 ==================== */
-/* 基础样式，background-color 和 box-shadow 由 JS 动态注入 */
-#site-name {
+/* ==================== 导航栏自定义 - 使用 .site-name ==================== */
+.site-name {
     position: relative;
     font-size: 24px;
 }
 
-#site-name::before {
+/* 基础样式，background-color 和 box-shadow 由 JS 动态注入 */
+.site-name::before {
     opacity: 0;
     border-radius: 8px;
     -webkit-border-radius: 8px;
@@ -1033,7 +1033,7 @@ img {
     /* box-shadow 由 JS 动态设置 */
 }
 
-#site-name:hover::before {
+.site-name:hover::before {
     opacity: 1;
     scale: 1.03;
 }
