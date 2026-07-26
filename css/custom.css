@@ -999,13 +999,13 @@ img {
     background: var(--main-color) !important;
 }
 
-/* ==================== 导航栏自定义 - 使用 .site-name ==================== */
+/* ==================== 导航栏全面主题化 ==================== */
+/* 网站标题 */
 .site-name {
     position: relative;
     font-size: 24px;
 }
 
-/* 基础样式，background-color 和 box-shadow 由 JS 动态注入 */
 .site-name::before {
     opacity: 0;
     border-radius: 8px;
@@ -1029,11 +1029,58 @@ img {
     color: white;
     line-height: 34px;
     font-size: 18px;
-    /* background-color 由 JS 动态设置 */
-    /* box-shadow 由 JS 动态设置 */
 }
 
 .site-name:hover::before {
+    opacity: 1;
+    scale: 1.03;
+}
+
+/* 导航菜单项 - 基础样式由 JS 动态注入 */
+.menus_item .site-page {
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.menus_item .site-page:hover {
+    color: var(--lyx-theme) !important;
+}
+
+.menus_item .site-page.current,
+.menus_item .site-page.active {
+    color: var(--lyx-theme) !important;
+    border-bottom: 2px solid var(--lyx-theme) !important;
+}
+
+/* 子菜单 */
+.site-page.child:hover {
+    color: var(--lyx-theme) !important;
+    background: var(--lyx-theme)11 !important;
+}
+
+/* 分组菜单 */
+.site-page.group:hover {
+    color: var(--lyx-theme) !important;
+}
+
+/* blog-info */
+#blog-info::before {
+    opacity: 0;
+    border-radius: 8px;
+    transition: .3s;
+    position: absolute;
+    top: 0 !important;
+    right: 0 !important;
+    width: 100%;
+    height: 100%;
+    content: "\f015";
+    font-family: "Font Awesome 6 Free";
+    text-align: center;
+    color: white;
+    line-height: 34px;
+    font-size: 18px;
+}
+
+#blog-info:hover::before {
     opacity: 1;
     scale: 1.03;
 }
