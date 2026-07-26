@@ -933,51 +933,14 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
   translate:-50%;
 }
 
-#site-name::before{
-    opacity: 0;
-    background-color: var(--lyx-theme)!important;
-    border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    -ms-border-radius: 8px;
-    -o-border-radius: 8px;
-    transition: .3s;
-    -webkit-transition: .3s;
-    -moz-transition: .3s;
-    -ms-transition: .3s;
-    -o-transition: .3s;
-    position:absolute;
-    top:0!important;
-    right:0!important;
-    width:100%;
-    height:100%;
-    content: "\f015";
-    box-shadow: 0 0 5px var(--lyx-theme);
-    font-family: "Font Awesome 6 Free";
-    text-align: center;
-    color:white;
-    line-height:34px;/*如果有溢出或者垂直不居中的现象微调一下这个参数*/
-    font-size: 18px;/*根据个人喜好*/
-}
-#site-name:hover::before{
-    opacity: 1;
-    scale:1.03;
-}
-#site-name{
-    position: relative;
-    font-size: 24px; /*一定要把字体调大点，否则效果惨不忍睹！*/
-}
-:root{
-    --lyx-theme:#ed709b /*我的主题色*/
-}
-
 
 /*myscript*/
 /* source/css/custom.css */
 :root {
-  --main-radius: 10px;
-  --main-color: #49B1F5;
-  --main-font: 'Microsoft YaHei', sans-serif;
+    --main-radius: 10px;
+    --main-color: #49B1F5;
+    --main-font: 'Microsoft YaHei', sans-serif;
+    --lyx-theme: #49B1F5;
 }
 
 /* 全局圆角 */
@@ -988,11 +951,11 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
 .page-content, .main-content, .content-area,
 #post, .post-wrap, .article-wrap, .blog-post,
 .post-main, .post-container, .post-inner {
-  border-radius: var(--main-radius) !important;
+    border-radius: var(--main-radius) !important;
 }
 
 img {
-  border-radius: 0px !important;
+    border-radius: 0px !important;
 }
 
 /* 目录文字颜色 */
@@ -1000,18 +963,18 @@ img {
 .toc-link,
 .toc-text,
 .toc-number {
-  color: var(--main-color) !important;
+    color: var(--main-color) !important;
 }
 
 .toc-link:hover {
-  color: var(--main-color) !important;
-  opacity: 0.8;
+    color: var(--main-color) !important;
+    opacity: 0.8;
 }
 
 .toc-item.active .toc-link,
 .toc-link.active {
-  color: var(--main-color) !important;
-  border-color: var(--main-color) !important;
+    color: var(--main-color) !important;
+    border-color: var(--main-color) !important;
 }
 
 /* 文章标题颜色 */
@@ -1020,90 +983,133 @@ img {
 .post-title a,
 .recent-post-item .title,
 .blog-post-title {
-  color: var(--main-color) !important;
+    color: var(--main-color) !important;
 }
 
 .post-title a:hover,
 .article-title a:hover,
 .recent-post-item .title a:hover {
-  color: var(--main-color) !important;
-  opacity: 0.8;
+    color: var(--main-color) !important;
+    opacity: 0.8;
 }
 
 .post-title::after,
 .article-title::after,
 .recent-post-item .title::after {
-  background: var(--main-color) !important;
+    background: var(--main-color) !important;
 }
 
+/* ==================== 导航栏自定义 ==================== */
+/* 基础样式，background-color 和 box-shadow 由 JS 动态注入 */
+#site-name {
+    position: relative;
+    font-size: 24px;
+}
+
+#site-name::before {
+    opacity: 0;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    transition: .3s;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -ms-transition: .3s;
+    -o-transition: .3s;
+    position: absolute;
+    top: 0 !important;
+    right: 0 !important;
+    width: 100%;
+    height: 100%;
+    content: "\f015";
+    font-family: "Font Awesome 6 Free";
+    text-align: center;
+    color: white;
+    line-height: 34px;
+    font-size: 18px;
+    /* background-color 由 JS 动态设置 */
+    /* box-shadow 由 JS 动态设置 */
+}
+
+#site-name:hover::before {
+    opacity: 1;
+    scale: 1.03;
+}
+
+/* 字体 */
 body {
-  font-family: var(--main-font) !important;
+    font-family: var(--main-font) !important;
 }
 
+/* 滤镜 */
 html.filter-dark {
-  filter: brightness(0.7);
+    filter: brightness(0.7);
 }
 html.filter-sunset {
-  filter: sepia(0.6) brightness(1.1) saturate(1.4) hue-rotate(-10deg);
+    filter: sepia(0.6) brightness(1.1) saturate(1.4) hue-rotate(-10deg);
 }
 html.filter-grayscale {
-  filter: grayscale(1);
+    filter: grayscale(1);
 }
 
+/* 面板动画 */
 #custom-control-panel.panel-hidden {
-  opacity: 0 !important;
-  transform: scale(0.9) translateY(10px) !important;
-  pointer-events: none !important;
+    opacity: 0 !important;
+    transform: scale(0.9) translateY(10px) !important;
+    pointer-events: none !important;
 }
 #custom-control-panel.panel-visible {
-  opacity: 1 !important;
-  transform: scale(1) translateY(0) !important;
-  pointer-events: auto !important;
+    opacity: 1 !important;
+    transform: scale(1) translateY(0) !important;
+    pointer-events: auto !important;
 }
 
 #color-picker-panel.picker-hidden {
-  opacity: 0 !important;
-  transform: scale(0.9) translateY(10px) !important;
-  pointer-events: none !important;
+    opacity: 0 !important;
+    transform: scale(0.9) translateY(10px) !important;
+    pointer-events: none !important;
 }
 #color-picker-panel.picker-visible {
-  opacity: 1 !important;
-  transform: scale(1) translateY(0) !important;
-  pointer-events: auto !important;
+    opacity: 1 !important;
+    transform: scale(1) translateY(0) !important;
+    pointer-events: auto !important;
 }
 
+/* 手机端适配 */
 @media (max-width: 768px) {
-  #custom-control-panel,
-  #color-picker-panel {
-    width: calc(100vw - 30px) !important;
-    max-width: 360px !important;
-    right: 15px !important;
-    bottom: 80px !important;
-    padding: 16px !important;
-    font-size: 13px !important;
-    max-height: 70vh !important;
-  }
-  #custom-control-panel h3 {
-    font-size: 15px !important;
-  }
-  #color-picker-panel h4 {
-    font-size: 14px !important;
-  }
-  .picker-swatch {
-    width: 26px !important;
-    height: 26px !important;
-  }
-  .filter-btn {
-    padding: 3px 10px !important;
-    font-size: 11px !important;
-  }
-  #custom-control-panel input[type="range"],
-  #color-picker-panel input[type="range"] {
-    height: 4px !important;
-  }
-  #custom-control-panel select,
-  #color-picker-panel select {
-    font-size: 12px !important;
-    padding: 5px !important;
-  }
+    #custom-control-panel,
+    #color-picker-panel {
+        width: calc(100vw - 30px) !important;
+        max-width: 360px !important;
+        right: 15px !important;
+        bottom: 80px !important;
+        padding: 16px !important;
+        font-size: 13px !important;
+        max-height: 70vh !important;
+    }
+    #custom-control-panel h3 {
+        font-size: 15px !important;
+    }
+    #color-picker-panel h4 {
+        font-size: 14px !important;
+    }
+    .picker-swatch {
+        width: 26px !important;
+        height: 26px !important;
+    }
+    .filter-btn {
+        padding: 3px 10px !important;
+        font-size: 11px !important;
+    }
+    #custom-control-panel input[type="range"],
+    #color-picker-panel input[type="range"] {
+        height: 4px !important;
+    }
+    #custom-control-panel select,
+    #color-picker-panel select {
+        font-size: 12px !important;
+        padding: 5px !important;
+    }
 }

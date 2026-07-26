@@ -4,10 +4,11 @@
     const PRESET_COLORS = [
         '#49B1F5', '#FF6B6B', '#4ECDC4', '#FF9F43', '#A29BFE',
         '#FD79A8', '#00B894', '#E17055', '#0984E3', '#6C5CE7',
-        '#FDCB6E', '#E84393', '#00CEC9', '#D63031',
+        '#FDCB6E', '#E84393', '#00CEC9', '#D63031', '#6C5CE7',
+        '#00B894', '#E17055', '#0984E3', '#A29BFE', '#FD79A8'
     ];
 
-    // 全局存储当前颜色
+    // 全局当前颜色
     let currentColor = '#49B1F5';
 
     function initCustomPanel() {
@@ -71,7 +72,6 @@
 
     // 应用主题色到各个元素（实时更新）
     function applyThemeToElements() {
-        // 直接使用全局变量 currentColor，不从设置读取
         const color = currentColor;
         
         // 1. 应用到目录（TOC）文字颜色
@@ -101,7 +101,36 @@
             el.style.background = color;
         });
         
-        // 3. 应用到面板自身
+        // 3. 应用到导航栏自定义主题色（site-name 的 ::before 伪元素）
+        // 更新 CSS 变量
+        document.documentElement.style.setProperty('--lyx-theme', color);
+        
+        // 方法：直接创建 style 标签覆盖伪元素样式
+        const styleId = 'dynamic-site-name-style';
+        let styleEl = document.getElementById(styleId);
+        if (!styleEl) {
+            styleEl = document.createElement('style');
+            styleEl.id = styleId;
+            document.head.appendChild(styleEl);
+        }
+        styleEl.textContent = `
+            #site-name::before {
+                background-color: ${color} !important;
+                box-shadow: 0 0 5px ${color} !important;
+            }
+            #site-name:hover::before {
+                background-color: ${color} !important;
+                box-shadow: 0 0 5px ${color} !important;
+            }
+        `;
+        
+        // 也尝试直接设置 #site-name 的样式（作为备用）
+        const siteName = document.getElementById('site-name');
+        if (siteName) {
+            siteName.style.setProperty('--lyx-theme', color);
+        }
+        
+        // 4. 应用到面板自身
         const panel = document.getElementById('custom-control-panel');
         if (panel) {
             const title = panel.querySelector('h3');
@@ -139,7 +168,7 @@
             }
         }
         
-        // 4. 颜色选择器
+        // 5. 颜色选择器
         const picker = document.getElementById('color-picker-panel');
         if (picker) {
             const title = picker.querySelector('h4');
@@ -152,14 +181,14 @@
             }
         }
         
-        // 5. 齿轮按钮
+        // 6. 齿轮按钮
         const gearBtn = document.getElementById('custom-panel-btn');
         if (gearBtn) {
             gearBtn.style.color = color;
             gearBtn.style.borderColor = color;
         }
         
-        // 6. 更新CSS变量
+        // 7. 更新CSS变量
         document.documentElement.style.setProperty('--main-color', color);
     }
 
@@ -386,6 +415,7 @@
                 applyRadiusToAllWithValue(defaultSettings.radius);
                 document.documentElement.style.setProperty('--main-color', defaultSettings.color);
                 document.documentElement.style.setProperty('--main-font', defaultSettings.font);
+                document.documentElement.style.setProperty('--lyx-theme', defaultSettings.color);
                 applyFilter('none');
                 document.getElementById('current-color-display').style.background = defaultSettings.color;
                 document.getElementById('current-color-hex').textContent = defaultSettings.color.toUpperCase();
@@ -397,7 +427,6 @@
                         s.style.borderColor = '#333';
                     }
                 });
-                // 更新全局颜色变量
                 currentColor = defaultSettings.color;
                 saveSettings(defaultSettings);
                 applyThemeToElements();
@@ -410,6 +439,7 @@
         applyFilter(settings.filter);
         document.documentElement.style.setProperty('--main-color', settings.color);
         document.documentElement.style.setProperty('--main-font', settings.font);
+        document.documentElement.style.setProperty('--lyx-theme', settings.color);
         applyPanelRadius();
         applyThemeToElements();
         document.getElementById('current-color-display').style.background = settings.color;
@@ -466,24 +496,15 @@
     }
 
     function applyColor(color) {
-        // 更新全局颜色变量
         currentColor = color;
-        
-        // 更新CSS变量
         document.documentElement.style.setProperty('--main-color', color);
+        document.documentElement.style.setProperty('--lyx-theme', color);
         
-        // 更新显示
-        const display = document.getElementById('current-color-display');
-        const hex = document.getElementById('current-color-hex');
-        const wheel = document.getElementById('color-wheel');
-        const input = document.getElementById('color-hex-input');
+        document.getElementById('current-color-display').style.background = color;
+        document.getElementById('current-color-hex').textContent = color.toUpperCase();
+        document.getElementById('color-wheel').value = color;
+        document.getElementById('color-hex-input').value = color;
         
-        if (display) display.style.background = color;
-        if (hex) hex.textContent = color.toUpperCase();
-        if (wheel) wheel.value = color;
-        if (input) input.value = color;
-        
-        // 高亮选中的预设色块
         document.querySelectorAll('.picker-swatch').forEach(s => {
             s.style.borderColor = 'transparent';
             if (s.dataset.color === color) {
@@ -491,10 +512,8 @@
             }
         });
         
-        // 立即应用主题到所有元素
         applyThemeToElements();
         
-        // 保存设置
         const newSettings = getSettings();
         newSettings.color = color;
         saveSettings(newSettings);
@@ -506,6 +525,7 @@
         document.documentElement.style.setProperty('--main-radius', settings.radius + 'px');
         document.documentElement.style.setProperty('--main-color', settings.color);
         document.documentElement.style.setProperty('--main-font', settings.font);
+        document.documentElement.style.setProperty('--lyx-theme', settings.color);
         applyFilter(settings.filter);
         setTimeout(function() {
             applyRadiusToAllWithValue(settings.radius);
@@ -544,7 +564,7 @@
         const panelHTML = `
             <div id="custom-control-panel" class="panel-hidden" style="position:fixed; bottom:70px; right:10px; width:300px; max-width:calc(100vw - 20px); background:#fff; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,0.25); padding:20px; z-index:99999; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#333; max-height:80vh; overflow-y:auto; opacity:0; transform:scale(0.9) translateY(10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events:none; transform-origin: bottom right; font-size:14px;">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
-                    <h3 style="margin:0; font-size:16px; font-weight:600; color:#49B1F5;">自定义</h3>
+                    <h3 style="margin:0; font-size:16px; font-weight:600; color:#49B1F5;">🎨 实时自定义</h3>
                     <button id="close-panel-btn" style="background:none; border:none; font-size:20px; cursor:pointer; color:#888; padding:0 6px; transition:color 0.3s;" aria-label="关闭面板">✕</button>
                 </div>
                 
@@ -561,7 +581,7 @@
                 <!-- 颜色选择器（二级面板） -->
                 <div id="color-picker-panel" class="picker-hidden" style="position:fixed; bottom:70px; right:10px; width:300px; max-width:calc(100vw - 20px); background:#fff; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,0.3); padding:20px; z-index:100000; opacity:0; transform:scale(0.9) translateY(10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events:none; transform-origin: bottom right; font-size:14px;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
-                        <h4 style="margin:0; font-size:15px; font-weight:600; color:#49B1F5;">选择主题色</h4>
+                        <h4 style="margin:0; font-size:15px; font-weight:600; color:#49B1F5;">🎯 选择颜色</h4>
                         <button id="close-color-picker-btn" style="background:none; border:none; font-size:18px; cursor:pointer; color:#888; padding:0 4px; transition:color 0.3s;" aria-label="关闭颜色选择器">✕</button>
                     </div>
                     
@@ -767,6 +787,7 @@
             applyRadiusToAllWithValue(defaultSettings.radius);
             document.documentElement.style.setProperty('--main-color', defaultSettings.color);
             document.documentElement.style.setProperty('--main-font', defaultSettings.font);
+            document.documentElement.style.setProperty('--lyx-theme', defaultSettings.color);
             applyFilter('none');
             document.getElementById('current-color-display').style.background = defaultSettings.color;
             document.getElementById('current-color-hex').textContent = defaultSettings.color.toUpperCase();
