@@ -2,6 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://love.gzh-czy.cc.cd/tags/index-2.html</loc>
+    
+    <lastmod>2026-07-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://love.gzh-czy.cc.cd/tags/index-1.html</loc>
+    
+    <lastmod>2026-07-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://love.gzh-czy.cc.cd/categories/index.html</loc>
+    
+    <lastmod>2026-07-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://love.gzh-czy.cc.cd/tags/index.html</loc>
     
     <lastmod>2026-07-26</lastmod>
@@ -68,15 +95,6 @@
     <loc>https://love.gzh-czy.cc.cd/Gallery/ohmygirl/index.html</loc>
     
     <lastmod>2026-07-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://love.gzh-czy.cc.cd/categories/index.html</loc>
-    
-    <lastmod>2026-07-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -193,5 +211,12 @@
   </url>
   
 
+  
+  <url>
+    <loc>https://love.gzh-czy.cc.cd/categories/%E7%88%B1%E4%BA%BA/</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
 </urlset>

@@ -15,6 +15,7 @@
     <author>
       <name>GZH</name>
     </author>
+    <category term="爱人" scheme="https://love.gzh-czy.cc.cd/categories/%E7%88%B1%E4%BA%BA/"/>
     <category term="日记" scheme="https://love.gzh-czy.cc.cd/tags/%E6%97%A5%E8%AE%B0/"/>
     <category term="测试" scheme="https://love.gzh-czy.cc.cd/tags/%E6%B5%8B%E8%AF%95/"/>
     <content>
@@ -54,7 +55,7 @@
     </author>
     <category term="生活" scheme="https://love.gzh-czy.cc.cd/tags/%E7%94%9F%E6%B4%BB/"/>
     <content>
-      <![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt"     data-hbe-format="4"     data-wpm="Oh, 密码错了，检查一下好吗～"     data-whm="Oh, 密码错了，检查一下好吗～"     data-salt="4f19621b8ef20466ea894898a57e07b08304a2aa803f89ce80ddba8ca65c7ddf"     data-nonce="c8c337178f268dfb82809598"     data-kdf-iterations="600000"     data-auto-save="false">  <script id="hbeData" type="hbeData">    a3b073d244996bfbfaef8badec010f1d2eaddbb52577aeab04662e1512d619236768afe0bf7ee4f726430aab44af178a483211e0c58d782695e49534e2a6fafc77522d4211fc0520a1e75544ade78d97756e0d6386f7da6d09644444a999819da4f0f697bab56da8c29eceeb967f5c29f44f3d922bbd7adb15e0a01ea7  </script>  <div class="hbe hbe-content">    <form id="hbeForm" class="hbe hbe-form" onsubmit="return false">      <div class="hbe hbe-input hbe-input-shrink">      <input class="hbe hbe-input-field hbe-input-field-shrink" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-shrink" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-shrink">Hey, 这篇文章被加密了，请输入密码！</span>      </label>    </div>      <button class="hbe hbe-button" type="submit">解密</button>      <div class="hbe hbe-error" role="alert" aria-live="polite"></div>    </form>  </div></div><script data-pjax src="/lib/hbe.9e70f1e1d2.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]>
+      <![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt"     data-hbe-format="4"     data-wpm="Oh, 密码错了，检查一下好吗～"     data-whm="Oh, 密码错了，检查一下好吗～"     data-salt="fb45e3c3e8f14c298372d5f6e12bf7a6919de121b6042d1a4794d0d98fa7e346"     data-nonce="ad849585c8981e396a8e7af5"     data-kdf-iterations="600000"     data-auto-save="false">  <script id="hbeData" type="hbeData">    933f5ffeab4050a233b1524e3e4c6e62703ea75fe9dc94f56a9d28904a82fe3fc3ed79dc5c167f82e380b6f36100725cb718c235a3635259aff0b9a2cb4eac297ca31a8cd409e2a989ed75107f0f2742f7d460bc2daae0b6d720eee13b8741d4ad3f8a4f3bce1593a9964fae1c34010a86b833ecc47b9a1ff3e93e3750  </script>  <div class="hbe hbe-content">    <form id="hbeForm" class="hbe hbe-form" onsubmit="return false">      <div class="hbe hbe-input hbe-input-shrink">      <input class="hbe hbe-input-field hbe-input-field-shrink" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-shrink" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-shrink">Hey, 这篇文章被加密了，请输入密码！</span>      </label>    </div>      <button class="hbe hbe-button" type="submit">解密</button>      <div class="hbe hbe-error" role="alert" aria-live="polite"></div>    </form>  </div></div><script data-pjax src="/lib/hbe.9e70f1e1d2.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]>
     </content>
     <id>https://love.gzh-czy.cc.cd/posts/60cbaead.html</id>
     <link href="https://love.gzh-czy.cc.cd/posts/60cbaead.html"/>
