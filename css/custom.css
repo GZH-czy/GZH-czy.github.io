@@ -999,35 +999,7 @@ img {
     background: var(--main-color) !important;
 }
 
-/* ==================== 导航栏（JS 动态控制，CSS 只保留基础样式） ==================== */
-/* 网站标题 - 背景色由 JS 控制 */
-.site-name {
-    position: relative;
-    font-size: 24px;
-}
-
-.site-name::before {
-    opacity: 0;
-    border-radius: 8px;
-    transition: .3s;
-    position: absolute;
-    top: 0 !important;
-    right: 0 !important;
-    width: 100%;
-    height: 100%;
-    content: "\f015";
-    font-family: "Font Awesome 6 Free";
-    text-align: center;
-    color: white;
-    line-height: 34px;
-    font-size: 18px;
-}
-
-.site-name:hover::before {
-    opacity: 1;
-    scale: 1.03;
-}
-
+/* ==================== 导航栏 - 只改菜单文字颜色，不改博客名字 ==================== */
 /* 导航菜单过渡 */
 .menus_item .site-page {
     transition: color 0.3s ease, border-color 0.3s ease;
@@ -1036,33 +1008,6 @@ img {
 /* 二级菜单过渡 */
 .menus_item .menus_list .site-page.child {
     transition: color 0.3s ease;
-}
-
-/* blog-info */
-#blog-info {
-    position: relative;
-}
-
-#blog-info::before {
-    opacity: 0;
-    border-radius: 8px;
-    transition: .3s;
-    position: absolute;
-    top: 0 !important;
-    right: 0 !important;
-    width: 100%;
-    height: 100%;
-    content: "\f015";
-    font-family: "Font Awesome 6 Free";
-    text-align: center;
-    color: white;
-    line-height: 34px;
-    font-size: 18px;
-}
-
-#blog-info:hover::before {
-    opacity: 1;
-    scale: 1.03;
 }
 
 /* 字体 */
