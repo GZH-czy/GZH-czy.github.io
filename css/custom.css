@@ -999,7 +999,7 @@ img {
     background: var(--main-color) !important;
 }
 
-/* ==================== 导航栏 - 只改文字颜色，不改背景 ==================== */
+/* ==================== 导航栏 - 只改 .site-name 和菜单项 ==================== */
 /* 网站标题 - 文字颜色 */
 .site-name {
     color: var(--lyx-theme) !important;
@@ -1031,16 +1031,6 @@ img {
 /* 分组菜单 - 文字颜色 */
 .site-page.group:hover {
     color: var(--lyx-theme) !important;
-}
-
-/* blog-info 文字颜色 */
-#blog-info {
-    color: var(--lyx-theme) !important;
-    transition: color 0.3s ease;
-}
-#blog-info:hover {
-    color: var(--lyx-theme) !important;
-    opacity: 0.8;
 }
 
 /* 字体 */

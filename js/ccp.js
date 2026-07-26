@@ -101,11 +101,11 @@
             el.style.background = color;
         });
         
-        // 3. 应用到导航栏 - 只针对文字，不覆盖背景
+        // 3. 应用到导航栏 - 只修改 .site-name 和菜单项
         // 更新 CSS 变量
         document.documentElement.style.setProperty('--lyx-theme', color);
         
-        // 动态注入样式，只修改文字颜色，不涉及背景
+        // 动态注入样式
         const styleId = 'dynamic-nav-style';
         let styleEl = document.getElementById(styleId);
         if (!styleEl) {
@@ -114,9 +114,10 @@
             document.head.appendChild(styleEl);
         }
         styleEl.textContent = `
-            /* 网站标题 - 只改文字颜色，不改背景 */
+            /* 网站标题 - 文字颜色 */
             .site-name {
                 color: ${color} !important;
+                transition: color 0.3s ease;
             }
             .site-name:hover {
                 color: ${color} !important;
@@ -135,6 +136,7 @@
             .site-page.current,
             .site-page.active {
                 color: ${color} !important;
+                border-bottom: 2px solid ${color} !important;
             }
             
             /* 子菜单项 - 悬停文字颜色 */
@@ -146,15 +148,6 @@
             /* 分组菜单 - 悬停文字颜色 */
             .site-page.group:hover {
                 color: ${color} !important;
-            }
-            
-            /* blog-info 文字颜色 */
-            #blog-info {
-                color: ${color} !important;
-            }
-            #blog-info:hover {
-                color: ${color} !important;
-                opacity: 0.8;
             }
         `;
         
