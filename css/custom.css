@@ -1527,6 +1527,33 @@ html[data-theme="dark"] #post {
     color: var(--text-secondary, #666) !important;
 }
 
+/* ---------- 激活文字 - 高亮 ---------- */
+.toc-link.active {
+    color: var(--main-color, #49B1F5) !important;
+    border-color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 10px var(--main-color, #49B1F5),
+        0 0 20px var(--main-color, #49B1F5),
+        0 0 40px var(--main-color, #49B1F5) !important;
+    font-weight: 600 !important;
+}
+
+/* ---------- 悬停时所有文字发光（可选） ---------- */
+.toc-container:hover .toc-link {
+    color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 6px var(--main-color, #49B1F5),
+        0 0 12px var(--main-color, #49B1F5),
+        0 0 24px var(--main-color, #49B1F5) !important;
+}
+
+/* 但激活的发光更强（保持突出） */
+.toc-container:hover .toc-link.active {
+    text-shadow: 
+        0 0 12px var(--main-color, #49B1F5),
+        0 0 24px var(--main-color, #49B1F5),
+        0 0 48px var(--main-color, #49B1F5) !important;
+}
 
 /* ---------- 深色模式 ---------- */
 [data-theme="dark"] .toc-item .toc-link::before {
