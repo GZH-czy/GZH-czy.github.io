@@ -1051,7 +1051,7 @@ span.categoryBar-list-descr {
   --hlnumber-bg: #221a0f;
   --hlnumber-color: #fff;
   --hlscrollbar-bg: #d3af86;
-  --hlexpand-bg: #d3af86;
+  --hlexpand-bg: var(--main-color);
 }
 
 /* Kimbie Comment */
