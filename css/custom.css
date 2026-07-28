@@ -1126,7 +1126,7 @@ span.categoryBar-list-descr {
 
 
 /*page界面模糊背景*/
-.page #page:not(.home #page){
+/*.page #page:not(.home #page){
     background: transparent!important;
     border: none!important;
     box-shadow: none!important;
@@ -1146,9 +1146,62 @@ span.categoryBar-list-descr {
 }
 [data-theme="dark"] #page::before{
     background-color: var(--lyx-black-acrylic2)!important;
+}*/
+
+/* ========================================
+   文章页全局毛玻璃背景
+   ======================================== */
+
+/* 文章页背景图 */
+.post-page .layout-page {
+    background-image: url('https://你的背景图链接.jpg') !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-position: center !important;
+    min-height: 100vh !important;
 }
 
+/* 毛玻璃叠加层 - 覆盖整个页面背景 */
+.post-page .layout-page::before {
+    content: '' !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+}
 
+/* 确保所有内容在毛玻璃之上 */
+.post-page .layout-page > * {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* 文章内容区域透明毛玻璃 */
+.post-page .post-block {
+    background: rgba(255, 255, 255, 0.10) !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: var(--main-radius, 12px) !important;
+}
+
+/* ========== 深色模式 ========== */
+[data-theme="dark"] .post-page .layout-page::before {
+    background: rgba(0, 0, 0, 0.25) !important;
+}
+
+[data-theme="dark"] .post-page .post-block {
+    background: rgba(0, 0, 0, 0.30) !important;
+    border-color: rgba(255, 255, 255, 0.06) !important;
+}
 
 
 
