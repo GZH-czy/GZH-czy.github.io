@@ -885,3 +885,28 @@ if (document.readyState === 'loading') {
 // Pjax 兼容
 document.addEventListener('pjax:complete', checkMusicPage);
 document.addEventListener('pjax:success', checkMusicPage);
+
+// ============================================================
+//  修复 anzhiyu.js 的 aplayer 空指针错误
+// ============================================================
+
+// 等待 APlayer 加载完成后再执行相关操作
+document.addEventListener('DOMContentLoaded', function() {
+    // 如果存在音乐馆页面，等待 APlayer 初始化
+    if (document.querySelector('#anMusic-page')) {
+        // 等待 APlayer 实例创建
+        const checkAplayer = setInterval(function() {
+            const aplayer = document.querySelector('.aplayer');
+            if (aplayer && aplayer.aplayer) {
+                clearInterval(checkAplayer);
+                // 触发自定义事件，让 anzhiyu.js 可以安全执行
+                document.dispatchEvent(new Event('aplayer-ready'));
+            }
+        }, 100);
+        
+        // 超时保护（10秒后停止检查）
+        setTimeout(function() {
+            clearInterval(checkAplayer);
+        }, 10000);
+    }
+});
