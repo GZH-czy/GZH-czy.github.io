@@ -10,7 +10,7 @@
   <rights>All rights reserved 2026, GZH</rights>
   <subtitle>生活明朗，万物可爱</subtitle>
   <title>子涵'blog</title>
-  <updated>2026-07-28T01:51:02.015Z</updated>
+  <updated>2026-07-28T01:53:50.750Z</updated>
   <entry>
     <author>
       <name>GZH</name>
@@ -35,8 +35,8 @@
 <hr>
 <h2 id="一、效果特点"><a href="#一、效果]]>
     </summary>
-    <title>Docker 与 Nextcloud 部署完整指南(个人网盘)</title>
-    <updated>2026-07-28T01:51:02.015Z</updated>
+    <title>Butterfly 下雪特效（透明背景 + 光晕 + 自适应）</title>
+    <updated>2026-07-28T01:53:50.750Z</updated>
   </entry>
   <entry>
     <author>
@@ -83,7 +83,7 @@
     </author>
     <category term="生活" scheme="https://love.gzh-czy.cc.cd/tags/%E7%94%9F%E6%B4%BB/"/>
     <content>
-      <![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt"     data-hbe-format="4"     data-wpm="Oh, 密码错了，检查一下好吗～"     data-whm="Oh, 密码错了，检查一下好吗～"     data-salt="478a3a1fce6e60f7fe6421d50b7163bb90e5d98489d73714e523c6de0afc834f"     data-nonce="625ec8ee046425f057fd0dae"     data-kdf-iterations="600000"     data-auto-save="false">  <script id="hbeData" type="hbeData">    c43d60e92a29eb273c7915b97fa52d1e52cab9fe7165046ae1cfd20110e12bcae5a1a147e777ab8ab7a169fb2b6d88f8f30b3692ad1810ccd2cff65541d1e816be04cc9f214b2109753e0dec3d73f7b6aca99e89384095e4ff9e73abf8e55233037fada1030d9245392c8c11fdcbf546c29589ca909470103188654d81  </script>  <div class="hbe hbe-content">    <form id="hbeForm" class="hbe hbe-form" onsubmit="return false">      <div class="hbe hbe-input hbe-input-shrink">      <input class="hbe hbe-input-field hbe-input-field-shrink" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-shrink" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-shrink">Hey, 这篇文章被加密了，请输入密码！</span>      </label>    </div>      <button class="hbe hbe-button" type="submit">解密</button>      <div class="hbe hbe-error" role="alert" aria-live="polite"></div>    </form>  </div></div><script data-pjax src="/lib/hbe.9e70f1e1d2.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]>
+      <![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt"     data-hbe-format="4"     data-wpm="Oh, 密码错了，检查一下好吗～"     data-whm="Oh, 密码错了，检查一下好吗～"     data-salt="419ff43ca5ff7c8eff67b6011039dd4bac46e8c7145f4acb6ba794fb5b68b8ff"     data-nonce="5358ac5149835bffd6bf508b"     data-kdf-iterations="600000"     data-auto-save="false">  <script id="hbeData" type="hbeData">    63055607e59a24bcfa3fa7ea04c94aadc9ac760a1dd620158e777d34157ecde9f16a04b9bc0d1188817ab105c1d874691aaf7cb1211dfae22082049736de76a4f3edf2d5081306aef5e1b91cbf191da3343d8d01fd81b61e17c09db3c4df8143b257a67c0314f0d07205702fffa8389addf961cec301d3a8f0c781ce8c  </script>  <div class="hbe hbe-content">    <form id="hbeForm" class="hbe hbe-form" onsubmit="return false">      <div class="hbe hbe-input hbe-input-shrink">      <input class="hbe hbe-input-field hbe-input-field-shrink" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-shrink" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-shrink">Hey, 这篇文章被加密了，请输入密码！</span>      </label>    </div>      <button class="hbe hbe-button" type="submit">解密</button>      <div class="hbe hbe-error" role="alert" aria-live="polite"></div>    </form>  </div></div><script data-pjax src="/lib/hbe.9e70f1e1d2.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]>
     </content>
     <id>https://love.gzh-czy.cc.cd/posts/60cbaead.html</id>
     <link href="https://love.gzh-czy.cc.cd/posts/60cbaead.html"/>
