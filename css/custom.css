@@ -1349,12 +1349,15 @@ html[data-theme="dark"] #post {
         0 0 10px var(--main-color, #49B1F5) !important;
 }
 
+
+
+
 /* ========================================
-   目录光晕 - 只触发当前标题（独立发光）
+   文章标题悬停发光
    ======================================== */
 
-/* 一级标题悬停发光 */
-.toc-item > .toc-link:hover {
+.post-title:hover,
+.article-title:hover {
     color: var(--main-color, #49B1F5) !important;
     text-shadow: 
         0 0 5px var(--main-color, #49B1F5),
@@ -1363,43 +1366,114 @@ html[data-theme="dark"] #post {
     transition: text-shadow 0.3s ease !important;
 }
 
-/* 二级标题悬停发光（独立发光，不受父级影响） */
-.toc-child .toc-link:hover {
+/* ========================================
+   导航菜单悬停发光
+   ======================================== */
+
+.menus_item .site-page:hover {
     color: var(--main-color, #49B1F5) !important;
     text-shadow: 
         0 0 5px var(--main-color, #49B1F5),
         0 0 8px var(--main-color, #49B1F5),
         0 0 10px var(--main-color, #49B1F5) !important;
-    transition: text-shadow 0.3s ease !important;
 }
 
-/* 三级标题悬停发光（独立发光） */
-.toc-child .toc-child .toc-link:hover {
+.menus_item .site-page.current,
+.menus_item .site-page.active {
     color: var(--main-color, #49B1F5) !important;
     text-shadow: 
         0 0 5px var(--main-color, #49B1F5),
         0 0 8px var(--main-color, #49B1F5),
         0 0 10px var(--main-color, #49B1F5) !important;
-    transition: text-shadow 0.3s ease !important;
 }
 
-/* 激活（当前阅读位置）高亮 - 只作用于当前项 */
+/* ========================================
+   目录激活背景框 + 外发光
+   ======================================== */
+
 .toc-link.active {
-    color: var(--main-color, #49B1F5) !important;
-    border-color: var(--main-color, #49B1F5) !important;
-    text-shadow: 
-        0 0 1px var(--main-color, #49B1F5),
+    /* 👇 光晕效果 */
+    box-shadow: 
         0 0 2px var(--main-color, #49B1F5),
-        0 0 3px var(--main-color, #49B1F5) !important;
-    font-weight: 600 !important;
+        0 0 3px var(--main-color, #49B1F5),
+        0 0 4px var(--main-color, #49B1F5) !important;
+    transition: all 0.4s ease !important;
 }
 
-/* 取消父级悬停传递给子级 */
-.toc-item:hover .toc-link {
-    /* 这里留空，防止父级发光影响子级 */
+/* ========================================
+   目录毛玻璃蒙版 - 悬停全部清晰（修复版）
+   ======================================== */
+
+.toc-item {
+    position: relative !important;
+    overflow: hidden !important;
 }
 
+/* ---------- 毛玻璃蒙版 ---------- */
+.toc-item .toc-link::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -4px !important;
+    left: -12px !important;
+    right: -12px !important;
+    bottom: -4px !important;
+    border-radius: 8px !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    opacity: 0.85 !important;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+}
 
+/* ---------- 激活状态 - 清晰 ---------- */
+.toc-link.active::before {
+    opacity: 0 !important;
+    backdrop-filter: blur(0px) !important;
+    -webkit-backdrop-filter: blur(0px) !important;
+    background: transparent !important;
+}
+
+/* ---------- 悬停到任意目录时，所有目录蒙版消失 ---------- */
+/* 当悬停到 .toc 容器时，所有目录变清晰 */
+.toc:hover .toc-link::before,
+#aside-content .toc:hover .toc-link::before,
+.toc-container:hover .toc-link::before {
+    opacity: 0 !important;
+    backdrop-filter: blur(0px) !important;
+    -webkit-backdrop-filter: blur(0px) !important;
+    background: transparent !important;
+}
+
+/* ---------- 但激活的保持清晰（防止冲突） ---------- */
+.toc-link.active::before {
+    opacity: 0 !important;
+    backdrop-filter: blur(0px) !important;
+    -webkit-backdrop-filter: blur(0px) !important;
+    background: transparent !important;
+}
+
+/* ---------- 文字在蒙版上方 ---------- */
+.toc-link {
+    position: relative !important;
+    z-index: 1 !important;
+    transition: color 0.4s ease, text-shadow 0.4s ease !important;
+    color: var(--text-secondary, #666) !important;
+}
+
+/* ---------- 深色模式 ---------- */
+[data-theme="dark"] .toc-item .toc-link::before {
+    background: rgba(0, 0, 0, 0.30) !important;
+    border-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+[data-theme="dark"] .toc:hover .toc-link::before,
+[data-theme="dark"] #aside-content .toc:hover .toc-link::before,
+[data-theme="dark"] .toc-container:hover .toc-link::before {
+    background: transparent !important;
+}
 
 
 /* ========================================
