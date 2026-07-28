@@ -862,3 +862,18 @@
         }
     }
 })();
+
+
+// 检测是否为音乐馆页面，添加 .music-page 类
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.querySelector('#anMusic-page')) {
+        document.body.classList.add('music-page');
+    }
+});
+
+// Pjax 兼容
+document.addEventListener('pjax:complete', function() {
+    if (document.querySelector('#anMusic-page')) {
+        document.body.classList.add('music-page');
+    }
+});
