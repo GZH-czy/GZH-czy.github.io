@@ -1478,7 +1478,7 @@ html[data-theme="dark"] .post-page #post {
    ======================================== */
 
 
-   
+
 /* ===================================================box-shadow卡片发光
    目录激活背景框 + 外发光
    ======================================== */
@@ -1558,7 +1558,7 @@ html[data-theme="dark"] .post-page #post {
 }
 
 /* ---------- 首页文章卡片 ---------- */
-#recent-posts > .recent-post-item:hover {
+/*#recent-posts > .recent-post-item:hover {
     box-shadow: 
         0 0 15px var(--main-color, #49B1F5),
         0 0 30px var(--main-color, #49B1F5) !important;
@@ -1566,7 +1566,7 @@ html[data-theme="dark"] .post-page #post {
     transition: all 0.4s ease !important;
     border-color: var(--main-color, #49B1F5) !important;
 }
-
+*/
 
 /* =======================================================
    目录毛玻璃蒙版 - 悬停全部清晰（修复版）
