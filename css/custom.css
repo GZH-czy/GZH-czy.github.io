@@ -1280,6 +1280,74 @@ html[data-theme="dark"] [glass-selector] {
 /* 4. 右下角按钮组 */
 #rightside
 
+/* ========================================
+   当前配置（保持你原来的效果不变）
+   ======================================== */
+
+/* 浅色模式 - 直接复制你原来的代码，没有改动 */
+html[data-theme="light"] #aside-content .card-author,
+html[data-theme="light"] #aside-content .card-announcement,
+html[data-theme="light"] #aside-content .card-recent-post,
+html[data-theme="light"] #aside-content .card-categories,
+html[data-theme="light"] #aside-content .card-tags,
+html[data-theme="light"] #aside-content .card-archives,
+html[data-theme="light"] #aside-content .card-webinfo,
+html[data-theme="light"] .layout>div:first-child:not(.recent-posts),
+html[data-theme="light"] #recent-posts>.recent-post-item,
+html[data-theme="light"] #page-header.nav-visible #nav,
+html[data-theme="light"] .search-dialog,
+html[data-theme="light"] #sidebar #sidebar-menus.open,
+html[data-theme="light"] .post-block,
+html[data-theme="light"] #post {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+}
+
+/* 深色模式 - 直接复制你原来的代码，没有改动 */
+html[data-theme="dark"] #aside-content .card-author,
+html[data-theme="dark"] #aside-content .card-announcement,
+html[data-theme="dark"] #aside-content .card-recent-post,
+html[data-theme="dark"] #aside-content .card-categories,
+html[data-theme="dark"] #aside-content .card-tags,
+html[data-theme="dark"] #aside-content .card-archives,
+html[data-theme="dark"] #aside-content .card-webinfo,
+html[data-theme="dark"] .layout>div:first-child:not(.recent-posts),
+html[data-theme="dark"] #recent-posts>.recent-post-item,
+html[data-theme="dark"] #page-header.nav-visible #nav,
+html[data-theme="dark"] .search-dialog,
+html[data-theme="dark"] #sidebar #sidebar-menus.open 
+html[data-theme="dark"] .post-block,
+html[data-theme="dark"] #post {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(20px);
+}
+
+
+/*文字选择，目录选择光晕*/
+
+/* ========================================
+   文本选中 - 发光光晕效果
+   ======================================== */
+
+/* 文本选中发光效果 */
+::selection {
+    background: var(--main-color, #49B1F5) !important;
+    color: #ffffff !important;
+    text-shadow: 
+        0 0 5px var(--main-color, #49B1F5),
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 10px var(--main-color, #49B1F5) !important;
+}
+
+/* Firefox 兼容 */
+::-moz-selection {
+    background: var(--main-color, #49B1F5) !important;
+    color: #ffffff !important;
+    text-shadow: 
+        0 0 5px var(--main-color, #49B1F5),
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 10px var(--main-color, #49B1F5) !important;
+}
 
 /* ========================================
    目录光晕 - 只触发当前标题（独立发光）
@@ -1456,14 +1524,7 @@ html[data-theme="dark"] [glass-selector] {
 }
 
 
-/* ========================================
-   目录激活背景 - 联动主题色
-   ======================================== */
 
-.toc-link.active {
-    background: rgba(var(--main-color, #49B1F5), 0.4) !important;  /* 改成你想要的颜色 */
-    border-radius: 6px !important;
-}
     
 
 /*myscript*/
