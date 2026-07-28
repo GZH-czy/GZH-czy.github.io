@@ -907,22 +907,42 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
 
 
 /* ⭐ 音乐馆页面强制取消毛玻璃（直接覆盖） */
-#anMusic-page #post,
-#anMusic-page .post-page #post,
-#anMusic-page .post-block,
-#anMusic-page .card-widget,
-#anMusic-page .recent-post-item,
-#anMusic-page .aplayer-bar-wrap {
+/* ========================================
+   音乐馆页面 - 强制取消所有毛玻璃
+   ======================================== */
+
+/* ⭐ 终极覆盖：音乐馆页面所有毛玻璃失效 */
+body:has(#anMusic-page) #post,
+body:has(#anMusic-page) .post-page #post,
+body:has(#anMusic-page) .post-block,
+body:has(#anMusic-page) .recent-post-item,
+body:has(#anMusic-page) .card-widget,
+body:has(#anMusic-page) #aside-content .card-author,
+body:has(#anMusic-page) #aside-content .card-announcement,
+body:has(#anMusic-page) #aside-content .card-recent-post,
+body:has(#anMusic-page) #aside-content .card-categories,
+body:has(#anMusic-page) #aside-content .card-tags,
+body:has(#anMusic-page) #aside-content .card-archives,
+body:has(#anMusic-page) #aside-content .card-webinfo,
+body:has(#anMusic-page) .layout>div:first-child:not(.recent-posts),
+body:has(#anMusic-page) .search-dialog,
+body:has(#anMusic-page) #sidebar #sidebar-menus.open {
     background: transparent !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
 }
 
-#anMusic-page .aplayer-bar {
+/* ⭐ 特别针对 .aplayer 进度条 */
+body:has(#anMusic-page) .aplayer .aplayer-bar-wrap {
+    background: transparent !important;
+    backdrop-filter: none !important;
+}
+
+body:has(#anMusic-page) .aplayer .aplayer-bar {
     background: rgba(255, 255, 255, 0.2) !important;
 }
 
-#anMusic-page .aplayer-played {
+body:has(#anMusic-page) .aplayer .aplayer-played {
     background: var(--anzhiyu-white) !important;
 }
 
