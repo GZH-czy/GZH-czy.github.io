@@ -862,3 +862,26 @@
         }
     }
 })();
+
+// ============================================================
+//  音乐馆页面检测 - 添加 body 类
+// ============================================================
+
+function checkMusicPage() {
+    if (document.querySelector('#anMusic-page')) {
+        document.body.classList.add('music-page');
+    } else {
+        document.body.classList.remove('music-page');
+    }
+}
+
+// 页面加载后检测
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', checkMusicPage);
+} else {
+    checkMusicPage();
+}
+
+// Pjax 兼容
+document.addEventListener('pjax:complete', checkMusicPage);
+document.addEventListener('pjax:success', checkMusicPage);
