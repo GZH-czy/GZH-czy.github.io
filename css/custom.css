@@ -1178,7 +1178,7 @@ html[data-theme="dark"] [glass-selector] {
    ======================================== */
 
 /* 1. 侧边栏所有卡片 */
-#aside-content .card-widget
+/*#aside-content .card-widget*/
 
 /* 2. 侧边栏第一个卡片（作者卡片） */
 /*#aside-content > .card-widget:first-child*/
