@@ -1517,12 +1517,10 @@ html[data-theme="dark"] #post {
 
 .toc-link.active {
     background: var(--main-color, #49B1F5) !important;
-    background: rgba(73, 177, 245, 0.15) !important;  /* 使用 CSS 变量 */
-    border-radius: 8px !important;
-    border-left: 3px solid var(--main-color, #49B1F5) !important;
-    padding: 2px 12px !important;
-    margin: 0 -12px !important;
+    background: rgba(73, 177, 245, 0.15) !important;  /* 半透明背景 */
+    border-radius: 6px !important;
 }
+    
 
 /*myscript*/
 /* source/css/custom.css */
