@@ -906,7 +906,7 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
 
 /*===================================================================*/
 
-#nav-right{
+/*#nav-right{
     flex:1 1 auto;
     justify-content: flex-end;
     margin-left: auto;
@@ -916,7 +916,7 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
 
 #nav *::after{
     background-color: transparent!important;
-}
+}*/
 
 .menus_item_child li:not(#sidebar-menus li){
     float: left;
