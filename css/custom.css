@@ -1459,42 +1459,50 @@ html[data-theme="dark"] #post {
 
 
 /* ========================================
-   目录蒙版光晕 - 带渐变发光
+   目录毛玻璃蒙版 - 默认半透明，悬停/激活时清晰
    ======================================== */
 
+/* ---------- 目录项基础 ---------- */
 .toc-item {
     position: relative !important;
+    overflow: hidden !important;
 }
 
-/* 蒙版 - 默认隐藏 */
+/* 毛玻璃蒙版 - 覆盖在目录文字上面 */
 .toc-item .toc-link::before {
     content: '' !important;
     position: absolute !important;
-    top: -6px !important;
-    left: -16px !important;
-    right: -16px !important;
-    bottom: -6px !important;
-    border-radius: 10px !important;
-    background: radial-gradient(
-        ellipse at center,
-        var(--main-color, #49B1F5) 0%,
-        var(--main-color, #49B1F5) 40%,
-        transparent 100%
-    ) !important;
-    opacity: 0 !important;
-    transition: opacity 0.4s ease !important;
+    top: -2px !important;
+    left: -10px !important;
+    right: -10px !important;
+    bottom: -2px !important;
+    border-radius: 8px !important;
+    /* 毛玻璃效果 */
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    /* 默认半透明挡住文字 */
+    opacity: 0.85 !important;
+    transition: opacity 0.35s ease, backdrop-filter 0.35s ease !important;
     z-index: 0 !important;
     pointer-events: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
 
-/* 悬停时蒙版显现 - 半透明 */
+/* 悬停时 - 毛玻璃变清晰（透明度降低，模糊减弱） */
 .toc-link:hover::before {
-    opacity: 0.25 !important;
+    opacity: 0.15 !important;
+    backdrop-filter: blur(2px) !important;
+    -webkit-backdrop-filter: blur(2px) !important;
+    background: var(--main-color, #49B1F5) !important;
+    opacity: 0.12 !important;
 }
 
-/* 激活时蒙版显现 - 更明显 */
+/* 激活时（当前阅读位置）- 毛玻璃完全消失，显示高亮 */
 .toc-link.active::before {
-    opacity: 0.35 !important;
+    opacity: 0 !important;
+    backdrop-filter: blur(0px) !important;
+    -webkit-backdrop-filter: blur(0px) !important;
 }
 
 /* 文字在蒙版上方 */
@@ -1503,6 +1511,42 @@ html[data-theme="dark"] #post {
     z-index: 1 !important;
 }
 
+/* ---------- 深色模式适配 ---------- */
+[data-theme="dark"] .toc-item .toc-link::before {
+    background: rgba(0, 0, 0, 0.30) !important;
+    border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+[data-theme="dark"] .toc-link:hover::before {
+    background: var(--main-color, #49B1F5) !important;
+    opacity: 0.20 !important;
+}
+
+/* ---------- 文字颜色保持不变 ---------- */
+.toc-link {
+    color: var(--text-secondary, #666) !important;
+    transition: color 0.3s ease !important;
+}
+
+/* 悬停文字发光 */
+.toc-link:hover {
+    color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 16px var(--main-color, #49B1F5),
+        0 0 32px var(--main-color, #49B1F5) !important;
+}
+
+/* 激活文字高亮 */
+.toc-link.active {
+    color: var(--main-color, #49B1F5) !important;
+    border-color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 10px var(--main-color, #49B1F5),
+        0 0 20px var(--main-color, #49B1F5),
+        0 0 40px var(--main-color, #49B1F5) !important;
+    font-weight: 600 !important;
+}
 
 /*myscript*/
 /* source/css/custom.css */
