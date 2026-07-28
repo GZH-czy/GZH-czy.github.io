@@ -1426,9 +1426,9 @@ html[data-theme="dark"] .post-page #post {
     color: var(--main-color, #49B1F5) !important;
     border-color: var(--main-color, #49B1F5) !important;
     text-shadow: 
-        0 0 1px var(--main-color, #49B1F5),
-        0 0 2px var(--main-color, #49B1F5),
-        0 0 5px var(--main-color, #49B1F5) !important;
+        0 0 3px var(--main-color, #49B1F5),
+        0 0 5px var(--main-color, #49B1F5),
+        0 0 8px var(--main-color, #49B1F5) !important;
     font-weight: 600 !important;
 }
 
@@ -1482,7 +1482,7 @@ html[data-theme="dark"] .post-page #post {
     box-shadow: 
         0 0 2px var(--main-color, #49B1F5),
         0 0 3px var(--main-color, #49B1F5),
-        0 0 4px var(--main-color, #49B1F5) !important;
+        0 0 5px var(--main-color, #49B1F5) !important;
     transition: all 0.4s ease !important;
 }
 
