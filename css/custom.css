@@ -1152,48 +1152,440 @@ span.categoryBar-list-descr {
    文章页面毛玻璃遮罩（仅遮罩，不设置背景图）
    ======================================== */
 
-/*所有页面实现毛玻璃特效*/
+/* ========================================
+   Hexo Butterfly 主题 - 全界面毛玻璃配置
+   使用说明：在下方选择器中添加或删除对应类名即可控制毛玻璃效果
+   ======================================== */
 
-#aside-content,
-#search-mask,
-/* 手机端 */
-#sidebar #menu-mask {
-  background: rgba(255, 255, 255, 0);
+/* ---------- 基础毛玻璃样式 ---------- */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 
+.glass-effect-dark {
+    background: rgba(0, 0, 0, 0.7) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+/* ========================================
+   一、页面布局
+   ======================================== */
+
+/* 1. 页面主容器 */
+.layout-page {
+    /* 页面整体布局容器，通常不需要毛玻璃 */
+}
+
+/* 2. 主要内容区域 */
+.layout > div:first-child:not(.recent-posts) {
+    /* 非首页的主要区域（文章页、归档页等） */
+}
+
+/* 3. 首页文章列表 */
+#recent-posts > .recent-post-item {
+    /* 首页每篇文章卡片 */
+}
+
+/* 4. 文章详情页 */
+.post-block {
+    /* 文章内容块 */
+}
+
+#post {
+    /* 文章主体 */
+}
+
+/* 5. 分页 */
+.pagination {
+    /* 分页按钮区域 */
+}
+
+/* ========================================
+   二、侧边栏
+   ======================================== */
+
+/* 1. 侧边栏整体 */
+#aside-content {
+    /* 侧边栏容器 */
+}
+
+/* 2. 侧边栏卡片 */
+#aside-content .card-widget {
+    /* 所有侧边栏卡片 */
+}
+
+/* 3. 侧边栏第一个卡片（作者卡片） */
+#aside-content > .card-widget:first-child {
+    /* 作者信息卡片 */
+}
+
+/* 4. 侧边栏具体卡片类型 */
+#aside-content .card-author {
+    /* 作者卡片 */
+}
+
+#aside-content .card-info {
+    /* 信息卡片 */
+}
+
+#aside-content .card-announcement {
+    /* 公告卡片 */
+}
+
+#aside-content .card-recent-post {
+    /* 最新文章卡片 */
+}
+
+#aside-content .card-categories {
+    /* 分类卡片 */
+}
+
+#aside-content .card-tags {
+    /* 标签卡片 */
+}
+
+#aside-content .card-archives {
+    /* 归档卡片 */
+}
+
+#aside-content .card-webinfo {
+    /* 网站信息卡片 */
+}
+
+/* ========================================
+   三、导航栏
+   ======================================== */
+
+/* 1. 导航栏整体 */
+#page-header #nav {
+    /* 导航栏 */
+}
+
+#page-header.nav-visible #nav {
+    /* 导航栏可见状态 */
+}
+
+/* 2. 导航栏菜单 */
+#nav .menus {
+    /* 菜单列表 */
+}
+
+#nav .menus_item {
+    /* 单个菜单项 */
+}
+
+/* 3. 导航栏搜索按钮 */
+#nav .search-button {
+    /* 搜索按钮 */
+}
+
+/* 4. 移动端菜单按钮 */
+#nav .toggle-menu {
+    /* 菜单切换按钮 */
+}
+
+/* ========================================
+   四、文章相关
+   ======================================== */
+
+/* 1. 文章标题 */
+.post-title {
+    /* 文章标题 */
+}
+
+/* 2. 文章元信息（日期、分类等） */
+.post-meta {
+    /* 文章元信息 */
+}
+
+/* 3. 文章内容 */
+.post-content {
+    /* 文章正文内容 */
+}
+
+/* 4. 文章底部标签 */
+.post-tags {
+    /* 文章标签 */
+}
+
+/* 5. 文章版权信息 */
+.post-copyright {
+    /* 版权声明 */
+}
+
+/* 6. 上一篇/下一篇导航 */
+.post-nav {
+    /* 文章底部导航 */
+}
+
+/* 7. 文章目录（TOC） */
+.toc-container {
+    /* 目录容器 */
+}
+
+.toc {
+    /* 目录列表 */
+}
+
+/* ========================================
+   五、评论区
+   ======================================== */
+
+/* 1. 评论区整体 */
+#post-comment {
+    /* 评论区容器 */
+}
+
+/* 2. 评论输入框 */
+.comment-wrap {
+    /* 评论输入区域 */
+}
+
+/* ========================================
+   六、搜索框
+   ======================================== */
+
+/* 1. 搜索弹窗 */
 .search-dialog {
-  border-radius: 0px;
+    /* 搜索对话框 */
 }
 
-/* 浅色模式 */
-html[data-theme="light"] #aside-content>.card-widget:first-child,
-html[data-theme="light"] #aside-content .card-widget,
-html[data-theme="light"] .layout>div:first-child:not(.recent-posts),
-html[data-theme="light"] #recent-posts>.recent-post-item,
-/* 标题栏 */
-html[data-theme="light"] #page-header.nav-visible #nav,
-/* 搜索框 */
-html[data-theme="light"] .search-dialog,
-/* 移动端 */
-html[data-theme="light"] #sidebar #sidebar-menus.open {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
+/* 2. 搜索遮罩 */
+#search-mask {
+    /* 搜索遮罩层 */
 }
 
-/* 深色模式 */
-html[data-theme="dark"] #aside-content>.card-widget:first-child,
-html[data-theme="dark"] #aside-content .card-widget,
-html[data-theme="dark"] .layout>div:first-child:not(.recent-posts),
-html[data-theme="dark"] #recent-posts>.recent-post-item,
-/* 标题栏 */
-html[data-theme="dark"] #page-header.nav-visible #nav,
-/* 搜索框 */
-html[data-theme="dark"] .search-dialog,
-/* 移动端 */
-html[data-theme="dark"] #sidebar #sidebar-menus.open {
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(20px);
+/* 3. 搜索输入框 */
+.search-dialog .search-input {
+    /* 搜索输入框 */
 }
+
+/* 4. 搜索结果 */
+.search-dialog .search-result {
+    /* 搜索结果列表 */
+}
+
+/* ========================================
+   七、移动端侧边栏
+   ======================================== */
+
+/* 1. 移动端侧边栏 */
+#sidebar {
+    /* 侧边栏容器 */
+}
+
+#sidebar #sidebar-menus {
+    /* 侧边栏菜单 */
+}
+
+#sidebar #sidebar-menus.open {
+    /* 侧边栏打开状态 */
+}
+
+#sidebar #menu-mask {
+    /* 侧边栏遮罩 */
+}
+
+/* ========================================
+   八、特殊页面
+   ======================================== */
+
+/* 1. 友情链接页面 */
+.link-page .link-group {
+    /* 友链分组 */
+}
+
+.link-page .link-card {
+    /* 友链卡片 */
+}
+
+/* 2. 归档页面 */
+.archives .archive-item {
+    /* 归档条目 */
+}
+
+/* 3. 分类页面 */
+.category-lists .category-list-item {
+    /* 分类条目 */
+}
+
+/* 4. 标签页面 */
+.tag-lists .tag-list-item {
+    /* 标签条目 */
+}
+
+/* 5. 404页面 */
+.error404 {
+    /* 404错误页面 */
+}
+
+/* 6. 关于页面 */
+.about-page {
+    /* 关于页面 */
+}
+
+/* ========================================
+   九、弹窗和浮层
+   ======================================== */
+
+/* 1. 图片查看器 */
+.medium-zoom-overlay {
+    /* 图片放大遮罩 */
+}
+
+/* 2. 提示弹窗 */
+.toast {
+    /* 提示消息 */
+}
+
+/* ========================================
+   十、页脚
+   ======================================== */
+
+#footer {
+    /* 页脚 */
+}
+
+#footer .footer-inner {
+    /* 页脚内容 */
+}
+
+/* ========================================
+   十一、音乐播放器
+   ======================================== */
+
+.aplayer {
+    /* APlayer 播放器 */
+}
+
+/* ========================================
+   十二、Back to Top 按钮
+   ======================================== */
+
+#rightside {
+    /* 右下角按钮组 */
+}
+
+#rightside .rightside-item {
+    /* 单个按钮 */
+}
+
+/* ========================================
+   自定义应用配置 - 在这里选择哪些界面应用毛玻璃
+   ======================================== */
+
+/* -------- 浅色模式 -------- */
+html[data-theme="light"] 
+  /* 1. 侧边栏卡片 */
+  #aside-content > .card-widget:first-child,
+  #aside-content .card-widget,
+  
+  /* 2. 主要内容（非首页） */
+  .layout > div:first-child:not(.recent-posts),
+  
+  /* 3. 首页文章列表 */
+  #recent-posts > .recent-post-item,
+  
+  /* 4. 文章详情页 */
+  .post-block,
+  #post,
+  
+  /* 5. 导航栏 */
+  #page-header.nav-visible #nav,
+  
+  /* 6. 搜索框 */
+  .search-dialog,
+  
+  /* 7. 移动端侧边栏 */
+  #sidebar #sidebar-menus.open,
+  
+  /* 8. 分页 */
+  .pagination,
+  
+  /* 9. 文章底部导航 */
+  .post-nav,
+  
+  /* 10. 评论区 */
+  #post-comment,
+  
+  /* 11. 目录 */
+  .toc-container,
+  
+  /* 12. 版权信息 */
+  .post-copyright,
+  
+  /* 13. 文章标签 */
+  .post-tags,
+  
+  /* 14. 页脚 */
+  #footer,
+  
+  /* 15. 友情链接卡片 */
+  .link-page .link-card {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  }
+
+/* -------- 深色模式 -------- */
+html[data-theme="dark"] 
+  /* 1. 侧边栏卡片 */
+  #aside-content > .card-widget:first-child,
+  #aside-content .card-widget,
+  
+  /* 2. 主要内容（非首页） */
+  .layout > div:first-child:not(.recent-posts),
+  
+  /* 3. 首页文章列表 */
+  #recent-posts > .recent-post-item,
+  
+  /* 4. 文章详情页 */
+  .post-block,
+  #post,
+  
+  /* 5. 导航栏 */
+  #page-header.nav-visible #nav,
+  
+  /* 6. 搜索框 */
+  .search-dialog,
+  
+  /* 7. 移动端侧边栏 */
+  #sidebar #sidebar-menus.open,
+  
+  /* 8. 分页 */
+  .pagination,
+  
+  /* 9. 文章底部导航 */
+  .post-nav,
+  
+  /* 10. 评论区 */
+  #post-comment,
+  
+  /* 11. 目录 */
+  .toc-container,
+  
+  /* 12. 版权信息 */
+  .post-copyright,
+  
+  /* 13. 文章标签 */
+  .post-tags,
+  
+  /* 14. 页脚 */
+  #footer,
+  
+  /* 15. 友情链接卡片 */
+  .link-page .link-card {
+    background: rgba(0, 0, 0, 0.7) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  }
 
 
 /*myscript*/
