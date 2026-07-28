@@ -904,6 +904,28 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
   }
 }
 
+
+
+/* ⭐ 音乐馆页面强制取消毛玻璃（直接覆盖） */
+#anMusic-page #post,
+#anMusic-page .post-page #post,
+#anMusic-page .post-block,
+#anMusic-page .card-widget,
+#anMusic-page .recent-post-item,
+#anMusic-page .aplayer-bar-wrap {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+#anMusic-page .aplayer-bar {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+#anMusic-page .aplayer-played {
+    background: var(--anzhiyu-white) !important;
+}
+
 /*===================================================================*/
 
 #nav-right{
@@ -1318,18 +1340,6 @@ html[data-theme="dark"] #sidebar #sidebar-menus.open
 html[data-theme="dark"] .post-page #post {
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(20px);
-}
-
-/* ---------- 音乐馆页面取消毛玻璃 ---------- */
-.music-page #post,
-.music-page .post-block,
-.music-page .recent-post-item,
-.music-page .layout>div:first-child,
-.music-page .card-widget {
-    background: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    box-shadow: none !important;
 }
 
 /*文字选择，目录选择光晕*/
