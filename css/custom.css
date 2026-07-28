@@ -1428,7 +1428,7 @@ html[data-theme="dark"] .post-page #post {
     text-shadow: 
         0 0 1px var(--main-color, #49B1F5),
         0 0 2px var(--main-color, #49B1F5),
-        0 0 3px var(--main-color, #49B1F5) !important;
+        0 0 5px var(--main-color, #49B1F5) !important;
     font-weight: 600 !important;
 }
 
@@ -1486,8 +1486,14 @@ html[data-theme="dark"] .post-page #post {
     transition: all 0.4s ease !important;
 }
 
+/* =======================================================
+   目录激活背景 - 联动主题色
+   ======================================== */
 
-
+.toc-link.active {
+    background: rgba(var(--main-color, #49B1F5), 0.2) !important;  /* 改成你想要的颜色 */
+    border-radius: 6px !important;
+}
 
 /* =======================================================
    目录毛玻璃蒙版 - 悬停全部清晰（修复版）
@@ -1565,15 +1571,6 @@ html[data-theme="dark"] .post-page #post {
 }
 
 
-/* =======================================================
-   目录激活背景 - 联动主题色
-   ======================================== */
-
-.toc-link.active {
-    background: rgba(var(--main-color, #49B1F5), 0.4) !important;  /* 改成你想要的颜色 */
-    border-radius: 6px !important;
-}
-    
 
 /*myscript*/
 /* source/css/custom.css */
