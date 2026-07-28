@@ -1345,6 +1345,101 @@ html[data-theme="dark"] #post {
 }
 
 
+/*文字选择，目录选择光晕*/
+
+/* ========================================
+   文本选中 - 发光光晕效果
+   ======================================== */
+
+/* 文本选中发光效果 */
+::selection {
+    background: var(--main-color, #49B1F5) !important;
+    color: #ffffff !important;
+    text-shadow: 
+        0 0 10px var(--main-color, #49B1F5),
+        0 0 20px var(--main-color, #49B1F5),
+        0 0 40px var(--main-color, #49B1F5) !important;
+}
+
+/* Firefox 兼容 */
+::-moz-selection {
+    background: var(--main-color, #49B1F5) !important;
+    color: #ffffff !important;
+    text-shadow: 
+        0 0 10px var(--main-color, #49B1F5),
+        0 0 20px var(--main-color, #49B1F5),
+        0 0 40px var(--main-color, #49B1F5) !important;
+}
+
+/* ========================================
+   目录选中 - 发光光晕效果
+   ======================================== */
+
+/* 目录悬停发光 */
+.toc-link:hover {
+    color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 10px var(--main-color, #49B1F5),
+        0 0 20px var(--main-color, #49B1F5),
+        0 0 40px var(--main-color, #49B1F5) !important;
+    transition: text-shadow 0.3s ease !important;
+}
+
+/* 目录激活（当前阅读位置）发光 */
+.toc-link.active {
+    color: var(--main-color, #49B1F5) !important;
+    border-color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 10px var(--main-color, #49B1F5),
+        0 0 20px var(--main-color, #49B1F5),
+        0 0 40px var(--main-color, #49B1F5) !important;
+    font-weight: 600 !important;
+}
+
+/* 目录列表项悬停发光 */
+.toc-item:hover .toc-link {
+    color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 10px var(--main-color, #49B1F5),
+        0 0 20px var(--main-color, #49B1F5),
+        0 0 40px var(--main-color, #49B1F5) !important;
+}
+
+/* ========================================
+   文章标题悬停发光
+   ======================================== */
+
+.post-title:hover,
+.article-title:hover {
+    color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 10px var(--main-color, #49B1F5),
+        0 0 20px var(--main-color, #49B1F5),
+        0 0 40px var(--main-color, #49B1F5) !important;
+    transition: text-shadow 0.3s ease !important;
+}
+
+/* ========================================
+   导航菜单悬停发光
+   ======================================== */
+
+.menus_item .site-page:hover {
+    color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 10px var(--main-color, #49B1F5),
+        0 0 20px var(--main-color, #49B1F5),
+        0 0 40px var(--main-color, #49B1F5) !important;
+}
+
+.menus_item .site-page.current,
+.menus_item .site-page.active {
+    color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 10px var(--main-color, #49B1F5),
+        0 0 20px var(--main-color, #49B1F5),
+        0 0 40px var(--main-color, #49B1F5) !important;
+}
+
 /*myscript*/
 /* source/css/custom.css */
 :root {
