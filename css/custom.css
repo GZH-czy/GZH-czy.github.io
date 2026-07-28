@@ -1363,7 +1363,7 @@ html[data-theme="dark"] .post-page #post {
 
 /*文字选择，目录选择光晕*/
 
-/* =======================================================================text-shadow文字发光
+/* =======================================================================
    文本选中 - 发光光晕效果
    ======================================== */
 
@@ -1473,8 +1473,6 @@ html[data-theme="dark"] .post-page #post {
         0 0 10px var(--main-color, #49B1F5) !important;
 }
 
-
-
 /* ===================================================box-shadow卡片发光
    目录激活背景框 + 外发光
    ======================================== */
@@ -1555,20 +1553,6 @@ html[data-theme="dark"] .post-page #post {
 
 /* ---------- 首页文章卡片 ---------- */
 #recent-posts > .recent-post-item:hover {
-    box-shadow: 
-        0 0 15px var(--main-color, #49B1F5),
-        0 0 30px var(--main-color, #49B1F5) !important;
-    transform: translateY(-4px) !important;
-    transition: all 0.4s ease !important;
-    border-color: var(--main-color, #49B1F5) !important;
-}
-
-/* ========================================
-   首页文章卡片 - 悬停发光
-   ======================================== */
-
-/* 卡片本身发光 */
-.recent-post-item:hover {
     box-shadow: 
         0 0 15px var(--main-color, #49B1F5),
         0 0 30px var(--main-color, #49B1F5) !important;
