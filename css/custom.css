@@ -1363,7 +1363,7 @@ html[data-theme="dark"] .post-page #post {
 
 /*文字选择，目录选择光晕*/
 
-/* ========================================
+/* =======================================================================
    文本选中 - 发光光晕效果
    ======================================== */
 
@@ -1483,7 +1483,9 @@ html[data-theme="dark"] .post-page #post {
         0 0 2px var(--main-color, #49B1F5),
         0 0 3px var(--main-color, #49B1F5),
         0 0 4px var(--main-color, #49B1F5) !important;
+    transform: translateY(-3px) !important;
     transition: all 0.4s ease !important;
+    border-color: var(--main-color, #49B1F5) !important;
 }
 
 
