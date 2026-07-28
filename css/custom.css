@@ -1387,9 +1387,9 @@ html[data-theme="dark"] #post {
     color: var(--main-color, #49B1F5) !important;
     border-color: var(--main-color, #49B1F5) !important;
     text-shadow: 
-        0 0 6px var(--main-color, #49B1F5),
+    /*    0 0 6px var(--main-color, #49B1F5),
         0 0 7px var(--main-color, #49B1F5),
-        0 0 8px var(--main-color, #49B1F5) !important;
+        0 0 8px var(--main-color, #49B1F5) !important;*/
     font-weight: 600 !important;
 }
 
