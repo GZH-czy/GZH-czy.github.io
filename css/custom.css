@@ -1479,18 +1479,17 @@ html[data-theme="dark"] .post-page #post {
 
 
 /* ========================================
-   文章卡片 - 悬停发光（强制版）
+   文章卡片 - 悬停发光（联动主题色）
    ======================================== */
 
 /* 文章卡片本身发光 */
 .recent-post-item:hover {
     box-shadow: 
-        0 0 20px #49B1F5,
-        0 0 40px #49B1F5 !important;
+        0 0 20px var(--main-color, #49B1F5),
+        0 0 40px var(--main-color, #49B1F5) !important;
     transform: translateY(-5px) scale(1.01) !important;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    border-color: #49B1F5 !important;
-    background: rgba(73, 177, 245, 0.05) !important;
+    border-color: var(--main-color, #49B1F5) !important;
 }
 
 /* 文章卡片内所有文字发光 */
@@ -1511,11 +1510,11 @@ html[data-theme="dark"] .post-page #post {
 .recent-post-item:hover .post-content,
 .recent-post-item:hover .post-content a,
 .recent-post-item:hover * {
-    color: #49B1F5 !important;
+    color: var(--main-color, #49B1F5) !important;
     text-shadow: 
-        0 0 10px rgba(73, 177, 245, 0.8),
-        0 0 20px rgba(73, 177, 245, 0.5),
-        0 0 40px rgba(73, 177, 245, 0.3) !important;
+        0 0 10px var(--main-color, #49B1F5),
+        0 0 20px var(--main-color, #49B1F5),
+        0 0 40px var(--main-color, #49B1F5) !important;
     transition: all 0.3s ease !important;
 }
 
@@ -1527,21 +1526,18 @@ html[data-theme="dark"] .post-page #post {
 }
 
 /* ========================================
-   侧边栏卡片 - 悬停发光（强制版）
+   侧边栏卡片 - 悬停发光（联动主题色）
    ======================================== */
 
-/* 侧边栏卡片本身发光 */
 #aside-content .card-widget:hover {
     box-shadow: 
-        0 0 20px #49B1F5,
-        0 0 40px #49B1F5 !important;
+        0 0 20px var(--main-color, #49B1F5),
+        0 0 40px var(--main-color, #49B1F5) !important;
     transform: translateY(-3px) !important;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    border-color: #49B1F5 !important;
-    background: rgba(73, 177, 245, 0.05) !important;
+    border-color: var(--main-color, #49B1F5) !important;
 }
 
-/* 侧边栏卡片内所有文字发光 */
 #aside-content .card-widget:hover .card-title,
 #aside-content .card-widget:hover .card-title a,
 #aside-content .card-widget:hover .card-content,
@@ -1551,21 +1547,18 @@ html[data-theme="dark"] .post-page #post {
 #aside-content .card-widget:hover .item,
 #aside-content .card-widget:hover .item a,
 #aside-content .card-widget:hover * {
-    color: #49B1F5 !important;
+    color: var(--main-color, #49B1F5) !important;
     text-shadow: 
-        0 0 10px rgba(73, 177, 245, 0.8),
-        0 0 20px rgba(73, 177, 245, 0.5),
-        0 0 40px rgba(73, 177, 245, 0.3) !important;
+        0 0 10px var(--main-color, #49B1F5),
+        0 0 20px var(--main-color, #49B1F5),
+        0 0 40px var(--main-color, #49B1F5) !important;
     transition: all 0.3s ease !important;
 }
 
-/* 排除图片 */
 #aside-content .card-widget:hover img {
     text-shadow: none !important;
     box-shadow: none !important;
 }
-
-
 /* ===================================================box-shadow卡片发光
    目录激活背景框 + 外发光
    ======================================== */
