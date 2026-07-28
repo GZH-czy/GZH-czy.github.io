@@ -434,13 +434,11 @@ html[data-theme="light"]:not(body:has(#anMusic-page))
     #page-header.nav-visible #nav,
     .search-dialog,
     #sidebar #sidebar-menus.open,
-    .post-page #post,
     .post-block {
     background: rgba(255, 255, 255, 0.7) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
 }
-
 /* 深色模式 - 音乐馆排除 */
 html[data-theme="dark"]:not(body:has(#anMusic-page)) 
     #aside-content .card-author,

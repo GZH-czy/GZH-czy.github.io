@@ -158,12 +158,12 @@
      data-hbe-format="4"
      data-wpm="Oh, 密码错了，检查一下好吗～"
      data-whm="Oh, 密码错了，检查一下好吗～"
-     data-salt="433b5ce9a0341b62159d76513933d1b58aa3b1425ee8588a4fa122945720179c"
-     data-nonce="69142102631d74c2225a05ec"
+     data-salt="6ced9fe8b49544725b7104cfde09001f29aa6b67dca39645936fabc93f315f8c"
+     data-nonce="3b73a9fe94951ed13d366524"
      data-kdf-iterations="600000"
      data-auto-save="false">
   <script id="hbeData" type="hbeData">
-    e879287a4b301ab180126038dc30a292a55f961abfb0d6784733a081419956d79ad1dc0c8f71bab8c7bd2191a5b7d218118e03ba23ff53fad8d0f8784b861d36072b2ede6606fa308683f78604594527bea1428d58ec5ce279ebb78228c64c44149adc41bfa5f1541c533a2cffdcc64e62c1c543c2f05e09580aa628de
+    4d19bb9f021175734dba2c8fbd911ea3227aba3eda047e2f21f644791c829e418aaf726d742269b0cb6837e9b07f7597dbc488f224c571e374466629e77bf26bd7b537c5e737bb4955d9d24eb3721ade357aee06f63bd4faeb1338b0afaa10212effa1d540941c2f261002769eb3128fab7f6b8555120c7e75bd865956
   </script>
   <div class="hbe hbe-content">
     <form id="hbeForm" class="hbe hbe-form" onsubmit="return false">
@@ -300,7 +300,7 @@ document.addEventListener('pjax:error', e => {
       parent_div_git.id = 'recent-posts'; // 赋予配置的ID
       document.querySelector('#page').prepend(parent_div_git); // 插入到 #content-inner 内
     }
-    var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 950px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 800px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(https://imgbed.gzh-czy.cc.cd/9.jpg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/插件/&quot;);" href="javascript:void(0);">插件</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">1</span></li><li class="categoryBar-list-item" style="background:url(https://imgbed.gzh-czy.cc.cd/15.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/知识库/&quot;);" href="javascript:void(0);">知识库</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">2</span></li><li class="categoryBar-list-item" style="background:url(/img/13.png);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/爱人/&quot;);" href="javascript:void(0);">爱人</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">3</span></li></ul></div></div>';
+    var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 950px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 800px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(https://imgbed.gzh-czy.cc.cd/9.jpg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/知识库/&quot;);" href="javascript:void(0);">知识库</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">1</span></li><li class="categoryBar-list-item" style="background:url(https://imgbed.gzh-czy.cc.cd/15.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/插件/&quot;);" href="javascript:void(0);">插件</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">2</span></li><li class="categoryBar-list-item" style="background:url(/img/13.png);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/爱人/&quot;);" href="javascript:void(0);">爱人</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">3</span></li></ul></div></div>';
     console.log('已挂载 butterfly_categories_card');
     parent_div_git.insertAdjacentHTML("afterbegin",item_html)
   }
