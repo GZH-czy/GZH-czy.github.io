@@ -1457,6 +1457,53 @@ html[data-theme="dark"] #post {
         0 0 10px var(--main-color, #49B1F5) !important;
 }
 
+
+/* ========================================
+   目录蒙版光晕 - 带渐变发光
+   ======================================== */
+
+.toc-item {
+    position: relative !important;
+}
+
+/* 蒙版 - 默认隐藏 */
+.toc-item .toc-link::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -6px !important;
+    left: -16px !important;
+    right: -16px !important;
+    bottom: -6px !important;
+    border-radius: 10px !important;
+    background: radial-gradient(
+        ellipse at center,
+        var(--main-color, #49B1F5) 0%,
+        var(--main-color, #49B1F5) 40%,
+        transparent 100%
+    ) !important;
+    opacity: 0 !important;
+    transition: opacity 0.4s ease !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+}
+
+/* 悬停时蒙版显现 - 半透明 */
+.toc-link:hover::before {
+    opacity: 0.25 !important;
+}
+
+/* 激活时蒙版显现 - 更明显 */
+.toc-link.active::before {
+    opacity: 0.35 !important;
+}
+
+/* 文字在蒙版上方 */
+.toc-link {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+
 /*myscript*/
 /* source/css/custom.css */
 :root {
