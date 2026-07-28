@@ -453,7 +453,6 @@ html[data-theme="dark"]:not(body:has(#anMusic-page))
     #page-header.nav-visible #nav,
     .search-dialog,
     #sidebar #sidebar-menus.open,
-    .post-page #post,
     .post-block {
     background: rgba(0, 0, 0, 0.7) !important;
     backdrop-filter: blur(20px) !important;
