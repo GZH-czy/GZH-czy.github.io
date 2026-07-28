@@ -1459,7 +1459,7 @@ html[data-theme="dark"] #post {
 
 
 /* ========================================
-   目录毛玻璃蒙版 - 平滑过渡版
+   目录毛玻璃蒙版 - 悬停时全部清晰
    ======================================== */
 
 .toc-item {
@@ -1472,12 +1472,12 @@ html[data-theme="dark"] #post {
     content: '' !important;
     position: absolute !important;
     top: -4px !important;
-    left: -14px !important;
-    right: -14px !important;
+    left: -12px !important;
+    right: -12px !important;
     bottom: -4px !important;
-    border-radius: 10px !important;
+    border-radius: 8px !important;
     /* 毛玻璃效果 - 默认半透明 */
-    background: rgba(255, 255, 255, 0.12) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
     backdrop-filter: blur(6px) !important;
     -webkit-backdrop-filter: blur(6px) !important;
     border: 1px solid rgba(255, 255, 255, 0.04) !important;
@@ -1499,23 +1499,15 @@ html[data-theme="dark"] #post {
     background: transparent !important;
 }
 
-/* ---------- 悬停状态 - 当前悬停的目录清晰 ---------- */
-.toc-link:hover::before {
+/* ---------- 🔥 关键：悬停到整个目录容器时，所有目录变清晰 ---------- */
+.toc-container:hover .toc-link::before {
     opacity: 0 !important;
     backdrop-filter: blur(0px) !important;
     -webkit-backdrop-filter: blur(0px) !important;
     background: transparent !important;
 }
 
-/* ---------- 当父级悬停时，子级也清晰（可选） ---------- */
-.toc-item:hover .toc-link::before {
-    opacity: 0 !important;
-    backdrop-filter: blur(0px) !important;
-    -webkit-backdrop-filter: blur(0px) !important;
-    background: transparent !important;
-}
-
-/* 但是激活的保持清晰 */
+/* ---------- 但激活的保持清晰（防止冲突） ---------- */
 .toc-link.active::before {
     opacity: 0 !important;
     backdrop-filter: blur(0px) !important;
@@ -1535,31 +1527,16 @@ html[data-theme="dark"] #post {
     color: var(--text-secondary, #666) !important;
 }
 
-/* ---------- 激活文字 - 高亮 ---------- */
-.toc-link.active {
-    color: var(--main-color, #49B1F5) !important;
-    border-color: var(--main-color, #49B1F5) !important;
-    text-shadow: 
-        0 0 10px var(--main-color, #49B1F5),
-        0 0 20px var(--main-color, #49B1F5),
-        0 0 40px var(--main-color, #49B1F5) !important;
-    font-weight: 600 !important;
-}
 
 /* ---------- 深色模式 ---------- */
 [data-theme="dark"] .toc-item .toc-link::before {
-    background: rgba(0, 0, 0, 0.25) !important;
+    background: rgba(0, 0, 0, 0.30) !important;
     border-color: rgba(255, 255, 255, 0.03) !important;
 }
 
-[data-theme="dark"] .toc-link.active::before {
+[data-theme="dark"] .toc-container:hover .toc-link::before {
     background: transparent !important;
 }
-
-[data-theme="dark"] .toc-link:hover::before {
-    background: transparent !important;
-}
-
 
 /*myscript*/
 /* source/css/custom.css */
