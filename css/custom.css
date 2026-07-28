@@ -1149,19 +1149,22 @@ span.categoryBar-list-descr {
 }*/
 
 /* ========================================
-   文章页全局毛玻璃背景
+   文章页全局背景毛玻璃特效
    ======================================== */
 
-/* 文章页背景图 */
+/* 只在文章页面生效 */
 .post-page .layout-page {
-    background-image: url('https://你的背景图链接.jpg') !important;
+    position: relative !important;
+    min-height: 100vh !important;
+    /* 背景图 - 可以换成你自己的图片 */
+    background-image: url('https://api.i-meto.com/meting/api?server=netease&type=pic&id=109951165867769764') !important;
     background-attachment: fixed !important;
     background-size: cover !important;
     background-position: center !important;
-    min-height: 100vh !important;
+    background-repeat: no-repeat !important;
 }
 
-/* 毛玻璃叠加层 - 覆盖整个页面背景 */
+/* 毛玻璃遮罩层 - 覆盖整个页面背景 */
 .post-page .layout-page::before {
     content: '' !important;
     position: fixed !important;
@@ -1184,21 +1187,24 @@ span.categoryBar-list-descr {
     z-index: 1 !important;
 }
 
-/* 文章内容区域透明毛玻璃 */
-.post-page .post-block {
+/* 文章内容区域 - 半透明让毛玻璃可见 */
+.post-page .post-block,
+.post-page #post {
     background: rgba(255, 255, 255, 0.10) !important;
     backdrop-filter: blur(4px) !important;
     -webkit-backdrop-filter: blur(4px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
     border-radius: var(--main-radius, 12px) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06) !important;
 }
 
 /* ========== 深色模式 ========== */
 [data-theme="dark"] .post-page .layout-page::before {
-    background: rgba(0, 0, 0, 0.25) !important;
+    background: rgba(0, 0, 0, 0.20) !important;
 }
 
-[data-theme="dark"] .post-page .post-block {
+[data-theme="dark"] .post-page .post-block,
+[data-theme="dark"] .post-page #post {
     background: rgba(0, 0, 0, 0.30) !important;
     border-color: rgba(255, 255, 255, 0.06) !important;
 }
