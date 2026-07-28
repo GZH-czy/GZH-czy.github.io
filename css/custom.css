@@ -1387,9 +1387,9 @@ html[data-theme="dark"] #post {
     color: var(--main-color, #49B1F5) !important;
     border-color: var(--main-color, #49B1F5) !important;
     text-shadow: 
-        0 0 5px var(--main-color, #49B1F5),
-        0 0 8px var(--main-color, #49B1F5),
-        0 0 10px var(--main-color, #49B1F5) !important;
+        0 0 6px var(--main-color, #49B1F5),
+        0 0 7px var(--main-color, #49B1F5),
+        0 0 8px var(--main-color, #49B1F5) !important;
     font-weight: 600 !important;
 }
 
@@ -1483,7 +1483,7 @@ html[data-theme="dark"] #post {
     background: transparent !important;
 }
 
-/* ---------- 🔥 关键修复：悬停到任意目录时，所有目录蒙版消失 ---------- */
+/* ---------- 悬停到任意目录时，所有目录蒙版消失 ---------- */
 /* 当悬停到 .toc 容器时，所有目录变清晰 */
 .toc:hover .toc-link::before,
 #aside-content .toc:hover .toc-link::before,
