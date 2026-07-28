@@ -1,5 +1,5 @@
 /* ========================================
-   Butterfly 主题 - 完整自定义 CSS
+   Butterfly 主题 - 完整自定义 CSS（修复版）
    ======================================== */
 
 /* ---------- 字体 ---------- */
@@ -59,363 +59,6 @@ svg.icon.faa-tada { font-size: 1.1em; }
 #page-header { background: transparent !important; }
 #footer { background: transparent !important; }
 
-/* ---------- 页面背景（非毛玻璃，基础背景） ---------- */
-/* 这些是基础背景色，不是毛玻璃，保留给文章页使用 */
-div#post { background: rgba(255, 255, 255, 0.9); }
-div#page { background: rgba(255, 255, 255, 0.9); }
-div#archive { background: rgba(255, 255, 255, 0.9); }
-div#tag { background: rgba(255, 255, 255, 0.9); }
-div#category { background: rgba(255, 255, 255, 0.9); }
-#recent-posts > .recent-post-item { background: rgba(255, 255, 255, 0.9); }
-#aside-content .card-widget { background: rgba(255, 255, 255, 0.9); }
-
-[data-theme="dark"] #recent-posts > .recent-post-item { background: #121212; }
-[data-theme="dark"] .card-widget { background: #121212 !important; }
-[data-theme="dark"] div#post { background: #121212 !important; }
-[data-theme="dark"] div#tag { background: #121212 !important; }
-[data-theme="dark"] div#archive { background: #121212 !important; }
-[data-theme="dark"] div#page { background: #121212 !important; }
-[data-theme="dark"] div#category { background: #121212 !important; }
-
-/* ---------- 滚动条 ---------- */
-::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-thumb { background-color: #3b70fc; border-radius: 2em; }
-::-webkit-scrollbar-corner { background-color: transparent; }
-::-moz-selection { color: #fff; background-color: #3b70fc; }
-
-/* ---------- 音乐播放器（固定） ---------- */
-.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-    left: -66px !important;
-    transition: all 0.3s;
-}
-.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover { left: 0 !important; transition: all 0.3s; }
-.aplayer.aplayer-fixed { z-index: 999999 !important; }
-
-/* ---------- 评论框 ---------- */
-.vwrap {
-    box-shadow: 2px 2px 5px #bbb;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 8px;
-    padding: 30px;
-    margin: 30px 0px 30px 0px;
-}
-.vcard {
-    box-shadow: 2px 2px 5px #bbb;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 8px;
-    padding: 30px;
-    margin: 30px 0px 0px 0px;
-}
-
-/* ---------- 文章链接 ---------- */
-#article-container a:hover { text-decoration: none !important; }
-#article-container #hpp_talk p img { display: inline; }
-
-/* ---------- 404页面 ---------- */
-#error-wrap {
-    position: absolute;
-    top: 40%;
-    right: 0;
-    left: 0;
-    margin: 0 auto;
-    padding: 0 1rem;
-    max-width: 1000px;
-    transform: translate(0, -50%);
-}
-#error-wrap .error-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin: 0 1rem;
-    height: 18rem;
-    border-radius: 8px;
-    background: var(--card-bg);
-    box-shadow: var(--card-box-shadow);
-    transition: all 0.3s;
-}
-#error-wrap .error-content .error-img {
-    flex: 1;
-    height: 100%;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-    background-color: #3b70fc;
-    background-position: center;
-    background-size: cover;
-}
-#error-wrap .error-content .error-info {
-    flex: 1;
-    padding: 0.5rem;
-    text-align: center;
-    font-size: 14px;
-    font-family: Titillium Web, "PingFang SC", "Hiragino Sans GB", "Microsoft JhengHei", "Microsoft YaHei", sans-serif;
-}
-#error-wrap .error-content .error-info .error_title { margin-top: -4rem; font-size: 9em; }
-#error-wrap .error-content .error-info .error_subtitle { margin-top: -3.5rem; word-break: break-word; font-size: 1.6em; }
-#error-wrap .error-content .error-info a {
-    display: inline-block;
-    margin-top: 0.5rem;
-    padding: 0.3rem 1.5rem;
-    background: var(--btn-bg);
-    color: var(--btn-color);
-}
-#body-wrap.error .aside-list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    bottom: 0px;
-    position: absolute;
-    padding: 1rem;
-    width: 100%;
-    overflow: scroll;
-}
-#body-wrap.error .aside-list .aside-list-group {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-#body-wrap.error .aside-list .aside-list-item { padding: 0.5rem; }
-#body-wrap.error .aside-list .aside-list-item img {
-    width: 100%;
-    object-fit: cover;
-    border-radius: 12px;
-}
-#body-wrap.error .aside-list .aside-list-item .thumbnail {
-    overflow: hidden;
-    width: 230px;
-    height: 143px;
-    background: var(--anzhiyu-card-bg);
-    display: flex;
-}
-#body-wrap.error .aside-list .aside-list-item .content .title {
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    line-height: 1.5;
-    justify-content: center;
-    align-items: flex-end;
-    align-content: center;
-    padding-top: 0.5rem;
-    color: white;
-}
-#body-wrap.error .aside-list .aside-list-item .content time { display: none; }
-
-/* ---------- 代码框 ---------- */
-#article-container figure.highlight { border-radius: 10px; }
-
-/* ---------- 鼠标样式 ---------- */
-#cursor {
-    position: fixed;
-    width: 16px;
-    height: 16px;
-    background: rgb(57, 197, 187);
-    border-radius: 8px;
-    opacity: 0.25;
-    z-index: 10086;
-    pointer-events: none;
-    transition: 0.2s ease-in-out;
-    transition-property: background, opacity, transform;
-}
-#cursor.hidden { opacity: 0; }
-#cursor.hover { opacity: 0.1; transform: scale(2.5); }
-#cursor.active { opacity: 0.5; transform: scale(0.5); }
-
-/* ---------- 侧边栏个人信息卡片 ---------- */
-#aside-content > .card-widget.card-info {
-    background: linear-gradient(-45deg, #e8d8b9, #eccec5, #a3e9eb, #bdbdf0, #eec1ea);
-    box-shadow: 0 0 5px rgb(66, 68, 68);
-    background-size: 400% 400%;
-    animation: Gradient 10s ease infinite !important;
-}
-@keyframes Gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-[data-theme="dark"] #aside-content > .card-widget.card-info { background: #191919ee; }
-#aside-content > .card-widget.card-info > #card-info-btn {
-    background-color: #3eb8be;
-    border-radius: 8px;
-}
-
-/* ---------- 顶部进度条 ---------- */
-.pace {
-    pointer-events: none;
-    user-select: none;
-    z-index: 2000;
-    position: fixed;
-    margin: auto;
-    top: 10px;
-    left: 0;
-    right: 0;
-    height: 8px;
-    border-radius: 8px;
-    width: 4rem;
-    background: #eaecf2;
-    border: 1px #e3e8f7;
-    overflow: hidden;
-}
-.pace-inactive .pace-progress { opacity: 0; transition: 0.3s ease-in; }
-.pace .pace-progress {
-    box-sizing: border-box;
-    transform: translate3d(0, 0, 0);
-    max-width: 200px;
-    position: absolute;
-    z-index: 2000;
-    display: block;
-    top: 0;
-    right: 100%;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    animation: gradient 1.5s ease infinite;
-    background-size: 200%;
-}
-.pace.pace-inactive { opacity: 0; transition: 0.3s; top: -8px; }
-@keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* ---------- 导航栏自定义 ---------- */
-#nav-right {
-    flex: 1 1 auto;
-    justify-content: flex-end;
-    margin-left: auto;
-    display: flex;
-    flex-wrap: nowrap;
-}
-#nav *::after { background-color: transparent !important; }
-.menus_item_child li:not(#sidebar-menus li) {
-    float: left;
-    border-radius: 6px !important;
-}
-.menus_item_child:not(#sidebar-menus ul) {
-    left: 50%;
-    translate: -50%;
-}
-.icon-theme { color: var(--main-color); }
-
-/* ---------- 分类标签卡 ---------- */
-#categoryBar { width: 100% !important; }
-ul.categoryBar-list { margin: 5px 5px 0 5px !important; padding: 0 !important; }
-li.categoryBar-list-item {
-    font-weight: bold;
-    display: inline-block;
-    height: 180px !important;
-    margin: 5px 0.5% 0 0.5% !important;
-    background-image: linear-gradient(rgba(0,0,0,0.4) 25%, rgba(16,16,16,0) 100%);
-    border-radius: 10px;
-    padding: 25px 0 25px 25px !important;
-    box-shadow: rgba(50,50,50,0.3) 50px 50px 50px 50px inset;
-    overflow: hidden;
-    background-size: 100% !important;
-    background-position: center !important;
-}
-li.categoryBar-list-item:hover {
-    background-size: 110% !important;
-    box-shadow: inset 500px 50px 50px 50px rgba(50,50,50,0.6);
-}
-li.categoryBar-list-item:hover span.categoryBar-list-descr {
-    transition: all 0.5s;
-    transform: translate(-100%, 0);
-}
-a.categoryBar-list-link { color: #fff !important; font-size: 20px !important; }
-a.categoryBar-list-link::before { content: '|' !important; color: #fff !important; font-size: 20px !important; }
-a.categoryBar-list-link:after {
-    content: '';
-    position: relative;
-    width: 0;
-    bottom: 0;
-    display: block;
-    height: 3px;
-    border-radius: 3px;
-    background-color: #fff;
-}
-a.categoryBar-list-link:hover:after { width: 90%; left: 1%; transition: all 0.5s; }
-span.categoryBar-list-count {
-    display: block !important;
-    color: #fff !important;
-    font-size: 20px !important;
-}
-span.categoryBar-list-count::before {
-    content: '\f02d' !important;
-    padding-right: 15px !important;
-    display: inline-block;
-    font-weight: 600;
-    font-style: normal;
-    font-variant: normal;
-    font-family: 'Font Awesome 6 Free';
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-}
-span.categoryBar-list-descr {
-    padding: 5px;
-    display: block !important;
-    color: #fff !important;
-    font-size: 20px !important;
-    position: relative;
-    right: -100%;
-}
-@media screen and (max-width: 650px) {
-    li.categoryBar-list-item { width: 48% !important; height: 150px !important; margin: 5px 1% 0 1% !important; }
-}
-
-/* ---------- 代码高亮 ---------- */
-:root {
-    --hl-color: var(--main-color);
-    --hl-bg: #221a0f;
-    --hltools-bg: var(--main-color);
-    --hltools-color: #fff;
-    --hlnumber-bg: #221a0f;
-    --hlnumber-color: #fff;
-    --hlscrollbar-bg: #fde5fa;
-    --hlexpand-bg: var(--main-color);
-}
-.hljs-comment, .hljs-quote { color: #d6baad; }
-.hljs-variable, .hljs-template-variable, .hljs-tag, .hljs-name, .hljs-selector-id, .hljs-selector-class, .hljs-regexp, .hljs-meta { color: #dc3958; }
-.hljs-number, .hljs-built_in, .hljs-builtin-name, .hljs-literal, .hljs-type, .hljs-params, .hljs-deletion, .hljs-link { color: #f79a32; }
-.hljs-title, .hljs-section, .hljs-attribute { color: #f06431; }
-.hljs-string, .hljs-symbol, .hljs-bullet, .hljs-addition { color: #889b4a; }
-.hljs-keyword, .hljs-selector-tag, .hljs-function { color: #98676a; }
-#article-container figure.highlight .hljs {
-    display: block;
-    overflow-x: auto;
-    background: #221a0f;
-    color: #d3af86;
-    padding: 0.5em;
-}
-.hljs-emphasis { font-style: italic; }
-.hljs-strong { font-weight: bold; }
-
-/* ========================================
-   🔥 音乐馆页面 - 优先取消所有毛玻璃
-   ======================================== */
-
-/* 检测到音乐馆页面时，强制取消所有冲突样式 */
-body:has(#anMusic-page) #post,
-body:has(#anMusic-page) .post-page #post,
-body:has(#anMusic-page) .post-block,
-body:has(#anMusic-page) .recent-post-item,
-body:has(#anMusic-page) .layout>div:first-child,
-body:has(#anMusic-page) .card-widget,
-body:has(#anMusic-page) [class*="card-"] {
-    background: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    box-shadow: none !important;
-    border: none !important;
-}
-
-/* 音乐馆页面自己的样式保留 */
-body:has(#anMusic-page) #anMusic-page * {
-    /* 音乐馆内部样式不被覆盖 */
-}
-
 /* ========================================
    🎨 毛玻璃特效 - 排除音乐馆页面
    ======================================== */
@@ -460,6 +103,25 @@ html[data-theme="dark"]:not(body:has(#anMusic-page))
     background: rgba(0, 0, 0, 0.7) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
+}
+
+/* ========================================
+   🔥 音乐馆页面 - 强制恢复默认（取消毛玻璃）
+   ======================================== */
+
+/* 检测到音乐馆页面时，强制取消毛玻璃 */
+body:has(#anMusic-page) #post,
+body:has(#anMusic-page) .post-page #post,
+body:has(#anMusic-page) .post-block,
+body:has(#anMusic-page) .recent-post-item,
+body:has(#anMusic-page) .layout>div:first-child,
+body:has(#anMusic-page) .card-widget,
+body:has(#anMusic-page) [class*="card-"] {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    border: none !important;
 }
 
 /* ========================================
@@ -668,7 +330,7 @@ html.filter-grayscale { filter: grayscale(1); }
     #custom-control-panel select, #color-picker-panel select { font-size: 12px !important; padding: 5px !important; }
 }
 
-/* ---------- 音乐馆样式（你原来的，保留） ---------- */
+/* ---------- 音乐馆样式 ---------- */
 #page:has(#anMusic-page) {
     border: 0;
     box-shadow: none !important;
