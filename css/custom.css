@@ -1046,7 +1046,7 @@ span.categoryBar-list-descr {
 :root {
   --hl-color: #d3af86;
   --hl-bg: #221a0f;
-  --hltools-bg: #321a0f;
+  --hltools-bg: var(--main-color);
   --hltools-color: #fff;
   --hlnumber-bg: #221a0f;
   --hlnumber-color: #fff;
