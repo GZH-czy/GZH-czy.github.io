@@ -1459,75 +1459,106 @@ html[data-theme="dark"] #post {
 
 
 /* ========================================
-   目录毛玻璃蒙版 - 默认半透明，悬停/激活时清晰
+   目录毛玻璃蒙版 - 平滑过渡版
    ======================================== */
 
-/* ---------- 目录项基础 ---------- */
 .toc-item {
     position: relative !important;
     overflow: hidden !important;
 }
 
-/* 毛玻璃蒙版 - 覆盖在目录文字上面 */
+/* ---------- 毛玻璃蒙版 ---------- */
 .toc-item .toc-link::before {
     content: '' !important;
     position: absolute !important;
-    top: -2px !important;
-    left: -10px !important;
-    right: -10px !important;
-    bottom: -2px !important;
-    border-radius: 8px !important;
-    /* 毛玻璃效果 */
-    background: rgba(255, 255, 255, 0.15) !important;
+    top: -4px !important;
+    left: -14px !important;
+    right: -14px !important;
+    bottom: -4px !important;
+    border-radius: 10px !important;
+    /* 毛玻璃效果 - 默认半透明 */
+    background: rgba(255, 255, 255, 0.12) !important;
     backdrop-filter: blur(6px) !important;
     -webkit-backdrop-filter: blur(6px) !important;
-    /* 默认半透明挡住文字 */
+    border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    /* 默认挡住文字（透明度高） */
     opacity: 0.85 !important;
-    transition: opacity 0.35s ease, backdrop-filter 0.35s ease !important;
+    /* 平滑过渡 */
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                backdrop-filter 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                background 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
     z-index: 0 !important;
     pointer-events: none !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
 
-/* 悬停时 - 毛玻璃变清晰（透明度降低，模糊减弱） */
-.toc-link:hover::before {
-    opacity: 0.15 !important;
-    backdrop-filter: blur(2px) !important;
-    -webkit-backdrop-filter: blur(2px) !important;
-    background: var(--main-color, #49B1F5) !important;
-    opacity: 0.12 !important;
-}
-
-/* 激活时（当前阅读位置）- 毛玻璃完全消失，显示高亮 */
+/* ---------- 激活状态（当前阅读位置）- 清晰 ---------- */
 .toc-link.active::before {
     opacity: 0 !important;
     backdrop-filter: blur(0px) !important;
     -webkit-backdrop-filter: blur(0px) !important;
+    background: transparent !important;
 }
 
-/* 文字在蒙版上方 */
+/* ---------- 悬停状态 - 当前悬停的目录清晰 ---------- */
+.toc-link:hover::before {
+    opacity: 0 !important;
+    backdrop-filter: blur(0px) !important;
+    -webkit-backdrop-filter: blur(0px) !important;
+    background: transparent !important;
+}
+
+/* ---------- 当父级悬停时，子级也清晰（可选） ---------- */
+.toc-item:hover .toc-link::before {
+    opacity: 0 !important;
+    backdrop-filter: blur(0px) !important;
+    -webkit-backdrop-filter: blur(0px) !important;
+    background: transparent !important;
+}
+
+/* 但是激活的保持清晰 */
+.toc-link.active::before {
+    opacity: 0 !important;
+    backdrop-filter: blur(0px) !important;
+    -webkit-backdrop-filter: blur(0px) !important;
+    background: transparent !important;
+}
+
+/* ---------- 文字在蒙版上方 ---------- */
 .toc-link {
     position: relative !important;
     z-index: 1 !important;
+    transition: color 0.4s ease, text-shadow 0.4s ease !important;
 }
 
-/* ---------- 深色模式适配 ---------- */
+/* ---------- 默认文字颜色 ---------- */
+.toc-link {
+    color: var(--text-secondary, #666) !important;
+}
+
+/* ---------- 激活文字 - 高亮 ---------- */
+.toc-link.active {
+    color: var(--main-color, #49B1F5) !important;
+    border-color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 10px var(--main-color, #49B1F5),
+        0 0 20px var(--main-color, #49B1F5),
+        0 0 40px var(--main-color, #49B1F5) !important;
+    font-weight: 600 !important;
+}
+
+/* ---------- 深色模式 ---------- */
 [data-theme="dark"] .toc-item .toc-link::before {
-    background: rgba(0, 0, 0, 0.30) !important;
-    border-color: rgba(255, 255, 255, 0.05) !important;
+    background: rgba(0, 0, 0, 0.25) !important;
+    border-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+[data-theme="dark"] .toc-link.active::before {
+    background: transparent !important;
 }
 
 [data-theme="dark"] .toc-link:hover::before {
-    background: var(--main-color, #49B1F5) !important;
-    opacity: 0.20 !important;
+    background: transparent !important;
 }
-
-/* ---------- 文字颜色保持不变 ---------- */
-.toc-link {
-    color: var(--text-secondary, #666) !important;
-    transition: color 0.3s ease !important;
-}
-
 
 
 /*myscript*/
