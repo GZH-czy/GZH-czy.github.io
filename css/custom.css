@@ -1320,6 +1320,14 @@ html[data-theme="dark"] .post-page #post {
   backdrop-filter: blur(20px);
 }
 
+/* ✅ 修改1：音乐馆页面强制取消毛玻璃 - 使用更高优先级 */
+html[data-theme="light"] body:has(#anMusic-page) .post-page #post,
+html[data-theme="light"] body:has(#anMusic-page) #post {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
 /* ========================================
    音乐馆页面 - 强制恢复默认（取消毛玻璃）
    ======================================== */
@@ -1336,6 +1344,13 @@ html[data-theme="dark"] .post-page #post {
     box-shadow: none !important;
 }
 
+/* ✅ 修改2：深色模式音乐馆页面强制取消毛玻璃 */
+html[data-theme="dark"] body:has(#anMusic-page) .post-page #post,
+html[data-theme="dark"] body:has(#anMusic-page) #post {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
 
 /*文字选择，目录选择光晕*/
 
