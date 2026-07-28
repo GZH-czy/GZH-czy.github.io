@@ -1528,25 +1528,7 @@ html[data-theme="dark"] #post {
     transition: color 0.3s ease !important;
 }
 
-/* 悬停文字发光 */
-.toc-link:hover {
-    color: var(--main-color, #49B1F5) !important;
-    text-shadow: 
-        0 0 8px var(--main-color, #49B1F5),
-        0 0 16px var(--main-color, #49B1F5),
-        0 0 32px var(--main-color, #49B1F5) !important;
-}
 
-/* 激活文字高亮 */
-.toc-link.active {
-    color: var(--main-color, #49B1F5) !important;
-    border-color: var(--main-color, #49B1F5) !important;
-    text-shadow: 
-        0 0 10px var(--main-color, #49B1F5),
-        0 0 20px var(--main-color, #49B1F5),
-        0 0 40px var(--main-color, #49B1F5) !important;
-    font-weight: 600 !important;
-}
 
 /*myscript*/
 /* source/css/custom.css */
