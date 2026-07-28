@@ -1337,6 +1337,23 @@ html[data-theme="dark"] body:has(#anMusic-page) .post-page #post {
     -webkit-backdrop-filter: none !important;
 }
 
+/* ========================================
+   音乐馆页面 - 强制恢复默认（取消毛玻璃）
+   ======================================== */
+
+/* 方法：使用 .music-page 类（需要 JS 添加） */
+.music-page #post,
+.music-page .post-block,
+.music-page .recent-post-item,
+.music-page .layout>div:first-child,
+.music-page .card-widget {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+}
+
+
 /*文字选择，目录选择光晕*/
 
 /* ========================================
