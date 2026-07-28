@@ -1348,96 +1348,62 @@ html[data-theme="dark"] #post {
 /*文字选择，目录选择光晕*/
 
 /* ========================================
-   文本选中 - 发光光晕效果
+   目录光晕 - 只触发当前标题（独立发光）
    ======================================== */
 
-/* 文本选中发光效果 */
-::selection {
-    background: var(--main-color, #49B1F5) !important;
-    color: #ffffff !important;
-    text-shadow: 
-        0 0 10px var(--main-color, #49B1F5),
-        0 0 20px var(--main-color, #49B1F5),
-        0 0 40px var(--main-color, #49B1F5) !important;
-}
-
-/* Firefox 兼容 */
-::-moz-selection {
-    background: var(--main-color, #49B1F5) !important;
-    color: #ffffff !important;
-    text-shadow: 
-        0 0 10px var(--main-color, #49B1F5),
-        0 0 20px var(--main-color, #49B1F5),
-        0 0 40px var(--main-color, #49B1F5) !important;
-}
-
-/* ========================================
-   目录选中 - 发光光晕效果
-   ======================================== */
-
-/* 目录悬停发光 */
-.toc-link:hover {
+/* 一级标题悬停发光 */
+.toc-item > .toc-link:hover {
     color: var(--main-color, #49B1F5) !important;
     text-shadow: 
-        0 0 10px var(--main-color, #49B1F5),
-        0 0 20px var(--main-color, #49B1F5),
-        0 0 40px var(--main-color, #49B1F5) !important;
+        0 0 6px var(--main-color, #49B1F5),
+        0 0 12px var(--main-color, #49B1F5),
+        0 0 24px var(--main-color, #49B1F5) !important;
     transition: text-shadow 0.3s ease !important;
 }
 
-/* 目录激活（当前阅读位置）发光 */
+/* 二级标题悬停发光（独立发光，不受父级影响） */
+.toc-child .toc-link:hover {
+    color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 6px var(--main-color, #49B1F5),
+        0 0 12px var(--main-color, #49B1F5),
+        0 0 24px var(--main-color, #49B1F5) !important;
+    transition: text-shadow 0.3s ease !important;
+}
+
+/* 三级标题悬停发光（独立发光） */
+.toc-child .toc-child .toc-link:hover {
+    color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 6px var(--main-color, #49B1F5),
+        0 0 12px var(--main-color, #49B1F5),
+        0 0 24px var(--main-color, #49B1F5) !important;
+    transition: text-shadow 0.3s ease !important;
+}
+
+/* 激活（当前阅读位置）高亮 - 只作用于当前项 */
 .toc-link.active {
     color: var(--main-color, #49B1F5) !important;
     border-color: var(--main-color, #49B1F5) !important;
     text-shadow: 
-        0 0 10px var(--main-color, #49B1F5),
-        0 0 20px var(--main-color, #49B1F5),
-        0 0 40px var(--main-color, #49B1F5) !important;
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 16px var(--main-color, #49B1F5),
+        0 0 32px var(--main-color, #49B1F5) !important;
     font-weight: 600 !important;
 }
 
-/* 目录列表项悬停发光 */
+/* 取消父级悬停传递给子级 */
 .toc-item:hover .toc-link {
-    color: var(--main-color, #49B1F5) !important;
-    text-shadow: 
-        0 0 10px var(--main-color, #49B1F5),
-        0 0 20px var(--main-color, #49B1F5),
-        0 0 40px var(--main-color, #49B1F5) !important;
+    /* 这里留空，防止父级发光影响子级 */
 }
 
-/* ========================================
-   文章标题悬停发光
-   ======================================== */
-
-.post-title:hover,
-.article-title:hover {
+/* 但保留激活状态的父级高亮（如果你希望） */
+.toc-item.active > .toc-link {
     color: var(--main-color, #49B1F5) !important;
     text-shadow: 
-        0 0 10px var(--main-color, #49B1F5),
-        0 0 20px var(--main-color, #49B1F5),
-        0 0 40px var(--main-color, #49B1F5) !important;
-    transition: text-shadow 0.3s ease !important;
-}
-
-/* ========================================
-   导航菜单悬停发光
-   ======================================== */
-
-.menus_item .site-page:hover {
-    color: var(--main-color, #49B1F5) !important;
-    text-shadow: 
-        0 0 10px var(--main-color, #49B1F5),
-        0 0 20px var(--main-color, #49B1F5),
-        0 0 40px var(--main-color, #49B1F5) !important;
-}
-
-.menus_item .site-page.current,
-.menus_item .site-page.active {
-    color: var(--main-color, #49B1F5) !important;
-    text-shadow: 
-        0 0 10px var(--main-color, #49B1F5),
-        0 0 20px var(--main-color, #49B1F5),
-        0 0 40px var(--main-color, #49B1F5) !important;
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 16px var(--main-color, #49B1F5),
+        0 0 32px var(--main-color, #49B1F5) !important;
 }
 
 /*myscript*/
