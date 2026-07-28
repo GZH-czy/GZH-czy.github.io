@@ -1559,8 +1559,7 @@ img {
     opacity: 0.8;
 }
 
-.toc-item.active .toc-link,
-.toc-link.active {
+.toc-item.active .toc-link {
     color: var(--main-color) !important;
     border-color: var(--main-color) !important;
 }
