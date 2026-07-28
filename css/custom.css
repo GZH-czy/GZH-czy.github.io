@@ -1307,7 +1307,6 @@ html[data-theme="dark"] [glass-selector] {
    ======================================== */
 
 /* 浅色模式 - 直接复制你原来的代码，没有改动 */
-html[data-theme="light"] #aside-content .card-author,
 html[data-theme="light"] #aside-content .card-announcement,
 html[data-theme="light"] #aside-content .card-recent-post,
 html[data-theme="light"] #aside-content .card-categories,
@@ -1327,7 +1326,6 @@ html[data-theme="light"] #post {
 }
 
 /* 深色模式 - 直接复制你原来的代码，没有改动 */
-html[data-theme="dark"] #aside-content .card-author,
 html[data-theme="dark"] #aside-content .card-announcement,
 html[data-theme="dark"] #aside-content .card-recent-post,
 html[data-theme="dark"] #aside-content .card-categories,
