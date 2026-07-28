@@ -503,6 +503,10 @@
         if (picker) {
             picker.classList.remove('picker-hidden');
             picker.classList.add('picker-visible');
+            // 确保选择器覆盖在主面板之上
+            if (document.getElementById('custom-control-panel')) {
+                picker.style.zIndex = '100001';
+            }
             applyThemeToElements();
         }
     }
@@ -581,6 +585,7 @@
     }
 
     function createControlPanel() {
+        // ---- 创建主面板 ----
         const panelHTML = `
             <div id="custom-control-panel" class="panel-hidden" style="position:fixed; bottom:70px; right:10px; width:300px; max-width:calc(100vw - 20px); background:#fff; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,0.25); padding:20px; z-index:99999; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#333; max-height:80vh; overflow-y:auto; opacity:0; transform:scale(0.9) translateY(10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events:none; transform-origin: bottom right; font-size:14px;">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
@@ -595,33 +600,6 @@
                         <span id="current-color-display" style="display:inline-block; width:36px; height:36px; border-radius:8px; background:#49B1F5; border:2px solid #ddd; cursor:pointer; transition: all 0.2s;" title="点击选择颜色"></span>
                         <span id="current-color-hex" style="font-size:13px; font-family:monospace; color:#555; cursor:pointer;" onclick="document.getElementById('current-color-display').click()">#49B1F5</span>
                         <span style="font-size:12px; color:#999; margin-left:auto;">点击色块选择</span>
-                    </div>
-                </div>
-
-                <!-- 颜色选择器（二级面板）- 浮在一级上面，位置不变 -->
-                <div id="color-picker-panel" class="picker-hidden" style="position:fixed; bottom:70px; right:10px; width:300px; max-width:calc(100vw - 20px); background:#fff; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,0.3); padding:20px; z-index:100000; opacity:0; transform:scale(0.9) translateY(10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events:none; transform-origin: bottom right; font-size:14px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
-                        <h4 style="margin:0; font-size:15px; font-weight:600; color:#49B1F5;">🎯 选择颜色</h4>
-                        <button id="close-color-picker-btn" style="background:none; border:none; font-size:18px; cursor:pointer; color:#888; padding:0 4px; transition:color 0.3s;" aria-label="关闭颜色选择器">✕</button>
-                    </div>
-                    
-                    <div style="margin-bottom:12px;">
-                        <label style="font-size:12px; color:#888; display:block; margin-bottom:4px;">预设颜色</label>
-                        <div style="display:flex; flex-wrap:wrap; gap:6px;">
-                            ${PRESET_COLORS.map(c => `
-                                <div class="picker-swatch" data-color="${c}" style="width:30px; height:30px; border-radius:50%; background:${c}; cursor:pointer; border:2px solid transparent; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'"></div>
-                            `).join('')}
-                        </div>
-                    </div>
-                    
-                    <div style="margin-bottom:12px;">
-                        <label style="font-size:12px; color:#888; display:block; margin-bottom:4px;">色环</label>
-                        <input type="color" id="color-wheel" value="#49B1F5" style="width:100%; height:50px; border:1px solid #ddd; border-radius:8px; cursor:pointer; padding:2px;">
-                    </div>
-                    
-                    <div>
-                        <label style="font-size:12px; color:#888; display:block; margin-bottom:4px;">十六进制</label>
-                        <input type="text" id="color-hex-input" value="#49B1F5" style="width:100%; padding:6px 10px; border:1px solid #ddd; border-radius:6px; font-family:monospace; font-size:14px;" placeholder="#RRGGBB">
                     </div>
                 </div>
 
@@ -666,6 +644,39 @@
         const panelContainer = document.createElement('div');
         panelContainer.innerHTML = panelHTML;
         document.body.appendChild(panelContainer.firstElementChild);
+
+        // ---- 创建颜色选择器面板（独立于主面板，放在body下） ----
+        const pickerHTML = `
+            <div id="color-picker-panel" class="picker-hidden" style="position:fixed; bottom:70px; right:10px; width:300px; max-width:calc(100vw - 20px); background:#fff; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,0.3); padding:20px; z-index:100000; opacity:0; transform:scale(0.9) translateY(10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events:none; transform-origin: bottom right; font-size:14px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
+                    <h4 style="margin:0; font-size:15px; font-weight:600; color:#49B1F5;">🎯 选择颜色</h4>
+                    <button id="close-color-picker-btn" style="background:none; border:none; font-size:18px; cursor:pointer; color:#888; padding:0 4px; transition:color 0.3s;" aria-label="关闭颜色选择器">✕</button>
+                </div>
+                
+                <div style="margin-bottom:12px;">
+                    <label style="font-size:12px; color:#888; display:block; margin-bottom:4px;">预设颜色</label>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                        ${PRESET_COLORS.map(c => `
+                            <div class="picker-swatch" data-color="${c}" style="width:30px; height:30px; border-radius:50%; background:${c}; cursor:pointer; border:2px solid transparent; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'"></div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div style="margin-bottom:12px;">
+                    <label style="font-size:12px; color:#888; display:block; margin-bottom:4px;">色环</label>
+                    <input type="color" id="color-wheel" value="#49B1F5" style="width:100%; height:50px; border:1px solid #ddd; border-radius:8px; cursor:pointer; padding:2px;">
+                </div>
+                
+                <div>
+                    <label style="font-size:12px; color:#888; display:block; margin-bottom:4px;">十六进制</label>
+                    <input type="text" id="color-hex-input" value="#49B1F5" style="width:100%; padding:6px 10px; border:1px solid #ddd; border-radius:6px; font-family:monospace; font-size:14px;" placeholder="#RRGGBB">
+                </div>
+            </div>
+        `;
+
+        const pickerContainer = document.createElement('div');
+        pickerContainer.innerHTML = pickerHTML;
+        document.body.appendChild(pickerContainer.firstElementChild);
 
         // ---- 事件绑定 ----
         const closeBtn = document.getElementById('close-panel-btn');
