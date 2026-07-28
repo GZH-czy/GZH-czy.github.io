@@ -1280,76 +1280,56 @@ html[data-theme="dark"] [glass-selector] {
 /* 4. 右下角按钮组 */
 #rightside
 
-/* ========================================
-   当前配置（保持你原来的效果不变）
-   ======================================== */
-
-/* 浅色模式 - 直接复制你原来的代码，没有改动 */
-html[data-theme="light"] #aside-content .card-author,
-html[data-theme="light"] #aside-content .card-announcement,
-html[data-theme="light"] #aside-content .card-recent-post,
-html[data-theme="light"] #aside-content .card-categories,
-html[data-theme="light"] #aside-content .card-tags,
-html[data-theme="light"] #aside-content .card-archives,
-html[data-theme="light"] #aside-content .card-webinfo,
-html[data-theme="light"] .layout>div:first-child:not(.recent-posts),
-html[data-theme="light"] #recent-posts>.recent-post-item,
-html[data-theme="light"] #page-header.nav-visible #nav,
-html[data-theme="light"] .search-dialog,
-html[data-theme="light"] #sidebar #sidebar-menus.open,
-html[data-theme="light"] .post-block,
-html[data-theme="light"] #post {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
-}
-
-/* 深色模式 - 直接复制你原来的代码，没有改动 */
-html[data-theme="dark"] #aside-content .card-author,
-html[data-theme="dark"] #aside-content .card-announcement,
-html[data-theme="dark"] #aside-content .card-recent-post,
-html[data-theme="dark"] #aside-content .card-categories,
-html[data-theme="dark"] #aside-content .card-tags,
-html[data-theme="dark"] #aside-content .card-archives,
-html[data-theme="dark"] #aside-content .card-webinfo,
-html[data-theme="dark"] .layout>div:first-child:not(.recent-posts),
-html[data-theme="dark"] #recent-posts>.recent-post-item,
-html[data-theme="dark"] #page-header.nav-visible #nav,
-html[data-theme="dark"] .search-dialog,
-html[data-theme="dark"] #sidebar #sidebar-menus.open 
-html[data-theme="dark"] .post-block,
-html[data-theme="dark"] #post {
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(20px);
-}
-
-
-/*文字选择，目录选择光晕*/
 
 /* ========================================
-   文本选中 - 发光光晕效果
+   目录光晕 - 只触发当前标题（独立发光）
    ======================================== */
 
-/* 文本选中发光效果 */
-::selection {
-    background: var(--main-color, #49B1F5) !important;
-    color: #ffffff !important;
+/* 一级标题悬停发光 */
+.toc-item > .toc-link:hover {
+    color: var(--main-color, #49B1F5) !important;
     text-shadow: 
         0 0 5px var(--main-color, #49B1F5),
         0 0 8px var(--main-color, #49B1F5),
         0 0 10px var(--main-color, #49B1F5) !important;
+    transition: text-shadow 0.3s ease !important;
 }
 
-/* Firefox 兼容 */
-::-moz-selection {
-    background: var(--main-color, #49B1F5) !important;
-    color: #ffffff !important;
+/* 二级标题悬停发光（独立发光，不受父级影响） */
+.toc-child .toc-link:hover {
+    color: var(--main-color, #49B1F5) !important;
     text-shadow: 
         0 0 5px var(--main-color, #49B1F5),
         0 0 8px var(--main-color, #49B1F5),
         0 0 10px var(--main-color, #49B1F5) !important;
+    transition: text-shadow 0.3s ease !important;
 }
 
+/* 三级标题悬停发光（独立发光） */
+.toc-child .toc-child .toc-link:hover {
+    color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 5px var(--main-color, #49B1F5),
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 10px var(--main-color, #49B1F5) !important;
+    transition: text-shadow 0.3s ease !important;
+}
 
+/* 激活（当前阅读位置）高亮 - 只作用于当前项 */
+.toc-link.active {
+    color: var(--main-color, #49B1F5) !important;
+    border-color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 1px var(--main-color, #49B1F5),
+        0 0 2px var(--main-color, #49B1F5),
+        0 0 3px var(--main-color, #49B1F5) !important;
+    font-weight: 600 !important;
+}
+
+/* 取消父级悬停传递给子级 */
+.toc-item:hover .toc-link {
+    /* 这里留空，防止父级发光影响子级 */
+}
 
 
 /* ========================================
