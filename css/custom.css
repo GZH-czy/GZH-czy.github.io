@@ -1307,6 +1307,13 @@ html[data-theme="dark"] [glass-selector] {
    ======================================== */
 
 /* 浅色模式 - 直接复制你原来的代码，没有改动 */
+html[data-theme="light"] #aside-content .card-author,
+html[data-theme="light"] #aside-content .card-announcement,
+html[data-theme="light"] #aside-content .card-recent-post,
+html[data-theme="light"] #aside-content .card-categories,
+html[data-theme="light"] #aside-content .card-tags,
+html[data-theme="light"] #aside-content .card-archives,
+html[data-theme="light"] #aside-content .card-webinfo,
 html[data-theme="light"] #aside-content .card-widget,
 html[data-theme="light"] .layout>div:first-child:not(.recent-posts),
 html[data-theme="light"] #recent-posts>.recent-post-item,
@@ -1320,6 +1327,13 @@ html[data-theme="light"] #post {
 }
 
 /* 深色模式 - 直接复制你原来的代码，没有改动 */
+html[data-theme="dark"] #aside-content .card-author,
+html[data-theme="dark"] #aside-content .card-announcement,
+html[data-theme="dark"] #aside-content .card-recent-post,
+html[data-theme="dark"] #aside-content .card-categories,
+html[data-theme="dark"] #aside-content .card-tags,
+html[data-theme="dark"] #aside-content .card-archives,
+html[data-theme="dark"] #aside-content .card-webinfo,
 html[data-theme="dark"] #aside-content .card-widget,
 html[data-theme="dark"] .layout>div:first-child:not(.recent-posts),
 html[data-theme="dark"] #recent-posts>.recent-post-item,
