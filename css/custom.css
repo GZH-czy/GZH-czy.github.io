@@ -1296,7 +1296,9 @@ html[data-theme="light"] .layout>div:first-child:not(.recent-posts),
 html[data-theme="light"] #recent-posts>.recent-post-item,
 html[data-theme="light"] #page-header.nav-visible #nav,
 html[data-theme="light"] .search-dialog,
-{
+
+html[data-theme="light"] .post-block,
+html[data-theme="light"] #post {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
 }
@@ -1313,7 +1315,9 @@ html[data-theme="dark"] .layout>div:first-child:not(.recent-posts),
 html[data-theme="dark"] #recent-posts>.recent-post-item,
 html[data-theme="dark"] #page-header.nav-visible #nav,
 html[data-theme="dark"] .search-dialog,
-{
+
+html[data-theme="dark"] .post-block,
+html[data-theme="dark"] #post {
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(20px);
 }
