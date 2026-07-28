@@ -1348,6 +1348,30 @@ html[data-theme="dark"] #post {
 /*文字选择，目录选择光晕*/
 
 /* ========================================
+   文本选中 - 发光光晕效果
+   ======================================== */
+
+/* 文本选中发光效果 */
+::selection {
+    background: var(--main-color, #49B1F5) !important;
+    color: #ffffff !important;
+    text-shadow: 
+        0 0 5px var(--main-color, #49B1F5),
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 10px var(--main-color, #49B1F5) !important;
+}
+
+/* Firefox 兼容 */
+::-moz-selection {
+    background: var(--main-color, #49B1F5) !important;
+    color: #ffffff !important;
+    text-shadow: 
+        0 0 5px var(--main-color, #49B1F5),
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 10px var(--main-color, #49B1F5) !important;
+}
+
+/* ========================================
    目录光晕 - 只触发当前标题（独立发光）
    ======================================== */
 
@@ -1355,9 +1379,9 @@ html[data-theme="dark"] #post {
 .toc-item > .toc-link:hover {
     color: var(--main-color, #49B1F5) !important;
     text-shadow: 
-        0 0 6px var(--main-color, #49B1F5),
-        0 0 10px var(--main-color, #49B1F5),
-        0 0 15px var(--main-color, #49B1F5) !important;
+        0 0 5px var(--main-color, #49B1F5),
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 10px var(--main-color, #49B1F5) !important;
     transition: text-shadow 0.3s ease !important;
 }
 
@@ -1365,9 +1389,9 @@ html[data-theme="dark"] #post {
 .toc-child .toc-link:hover {
     color: var(--main-color, #49B1F5) !important;
     text-shadow: 
-        0 0 6px var(--main-color, #49B1F5),
-        0 0 10px var(--main-color, #49B1F5),
-        0 0 15px var(--main-color, #49B1F5) !important;
+        0 0 5px var(--main-color, #49B1F5),
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 10px var(--main-color, #49B1F5) !important;
     transition: text-shadow 0.3s ease !important;
 }
 
@@ -1375,9 +1399,9 @@ html[data-theme="dark"] #post {
 .toc-child .toc-child .toc-link:hover {
     color: var(--main-color, #49B1F5) !important;
     text-shadow: 
-        0 0 6px var(--main-color, #49B1F5),
-        0 0 10px var(--main-color, #49B1F5),
-        0 0 15px var(--main-color, #49B1F5) !important;
+        0 0 5px var(--main-color, #49B1F5),
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 10px var(--main-color, #49B1F5) !important;
     transition: text-shadow 0.3s ease !important;
 }
 
@@ -1386,9 +1410,9 @@ html[data-theme="dark"] #post {
     color: var(--main-color, #49B1F5) !important;
     border-color: var(--main-color, #49B1F5) !important;
     text-shadow: 
+        0 0 5px var(--main-color, #49B1F5),
         0 0 8px var(--main-color, #49B1F5),
-        0 0 10px var(--main-color, #49B1F5),
-        0 0 15px var(--main-color, #49B1F5) !important;
+        0 0 10px var(--main-color, #49B1F5) !important;
     font-weight: 600 !important;
 }
 
@@ -1398,6 +1422,40 @@ html[data-theme="dark"] #post {
 }
 
 
+/* ========================================
+   文章标题悬停发光
+   ======================================== */
+
+.post-title:hover,
+.article-title:hover {
+    color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 5px var(--main-color, #49B1F5),
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 10px var(--main-color, #49B1F5) !important;
+    transition: text-shadow 0.3s ease !important;
+}
+
+/* ========================================
+   导航菜单悬停发光
+   ======================================== */
+
+.menus_item .site-page:hover {
+    color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 5px var(--main-color, #49B1F5),
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 10px var(--main-color, #49B1F5) !important;
+}
+
+.menus_item .site-page.current,
+.menus_item .site-page.active {
+    color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 5px var(--main-color, #49B1F5),
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 10px var(--main-color, #49B1F5) !important;
+}
 
 /*myscript*/
 /* source/css/custom.css */
