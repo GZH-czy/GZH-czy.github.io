@@ -1135,20 +1135,7 @@ span.categoryBar-list-descr {
    使用说明：在下方括号中填入选择器即可控制哪些界面应用毛玻璃
    ======================================== */
 
-/* ---------- 毛玻璃样式（保持不变） ---------- */
-/* 浅色模式 */
-html[data-theme="light"] [glass-selector] {
-  background: rgba(255, 255, 255, 0.7) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-}
 
-/* 深色模式 */
-html[data-theme="dark"] [glass-selector] {
-  background: rgba(0, 0, 0, 0.7) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-}
 
 /* ========================================
    一、侧边栏卡片
