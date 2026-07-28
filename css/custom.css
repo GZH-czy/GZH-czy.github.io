@@ -1125,29 +1125,6 @@ span.categoryBar-list-descr {
 }
 
 
-/*page界面模糊背景*/
-/*.page #page:not(.home #page){
-    background: transparent!important;
-    border: none!important;
-    box-shadow: none!important;
-    padding-top: 0;
-    backdrop-filter: none!important;
-}
-#page::before{
-    position: fixed;
-    z-index:-114;
-    bottom: 0;
-    left:0;
-    width: 100%;
-    height: 100%;
-    content:'';
-    backdrop-filter: blur(10px);
-    background:var(--lyx-white-acrylic2);
-}
-[data-theme="dark"] #page::before{
-    background-color: var(--lyx-black-acrylic2)!important;
-}*/
-
 
 /* ========================================
    文章页面毛玻璃遮罩（仅遮罩，不设置背景图）
@@ -1531,6 +1508,17 @@ html[data-theme="dark"] #post {
 [data-theme="dark"] #aside-content .toc:hover .toc-link::before,
 [data-theme="dark"] .toc-container:hover .toc-link::before {
     background: transparent !important;
+}
+
+
+/* ========================================
+   目录激活背景 - 联动主题色
+   ======================================== */
+
+.toc-link.active {
+    background: var(--main-color, #49B1F5) !important;
+    background: rgba(73, 177, 245, 0.15) !important;  /* 半透明背景 */
+    border-radius: 6px !important;
 }
 
 /*myscript*/
