@@ -1297,8 +1297,8 @@ html[data-theme="light"] #recent-posts>.recent-post-item,
 html[data-theme="light"] #page-header.nav-visible #nav,
 html[data-theme="light"] .search-dialog,
 html[data-theme="light"] #sidebar #sidebar-menus.open,
-
-html[data-theme="light"] #post {
+html[data-theme="light"] .post-block,
+{
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
 }
@@ -1316,8 +1316,8 @@ html[data-theme="dark"] #recent-posts>.recent-post-item,
 html[data-theme="dark"] #page-header.nav-visible #nav,
 html[data-theme="dark"] .search-dialog,
 html[data-theme="dark"] #sidebar #sidebar-menus.open 
-
-html[data-theme="dark"] #post {
+html[data-theme="dark"] .post-block,
+{
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(20px);
 }
