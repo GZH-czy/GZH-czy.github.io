@@ -1397,14 +1397,7 @@ html[data-theme="dark"] #post {
     /* 这里留空，防止父级发光影响子级 */
 }
 
-/* 但保留激活状态的父级高亮（如果你希望） */
-.toc-item.active > .toc-link {
-    color: var(--main-color, #49B1F5) !important;
-    text-shadow: 
-        0 0 8px var(--main-color, #49B1F5),
-        0 0 16px var(--main-color, #49B1F5),
-        0 0 32px var(--main-color, #49B1F5) !important;
-}
+
 
 /*myscript*/
 /* source/css/custom.css */
