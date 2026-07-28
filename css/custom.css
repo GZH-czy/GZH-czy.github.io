@@ -1181,7 +1181,7 @@ html[data-theme="dark"] [glass-selector] {
 #aside-content .card-widget
 
 /* 2. 侧边栏第一个卡片（作者卡片） */
-#aside-content > .card-widget:first-child
+/*#aside-content > .card-widget:first-child*/
 
 /* 3. 作者信息卡片 */
 #aside-content .card-author
