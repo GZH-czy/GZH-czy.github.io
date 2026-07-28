@@ -1528,10 +1528,7 @@ html[data-theme="dark"] #post {
    目录激活背景 - 联动主题色
    ======================================== */
 
-.toc-link.active {
-/*    background: rgba(var(--main-color, #49B1F5), 0.4) !important;  /* 改成你想要的颜色 */*/
-    border-radius: 6px !important;
-}
+
     
 
 /*myscript*/
