@@ -1363,7 +1363,7 @@ html[data-theme="dark"] .post-page #post {
 
 /*文字选择，目录选择光晕*/
 
-/* =======================================================================
+/* ========================================
    文本选中 - 发光光晕效果
    ======================================== */
 
@@ -1473,7 +1473,7 @@ html[data-theme="dark"] .post-page #post {
         0 0 10px var(--main-color, #49B1F5) !important;
 }
 
-/* ===================================================box-shadow卡片发光
+/* ========================================
    目录激活背景框 + 外发光
    ======================================== */
 
@@ -1487,79 +1487,6 @@ html[data-theme="dark"] .post-page #post {
 }
 
 
-/* ========================================
-   侧边栏卡片 - 悬停发光效果
-   ======================================== */
-
-/* ---------- 4. 公告卡片 ---------- */
-#aside-content .card-announcement:hover {
-    box-shadow: 
-        0 0 15px var(--main-color, #49B1F5),
-        0 0 30px var(--main-color, #49B1F5) !important;
-    transform: translateY(-3px) !important;
-    transition: all 0.4s ease !important;
-    border-color: var(--main-color, #49B1F5) !important;
-}
-
-/* ---------- 5. 最新文章卡片 ---------- */
-#aside-content .card-recent-post:hover {
-    box-shadow: 
-        0 0 15px var(--main-color, #49B1F5),
-        0 0 30px var(--main-color, #49B1F5) !important;
-    transform: translateY(-3px) !important;
-    transition: all 0.4s ease !important;
-    border-color: var(--main-color, #49B1F5) !important;
-}
-
-/* ---------- 6. 分类卡片 ---------- */
-#aside-content .card-categories:hover {
-    box-shadow: 
-        0 0 15px var(--main-color, #49B1F5),
-        0 0 30px var(--main-color, #49B1F5) !important;
-    transform: translateY(-3px) !important;
-    transition: all 0.4s ease !important;
-    border-color: var(--main-color, #49B1F5) !important;
-}
-
-/* ---------- 7. 标签卡片 ---------- */
-#aside-content .card-tags:hover {
-    box-shadow: 
-        0 0 15px var(--main-color, #49B1F5),
-        0 0 30px var(--main-color, #49B1F5) !important;
-    transform: translateY(-3px) !important;
-    transition: all 0.4s ease !important;
-    border-color: var(--main-color, #49B1F5) !important;
-}
-
-/* ---------- 8. 归档卡片 ---------- */
-#aside-content .card-archives:hover {
-    box-shadow: 
-        0 0 15px var(--main-color, #49B1F5),
-        0 0 30px var(--main-color, #49B1F5) !important;
-    transform: translateY(-3px) !important;
-    transition: all 0.4s ease !important;
-    border-color: var(--main-color, #49B1F5) !important;
-}
-
-/* ---------- 9. 友链卡片 ---------- */
-#aside-content .card-webinfo:hover {
-    box-shadow: 
-        0 0 15px var(--main-color, #49B1F5),
-        0 0 30px var(--main-color, #49B1F5) !important;
-    transform: translateY(-3px) !important;
-    transition: all 0.4s ease !important;
-    border-color: var(--main-color, #49B1F5) !important;
-}
-
-/* ---------- 首页文章卡片 ---------- */
-#recent-posts > .recent-post-item:hover {
-    box-shadow: 
-        0 0 15px var(--main-color, #49B1F5),
-        0 0 30px var(--main-color, #49B1F5) !important;
-    transform: translateY(-4px) !important;
-    transition: all 0.4s ease !important;
-    border-color: var(--main-color, #49B1F5) !important;
-}
 
 
 /* =======================================================
@@ -1638,7 +1565,7 @@ html[data-theme="dark"] .post-page #post {
 }
 
 
-/* =====================================================================
+/* =======================================================
    目录激活背景 - 联动主题色
    ======================================== */
 
