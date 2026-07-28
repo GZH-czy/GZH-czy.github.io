@@ -1356,8 +1356,8 @@ html[data-theme="dark"] #post {
     color: var(--main-color, #49B1F5) !important;
     text-shadow: 
         0 0 6px var(--main-color, #49B1F5),
-        0 0 12px var(--main-color, #49B1F5),
-        0 0 24px var(--main-color, #49B1F5) !important;
+        0 0 10px var(--main-color, #49B1F5),
+        0 0 15px var(--main-color, #49B1F5) !important;
     transition: text-shadow 0.3s ease !important;
 }
 
@@ -1366,8 +1366,8 @@ html[data-theme="dark"] #post {
     color: var(--main-color, #49B1F5) !important;
     text-shadow: 
         0 0 6px var(--main-color, #49B1F5),
-        0 0 12px var(--main-color, #49B1F5),
-        0 0 24px var(--main-color, #49B1F5) !important;
+        0 0 10px var(--main-color, #49B1F5),
+        0 0 15px var(--main-color, #49B1F5) !important;
     transition: text-shadow 0.3s ease !important;
 }
 
@@ -1376,8 +1376,8 @@ html[data-theme="dark"] #post {
     color: var(--main-color, #49B1F5) !important;
     text-shadow: 
         0 0 6px var(--main-color, #49B1F5),
-        0 0 12px var(--main-color, #49B1F5),
-        0 0 24px var(--main-color, #49B1F5) !important;
+        0 0 10px var(--main-color, #49B1F5),
+        0 0 15px var(--main-color, #49B1F5) !important;
     transition: text-shadow 0.3s ease !important;
 }
 
@@ -1387,8 +1387,8 @@ html[data-theme="dark"] #post {
     border-color: var(--main-color, #49B1F5) !important;
     text-shadow: 
         0 0 8px var(--main-color, #49B1F5),
-        0 0 16px var(--main-color, #49B1F5),
-        0 0 32px var(--main-color, #49B1F5) !important;
+        0 0 10px var(--main-color, #49B1F5),
+        0 0 15px var(--main-color, #49B1F5) !important;
     font-weight: 600 !important;
 }
 
