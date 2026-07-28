@@ -1459,7 +1459,7 @@ html[data-theme="dark"] #post {
 
 
 /* ========================================
-   目录毛玻璃蒙版 - 悬停时全部清晰
+   目录毛玻璃蒙版 - 悬停全部清晰（修复版）
    ======================================== */
 
 .toc-item {
@@ -1476,22 +1476,17 @@ html[data-theme="dark"] #post {
     right: -12px !important;
     bottom: -4px !important;
     border-radius: 8px !important;
-    /* 毛玻璃效果 - 默认半透明 */
     background: rgba(255, 255, 255, 0.15) !important;
     backdrop-filter: blur(6px) !important;
     -webkit-backdrop-filter: blur(6px) !important;
     border: 1px solid rgba(255, 255, 255, 0.04) !important;
-    /* 默认挡住文字（透明度高） */
     opacity: 0.85 !important;
-    /* 平滑过渡 */
-    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                backdrop-filter 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                background 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
     z-index: 0 !important;
     pointer-events: none !important;
 }
 
-/* ---------- 激活状态（当前阅读位置）- 清晰 ---------- */
+/* ---------- 激活状态 - 清晰 ---------- */
 .toc-link.active::before {
     opacity: 0 !important;
     backdrop-filter: blur(0px) !important;
@@ -1499,7 +1494,10 @@ html[data-theme="dark"] #post {
     background: transparent !important;
 }
 
-/* ---------- 🔥 关键：悬停到整个目录容器时，所有目录变清晰 ---------- */
+/* ---------- 🔥 关键修复：悬停到任意目录时，所有目录蒙版消失 ---------- */
+/* 当悬停到 .toc 容器时，所有目录变清晰 */
+.toc:hover .toc-link::before,
+#aside-content .toc:hover .toc-link::before,
 .toc-container:hover .toc-link::before {
     opacity: 0 !important;
     backdrop-filter: blur(0px) !important;
@@ -1520,39 +1518,7 @@ html[data-theme="dark"] #post {
     position: relative !important;
     z-index: 1 !important;
     transition: color 0.4s ease, text-shadow 0.4s ease !important;
-}
-
-/* ---------- 默认文字颜色 ---------- */
-.toc-link {
     color: var(--text-secondary, #666) !important;
-}
-
-/* ---------- 激活文字 - 高亮 ---------- */
-.toc-link.active {
-    color: var(--main-color, #49B1F5) !important;
-    border-color: var(--main-color, #49B1F5) !important;
-    text-shadow: 
-        0 0 10px var(--main-color, #49B1F5),
-        0 0 20px var(--main-color, #49B1F5),
-        0 0 40px var(--main-color, #49B1F5) !important;
-    font-weight: 600 !important;
-}
-
-/* ---------- 悬停时所有文字发光（可选） ---------- */
-.toc-container:hover .toc-link {
-    color: var(--main-color, #49B1F5) !important;
-    text-shadow: 
-        0 0 6px var(--main-color, #49B1F5),
-        0 0 12px var(--main-color, #49B1F5),
-        0 0 24px var(--main-color, #49B1F5) !important;
-}
-
-/* 但激活的发光更强（保持突出） */
-.toc-container:hover .toc-link.active {
-    text-shadow: 
-        0 0 12px var(--main-color, #49B1F5),
-        0 0 24px var(--main-color, #49B1F5),
-        0 0 48px var(--main-color, #49B1F5) !important;
 }
 
 /* ---------- 深色模式 ---------- */
@@ -1561,6 +1527,8 @@ html[data-theme="dark"] #post {
     border-color: rgba(255, 255, 255, 0.03) !important;
 }
 
+[data-theme="dark"] .toc:hover .toc-link::before,
+[data-theme="dark"] #aside-content .toc:hover .toc-link::before,
 [data-theme="dark"] .toc-container:hover .toc-link::before {
     background: transparent !important;
 }
