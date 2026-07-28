@@ -1298,7 +1298,7 @@ html[data-theme="light"] #page-header.nav-visible #nav,
 html[data-theme="light"] .search-dialog,
 html[data-theme="light"] #sidebar #sidebar-menus.open,
 html[data-theme="light"] .post-block,
-html[data-theme="light"] #post {
+{       /*会使anzhiyu音乐馆进度条异常*/
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
 }
@@ -1317,7 +1317,7 @@ html[data-theme="dark"] #page-header.nav-visible #nav,
 html[data-theme="dark"] .search-dialog,
 html[data-theme="dark"] #sidebar #sidebar-menus.open 
 html[data-theme="dark"] .post-block,
-html[data-theme="dark"] #post {
+{
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(20px);
 }
