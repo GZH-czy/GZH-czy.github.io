@@ -1196,5 +1196,267 @@ html[data-theme="dark"] [glass-selector] {
    三、文章详情页
    ======================================== */
 
+/* 1. 文章主体 */
+.post-block
+#post
 
- 
+/* 2. 文章标题 */
+.post-title
+
+/* 3. 文章元信息 */
+.post-meta
+
+/* 4. 文章内容 */
+.post-content
+
+/* 5. 文章标签 */
+.post-tags
+
+/* 6. 版权声明 */
+.post-copyright
+
+/* 7. 上一篇/下一篇 */
+.post-nav
+
+/* 8. 目录 */
+.toc-container
+
+/* ========================================
+   四、其他页面
+   ======================================== */
+
+/* 1. 非首页主要内容 */
+.layout > div:first-child:not(.recent-posts)
+
+/* 2. 搜索框 */
+.search-dialog
+
+/* 3. 搜索遮罩 */
+#search-mask
+
+/* 4. 移动端侧边栏 */
+#sidebar #sidebar-menus.open
+
+/* 5. 移动端遮罩 */
+#sidebar #menu-mask
+
+/* 6. 导航栏 */
+#page-header.nav-visible #nav
+
+/* 7. 评论区 */
+#post-comment
+
+/* 8. 页脚 */
+#footer
+
+/* 9. 友链卡片 */
+.link-page .link-card
+
+/* 10. 归档条目 */
+.archives .archive-item
+
+/* 11. 分类条目 */
+.category-lists .category-list-item
+
+/* 12. 标签条目 */
+.tag-lists .tag-list-item
+
+/* 13. 404页面 */
+.error404
+
+/* ========================================
+   五、弹窗与浮层
+   ======================================== */
+
+/* 1. 图片查看器 */
+.medium-zoom-overlay
+
+/* 2. 提示消息 */
+.toast
+
+/* 3. 音乐播放器 */
+.aplayer
+
+/* 4. 右下角按钮组 */
+#rightside
+
+/* ========================================
+   当前配置（保持你原来的效果不变）
+   ======================================== */
+
+    
+
+/*myscript*/
+/* source/css/custom.css */
+:root {
+    --main-radius: 10px;
+    --main-color: #49B1F5;
+    --main-font: 'Microsoft YaHei', sans-serif;
+    --lyx-theme: #49B1F5;
+}
+
+/* 全局圆角 */
+.card-widget, .recent-post-item, .layout-page, .post-block,
+.recent-post-item, .card, .post, .article, .entry, .blog-card,
+.layout, .main, .container, .content, .page,
+.post-content, .article-container, .post-body, .markdown-body,
+.page-content, .main-content, .content-area,
+#post, .post-wrap, .article-wrap, .blog-post,
+.post-main, .post-container, .post-inner {
+    border-radius: var(--main-radius) !important;
+}
+
+img {
+    border-radius: 0px !important;
+}
+
+/* 目录文字颜色 */
+.toc-item a,
+.toc-link,
+.toc-text,
+.toc-number {
+    color: var(--main-color) !important;
+}
+
+.toc-link:hover {
+    color: var(--main-color) !important;
+    opacity: 0.8;
+}
+
+.toc-item.active .toc-link,
+.toc-link.active {
+    color: var(--main-color) !important;
+    border-color: var(--main-color) !important;
+}
+
+/* 文章标题颜色 */
+.post-title,
+.article-title,
+.post-title a,
+.recent-post-item .title,
+.blog-post-title {
+    color: var(--main-color) !important;
+}
+
+.post-title a:hover,
+.article-title a:hover,
+.recent-post-item .title a:hover {
+    color: var(--main-color) !important;
+    opacity: 0.8;
+}
+
+.post-title::after,
+.article-title::after,
+.recent-post-item .title::after {
+    background: var(--main-color) !important;
+}
+
+/* ==================== 导航栏 - 只改 .site-name 和菜单项 ==================== */
+/* 网站标题 - 文字颜色 */
+.site-name {
+    color: var(--lyx-theme) !important;
+    transition: color 0.3s ease;
+}
+.site-name:hover {
+    color: var(--lyx-theme) !important;
+    opacity: 0.8;
+}
+
+/* 导航菜单项 - 文字颜色 */
+.menus_item .site-page {
+    transition: color 0.3s ease;
+}
+.menus_item .site-page:hover {
+    color: var(--lyx-theme) !important;
+}
+.menus_item .site-page.current,
+.menus_item .site-page.active {
+    color: var(--lyx-theme) !important;
+    border-bottom: 2px solid var(--lyx-theme) !important;
+}
+
+/* 子菜单 - 文字颜色 */
+.site-page.child:hover {
+    color: var(--lyx-theme) !important;
+}
+
+/* 分组菜单 - 文字颜色 */
+.site-page.group:hover {
+    color: var(--lyx-theme) !important;
+}
+
+/* 字体 */
+body {
+    font-family: var(--main-font) !important;
+}
+
+/* 滤镜 */
+html.filter-dark {
+    filter: brightness(0.7);
+}
+html.filter-sunset {
+    filter: sepia(0.6) brightness(1.1) saturate(1.4) hue-rotate(-10deg);
+}
+html.filter-grayscale {
+    filter: grayscale(1);
+}
+
+/* 面板动画 */
+#custom-control-panel.panel-hidden {
+    opacity: 0 !important;
+    transform: scale(0.9) translateY(10px) !important;
+    pointer-events: none !important;
+}
+#custom-control-panel.panel-visible {
+    opacity: 1 !important;
+    transform: scale(1) translateY(0) !important;
+    pointer-events: auto !important;
+}
+
+#color-picker-panel.picker-hidden {
+    opacity: 0 !important;
+    transform: scale(0.9) translateY(10px) !important;
+    pointer-events: none !important;
+}
+#color-picker-panel.picker-visible {
+    opacity: 1 !important;
+    transform: scale(1) translateY(0) !important;
+    pointer-events: auto !important;
+}
+
+/* 手机端适配 */
+@media (max-width: 768px) {
+    #custom-control-panel,
+    #color-picker-panel {
+        width: calc(100vw - 30px) !important;
+        max-width: 360px !important;
+        right: 15px !important;
+        bottom: 80px !important;
+        padding: 16px !important;
+        font-size: 13px !important;
+        max-height: 70vh !important;
+    }
+    #custom-control-panel h3 {
+        font-size: 15px !important;
+    }
+    #color-picker-panel h4 {
+        font-size: 14px !important;
+    }
+    .picker-swatch {
+        width: 26px !important;
+        height: 26px !important;
+    }
+    .filter-btn {
+        padding: 3px 10px !important;
+        font-size: 11px !important;
+    }
+    #custom-control-panel input[type="range"],
+    #color-picker-panel input[type="range"] {
+        height: 4px !important;
+    }
+    #custom-control-panel select,
+    #color-picker-panel select {
+        font-size: 12px !important;
+        padding: 5px !important;
+    }
+}
