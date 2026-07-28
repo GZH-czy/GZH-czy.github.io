@@ -1474,24 +1474,65 @@ html[data-theme="dark"] .post-page #post {
 }
 
 /* ========================================
-   侧边栏所有卡片 - 文字悬停发光（统一）
+   侧边栏卡片 - 卡片内文字悬停发光
    ======================================== */
 
+/* ---------- 4. 公告卡片 - 文字发光 ---------- */
 #aside-content .card-announcement:hover .card-title,
 #aside-content .card-announcement:hover a,
-#aside-content .card-announcement:hover span,
+#aside-content .card-announcement:hover span {
+    color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 16px var(--main-color, #49B1F5) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* ---------- 5. 最新文章卡片 - 文字发光 ---------- */
 #aside-content .card-recent-post:hover .card-title,
 #aside-content .card-recent-post:hover a,
-#aside-content .card-recent-post:hover span,
+#aside-content .card-recent-post:hover span {
+    color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 16px var(--main-color, #49B1F5) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* ---------- 6. 分类卡片 - 文字发光 ---------- */
 #aside-content .card-categories:hover .card-title,
 #aside-content .card-categories:hover a,
-#aside-content .card-categories:hover span,
+#aside-content .card-categories:hover span {
+    color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 16px var(--main-color, #49B1F5) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* ---------- 7. 标签卡片 - 文字发光 ---------- */
 #aside-content .card-tags:hover .card-title,
 #aside-content .card-tags:hover a,
-#aside-content .card-tags:hover span,
+#aside-content .card-tags:hover span {
+    color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 16px var(--main-color, #49B1F5) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* ---------- 8. 归档卡片 - 文字发光 ---------- */
 #aside-content .card-archives:hover .card-title,
 #aside-content .card-archives:hover a,
-#aside-content .card-archives:hover span,
+#aside-content .card-archives:hover span {
+    color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 16px var(--main-color, #49B1F5) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* ---------- 9. 友链卡片（网站信息卡片） - 文字发光 ---------- */
 #aside-content .card-webinfo:hover .card-title,
 #aside-content .card-webinfo:hover a,
 #aside-content .card-webinfo:hover span {
