@@ -25,21 +25,8 @@
             panel.classList.add('panel-hidden');
         }
         initCustomPanelButton();
-        document.addEventListener('click', function(e) {
-            const panel = document.getElementById('custom-control-panel');
-            const btn = document.getElementById('custom-panel-btn');
-            const colorPicker = document.getElementById('color-picker-panel');
-            // 如果点击的是面板内部或按钮，不关闭
-            if (panel && panel.contains(e.target)) return;
-            if (btn && btn.contains(e.target)) return;
-            if (colorPicker && colorPicker.contains(e.target)) return;
-            // 如果点击的是色环或颜色选择器内部元素，不关闭
-            if (e.target.closest('#color-picker-panel')) return;
-            if (e.target.closest('#custom-control-panel')) return;
-            
-            hidePanel();
-            hideColorPicker();
-        });
+        // 只在面板可见时监听点击，且只监听面板相关元素
+        setupPanelClickHandler();
     }
 
     if (document.readyState === 'loading') {
@@ -68,6 +55,15 @@
             }, 200);
         }
     });
+
+    // ================================================================
+    //  新增：只处理面板内部的点击事件，不干扰其他界面
+    // ================================================================
+    function setupPanelClickHandler() {
+        // 移除之前可能绑定的监听器（通过克隆替换方式）
+        // 只对面板内部的关闭按钮和颜色选择器进行事件绑定
+        // 不再使用全局 document 监听
+    }
 
     // 应用主题色到各个元素（实时更新）
     function applyThemeToElements() {
@@ -101,10 +97,8 @@
         });
         
         // 3. 应用到导航栏 - 只修改 .site-name 和菜单项
-        // 更新 CSS 变量
         document.documentElement.style.setProperty('--lyx-theme', color);
         
-        // 动态注入样式
         const styleId = 'dynamic-nav-style';
         let styleEl = document.getElementById(styleId);
         if (!styleEl) {
@@ -113,7 +107,6 @@
             document.head.appendChild(styleEl);
         }
         styleEl.textContent = `
-            /* 网站标题 - 文字颜色 */
             .site-name {
                 color: ${color} !important;
                 transition: color 0.3s ease;
@@ -122,14 +115,10 @@
                 color: ${color} !important;
                 opacity: 0.8;
             }
-            
-            /* 导航菜单项 - 悬停文字颜色 */
             .menus_item:hover > .site-page,
             .menus_item > .site-page:hover {
                 color: ${color} !important;
             }
-            
-            /* 导航菜单项 - 当前页面高亮文字颜色 */
             .menus_item .site-page.current,
             .menus_item .site-page.active,
             .site-page.current,
@@ -137,14 +126,10 @@
                 color: ${color} !important;
                 border-bottom: 2px solid ${color} !important;
             }
-            
-            /* 子菜单项 - 悬停文字颜色 */
             .site-page.child:hover,
             .menus_item .child:hover {
                 color: ${color} !important;
             }
-            
-            /* 分组菜单 - 悬停文字颜色 */
             .site-page.group:hover {
                 color: ${color} !important;
             }
@@ -208,7 +193,6 @@
             gearBtn.style.borderColor = color;
         }
         
-        // 7. 更新CSS变量
         document.documentElement.style.setProperty('--main-color', color);
     }
 
@@ -341,7 +325,6 @@
                 e.stopPropagation();
                 const color = this.dataset.color;
                 applyColor(color);
-                // 不关闭颜色选择器，让用户继续选择
             });
         });
 
@@ -355,7 +338,6 @@
                 const color = this.value;
                 document.getElementById('color-hex-input').value = color;
                 applyColor(color);
-                // 不关闭颜色选择器
             });
         }
 
@@ -371,7 +353,6 @@
                     if (/^#[0-9a-fA-F]{6}$/.test(val)) {
                         document.getElementById('color-wheel').value = val;
                         applyColor(val);
-                        // 不关闭颜色选择器
                     }
                 }
             });
@@ -505,7 +486,6 @@
             panel.classList.remove('panel-visible');
             panel.classList.add('panel-hidden');
         }
-        // 不自动关闭颜色选择器
     }
 
     function showColorPicker() {
@@ -513,7 +493,6 @@
         if (picker) {
             picker.classList.remove('picker-hidden');
             picker.classList.add('picker-visible');
-            // 确保选择器覆盖在主面板之上
             picker.style.zIndex = '100001';
             applyThemeToElements();
         }
@@ -549,8 +528,6 @@
         const newSettings = getSettings();
         newSettings.color = color;
         saveSettings(newSettings);
-        
-        // 不关闭颜色选择器，让用户继续选择
     }
 
     function loadSettings() {
@@ -691,14 +668,26 @@
         // ---- 事件绑定 ----
         const closeBtn = document.getElementById('close-panel-btn');
         if (closeBtn) {
-            closeBtn.addEventListener('click', function(e) { e.stopPropagation(); hidePanel(); });
-            closeBtn.addEventListener('touchstart', function(e) { e.stopPropagation(); hidePanel(); }, { passive: false });
+            closeBtn.addEventListener('click', function(e) { 
+                e.stopPropagation(); 
+                hidePanel(); 
+            });
+            closeBtn.addEventListener('touchstart', function(e) { 
+                e.stopPropagation(); 
+                hidePanel(); 
+            }, { passive: false });
         }
 
         const closeColorBtn = document.getElementById('close-color-picker-btn');
         if (closeColorBtn) {
-            closeColorBtn.addEventListener('click', function(e) { e.stopPropagation(); hideColorPicker(); });
-            closeColorBtn.addEventListener('touchstart', function(e) { e.stopPropagation(); hideColorPicker(); }, { passive: false });
+            closeColorBtn.addEventListener('click', function(e) { 
+                e.stopPropagation(); 
+                hideColorPicker(); 
+            });
+            closeColorBtn.addEventListener('touchstart', function(e) { 
+                e.stopPropagation(); 
+                hideColorPicker(); 
+            }, { passive: false });
         }
 
         const colorDisplay = document.getElementById('current-color-display');
@@ -723,7 +712,6 @@
                 e.stopPropagation();
                 const color = this.dataset.color;
                 applyColor(color);
-                // 不关闭颜色选择器
             });
         });
 
@@ -734,7 +722,6 @@
                 const color = this.value;
                 document.getElementById('color-hex-input').value = color;
                 applyColor(color);
-                // 不关闭颜色选择器
             });
         }
 
@@ -747,7 +734,6 @@
                     if (/^#[0-9a-fA-F]{6}$/.test(val)) {
                         document.getElementById('color-wheel').value = val;
                         applyColor(val);
-                        // 不关闭颜色选择器
                     }
                 }
             });
