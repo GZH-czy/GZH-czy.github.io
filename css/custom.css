@@ -1372,9 +1372,9 @@ html[data-theme="dark"] .post-page #post {
     background: var(--main-color, #49B1F5) !important;
     color: #ffffff !important;
     text-shadow: 
-        0 0 10px var(--main-color, #49B1F5),
         0 0 15px var(--main-color, #49B1F5),
-        0 0 20px var(--main-color, #49B1F5) !important;
+        0 0 25px var(--main-color, #49B1F5),
+        0 0 40px var(--main-color, #49B1F5) !important;
 }
 
 /* Firefox 兼容 */
@@ -1382,9 +1382,9 @@ html[data-theme="dark"] .post-page #post {
     background: var(--main-color, #49B1F5) !important;
     color: #ffffff !important;
     text-shadow: 
-        0 0 10px var(--main-color, #49B1F5),
         0 0 15px var(--main-color, #49B1F5),
-        0 0 20px var(--main-color, #49B1F5) !important;
+        0 0 25px var(--main-color, #49B1F5),
+        0 0 40px var(--main-color, #49B1F5) !important;
 }
 
 /* ========================================
