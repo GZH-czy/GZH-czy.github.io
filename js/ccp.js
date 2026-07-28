@@ -29,16 +29,16 @@
             const panel = document.getElementById('custom-control-panel');
             const btn = document.getElementById('custom-panel-btn');
             const colorPicker = document.getElementById('color-picker-panel');
-            if (panel && btn) {
-                if (!panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
-                    hidePanel();
-                }
-            }
-            if (colorPicker) {
-                if (!colorPicker.contains(e.target) && e.target.id !== 'current-color-display') {
-                    hideColorPicker();
-                }
-            }
+            // 如果点击的是面板内部或按钮，不关闭
+            if (panel && panel.contains(e.target)) return;
+            if (btn && btn.contains(e.target)) return;
+            if (colorPicker && colorPicker.contains(e.target)) return;
+            // 如果点击的是色环或颜色选择器内部元素，不关闭
+            if (e.target.closest('#color-picker-panel')) return;
+            if (e.target.closest('#custom-control-panel')) return;
+            
+            hidePanel();
+            hideColorPicker();
         });
     }
 
@@ -337,9 +337,11 @@
         document.querySelectorAll('.picker-swatch').forEach(el => {
             const newEl = el.cloneNode(true);
             el.parentNode.replaceChild(newEl, el);
-            newEl.addEventListener('click', function() {
+            newEl.addEventListener('click', function(e) {
+                e.stopPropagation();
                 const color = this.dataset.color;
                 applyColor(color);
+                // 不关闭颜色选择器，让用户继续选择
             });
         });
 
@@ -348,10 +350,12 @@
         if (colorWheel) {
             const newWheel = colorWheel.cloneNode(true);
             colorWheel.parentNode.replaceChild(newWheel, colorWheel);
-            newWheel.addEventListener('input', function() {
+            newWheel.addEventListener('input', function(e) {
+                e.stopPropagation();
                 const color = this.value;
                 document.getElementById('color-hex-input').value = color;
                 applyColor(color);
+                // 不关闭颜色选择器
             });
         }
 
@@ -360,12 +364,14 @@
         if (hexInput) {
             const newInput = hexInput.cloneNode(true);
             hexInput.parentNode.replaceChild(newInput, hexInput);
-            newInput.addEventListener('input', function() {
+            newInput.addEventListener('input', function(e) {
+                e.stopPropagation();
                 let val = this.value.trim();
                 if (val.startsWith('#')) {
                     if (/^#[0-9a-fA-F]{6}$/.test(val)) {
                         document.getElementById('color-wheel').value = val;
                         applyColor(val);
+                        // 不关闭颜色选择器
                     }
                 }
             });
@@ -375,7 +381,8 @@
         document.querySelectorAll('.filter-btn').forEach(el => {
             const newEl = el.cloneNode(true);
             el.parentNode.replaceChild(newEl, el);
-            newEl.addEventListener('click', function() {
+            newEl.addEventListener('click', function(e) {
+                e.stopPropagation();
                 const filter = this.dataset.filter;
                 const color = currentColor;
                 applyFilter(filter);
@@ -398,7 +405,8 @@
         if (radiusSlider) {
             const newSlider = radiusSlider.cloneNode(true);
             radiusSlider.parentNode.replaceChild(newSlider, radiusSlider);
-            newSlider.addEventListener('input', function() {
+            newSlider.addEventListener('input', function(e) {
+                e.stopPropagation();
                 const val = this.value;
                 document.getElementById('radius-value').textContent = val + 'px';
                 applyRadiusToAllWithValue(val);
@@ -413,7 +421,8 @@
         if (fontSelect) {
             const newSelect = fontSelect.cloneNode(true);
             fontSelect.parentNode.replaceChild(newSelect, fontSelect);
-            newSelect.addEventListener('change', function() {
+            newSelect.addEventListener('change', function(e) {
+                e.stopPropagation();
                 const val = this.value;
                 document.documentElement.style.setProperty('--main-font', val);
                 const newSettings = getSettings();
@@ -427,7 +436,8 @@
         if (resetBtn) {
             const newResetBtn = resetBtn.cloneNode(true);
             resetBtn.parentNode.replaceChild(newResetBtn, resetBtn);
-            newResetBtn.addEventListener('click', function() {
+            newResetBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
                 const defaultSettings = { radius: 10, color: '#49B1F5', font: "'Microsoft YaHei', sans-serif", filter: 'none' };
                 document.getElementById('radius-slider').value = defaultSettings.radius;
                 document.getElementById('radius-value').textContent = defaultSettings.radius + 'px';
@@ -495,7 +505,7 @@
             panel.classList.remove('panel-visible');
             panel.classList.add('panel-hidden');
         }
-        hideColorPicker();
+        // 不自动关闭颜色选择器
     }
 
     function showColorPicker() {
@@ -504,9 +514,7 @@
             picker.classList.remove('picker-hidden');
             picker.classList.add('picker-visible');
             // 确保选择器覆盖在主面板之上
-            if (document.getElementById('custom-control-panel')) {
-                picker.style.zIndex = '100001';
-            }
+            picker.style.zIndex = '100001';
             applyThemeToElements();
         }
     }
@@ -541,6 +549,8 @@
         const newSettings = getSettings();
         newSettings.color = color;
         saveSettings(newSettings);
+        
+        // 不关闭颜色选择器，让用户继续选择
     }
 
     function loadSettings() {
@@ -709,29 +719,35 @@
         });
 
         document.querySelectorAll('.picker-swatch').forEach(el => {
-            el.addEventListener('click', function() {
+            el.addEventListener('click', function(e) {
+                e.stopPropagation();
                 const color = this.dataset.color;
                 applyColor(color);
+                // 不关闭颜色选择器
             });
         });
 
         const colorWheel = document.getElementById('color-wheel');
         if (colorWheel) {
-            colorWheel.addEventListener('input', function() {
+            colorWheel.addEventListener('input', function(e) {
+                e.stopPropagation();
                 const color = this.value;
                 document.getElementById('color-hex-input').value = color;
                 applyColor(color);
+                // 不关闭颜色选择器
             });
         }
 
         const hexInput = document.getElementById('color-hex-input');
         if (hexInput) {
-            hexInput.addEventListener('input', function() {
+            hexInput.addEventListener('input', function(e) {
+                e.stopPropagation();
                 let val = this.value.trim();
                 if (val.startsWith('#')) {
                     if (/^#[0-9a-fA-F]{6}$/.test(val)) {
                         document.getElementById('color-wheel').value = val;
                         applyColor(val);
+                        // 不关闭颜色选择器
                     }
                 }
             });
@@ -762,7 +778,8 @@
         });
 
         document.querySelectorAll('.color-swatch').forEach(el => {
-            el.addEventListener('click', function() {
+            el.addEventListener('click', function(e) {
+                e.stopPropagation();
                 const color = this.dataset.color;
                 applyColor(color);
                 document.querySelectorAll('.color-swatch').forEach(s => {
@@ -775,7 +792,8 @@
         });
 
         document.querySelectorAll('.filter-btn').forEach(el => {
-            el.addEventListener('click', function() {
+            el.addEventListener('click', function(e) {
+                e.stopPropagation();
                 const filter = this.dataset.filter;
                 const color = currentColor;
                 applyFilter(filter);
@@ -793,7 +811,8 @@
             });
         });
 
-        document.getElementById('radius-slider').addEventListener('input', function() {
+        document.getElementById('radius-slider').addEventListener('input', function(e) {
+            e.stopPropagation();
             const val = this.value;
             document.getElementById('radius-value').textContent = val + 'px';
             applyRadiusToAllWithValue(val);
@@ -802,7 +821,8 @@
             saveSettings(newSettings);
         });
 
-        document.getElementById('font-select').addEventListener('change', function() {
+        document.getElementById('font-select').addEventListener('change', function(e) {
+            e.stopPropagation();
             const val = this.value;
             document.documentElement.style.setProperty('--main-font', val);
             const newSettings = getSettings();
@@ -810,7 +830,8 @@
             saveSettings(newSettings);
         });
 
-        document.getElementById('reset-default-btn').addEventListener('click', function() {
+        document.getElementById('reset-default-btn').addEventListener('click', function(e) {
+            e.stopPropagation();
             const defaultSettings = { radius: 10, color: '#49B1F5', font: "'Microsoft YaHei', sans-serif", filter: 'none' };
             document.getElementById('radius-slider').value = defaultSettings.radius;
             document.getElementById('radius-value').textContent = defaultSettings.radius + 'px';
