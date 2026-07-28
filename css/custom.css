@@ -1284,6 +1284,31 @@ html[data-theme="dark"] [glass-selector] {
    当前配置（保持你原来的效果不变）
    ======================================== */
 
+/* 浅色模式 - 直接复制你原来的代码，没有改动 */
+html[data-theme="light"] #aside-content .card-author,
+html[data-theme="light"] #aside-content .card-announcement,
+html[data-theme="light"] #aside-content .card-recent-post,
+html[data-theme="light"] #aside-content .card-categories,
+html[data-theme="light"] #aside-content .card-tags,
+html[data-theme="light"] #aside-content .card-archives,
+html[data-theme="light"] #aside-content .card-webinfo,
+{
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+}
+
+/* 深色模式 - 直接复制你原来的代码，没有改动 */
+html[data-theme="dark"] #aside-content .card-author,
+html[data-theme="dark"] #aside-content .card-announcement,
+html[data-theme="dark"] #aside-content .card-recent-post,
+html[data-theme="dark"] #aside-content .card-categories,
+html[data-theme="dark"] #aside-content .card-tags,
+html[data-theme="dark"] #aside-content .card-archives,
+html[data-theme="dark"] #aside-content .card-webinfo,
+{
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(20px);
+}
 
 
 /*文字选择，目录选择光晕*/
