@@ -1363,7 +1363,7 @@ html[data-theme="dark"] .post-page #post {
 
 /*文字选择，目录选择光晕*/
 
-/* =======================================================================
+/* =======================================================================text-shadow文字发光
    文本选中 - 发光光晕效果
    ======================================== */
 
@@ -1474,6 +1474,35 @@ html[data-theme="dark"] .post-page #post {
 }
 
 /* ========================================
+   侧边栏所有卡片 - 文字悬停发光（统一）
+   ======================================== */
+
+#aside-content .card-announcement:hover .card-title,
+#aside-content .card-announcement:hover a,
+#aside-content .card-announcement:hover span,
+#aside-content .card-recent-post:hover .card-title,
+#aside-content .card-recent-post:hover a,
+#aside-content .card-recent-post:hover span,
+#aside-content .card-categories:hover .card-title,
+#aside-content .card-categories:hover a,
+#aside-content .card-categories:hover span,
+#aside-content .card-tags:hover .card-title,
+#aside-content .card-tags:hover a,
+#aside-content .card-tags:hover span,
+#aside-content .card-archives:hover .card-title,
+#aside-content .card-archives:hover a,
+#aside-content .card-archives:hover span,
+#aside-content .card-webinfo:hover .card-title,
+#aside-content .card-webinfo:hover a,
+#aside-content .card-webinfo:hover span {
+    color: var(--main-color, #49B1F5) !important;
+    text-shadow: 
+        0 0 8px var(--main-color, #49B1F5),
+        0 0 16px var(--main-color, #49B1F5) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* ===================================================box-shadow卡片发光
    目录激活背景框 + 外发光
    ======================================== */
 
@@ -1483,9 +1512,7 @@ html[data-theme="dark"] .post-page #post {
         0 0 2px var(--main-color, #49B1F5),
         0 0 3px var(--main-color, #49B1F5),
         0 0 4px var(--main-color, #49B1F5) !important;
-    transform: translateY(-3px) !important;
     transition: all 0.4s ease !important;
-    border-color: var(--main-color, #49B1F5) !important;
 }
 
 
@@ -1549,6 +1576,16 @@ html[data-theme="dark"] .post-page #post {
         0 0 15px var(--main-color, #49B1F5),
         0 0 30px var(--main-color, #49B1F5) !important;
     transform: translateY(-3px) !important;
+    transition: all 0.4s ease !important;
+    border-color: var(--main-color, #49B1F5) !important;
+}
+
+/* ---------- 首页文章卡片 ---------- */
+#recent-posts > .recent-post-item:hover {
+    box-shadow: 
+        0 0 15px var(--main-color, #49B1F5),
+        0 0 30px var(--main-color, #49B1F5) !important;
+    transform: translateY(-4px) !important;
     transition: all 0.4s ease !important;
     border-color: var(--main-color, #49B1F5) !important;
 }
