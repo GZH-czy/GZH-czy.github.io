@@ -519,7 +519,7 @@
       });
   }
 
-  // ==================== 渲染 ====================
+  // ==================== 渲染（保留懒加载） ====================
   function render(imagesData) {
     images = imagesData;
     stats.innerHTML = '<span>📷 共 ' + images.length + ' 张图片</span>';
@@ -540,6 +540,7 @@
       var imgEl = document.createElement('img');
       imgEl.src = img.url;
       imgEl.alt = img.name;
+      imgEl.loading = 'lazy';  // ⭐ 保留懒加载
 
       imgEl.onerror = function() {
         this.style.display = 'none';
@@ -574,7 +575,7 @@
     });
   }
 
-  // ==================== ⭐ 弹窗（无闪烁切换） ====================
+  // ==================== ⭐ 弹窗（利用浏览器缓存，流畅切换） ====================
   function openModal(i) {
     if (!images.length) return;
     currentIndex = i;
@@ -582,28 +583,26 @@
     
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
+    modalFilename.textContent = img.name;
     
-    modalFilename.textContent = '加载中...';
+    modalImg.src = img.url;
+    modalImg.style.opacity = '0';
     
-    var loader = new Image();
-    loader.crossOrigin = 'anonymous';
-    loader.onload = function() {
-      modalImg.src = loader.src;
-      modalFilename.textContent = img.name;
-      loader.onload = null;
+    modalImg.onload = function() {
+      modalImg.style.opacity = '1';
+      modalImg.onload = null;
     };
-    loader.onerror = function() {
-      modalImg.src = img.url;
-      modalFilename.textContent = img.name;
-      loader.onerror = null;
-    };
-    loader.src = img.url;
+    
+    if (modalImg.complete) {
+      modalImg.style.opacity = '1';
+      modalImg.onload = null;
+    }
   }
 
   function closeModal() {
     modal.classList.remove('active');
     document.body.style.overflow = '';
-    modalImg.src = '';
+    modalImg.style.opacity = '0';
   }
 
   function changeImage(delta) {
@@ -611,22 +610,19 @@
     currentIndex = (currentIndex + delta + images.length) % images.length;
     var img = images[currentIndex];
     
-    // 只改文件名提示，不隐藏图片
-    modalFilename.textContent = '加载中...';
+    modalImg.style.opacity = '0';
+    modalFilename.textContent = img.name;
     
-    var loader = new Image();
-    loader.crossOrigin = 'anonymous';
-    loader.onload = function() {
-      modalImg.src = loader.src;
-      modalFilename.textContent = img.name;
-      loader.onload = null;
+    modalImg.src = img.url;
+    modalImg.onload = function() {
+      modalImg.style.opacity = '1';
+      modalImg.onload = null;
     };
-    loader.onerror = function() {
-      modalImg.src = img.url;
-      modalFilename.textContent = img.name;
-      loader.onerror = null;
-    };
-    loader.src = img.url;
+    
+    if (modalImg.complete) {
+      modalImg.style.opacity = '1';
+      modalImg.onload = null;
+    }
   }
 
   // ==================== 键盘事件 ====================
