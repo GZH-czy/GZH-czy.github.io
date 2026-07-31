@@ -1670,7 +1670,7 @@ html[data-theme="dark"] .post-page #post {
 /* 覆盖 SnackBar 背景样式 */
 .snackbar-container {
     /* 基础背景色：半透明白色或你主题的颜色 */
-    background: rgba(255, 255, 255, 0.25) !important;
+    background: rgba(var(--main-color, #49B1F5), 0.25)  !important;
     /* 毛玻璃效果（可选） */
     backdrop-filter: blur(10px) !important;
     -webkit-backdrop-filter: blur(10px) !important;
