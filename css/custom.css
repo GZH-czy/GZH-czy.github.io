@@ -1675,7 +1675,7 @@ html[data-theme="dark"] .post-page #post {
     backdrop-filter: blur(10px) !important;
     -webkit-backdrop-filter: blur(10px) !important;
     /* 光晕：使用 box-shadow 实现 */
-    box-shadow: 0 0 30px 10px rgba(100, 200, 255, 0.3) !important;
+    box-shadow: 0 0 30px 10px rgba(var(--main-color, #49B1F5), 0.3)  !important;
     /* 或者用边框光晕效果 */
     /* border: 1px solid rgba(255, 255, 255, 0.3) !important; */
 }
