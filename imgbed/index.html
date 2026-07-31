@@ -324,7 +324,7 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.85);
-  z-index: 100003;
+  z-index: 100003;  /* 👈 高于右下角面板蒙版 */
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(12px);
@@ -586,36 +586,20 @@
     });
   }
 
-  // ==================== ⭐ 弹窗（修复版） ====================
+  // ==================== 弹窗 ====================
   function openModal(i) {
     if (!images.length) return;
     currentIndex = i;
     var img = images[currentIndex];
-    
-    // 先设置图片
     modalImg.src = img.url;
     modalFilename.textContent = img.name;
-    
-    // 图片加载完成后显示弹窗
-    modalImg.onload = function() {
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      modalImg.onload = null;
-    };
-    
-    // 如果图片已缓存，立即显示
-    if (modalImg.complete) {
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      modalImg.onload = null;
-    }
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
   }
 
   function closeModal() {
     modal.classList.remove('active');
     document.body.style.overflow = '';
-    // 清理 onload 防止下次误触发
-    modalImg.onload = null;
   }
 
   function changeImage(delta) {
@@ -624,7 +608,6 @@
     var img = images[currentIndex];
     modalImg.src = img.url;
     modalFilename.textContent = img.name;
-    // 切换图片时不需要重新加载，直接显示（已缓存或预加载）
   }
 
   // ==================== 键盘事件 ====================
@@ -781,7 +764,7 @@ document.addEventListener('pjax:error', e => {
       parent_div_git.id = 'recent-posts'; // 赋予配置的ID
       document.querySelector('#page').prepend(parent_div_git); // 插入到 #content-inner 内
     }
-    var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 950px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 800px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(https://imgbed.gzh-czy.cc.cd/9.jpg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/插件/&quot;);" href="javascript:void(0);">插件</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">1</span></li><li class="categoryBar-list-item" style="background:url(https://imgbed.gzh-czy.cc.cd/15.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/知识库/&quot;);" href="javascript:void(0);">知识库</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">2</span></li><li class="categoryBar-list-item" style="background:url(/img/13.png);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/爱人/&quot;);" href="javascript:void(0);">爱人</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">3</span></li></ul></div></div>';
+    var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 950px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 800px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(https://imgbed.gzh-czy.cc.cd/9.jpg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/知识库/&quot;);" href="javascript:void(0);">知识库</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">1</span></li><li class="categoryBar-list-item" style="background:url(https://imgbed.gzh-czy.cc.cd/15.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/插件/&quot;);" href="javascript:void(0);">插件</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">2</span></li><li class="categoryBar-list-item" style="background:url(/img/13.png);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/爱人/&quot;);" href="javascript:void(0);">爱人</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">3</span></li></ul></div></div>';
     console.log('已挂载 butterfly_categories_card');
     parent_div_git.insertAdjacentHTML("afterbegin",item_html)
   }
