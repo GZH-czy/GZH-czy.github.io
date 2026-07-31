@@ -10,6 +10,52 @@
     // 全局当前颜色
     let currentColor = '#49B1F5';
 
+    // ---- 蒙版元素 ----
+    let overlay = null;
+
+    function createOverlay() {
+        if (document.getElementById('custom-panel-overlay')) {
+            return document.getElementById('custom-panel-overlay');
+        }
+        overlay = document.createElement('div');
+        overlay.id = 'custom-panel-overlay';
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 99998;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+        `;
+        // 点击蒙版关闭面板
+        overlay.addEventListener('click', function() {
+            hidePanel();
+            hideColorPicker();
+        });
+        document.body.appendChild(overlay);
+        return overlay;
+    }
+
+    function showOverlay() {
+        const el = createOverlay();
+        el.style.pointerEvents = 'auto';
+        el.style.opacity = '1';
+    }
+
+    function hideOverlay() {
+        const el = document.getElementById('custom-panel-overlay');
+        if (el) {
+            el.style.pointerEvents = 'none';
+            el.style.opacity = '0';
+        }
+    }
+
     function initCustomPanel() {
         if (document.getElementById('custom-control-panel')) {
             rebindEvents();
@@ -25,6 +71,8 @@
             panel.classList.add('panel-hidden');
         }
         initCustomPanelButton();
+        // 创建蒙版（但默认隐藏）
+        createOverlay();
         // 只在面板可见时监听点击，且只监听面板相关元素
         setupPanelClickHandler();
     }
@@ -477,6 +525,8 @@
             panel.classList.remove('panel-hidden');
             panel.classList.add('panel-visible');
             applyThemeToElements();
+            // 显示蒙版
+            showOverlay();
         }
     }
 
@@ -486,6 +536,8 @@
             panel.classList.remove('panel-visible');
             panel.classList.add('panel-hidden');
         }
+        // 隐藏蒙版
+        hideOverlay();
     }
 
     function showColorPicker() {
