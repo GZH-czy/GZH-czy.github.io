@@ -911,39 +911,6 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
    音乐馆页面 - 强制取消所有毛玻璃
    ======================================== */
 
-/* 合并电脑和手机选择器 */
-:is(body:has(#anMusic-page), .music-page) #post,
-:is(body:has(#anMusic-page), .music-page) .post-page #post,
-:is(body:has(#anMusic-page), .music-page) .post-block,
-:is(body:has(#anMusic-page), .music-page) .recent-post-item,
-:is(body:has(#anMusic-page), .music-page) .card-widget,
-:is(body:has(#anMusic-page), .music-page) #aside-content .card-author,
-:is(body:has(#anMusic-page), .music-page) #aside-content .card-announcement,
-:is(body:has(#anMusic-page), .music-page) #aside-content .card-recent-post,
-:is(body:has(#anMusic-page), .music-page) #aside-content .card-categories,
-:is(body:has(#anMusic-page), .music-page) #aside-content .card-tags,
-:is(body:has(#anMusic-page), .music-page) #aside-content .card-archives,
-:is(body:has(#anMusic-page), .music-page) #aside-content .card-webinfo,
-:is(body:has(#anMusic-page), .music-page) .layout>div:first-child:not(.recent-posts),
-:is(body:has(#anMusic-page), .music-page) .search-dialog,
-:is(body:has(#anMusic-page), .music-page) #sidebar #sidebar-menus.open {
-    background: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-}
-
-:is(body:has(#anMusic-page), .music-page) .aplayer .aplayer-bar-wrap {
-    background: transparent !important;
-    backdrop-filter: none !important;
-}
-
-:is(body:has(#anMusic-page), .music-page) .aplayer .aplayer-bar {
-    background: rgba(255, 255, 255, 0.2) !important;
-}
-
-:is(body:has(#anMusic-page), .music-page) .aplayer .aplayer-played {
-    background: var(--anzhiyu-white) !important;
-}
 
 
 
