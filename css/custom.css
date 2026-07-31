@@ -1197,6 +1197,10 @@ h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
     }
 }
 
+/*=======================风车位置细调=========================*/
+/*        增大 margin-left（比如从 -1.0rem 改成 -0.6rem）数值越接近 0，风车越靠右
+          调整 font-size  越大风车越大
+          调整 margin-top 正数向下移，负数向上移           */
 #content-inner.layout h1::before {
     color: #ef50a8 ;
     margin-left: -1.55rem;
@@ -1233,6 +1237,34 @@ h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
     font-size: 0.66rem;
     margin-top: 0.0rem;
 }
+
+/* 手机版调整 - 风车位置 */
+@media screen and (max-width: 768px) {
+    #content-inner.layout h1::before,
+    #content-inner.layout h2::before,
+    #content-inner.layout h3::before,
+    #content-inner.layout h4::before,
+    #content-inner.layout h5::before,
+    #content-inner.layout h6::before {
+        /* 将负边距减小，让风车往右收 */
+        margin-left: -0.8rem !important;
+        /* 如果还不够，可以再调整字体大小 */
+        font-size: 0.9rem !important;
+    }
+    
+    /* 如果个别标题还是溢出，可以单独微调 */
+    #content-inner.layout h1::before {
+        margin-left: -1.0rem !important;
+        font-size: 1.0rem !important;
+    }
+    #content-inner.layout h2::before {
+        margin-left: -0.9rem !important;
+    }
+    #content-inner.layout h3::before {
+        margin-left: -0.85rem !important;
+    }
+}
+
 /*小风车鼠标悬停变慢*/
 #content-inner.layout h1:hover, #content-inner.layout h2:hover, #content-inner.layout h3:hover, #content-inner.layout h4:hover, #content-inner.layout h5:hover, #content-inner.layout h6:hover {
     color: #49b1f5 ;
