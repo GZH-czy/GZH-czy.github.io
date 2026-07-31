@@ -1238,7 +1238,19 @@ h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
     margin-top: 0.0rem;
 }
 
-
+/* 手机版调整 - 风车位置 */
+@media screen and (max-width: 768px) {
+    #content-inner.layout h1::before,
+    #content-inner.layout h2::before,
+    #content-inner.layout h3::before,
+    #content-inner.layout h4::before,
+    #content-inner.layout h5::before,
+    #content-inner.layout h6::before {
+        /* 将负边距减小，让风车往右收 */
+        margin-left: -0.1rem !important;
+        /* 如果还不够，可以再调整字体大小 */
+        font-size: 0.9rem !important;
+    }
 }
 
 /*小风车鼠标悬停变慢*/
