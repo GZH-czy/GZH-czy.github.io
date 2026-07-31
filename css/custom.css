@@ -1238,6 +1238,9 @@ h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
     margin-top: 0.0rem;
 }
 
+
+}
+
 /*小风车鼠标悬停变慢*/
 #content-inner.layout h1:hover, #content-inner.layout h2:hover, #content-inner.layout h3:hover, #content-inner.layout h4:hover, #content-inner.layout h5:hover, #content-inner.layout h6:hover {
     color: #49b1f5 ;
