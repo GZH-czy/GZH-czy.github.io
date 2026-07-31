@@ -1697,7 +1697,7 @@ html[data-theme="dark"] .post-page #post {
   align-items: center;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  opacity: 0;                     /* 👈 默认透明 */
+  opacity: 1;                     /* 👈 默认透明 */
   transition: opacity 0.2s ease;  /* 👈 淡入效果 */
 }
 
@@ -1705,9 +1705,6 @@ html[data-theme="dark"] .post-page #post {
   display: flex;
 }
 
-.gallery-modal.loaded {
-  opacity: 1;                     /* 👈 图片加载完成后显示 */
-}
 
 /*==========================================================myscript=========================================================*/
 /* source/css/custom.css */
