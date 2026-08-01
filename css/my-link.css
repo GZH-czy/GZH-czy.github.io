@@ -27,7 +27,7 @@
 
 /* ===== 上区域：提示标签 ===== */
 .my-link .my-link-tip {
-    font-size: 0.55rem !important;                 /* 👈 提示文字大小 */
+    font-size: 0.6rem !important;                 /* 👈 提示文字大小 */
     color: var(--aria-light-fontcolor, #828282) !important;
     grid-row: 1 !important;
     grid-column: 2 !important;
@@ -82,7 +82,7 @@
     font-weight: 600 !important;                   /* 👈 标题粗细（600=半粗） */
     font-size: 1.05rem !important;                 /* 👈 标题大小 */
     transition: color 0.3s ease !important;
-    color: var(--main-color, #49B1F5) !important;
+    color: var(--aria-blackfont, #49B1F5) !important;
     white-space: nowrap !important;                /* 👈 不换行 */
 }
 
