@@ -20,7 +20,7 @@
 
 /* ===== 上区域：提示标签 ===== */
 .my-link .my-link-tip {
-    font-size: 0.55rem !important;
+    font-size: 0.6rem !important;
     color: var(--aria-light-fontcolor, #828282) !important;
     grid-row: 1 !important;
     grid-column: 2 !important;
@@ -45,8 +45,8 @@
 
 /* ===== 下区域：图标 ===== */
 .my-link .my-link-img {
-    width: 52px !important;
-    height: 52px !important;
+    width: 55px !important;
+    height: 55px !important;
     border-radius: 50% !important;
     object-fit: cover !important;
     border: 2px solid var(--aria-border, #c9c9c9) !important;
@@ -80,14 +80,14 @@
 /* ===== 标题 ===== */
 .my-link .my-link-title {
     font-weight: 600 !important;
-    font-size: 0.95rem !important;
+    font-size: 1rem !important;
     transition: color 0.3s ease !important;
     color: #4c4948 !important;
 }
 
 /* ===== 副标题 ===== */
 .my-link .my-link-subtitle {
-    font-size: 0.7rem !important;
+    font-size: 0.8rem !important;
     color: var(--aria-light-fontcolor, #828282) !important;
     transition: color 0.3s ease !important;
 }
