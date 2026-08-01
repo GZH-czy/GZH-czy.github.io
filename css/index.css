@@ -219,6 +219,7 @@ template {
 #article-container.post-content h6:before,
 #article-container.post-content hr:before,
 #post .post-copyright:before,
+#post .post-outdate-notice:before,
 .note:not(.no-icon)::before,
 .search-dialog hr:before {
   display: inline-block;
@@ -4515,6 +4516,20 @@ h1.page-title + .tag-cloud-list {
   border-radius: 3px;
   background-color: #ffe6e6;
   color: #f66;
+  padding: 0.5em 1em 0.5em 2.6em;
+  border-left: 5px solid #ff8080;
+}
+#post .post-outdate-notice:before {
+  position: absolute;
+  top: 50%;
+  left: 0.9em;
+  color: #ff8080;
+  content: '\f071';
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 #post .ads-wrap {
   margin: 40px 0;
