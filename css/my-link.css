@@ -15,7 +15,6 @@
     padding: 5px !important;
     transition: all 0.3s ease !important;
     text-decoration: none !important;
-    color: var(--aria-fontcolor, #4c4948) !important;
     overflow: hidden !important;
 }
 
@@ -71,14 +70,14 @@
     padding-top: 2px !important;
 }
 
-/* ===== 标题 - 修复颜色 ===== */
+/* ===== ⭐ 标题 - 强制黑色 ===== */
 .my-link .my-link-title {
     font-weight: 600 !important;
     font-size: 0.95rem !important;
     transition: color 0.3s ease !important;
     white-space: nowrap !important;
-    /* 浅色模式黑色 */
-    color: var(--aria-blackfont, #4c4948) !important;
+    /* 强制颜色 */
+    color: #4c4948 !important;
 }
 
 /* ===== 副标题 ===== */
@@ -167,7 +166,7 @@
 
     /* 深色模式标题变白 */
     .my-link .my-link-title {
-        color: var(--aria-whitefont, #ffffffb3) !important;
+        color: #ffffffb3 !important;
     }
 
     .my-link .my-link-subtitle,
