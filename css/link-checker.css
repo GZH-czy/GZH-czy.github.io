@@ -21,11 +21,3 @@
   color: #ffffff !important;
 }
 
-/* 标题强制黑色 */
-.my-link .my-link-title {
-  color: #4c4948 !important;
-}
-
-[data-theme="dark"] .my-link .my-link-title {
-  color: #ffffffb3 !important;
-}
