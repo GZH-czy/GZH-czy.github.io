@@ -16,7 +16,7 @@
     height: 100px !important;                     /* 👈 卡片整体高度 */
     
     /* ----- 外观 ----- */
-    background: var(--card-bg, #f1f3f8) !important;  /* 👈 卡片背景色（浅色模式） */
+    background: #321a0f !important;  /* 👈 卡片背景色（浅色模式） */
     border: var(--aria-border, 1px solid #c9c9c9) !important;  /* 👈 边框 */
     border-radius: 10px !important;               /* 👈 卡片圆角大小 */
     
@@ -126,7 +126,7 @@
     
     /* ----- 文字 ----- */
     font-weight: 600 !important;                  /* 👈 标题粗细（400正常 / 600半粗 / 700粗体） */
-    font-size: 1rem !important;                   /* 👈 标题大小 */
+    font-size: 2rem !important;                   /* 👈 标题大小 */
     color: var(--aria-blackfont, #4c4948) !important;  /* 👈 标题颜色（浅色模式） */
     
     /* ----- 间距 ----- */
