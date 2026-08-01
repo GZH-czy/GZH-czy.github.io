@@ -1,5 +1,5 @@
 /* ========================================
-   myLink 自定义外挂标签 - 完全复制 etag-link
+   myLink 自定义外挂标签 - 精调版
    ======================================== */
 
 .my-link {
@@ -19,21 +19,7 @@
     overflow: hidden !important;
 }
 
-/* ---------- 提示标签（右上角） ---------- */
-.my-link .my-link-tip {
-    font-size: 0.65rem !important;
-    color: var(--aria-light-fontcolor, #828282) !important;
-    position: absolute !important;
-    top: 4px !important;
-    right: 8px !important;
-    transition: color 0.3s ease !important;
-    grid-row: 1 !important;
-    grid-column: 1 / 3 !important;
-    justify-self: end !important;
-    align-self: start !important;
-}
-
-/* ---------- 图标（左侧居中） ---------- */
+/* ---------- 图标（左侧居中，稍微下移） ---------- */
 .my-link .my-link-img {
     width: 64px !important;
     height: 64px !important;
@@ -45,31 +31,61 @@
     grid-column: 1 !important;
     align-self: center !important;
     justify-self: center !important;
+    margin-top: 8px !important;  /* 👈 图标下移 */
 }
 
-/* ---------- 标题（左下方） ---------- */
+/* ---------- 提示标签（左侧上方） ---------- */
+.my-link .my-link-tip {
+    font-size: 0.6rem !important;
+    color: var(--aria-light-fontcolor, #828282) !important;
+    grid-row: 1 !important;
+    grid-column: 2 !important;
+    justify-self: start !important;
+    align-self: start !important;
+    padding-left: 8px !important;
+    padding-top: 2px !important;
+    transition: color 0.3s ease !important;
+}
+
+/* ---------- 分割线（提示标签下方） ---------- */
+.my-link .my-link-divider {
+    grid-row: 1 !important;
+    grid-column: 2 !important;
+    justify-self: stretch !important;
+    align-self: center !important;
+    height: 1px !important;
+    background: var(--aria-border, #c9c9c9) !important;
+    margin: 18px 8px 0 8px !important;
+    transition: background 0.3s ease !important;
+}
+
+/* ---------- 标题（左侧下方） ---------- */
 .my-link .my-link-title {
     font-weight: 600 !important;
     font-size: 1rem !important;
-    color: var(--aria-fontcolor, #4c4948) !important;
-    transition: color 0.3s ease !important;
-    grid-row: 1 !important;
-    grid-column: 2 !important;
-    align-self: end !important;
-    padding-left: 8px !important;
-    line-height: 1.4 !important;
-}
-
-/* ---------- 副标题（右下） ---------- */
-.my-link .my-link-subtitle {
-    font-size: 0.8rem !important;
-    color: var(--aria-light-fontcolor, #828282) !important;
-    transition: color 0.3s ease !important;
     grid-row: 2 !important;
     grid-column: 2 !important;
     align-self: start !important;
     padding-left: 8px !important;
+    padding-top: 2px !important;
     line-height: 1.4 !important;
+    transition: color 0.3s ease !important;
+    /* 浅色模式黑色 */
+    color: var(--aria-blackfont, #4c4948) !important;
+}
+
+/* ---------- 副标题（标题右侧/下方） ---------- */
+.my-link .my-link-subtitle {
+    font-size: 0.8rem !important;
+    color: var(--aria-light-fontcolor, #828282) !important;
+    grid-row: 2 !important;
+    grid-column: 2 !important;
+    align-self: start !important;
+    justify-self: end !important;
+    padding-right: 35px !important;
+    padding-top: 2px !important;
+    line-height: 1.4 !important;
+    transition: color 0.3s ease !important;
 }
 
 /* ---------- 右侧箭头 ---------- */
@@ -94,7 +110,7 @@
 }
 
 /* ========================================
-   悬停效果
+   悬停效果（所有文字变白）
    ======================================== */
 
 .my-link:hover {
@@ -109,6 +125,10 @@
 .my-link:hover .my-link-subtitle,
 .my-link:hover .my-link-tip {
     color: #ffffff !important;
+}
+
+.my-link:hover .my-link-divider {
+    background: rgba(255, 255, 255, 0.3) !important;
 }
 
 .my-link:hover .my-link-img {
@@ -144,6 +164,7 @@
         border-color: var(--aria-border, #8a8a8a) !important;
     }
 
+    /* 深色模式标题变白 */
     .my-link .my-link-title {
         color: var(--aria-whitefont, #ffffffb3) !important;
     }
