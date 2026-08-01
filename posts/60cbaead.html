@@ -158,12 +158,12 @@
      data-hbe-format="4"
      data-wpm="Oh, 密码错了，检查一下好吗～"
      data-whm="Oh, 密码错了，检查一下好吗～"
-     data-salt="701f70f9da536a468c16d71878194ed412c88ccffaf3a02d030cc4c072529548"
-     data-nonce="660aadd9da93c0dd5b0d644f"
+     data-salt="37e103d25e984f956536bc85714ff8e725fefec128f655739f128e4b1c2c4cad"
+     data-nonce="3dd2eb8cbe1c2e8f724b6829"
      data-kdf-iterations="600000"
      data-auto-save="false">
   <script id="hbeData" type="hbeData">
-    adc91623b5e10af48b65f9445af6254da4ba448334583082302872a4c7d79e326ece0c1f4374672d6f40bc2d42b8afb06db22045db1570b7e28ed3d1b54733deb631432174e8aed7c8a92a00abfa7b3149868011e706ee258336f15c7d67264966d90e81c64fcf1507deb7691c6b87c1cc1e5c5a909f5aeebeceec0b25
+    ebd12c0d8ae64bac2c77f1adecca1a986e357b338e8b419c03389b7c66988690482bec097d08211b1b772c1fd2e4d0866fd1408790afa8d9f75b2ab3593aabada1a75e0ca7965cb6b815b39050249e15f0e40ad532bfe1df160109206543249153be4da0317768caa1acc1c068a63961ad908ab1584210698cff943868
   </script>
   <div class="hbe hbe-content">
     <form id="hbeForm" class="hbe hbe-form" onsubmit="return false">
@@ -336,7 +336,7 @@ document.addEventListener('pjax:error', e => {
       parent_div_git.id = 'recent-posts'; // 赋予配置的ID
       document.querySelector('#page').prepend(parent_div_git); // 插入到 #content-inner 内
     }
-    var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 950px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 800px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(https://imgbed.gzh-czy.cc.cd/9.jpg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/插件/&quot;);" href="javascript:void(0);">插件</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">1</span></li><li class="categoryBar-list-item" style="background:url(https://imgbed.gzh-czy.cc.cd/15.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/知识库/&quot;);" href="javascript:void(0);">知识库</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">2</span></li><li class="categoryBar-list-item" style="background:url(/img/13.png);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/爱人/&quot;);" href="javascript:void(0);">爱人</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">3</span></li><li class="categoryBar-list-item" style="background:url(/img/14.png);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/外挂标签/&quot;);" href="javascript:void(0);">外挂标签</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">4</span></li></ul></div></div>';
+    var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 950px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 800px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(https://imgbed.gzh-czy.cc.cd/9.jpg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/插件/&quot;);" href="javascript:void(0);">插件</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">1</span></li><li class="categoryBar-list-item" style="background:url(https://imgbed.gzh-czy.cc.cd/15.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/知识库/&quot;);" href="javascript:void(0);">知识库</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">2</span></li><li class="categoryBar-list-item" style="background:url(/img/13.png);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/外挂标签/&quot;);" href="javascript:void(0);">外挂标签</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">3</span></li><li class="categoryBar-list-item" style="background:url(/img/14.png);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;/categories/爱人/&quot;);" href="javascript:void(0);">爱人</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">4</span></li></ul></div></div>';
     console.log('已挂载 butterfly_categories_card');
     parent_div_git.insertAdjacentHTML("afterbegin",item_html)
   }
