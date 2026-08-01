@@ -12,7 +12,7 @@
     background: var(--card-bg, #f1f3f8) !important;
     border-radius: 10px !important;
     margin: 10px !important;
-    padding: 5px 5px 5px 5px !important;
+    padding: 5px !important;
     transition: all 0.3s ease !important;
     text-decoration: none !important;
     color: var(--aria-fontcolor, #4c4948) !important;
@@ -20,7 +20,7 @@
 }
 
 /* ===== 上区域：提示标签 ===== */
-/* 第1行第1列：图标占位（空） */
+/* 第1行第1列：空占位 */
 .my-link .my-link-placeholder {
     grid-row: 1 !important;
     grid-column: 1 !important;
@@ -38,7 +38,7 @@
     transition: color 0.3s ease !important;
 }
 
-/* ===== 分割线（跨两列） ===== */
+/* ===== 分割线（只在上区域下方，图标上方） ===== */
 .my-link .my-link-divider {
     grid-row: 1 !important;
     grid-column: 1 / 3 !important;
@@ -49,7 +49,7 @@
     transition: background 0.3s ease !important;
 }
 
-/* ===== 下区域：图标 + 标题 + 副标题 + 箭头 ===== */
+/* ===== 下区域：图标 + 标题 + 副标题 ===== */
 /* 第2行第1列：图标（居中） */
 .my-link .my-link-img {
     width: 52px !important;
@@ -64,29 +64,31 @@
     justify-self: center !important;
 }
 
-/* 第2行第2列：标题（靠左上方） */
+/* 第2行第2列：标题（靠左上） */
 .my-link .my-link-title {
     font-weight: 600 !important;
-    font-size: 1rem !important;
+    font-size: 0.95rem !important;
     grid-row: 2 !important;
     grid-column: 2 !important;
-    align-self: center !important;
+    align-self: start !important;
     justify-self: start !important;
     padding-left: 8px !important;
+    padding-top: 4px !important;
     line-height: 1.4 !important;
     transition: color 0.3s ease !important;
     color: var(--aria-blackfont, #4c4948) !important;
 }
 
-/* 第2行第2列：副标题（靠右） */
+/* 第2行第2列：副标题（靠左上，在标题下方） */
 .my-link .my-link-subtitle {
-    font-size: 0.75rem !important;
+    font-size: 0.7rem !important;
     color: var(--aria-light-fontcolor, #828282) !important;
     grid-row: 2 !important;
     grid-column: 2 !important;
-    align-self: center !important;
-    justify-self: end !important;
-    padding-right: 35px !important;
+    align-self: end !important;
+    justify-self: start !important;
+    padding-left: 8px !important;
+    padding-bottom: 4px !important;
     transition: color 0.3s ease !important;
 }
 
@@ -206,8 +208,7 @@
     }
 
     .my-link .my-link-subtitle {
-        font-size: 0.65rem !important;
-        padding-right: 28px !important;
+        font-size: 0.6rem !important;
     }
 
     .my-link .my-link-tip {
