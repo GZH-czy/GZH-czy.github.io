@@ -80,7 +80,7 @@
 /* ===== 标题 ===== */
 .my-link .my-link-title {
     font-weight: 600 !important;                   /* 👈 标题粗细（600=半粗） */
-    font-size: 0.95rem !important;                 /* 👈 标题大小 */
+    font-size: 1.05rem !important;                 /* 👈 标题大小 */
     transition: color 0.3s ease !important;
     color: var(--main-color, #49B1F5) !important;
     white-space: nowrap !important;                /* 👈 不换行 */
@@ -88,7 +88,7 @@
 
 /* ===== 副标题 ===== */
 .my-link .my-link-subtitle {
-    font-size: 0.7rem !important;                  /* 👈 副标题大小 */
+    font-size: 0.8rem !important;                  /* 👈 副标题大小 */
     color: var(--aria-light-fontcolor, #828282) !important;
     transition: color 0.3s ease !important;
     white-space: nowrap !important;
