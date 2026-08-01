@@ -1,5 +1,5 @@
 /* ========================================
-   myLink 自定义外挂标签 - 修复版
+   myLink 自定义外挂标签 - 修复标题颜色
    ======================================== */
 
 .my-link {
@@ -15,6 +15,7 @@
     padding: 5px !important;
     transition: all 0.3s ease !important;
     text-decoration: none !important;
+    color: var(--aria-fontcolor, #4c4948) !important;
     overflow: hidden !important;
 }
 
@@ -70,13 +71,13 @@
     padding-top: 2px !important;
 }
 
-/* ===== 标题（修复颜色不生效） ===== */
+/* ===== 标题 - 修复颜色 ===== */
 .my-link .my-link-title {
     font-weight: 600 !important;
     font-size: 0.95rem !important;
     transition: color 0.3s ease !important;
     white-space: nowrap !important;
-    /* 使用更高优先级的选择器 */
+    /* 浅色模式黑色 */
     color: var(--aria-blackfont, #4c4948) !important;
 }
 
@@ -88,7 +89,7 @@
     white-space: nowrap !important;
 }
 
-/* ===== 右侧箭头（只保留一个） ===== */
+/* ===== 右侧箭头 ===== */
 .my-link::after {
     content: "" !important;
     background-color: var(--aria-fontcolor, #4c4948) !important;
@@ -104,7 +105,6 @@
     transition: all 0.3s ease !important;
 }
 
-/* 悬停时箭头右移 */
 .my-link:hover::after {
     transform: translateY(-50%) translateX(4px) !important;
     background-color: #ffffff !important;
@@ -222,9 +222,5 @@
         width: 12px !important;
         height: 12px !important;
         right: 10px !important;
-
-     /* ===== 分割线 ===== */
-    .my-link .my-link-divider {
-        margin: 0 20px 0 4px !important;               /* 👈 左右间距：右30px（留出箭头空间），左8px */
     }
 }
