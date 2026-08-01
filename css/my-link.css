@@ -1,5 +1,5 @@
 /* ========================================
-   myLink 自定义外挂标签 - 最终版
+   myLink 自定义外挂标签 - 标题副标题同行
    ======================================== */
 
 .my-link {
@@ -19,37 +19,31 @@
     overflow: hidden !important;
 }
 
-/* ===== 上区域：提示标签 ===== */
-/* 第1行第1列：空占位（图标会在下区域） */
-.my-link .my-link-placeholder {
-    grid-row: 1 !important;
-    grid-column: 1 !important;
-}
-
-/* 第1行第2列：提示标签（靠右） */
+/* ===== 上区域第1行第1列：提示标签（靠左） ===== */
 .my-link .my-link-tip {
-    font-size: 0.6rem !important;
+    font-size: 0.55rem !important;
     color: var(--aria-light-fontcolor, #828282) !important;
     grid-row: 1 !important;
-    grid-column: 2 !important;
-    justify-self: end !important;
+    grid-column: 1 !important;
+    justify-self: start !important;
     align-self: center !important;
-    padding-right: 30px !important;
+    padding-left: 8px !important;
     transition: color 0.3s ease !important;
+    z-index: 2 !important;
 }
 
-/* ===== 分割线（从图标右侧开始，到右侧结束） ===== */
+/* ===== 上区域第1行第2列：分割线 ===== */
 .my-link .my-link-divider {
     grid-row: 1 !important;
     grid-column: 2 !important;
-    align-self: end !important;
+    align-self: center !important;
     height: 1px !important;
     background: var(--aria-border, #c9c9c9) !important;
-    margin: 0 8px 0 8px !important;
+    margin: 0 30px 0 12px !important;
     transition: background 0.3s ease !important;
 }
 
-/* ===== 下区域：图标（第2行第1列，居中） ===== */
+/* ===== 下区域第2行第1列：图标（居中） ===== */
 .my-link .my-link-img {
     width: 52px !important;
     height: 52px !important;
@@ -63,32 +57,30 @@
     justify-self: center !important;
 }
 
-/* ===== 下区域：标题（第2行第2列，靠左上） ===== */
+/* ===== 下区域第2行第2列：标题 + 副标题 同行 ===== */
+.my-link .my-link-content {
+    grid-row: 2 !important;
+    grid-column: 2 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding: 0 30px 0 8px !important;
+}
+
 .my-link .my-link-title {
     font-weight: 600 !important;
     font-size: 0.95rem !important;
-    grid-row: 2 !important;
-    grid-column: 2 !important;
-    align-self: start !important;
-    justify-self: start !important;
-    padding-left: 8px !important;
-    padding-top: 4px !important;
-    line-height: 1.4 !important;
     transition: color 0.3s ease !important;
     color: var(--aria-blackfont, #4c4948) !important;
+    white-space: nowrap !important;
 }
 
-/* ===== 下区域：副标题（第2行第2列，靠左下） ===== */
 .my-link .my-link-subtitle {
     font-size: 0.7rem !important;
     color: var(--aria-light-fontcolor, #828282) !important;
-    grid-row: 2 !important;
-    grid-column: 2 !important;
-    align-self: end !important;
-    justify-self: start !important;
-    padding-left: 8px !important;
-    padding-bottom: 4px !important;
     transition: color 0.3s ease !important;
+    white-space: nowrap !important;
 }
 
 /* ===== 右侧箭头 ===== */
@@ -212,7 +204,11 @@
 
     .my-link .my-link-tip {
         font-size: 0.5rem !important;
-        padding-right: 20px !important;
+        padding-left: 4px !important;
+    }
+
+    .my-link .my-link-content {
+        padding: 0 20px 0 8px !important;
     }
 
     .my-link::after {
