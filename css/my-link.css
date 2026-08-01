@@ -249,4 +249,9 @@
         height: 12px !important;
         right: 10px !important;
     }
+
+    /* ===== 分割线 ===== */
+    .my-link .my-link-divider {
+        margin: 0 25px 0 5px !important;
+    }
 }
