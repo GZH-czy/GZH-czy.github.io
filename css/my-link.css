@@ -13,7 +13,7 @@
     
     /* ----- 边框与背景（可调） ----- */
     border: var(--aria-border, 1px solid #c9c9c9) !important;
-    background: rgb(81,68,60) !important;
+    background: var(--card-bg, #f1f3f8) !important;
     border-radius: 10px !important;               /* 👈 圆角大小 */
     margin: 10px !important;                       /* 👈 外边距 */
     padding: 5px !important;                       /* 👈 内边距 */
@@ -82,7 +82,7 @@
     font-weight: 600 !important;                   /* 👈 标题粗细（600=半粗） */
     font-size: 0.95rem !important;                 /* 👈 标题大小 */
     transition: color 0.3s ease !important;
-    color: var(--aria-blackfont, #4c4948) !important;
+    color: var(--main-color, #49B1F5) !important;
     white-space: nowrap !important;                /* 👈 不换行 */
 }
 
@@ -232,5 +232,5 @@
     }
     /* ===== 分割线 ===== */
     .my-link .my-link-divider {
-        margin: 0 15px 0 4px !important;               /* 👈 左右间距：右30px（留出箭头空间），左8px */
+        margin: 0 20px 0 4px !important;               /* 👈 左右间距：右30px（留出箭头空间），左8px */
 }
