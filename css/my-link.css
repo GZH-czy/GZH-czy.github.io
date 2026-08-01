@@ -1,5 +1,5 @@
 /* ========================================
-   myLink 自定义外挂标签
+   myLink 自定义外挂标签 - 最终版
    ======================================== */
 
 .my-link {
@@ -19,28 +19,34 @@
     overflow: hidden !important;
 }
 
-/* ===== 上区域第1行第1列：提示标签（靠左） ===== */
+/* ===== 上区域第1行第1列：图标占位（空） ===== */
+.my-link .my-link-placeholder {
+    grid-row: 1 !important;
+    grid-column: 1 !important;
+}
+
+/* ===== 上区域第1行第2列：提示标签（靠左，标题正上方） ===== */
 .my-link .my-link-tip {
     font-size: 0.55rem !important;
     color: var(--aria-light-fontcolor, #828282) !important;
     grid-row: 1 !important;
-    grid-column: 1 !important;
+    grid-column: 2 !important;
     justify-self: start !important;
-    align-self: center !important;
+    align-self: end !important;
     padding-left: 8px !important;
+    padding-bottom: 2px !important;
     transition: color 0.3s ease !important;
     z-index: 2 !important;
 }
 
-/* ===== 上区域第1行第2列：分割线 ===== */
+/* ===== 上区域第1行第2列：分割线（在提示标签下方） ===== */
 .my-link .my-link-divider {
     grid-row: 1 !important;
     grid-column: 2 !important;
     align-self: end !important;
     height: 1px !important;
     background: var(--aria-border, #c9c9c9) !important;
-    margin: 0 30px 0 12px !important;
-    padding-bottom: 2px !important;
+    margin: 0 30px 0 8px !important;
     transition: background 0.3s ease !important;
 }
 
@@ -58,7 +64,7 @@
     justify-self: center !important;
 }
 
-/* ===== 下区域第2行第2列：标题 + 副标题 同行，紧挨分割线 ===== */
+/* ===== 下区域第2行第2列：标题 + 副标题 同行 ===== */
 .my-link .my-link-content {
     grid-row: 2 !important;
     grid-column: 2 !important;
