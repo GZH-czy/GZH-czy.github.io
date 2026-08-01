@@ -1,5 +1,5 @@
 /* ========================================
-   myLink 自定义外挂标签 - 修复标题颜色
+   myLink 自定义外挂标签
    ======================================== */
 
 .my-link {
@@ -57,27 +57,25 @@
     justify-self: center !important;
 }
 
-/* ===== 下区域：标题 + 副标题 容器 ===== */
+/* ===== 下区域：内容（标题 + 副标题 + 信号 各一行） ===== */
 .my-link .my-link-content {
     grid-row: 2 !important;
     grid-column: 2 !important;
     display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
+    flex-direction: column !important;
+    justify-content: center !important;
     width: 100% !important;
     padding: 0 30px 0 8px !important;
-    align-self: start !important;
-    padding-top: 2px !important;
+    gap: 0 !important;
 }
 
-/* ===== ⭐ 标题 - 强制黑色 ===== */
+/* ===== 标题 ===== */
 .my-link .my-link-title {
     font-weight: 600 !important;
     font-size: 0.95rem !important;
     transition: color 0.3s ease !important;
-    white-space: nowrap !important;
-    /* 强制颜色 */
     color: #4c4948 !important;
+    line-height: 1.4 !important;
 }
 
 /* ===== 副标题 ===== */
@@ -85,7 +83,21 @@
     font-size: 0.7rem !important;
     color: var(--aria-light-fontcolor, #828282) !important;
     transition: color 0.3s ease !important;
-    white-space: nowrap !important;
+    line-height: 1.4 !important;
+}
+
+/* ===== 信号图标（单独一行） ===== */
+.my-link .my-link-signal {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    font-size: 0.7rem !important;
+    line-height: 1.4 !important;
+    margin-top: 1px !important;
+}
+
+.my-link .my-link-signal i {
+    display: inline-block !important;
 }
 
 /* ===== 右侧箭头 ===== */
@@ -123,7 +135,8 @@
 
 .my-link:hover .my-link-title,
 .my-link:hover .my-link-subtitle,
-.my-link:hover .my-link-tip {
+.my-link:hover .my-link-tip,
+.my-link:hover .my-link-signal i {
     color: #ffffff !important;
 }
 
@@ -150,7 +163,8 @@
 
 .my-link:active .my-link-title,
 .my-link:active .my-link-subtitle,
-.my-link:active .my-link-tip {
+.my-link:active .my-link-tip,
+.my-link:active .my-link-signal i {
     color: #ffffff !important;
 }
 
@@ -164,7 +178,6 @@
         border-color: var(--aria-border, #8a8a8a) !important;
     }
 
-    /* 深色模式标题变白 */
     .my-link .my-link-title {
         color: #ffffffb3 !important;
     }
@@ -180,7 +193,8 @@
 
     .my-link:hover .my-link-title,
     .my-link:hover .my-link-subtitle,
-    .my-link:hover .my-link-tip {
+    .my-link:hover .my-link-tip,
+    .my-link:hover .my-link-signal i {
         color: #ffffff !important;
     }
 }
