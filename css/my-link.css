@@ -3,110 +3,91 @@
    ======================================== */
 
 .my-link {
-    /* ----- 网格布局 ----- */
     display: grid !important;
-    grid-template-rows: 28px 1fr !important;      /* 上区域28px（提示标签），下区域占满剩余空间 */
-    grid-template-columns: 80px 1fr !important;   /* 左侧80px（图标），右侧占满 */
-    
-    /* ----- 尺寸 ----- */
-    height: 100px !important;                     /* 👈 卡片整体高度，可调 */
-    
-    /* ----- 边框与背景 ----- */
+    grid-template-rows: 28px 1fr !important;
+    grid-template-columns: 80px 1fr !important;
+    height: 100px !important;
+    position: relative !important;
     border: var(--aria-border, 1px solid #c9c9c9) !important;
     background: var(--card-bg, #f1f3f8) !important;
-    border-radius: 10px !important;               /* 👈 卡片圆角 */
-    margin: 10px !important;                      /* 👈 卡片外边距 */
-    padding: 5px !important;                      /* 👈 卡片内边距 */
-    
-    /* ----- 动画与定位 ----- */
+    border-radius: 10px !important;
+    margin: 10px !important;
+    padding: 5px !important;
     transition: all 0.3s ease !important;
     text-decoration: none !important;
-    overflow: hidden !important;                  /* 防止子元素溢出 */
+    overflow: hidden !important;
 }
 
 /* ===== 上区域：提示标签 ===== */
 .my-link .my-link-tip {
-    /* ----- 位置（第1行第2列） ----- */
+    font-size: 0.55rem !important;
+    color: var(--aria-light-fontcolor, #828282) !important;
     grid-row: 1 !important;
     grid-column: 2 !important;
-    justify-self: start !important;               /* 水平靠左 */
-    align-self: end !important;                   /* 垂直靠下（紧贴分割线） */
-    
-    /* ----- 样式 ----- */
-    font-size: 0.55rem !important;                /* 👈 提示文字大小 */
-    color: var(--aria-light-fontcolor, #828282) !important;
+    justify-self: start !important;
+    align-self: end !important;
     padding-left: 8px !important;
     padding-bottom: 2px !important;
     transition: color 0.3s ease !important;
-    z-index: 2 !important;                        /* 确保在分割线上方 */
+    z-index: 2 !important;
 }
 
 /* ===== 分割线 ===== */
 .my-link .my-link-divider {
-    /* ----- 位置（第1行第2列） ----- */
     grid-row: 1 !important;
     grid-column: 2 !important;
-    align-self: end !important;                   /* 垂直靠下 */
-    
-    /* ----- 样式 ----- */
-    height: 1px !important;                       /* 👈 分割线粗细 */
+    align-self: end !important;
+    height: 1px !important;
     background: var(--aria-border, #c9c9c9) !important;
-    margin: 0 30px 0 8px !important;              /* 👈 右30px（留出箭头空间），左8px */
+    margin: 0 30px 0 8px !important;
     transition: background 0.3s ease !important;
 }
 
 /* ===== 下区域：图标 ===== */
 .my-link .my-link-img {
-    /* ----- 位置（第2行第1列，跨两行） ----- */
-    grid-row: 2 !important;
-    grid-column: 1 !important;
-    align-self: center !important;                /* 垂直居中 */
-    justify-self: center !important;              /* 水平居中 */
-    
-    /* ----- 样式 ----- */
-    width: 52px !important;                       /* 👈 图标大小 */
+    width: 52px !important;
     height: 52px !important;
-    border-radius: 50% !important;                /* 圆形 */
+    border-radius: 50% !important;
     object-fit: cover !important;
     border: 2px solid var(--aria-border, #c9c9c9) !important;
     transition: border-color 0.3s ease !important;
+    grid-row: 2 !important;
+    grid-column: 1 !important;
+    align-self: center !important;
+    justify-self: center !important;
 }
 
-/* ===== 下区域：内容容器（标题+副标题+信号） ===== */
+/* ===== 下区域：内容容器（紧挨分割线） ===== */
 .my-link .my-link-content {
-    /* ----- 位置（第2行第2列） ----- */
     grid-row: 2 !important;
     grid-column: 2 !important;
-    align-self: start !important;                 /* 垂直靠上（紧挨分割线） */
-    
-    /* ----- 内部布局 ----- */
     display: flex !important;
-    flex-direction: column !important;            /* 垂直排列（标题行 → 信号行） */
+    flex-direction: column !important;
     justify-content: flex-start !important;
     width: 100% !important;
-    padding: 0 30px 0 8px !important;             /* 👈 右30px（留出箭头空间） */
-    padding-top: 2px !important;                  /* 👈 紧挨分割线 */
+    padding: 0 30px 0 8px !important;
+    padding-top: 2px !important;  /* 👈 紧挨分割线 */
 }
 
-/* ===== 顶部行：标题 + 副标题（同行） ===== */
+/* ===== 顶部行：标题 + 副标题 ===== */
 .my-link .my-link-top {
     display: flex !important;
-    align-items: center !important;               /* 垂直居中 */
-    justify-content: space-between !important;    /* 标题靠左，副标题靠右 */
+    align-items: center !important;
+    justify-content: space-between !important;
     width: 100% !important;
 }
 
 /* ===== 标题 ===== */
 .my-link .my-link-title {
-    font-weight: 600 !important;                  /* 👈 标题粗细 */
-    font-size: 0.95rem !important;                /* 👈 标题大小 */
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
     transition: color 0.3s ease !important;
-    color: #4c4948 !important;                    /* 浅色模式黑色（硬编码） */
+    color: #4c4948 !important;
 }
 
 /* ===== 副标题 ===== */
 .my-link .my-link-subtitle {
-    font-size: 0.7rem !important;                 /* 👈 副标题大小 */
+    font-size: 0.7rem !important;
     color: var(--aria-light-fontcolor, #828282) !important;
     transition: color 0.3s ease !important;
 }
@@ -114,7 +95,7 @@
 /* ===== 信号行（单独一行，靠右） ===== */
 .my-link .my-link-signal-row {
     display: flex !important;
-    justify-content: flex-end !important;         /* 信号图标靠右 */
+    justify-content: flex-end !important;
     width: 100% !important;
     margin-top: 1px !important;
 }
@@ -124,7 +105,7 @@
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    font-size: 0.65rem !important;                /* 👈 信号图标大小 */
+    font-size: 0.65rem !important;
 }
 
 .my-link .my-link-signal i {
@@ -135,11 +116,11 @@
 .my-link::after {
     content: "" !important;
     background-color: var(--aria-fontcolor, #4c4948) !important;
-    width: 14px !important;                       /* 👈 箭头大小 */
+    width: 14px !important;
     height: 14px !important;
     position: absolute !important;
-    top: 50% !important;                          /* 垂直居中 */
-    right: 15px !important;                       /* 👈 距右侧距离 */
+    top: 50% !important;
+    right: 15px !important;
     transform: translateY(-50%) !important;
     mask-image: url("data:image/svg+xml;charset=utf-8;base64,PHN2ZyB0PSIxNzI1Mjk1MDA0Njc5IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjE2NTciIGlkPSJteF9uXzE3MjUyOTUwMDQ2NzkiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiI+PHBhdGggZD0iTTgxNi42NTMwOTMgNDY5LjU0NDA0OWMtMS40OTUwNS0xLjQ5NTA1LTMuMDYwNzA5LTIuODc0NDY3LTQuNjc2NTA5LTQuMTU5NzRMNDI4LjQ3NTE5IDc5Ljg5NTY1NWMtMjEuMzUxMjg0LTIxLjM1MDI2MS01NS45Njc2ODYtMjEuMzUwMjYxLTc3LjMxNzk0NiAwLTIxLjM1MDI2MSAyMS4zNTEyODQtMjEuMzUwMjYxIDU1Ljk2NjY2MyAwIDc3LjMxNzk0NmwzNDkuMjU5NTIyIDM1MS4yNDc4MDZMMzQzLjY1NjQwOSA4NjQuODgzMDQ5Yy0yMS4zNTAyNjEgMjEuMzUxMjg0LTIxLjM1MDI2MSA1NS45NjY2NjMgMCA3Ny4zMTg5NyAyMS4zNTAyNjEgMjEuMzUwMjYxIDU1Ljk2NjY2MyAyMS4zNTAyNjEgNzcuMzE3OTQ2IDBsMzkwLjk5ODEzNS0zOTAuNjYxNDY4YzEuNjE2ODI0LTEuMjg2Mjk2IDMuMTgzNTA2LTIuNjY0Njg5IDQuNjc5NTc5LTQuMTYwNzYzIDEwLjc0MDYyMi0xMC43NDA2MjIgMTYuMDczMDctMjQuODM5NzM1IDE2LjAwNjU1Ni0zOC45MTczNThDODMyLjcyNjE2NCA0OTQuMzgyNzYgODI3LjM5MzcxNSA0ODAuMjg0NjcxIDgxNi42NTMwOTMgNDY5LjU0NDA0OXoiIGZpbGw9InZhcigtLWFyaWEtZm9udGNvbG9yKSIgcC1pZD0iMTY1OCI+PC9wYXRoPjwvc3ZnPg==") !important;
     mask-size: contain !important;
@@ -147,25 +128,23 @@
     transition: all 0.3s ease !important;
 }
 
-/* ===== 悬停时箭头右移 ===== */
 .my-link:hover::after {
     transform: translateY(-50%) translateX(4px) !important;
     background-color: #ffffff !important;
 }
 
 /* ========================================
-   悬停效果（联动主题色）
+   悬停效果
    ======================================== */
 
 .my-link:hover {
-    background: var(--main-color, #49B1F5) !important;   /* 👈 悬停背景色 = 主题色 */
+    background: var(--main-color, #49B1F5) !important;
     border-color: var(--main-color, #49B1F5) !important;
-    transform: translateY(-4px) !important;              /* 👈 悬停上浮距离 */
+    transform: translateY(-4px) !important;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10),
-                0 0 20px var(--main-color, #49B1F5) !important;  /* 👈 光晕大小 */
+                0 0 20px var(--main-color, #49B1F5) !important;
 }
 
-/* 悬停时所有文字变白 */
 .my-link:hover .my-link-title,
 .my-link:hover .my-link-subtitle,
 .my-link:hover .my-link-tip,
@@ -173,18 +152,16 @@
     color: #ffffff !important;
 }
 
-/* 悬停时分割线变白半透明 */
 .my-link:hover .my-link-divider {
     background: rgba(255, 255, 255, 0.3) !important;
 }
 
-/* 悬停时图标边框变白半透明 */
 .my-link:hover .my-link-img {
     border-color: rgba(255, 255, 255, 0.5) !important;
 }
 
 /* ========================================
-   点击/激活光晕（更强烈）
+   点击/激活光晕
    ======================================== */
 
 .my-link:active {
@@ -204,7 +181,7 @@
 }
 
 /* ========================================
-   深色模式适配
+   深色模式
    ======================================== */
 
 @media (prefers-color-scheme: dark) {
@@ -214,7 +191,7 @@
     }
 
     .my-link .my-link-title {
-        color: #ffffffb3 !important;               /* 👈 深色模式标题变白 */
+        color: #ffffffb3 !important;
     }
 
     .my-link .my-link-subtitle,
@@ -240,35 +217,35 @@
 
 @media (max-width: 768px) {
     .my-link {
-        height: 85px !important;                   /* 👈 手机端卡片高度 */
+        height: 85px !important;
         padding: 4px !important;
     }
 
     .my-link .my-link-img {
-        width: 42px !important;                    /* 👈 手机端图标大小 */
+        width: 42px !important;
         height: 42px !important;
     }
 
     .my-link .my-link-title {
-        font-size: 0.85rem !important;             /* 👈 手机端标题大小 */
+        font-size: 0.85rem !important;
     }
 
     .my-link .my-link-subtitle {
-        font-size: 0.6rem !important;              /* 👈 手机端副标题大小 */
+        font-size: 0.6rem !important;
     }
 
     .my-link .my-link-tip {
-        font-size: 0.5rem !important;              /* 👈 手机端提示文字大小 */
+        font-size: 0.5rem !important;
         padding-left: 4px !important;
     }
 
     .my-link .my-link-content {
-        padding: 0 20px 0 8px !important;          /* 👈 手机端右侧间距（留出箭头空间） */
+        padding: 0 20px 0 8px !important;
         padding-top: 2px !important;
     }
 
     .my-link::after {
-        width: 12px !important;                    /* 👈 手机端箭头大小 */
+        width: 12px !important;
         height: 12px !important;
         right: 10px !important;
     }
