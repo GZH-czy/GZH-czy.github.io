@@ -1,86 +1,93 @@
 /* ========================================
-   myLink 自定义外挂标签 - 和 etag-link 同款样式
+   myLink 自定义外挂标签 - 修正版
    ======================================== */
 
 .my-link {
-    grid-template-rows: 28px min-content;
-    grid-template-columns: 80px calc(100% - 80px);
-    height: 100px;
-    display: grid;
-    position: relative;
-    border: var(--aria-border, 1px solid #c9c9c9);
-    background: var(--card-bg, #f1f3f8);
-    border-radius: 10px;
-    margin: 10px;
-    padding: 5px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-decoration: none;
-    color: var(--aria-fontcolor, #4c4948);
-    overflow: hidden;
+    display: flex !important;
+    align-items: center !important;
+    position: relative !important;
+    border: var(--aria-border, 1px solid #c9c9c9) !important;
+    background: var(--card-bg, #f1f3f8) !important;
+    border-radius: 12px !important;
+    margin: 10px 0 !important;
+    padding: 14px 20px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    text-decoration: none !important;
+    color: var(--aria-fontcolor, #4c4948) !important;
+    overflow: hidden !important;
+    gap: 16px !important;
+    min-height: 80px !important;
 }
 
-.my-link .my-link-tip {
-    font-size: 0.65rem;
-    color: var(--aria-light-fontcolor, #828282);
-    position: absolute;
-    top: 4px;
-    right: 8px;
-    transition: color 0.3s ease;
-}
-
+/* ---------- 左侧图标 ---------- */
 .my-link .my-link-img {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--aria-border, #c9c9c9);
-    transition: border-color 0.3s ease;
-    grid-row: 1 / 3;
-    grid-column: 1;
-    align-self: center;
-    justify-self: center;
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    border: 2px solid var(--aria-border, #c9c9c9) !important;
+    flex-shrink: 0 !important;
+    transition: border-color 0.3s ease !important;
 }
 
+/* ---------- 右侧内容区域 ---------- */
+.my-link .my-link-content {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+    position: relative !important;
+}
+
+/* ---------- 标题 ---------- */
 .my-link .my-link-title {
-    font-weight: 600;
-    font-size: 1rem;
-    color: var(--aria-fontcolor, #4c4948);
-    transition: color 0.3s ease;
-    grid-row: 1;
-    grid-column: 2;
-    align-self: end;
-    padding-left: 8px;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    color: var(--aria-fontcolor, #4c4948) !important;
+    transition: color 0.3s ease !important;
+    line-height: 1.4 !important;
 }
 
+/* ---------- 副标题 ---------- */
 .my-link .my-link-subtitle {
-    font-size: 0.8rem;
-    color: var(--aria-light-fontcolor, #828282);
-    transition: color 0.3s ease;
-    grid-row: 2;
-    grid-column: 2;
-    align-self: start;
-    padding-left: 8px;
+    font-size: 0.8rem !important;
+    color: var(--aria-light-fontcolor, #828282) !important;
+    transition: color 0.3s ease !important;
+    line-height: 1.4 !important;
 }
 
-/* 右侧箭头 */
+/* ---------- 提示标签（左上角） ---------- */
+.my-link .my-link-tip {
+    font-size: 0.6rem !important;
+    color: var(--aria-light-fontcolor, #828282) !important;
+    background: var(--aria-gray, #e2e2e2) !important;
+    padding: 2px 8px !important;
+    border-radius: 10px !important;
+    display: inline-block !important;
+    margin-bottom: 4px !important;
+    align-self: flex-start !important;
+    transition: all 0.3s ease !important;
+}
+
+/* ---------- 右侧箭头 ---------- */
 .my-link::after {
-    content: "";
-    background-color: var(--aria-fontcolor, #4c4948);
-    width: 16px;
-    height: 16px;
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translateY(-50%);
-    mask-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB0PSIxNzI1Mjk1MDA0Njc5IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjE2NTciIGlkPSJteF9uXzE3MjUyOTUwMDQ2NzkiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiI+PHBhdGggZD0iTTgxNi42NTMwOTMgNDY5LjU0NDA0OWMtMS40OTUwNS0xLjQ5NTA1LTMuMDYwNzA5LTIuODc0NDY3LTQuNjc2NTA5LTQuMTU5NzRMNDI4LjQ3NTE5IDc5Ljg5NTY1NWMtMjEuMzUxMjg0LTIxLjM1MDI2MS01NS45Njc2ODYtMjEuMzUwMjYxLTc3LjMxNzk0NiAwLTIxLjM1MDI2MSAyMS4zNTEyODQtMjEuMzUwMjYxIDU1Ljk2NjY2MyAwIDc3LjMxNzk0NmwzNDkuMjU5NTIyIDM1MS4yNDc4MDZMMzQzLjY1NjQwOSA4NjQuODgzMDQ5Yy0yMS4zNTAyNjEgMjEuMzUxMjg0LTIxLjM1MDI2MSA1NS45NjY2NjMgMCA3Ny4zMTg5NyAyMS4zNTAyNjEgMjEuMzUwMjYxIDU1Ljk2NjY2MyAyMS4zNTAyNjEgNzcuMzE3OTQ2IDBsMzkwLjk5ODEzNS0zOTAuNjYxNDY4YzEuNjE2ODI0LTEuMjg2Mjk2IDMuMTgzNTA2LTIuNjY0Njg5IDQuNjc5NTc5LTQuMTYwNzYzIDEwLjc0MDYyMi0xMC43NDA2MjIgMTYuMDczMDctMjQuODM5NzM1IDE2LjAwNjU1Ni0zOC45MTczNThDODMyLjcyNjE2NCA0OTQuMzgyNzYgODI3LjM5MzcxNSA0ODAuMjg0NjcxIDgxNi42NTMwOTMgNDY5LjU0NDA0OXoiIGZpbGw9InZhcigtLWFyaWEtZm9udGNvbG9yKSIgcC1pZD0iMTY1OCI+PC9wYXRoPjwvc3ZnPg==);
-    mask-size: contain;
-    mask-repeat: no-repeat;
-    transition: all 0.3s ease;
+    content: "" !important;
+    background-color: var(--aria-fontcolor, #4c4948) !important;
+    width: 14px !important;
+    height: 14px !important;
+    position: absolute !important;
+    top: 50% !important;
+    right: 16px !important;
+    transform: translateY(-50%) !important;
+    mask-image: url("data:image/svg+xml;charset=utf-8;base64,PHN2ZyB0PSIxNzI1Mjk1MDA0Njc5IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjE2NTciIGlkPSJteF9uXzE3MjUyOTUwMDQ2NzkiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiI+PHBhdGggZD0iTTgxNi42NTMwOTMgNDY5LjU0NDA0OWMtMS40OTUwNS0xLjQ5NTA1LTMuMDYwNzA5LTIuODc0NDY3LTQuNjc2NTA5LTQuMTU5NzRMNDI4LjQ3NTE5IDc5Ljg5NTY1NWMtMjEuMzUxMjg0LTIxLjM1MDI2MS01NS45Njc2ODYtMjEuMzUwMjYxLTc3LjMxNzk0NiAwLTIxLjM1MDI2MSAyMS4zNTEyODQtMjEuMzUwMjYxIDU1Ljk2NjY2MyAwIDc3LjMxNzk0NmwzNDkuMjU5NTIyIDM1MS4yNDc4MDZMMzQzLjY1NjQwOSA4NjQuODgzMDQ5Yy0yMS4zNTAyNjEgMjEuMzUxMjg0LTIxLjM1MDI2MSA1NS45NjY2NjMgMCA3Ny4zMTg5NyAyMS4zNTAyNjEgMjEuMzUwMjYxIDU1Ljk2NjY2MyAyMS4zNTAyNjEgNzcuMzE3OTQ2IDBsMzkwLjk5ODEzNS0zOTAuNjYxNDY4YzEuNjE2ODI0LTEuMjg2Mjk2IDMuMTgzNTA2LTIuNjY0Njg5IDQuNjc5NTc5LTQuMTYwNzYzIDEwLjc0MDYyMi0xMC43NDA2MjIgMTYuMDczMDctMjQuODM5NzM1IDE2LjAwNjU1Ni0zOC45MTczNThDODMyLjcyNjE2NCA0OTQuMzgyNzYgODI3LjM5MzcxNSA0ODAuMjg0NjcxIDgxNi42NTMwOTMgNDY5LjU0NDA0OXoiIGZpbGw9InZhcigtLWFyaWEtZm9udGNvbG9yKSIgcC1pZD0iMTY1OCI+PC9wYXRoPjwvc3ZnPg==") !important;
+    mask-size: contain !important;
+    mask-repeat: no-repeat !important;
+    transition: all 0.3s ease !important;
 }
 
 .my-link:hover::after {
-    transform: translateY(-50%) translateX(4px);
-    background-color: #ffffff;
+    transform: translateY(-50%) translateX(4px) !important;
+    background-color: #ffffff !important;
 }
 
 /* ========================================
@@ -88,17 +95,21 @@
    ======================================== */
 
 .my-link:hover {
-    background: var(--main-color, #49B1F5);
-    border-color: var(--main-color, #49B1F5);
-    transform: translateY(-4px);
+    background: var(--main-color, #49B1F5) !important;
+    border-color: var(--main-color, #49B1F5) !important;
+    transform: translateY(-4px) !important;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10),
-                0 0 20px var(--main-color, #49B1F5);
+                0 0 20px var(--main-color, #49B1F5) !important;
 }
 
 .my-link:hover .my-link-title,
 .my-link:hover .my-link-subtitle,
 .my-link:hover .my-link-tip {
     color: #ffffff !important;
+}
+
+.my-link:hover .my-link-tip {
+    background: rgba(255, 255, 255, 0.2) !important;
 }
 
 .my-link:hover .my-link-img {
@@ -110,12 +121,12 @@
    ======================================== */
 
 .my-link:active {
-    background: var(--main-color, #49B1F5);
-    border-color: var(--main-color, #49B1F5);
+    background: var(--main-color, #49B1F5) !important;
+    border-color: var(--main-color, #49B1F5) !important;
     box-shadow: 0 0 20px var(--main-color, #49B1F5),
                 0 0 40px var(--main-color, #49B1F5),
-                0 0 60px var(--main-color, #49B1F5);
-    transform: scale(0.98);
+                0 0 60px var(--main-color, #49B1F5) !important;
+    transform: scale(0.98) !important;
 }
 
 .my-link:active .my-link-title,
@@ -130,26 +141,62 @@
 
 @media (prefers-color-scheme: dark) {
     .my-link {
-        background: var(--card-bg, #2c2c2c);
-        border-color: var(--aria-border, #8a8a8a);
+        background: var(--card-bg, #2c2c2c) !important;
+        border-color: var(--aria-border, #8a8a8a) !important;
     }
 
     .my-link .my-link-title {
-        color: var(--aria-whitefont, #ffffffb3);
+        color: var(--aria-whitefont, #ffffffb3) !important;
     }
 
     .my-link .my-link-subtitle,
     .my-link .my-link-tip {
-        color: var(--aria-light-fontcolor, #828282);
+        color: var(--aria-light-fontcolor, #828282) !important;
     }
 
     .my-link:hover {
-        background: var(--main-color, #49B1F5);
+        background: var(--main-color, #49B1F5) !important;
     }
 
     .my-link:hover .my-link-title,
     .my-link:hover .my-link-subtitle,
     .my-link:hover .my-link-tip {
         color: #ffffff !important;
+    }
+}
+
+/* ========================================
+   手机端适配
+   ======================================== */
+
+@media (max-width: 768px) {
+    .my-link {
+        padding: 12px 16px !important;
+        min-height: 70px !important;
+        gap: 12px !important;
+    }
+
+    .my-link .my-link-img {
+        width: 42px !important;
+        height: 42px !important;
+    }
+
+    .my-link .my-link-title {
+        font-size: 0.9rem !important;
+    }
+
+    .my-link .my-link-subtitle {
+        font-size: 0.7rem !important;
+    }
+
+    .my-link .my-link-tip {
+        font-size: 0.5rem !important;
+        padding: 1px 6px !important;
+    }
+
+    .my-link::after {
+        width: 12px !important;
+        height: 12px !important;
+        right: 10px !important;
     }
 }
