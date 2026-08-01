@@ -39,7 +39,7 @@
     align-self: end !important;
     height: 1px !important;
     background: var(--aria-border, #c9c9c9) !important;
-    margin: 0 8px 0 8px !important;
+    margin: 0 30px 0 8px !important;
     transition: background 0.3s ease !important;
 }
 
@@ -57,15 +57,16 @@
     justify-self: center !important;
 }
 
-/* ===== 下区域：内容容器 ===== */
+/* ===== 下区域：内容容器（紧挨分割线） ===== */
 .my-link .my-link-content {
     grid-row: 2 !important;
     grid-column: 2 !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important;
+    justify-content: flex-start !important;
     width: 100% !important;
     padding: 0 30px 0 8px !important;
+    padding-top: 2px !important;  /* 👈 紧挨分割线 */
 }
 
 /* ===== 顶部行：标题 + 副标题 ===== */
@@ -96,7 +97,7 @@
     display: flex !important;
     justify-content: flex-end !important;
     width: 100% !important;
-    margin-top: 2px !important;
+    margin-top: 1px !important;
 }
 
 /* ===== 信号图标 ===== */
@@ -240,6 +241,7 @@
 
     .my-link .my-link-content {
         padding: 0 20px 0 8px !important;
+        padding-top: 2px !important;
     }
 
     .my-link::after {
