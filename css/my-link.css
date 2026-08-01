@@ -57,7 +57,7 @@
     justify-self: center !important;
 }
 
-/* ===== 下区域：内容（标题 + 副标题 + 信号 各一行） ===== */
+/* ===== 下区域：内容容器 ===== */
 .my-link .my-link-content {
     grid-row: 2 !important;
     grid-column: 2 !important;
@@ -66,7 +66,14 @@
     justify-content: center !important;
     width: 100% !important;
     padding: 0 30px 0 8px !important;
-    gap: 0 !important;
+}
+
+/* ===== 顶部行：标题 + 副标题 ===== */
+.my-link .my-link-top {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
 }
 
 /* ===== 标题 ===== */
@@ -75,7 +82,6 @@
     font-size: 0.95rem !important;
     transition: color 0.3s ease !important;
     color: #4c4948 !important;
-    line-height: 1.4 !important;
 }
 
 /* ===== 副标题 ===== */
@@ -83,17 +89,22 @@
     font-size: 0.7rem !important;
     color: var(--aria-light-fontcolor, #828282) !important;
     transition: color 0.3s ease !important;
-    line-height: 1.4 !important;
 }
 
-/* ===== 信号图标（单独一行） ===== */
+/* ===== 信号行（单独一行，靠右） ===== */
+.my-link .my-link-signal-row {
+    display: flex !important;
+    justify-content: flex-end !important;
+    width: 100% !important;
+    margin-top: 2px !important;
+}
+
+/* ===== 信号图标 ===== */
 .my-link .my-link-signal {
     display: inline-flex !important;
     align-items: center !important;
-    justify-content: flex-start !important;
-    font-size: 0.7rem !important;
-    line-height: 1.4 !important;
-    margin-top: 1px !important;
+    justify-content: center !important;
+    font-size: 0.65rem !important;
 }
 
 .my-link .my-link-signal i {
