@@ -211,6 +211,11 @@
     .my-link:hover .my-link-signal i {
         color: #ffffff !important;
     }
+
+    .my-link:hover .my-link-img {
+        border-color: var(--main-color, #49B1F5) !important;
+        background: var(--main-color, #49B1F5) !important;
+    }
 }
 
 /* ========================================
