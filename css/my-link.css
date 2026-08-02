@@ -55,6 +55,7 @@
     grid-column: 1 !important;
     align-self: center !important;
     justify-self: center !important;
+    background: #ffffff !important;
 }
 
 /* ===== 下区域：内容容器（紧挨分割线） ===== */
@@ -82,7 +83,7 @@
     font-weight: 600 !important;
     font-size: 1rem !important;
     transition: color 0.3s ease !important;
-    color: #000000 !important;
+    color: #1c1c1c !important;
 }
 
 /* ===== 副标题 ===== */
