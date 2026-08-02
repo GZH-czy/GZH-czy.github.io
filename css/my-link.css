@@ -157,8 +157,8 @@
     background: rgba(255, 255, 255, 0.3) !important;
 }
 
-.my-link:hover .my-link-img {
-    border-color: rgba(255, 255, 255, 0.5) !important;
+/*.my-link:hover .my-link-img {
+    border-color: rgba(255, 255, 255, 0.5) !important;*/
 }
 
 /* ========================================
