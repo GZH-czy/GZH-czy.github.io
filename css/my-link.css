@@ -149,7 +149,6 @@
 .my-link:hover .my-link-title,
 .my-link:hover .my-link-subtitle,
 .my-link:hover .my-link-tip,
-.my-link:hover .my-link-img,
 .my-link:hover .my-link-signal i {
     color: #ffffff !important;
 }
