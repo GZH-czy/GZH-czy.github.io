@@ -2625,6 +2625,13 @@ maxWidth1200()
   opacity: 0.9;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
   filter: alpha(opacity=90); /* 👈 整个元素半透明（会影响文字） */
+  -webkit-box-shadow: 0 0 20px var(--main-color, #49b1f5), 0 0 40px var(--main-color, #49b1f5), 0 0 60px var(--main-color, #49b1f5) !important;
+  box-shadow: 0 0 20px var(--main-color, #49b1f5), 0 0 40px var(--main-color, #49b1f5), 0 0 60px var(--main-color, #49b1f5) !important;
+  -webkit-transform: translateY(-4px) !important;
+  -moz-transform: translateY(-4px) !important;
+  -o-transform: translateY(-4px) !important;
+  -ms-transform: translateY(-4px) !important;
+  transform: translateY(-4px) !important;
 }
 .flexcard-flink-list > a .cover {
   width: 100%;
