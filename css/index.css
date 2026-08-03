@@ -2593,15 +2593,6 @@ maxWidth1200()
   box-shadow: none;
   border: var(--style-border) !important;
 }
-.flexcard-flink-list > a:hover {
-  -webkit-box-shadow: 0 0 8px var(--main-color, #49b1f5), 0 0 16px var(--main-color, #49b1f5) !important;
-  box-shadow: 0 0 8px var(--main-color, #49b1f5), 0 0 16px var(--main-color, #49b1f5) !important;
-  -webkit-transform: translateY(-4px) !important;
-  -moz-transform: translateY(-4px) !important;
-  -o-transform: translateY(-4px) !important;
-  -ms-transform: translateY(-4px) !important;
-  transform: translateY(-4px) !important;
-}
 .flexcard-flink-list > a:hover .info {
   -webkit-transform: translateY(-100%);
   -moz-transform: translateY(-100%);
