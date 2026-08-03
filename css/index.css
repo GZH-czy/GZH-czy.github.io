@@ -2532,18 +2532,40 @@ maxWidth1200()
   font-weight: bold;
   font-size: 1.2em;
   color: var(--anzhiyu-fontcolor);
-  display: inline-block !important;
+  position: relative !important;
+  display: block !important;
 }
 .flink-item-info .flink-item-name .flink-signal {
-  display: inline-block !important;
-  margin-left: 2px !important;
-  font-size: 0.55rem !important;
-  vertical-align: middle !important;
-  line-height: 1 !important;
+  position: absolute !important;
+  right: -18px !important;
+  top: 50% !important;
+  -webkit-transform: translateY(-50%) !important;
+  -moz-transform: translateY(-50%) !important;
+  -o-transform: translateY(-50%) !important;
+  -ms-transform: translateY(-50%) !important;
+  transform: translateY(-50%) !important;
+  display: -webkit-inline-box !important;
+  display: -moz-inline-box !important;
+  display: -webkit-inline-flex !important;
+  display: -ms-inline-flexbox !important;
+  display: inline-box !important;
+  display: inline-flex !important;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center !important;
+  align-items: center !important;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  font-size: 0.5rem !important;
 }
 .flink-item-info .flink-item-name .flink-signal i {
   display: inline-block !important;
-  vertical-align: middle !important;
 }
 .flink-item-info .flink-item-desc {
   padding: 0;
