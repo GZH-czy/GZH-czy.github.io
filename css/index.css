@@ -2532,8 +2532,20 @@ maxWidth1200()
   font-weight: bold;
   font-size: 1.2em;
   color: var(--anzhiyu-fontcolor);
+  display: -webkit-inline-box !important;
+  display: -moz-inline-box !important;
+  display: -webkit-inline-flex !important;
+  display: -ms-inline-flexbox !important;
+  display: inline-box !important;
+  display: inline-flex !important;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center !important;
+  align-items: center !important;
+  gap: 4px !important;
 }
-⭐ 信号图标占位（名称右侧）,
 .flink-item-info .flink-item-name .flink-signal {
   display: -webkit-inline-box !important;
   display: -moz-inline-box !important;
@@ -2553,10 +2565,10 @@ maxWidth1200()
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  margin-left: 4px !important;
-  font-size: 0.6rem !important;
+  font-size: 0.55rem !important;
+  -webkit-flex-shrink: 0 !important;
+  flex-shrink: 0 !important;
 }
-⭐ 信号图标占位（名称右侧） i,
 .flink-item-info .flink-item-name .flink-signal i {
   display: inline-block !important;
 }
