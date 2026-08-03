@@ -2592,8 +2592,6 @@ maxWidth1200()
   -webkit-box-shadow: none;
   box-shadow: none;
   border: var(--style-border) !important;
-}
-.flexcard-flink-list > a:hover {
   -webkit-box-shadow: 0 0 8px var(--main-color, #49b1f5), 0 0 16px var(--main-color, #49b1f5) !important;
   box-shadow: 0 0 8px var(--main-color, #49b1f5), 0 0 16px var(--main-color, #49b1f5) !important;
   -webkit-transform: translateY(-4px) !important;
