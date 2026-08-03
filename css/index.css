@@ -2441,19 +2441,6 @@ figure.highlight pre .javascript .function {
   transition: all 0.3s ease-in-out;
 maxWidth1200()
 }
-.butterfly-flink-list > .flink-list-item .flink-signal {
-  position: absolute !important;
-  bottom: 6px !important;
-  right: 10px !important;
-  font-size: 0.55rem !important;
-  z-index: 2 !important;
-  opacity: 0.7 !important;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)" !important;
-  filter: alpha(opacity=70) !important;
-}
-.butterfly-flink-list > .flink-list-item .flink-signal i {
-  display: inline-block !important;
-}
 @media screen and (max-width: 600px) {
   .butterfly-flink-list > .flink-list-item {
     width: calc(100% - 15px) !important;
