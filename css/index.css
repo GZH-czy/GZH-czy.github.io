@@ -2747,7 +2747,8 @@ maxWidth1200()
 [data-theme=dark] .flexcard-flink-list a .info span {
   background-color: rgba(0,0,0,0.6);
 }
-[data-theme=dark] .flexcard-flink-list > a:hover {
+[data-theme=dark] .flexcard-flink-list > a:hover:before {
+  background-color: rgba(18,18,18,0.8);
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
   -webkit-transform: translateY(-2px) !important;
@@ -2755,9 +2756,6 @@ maxWidth1200()
   -o-transform: translateY(-2px) !important;
   -ms-transform: translateY(-2px) !important;
   transform: translateY(-2px) !important;
-}
-[data-theme=dark] .flexcard-flink-list > a:hover:before {
-  background-color: rgba(18,18,18,0.8);
 }
 .justified-gallery > div > img,
 .justified-gallery > figure > img,
