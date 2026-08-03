@@ -2517,7 +2517,7 @@ maxWidth1200()
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  padding-left: 100px;
+  padding-left: 10px;
   text-align: left;
   -webkit-box-orient: vertical;
   -moz-box-orient: vertical;
@@ -2609,7 +2609,7 @@ maxWidth1200()
 }
 .flexcard-flink-list > a:hover::before {
   position: fixed;
-  width: inherit;
+  width: 80vw;
   margin: auto;
   left: 0;
   right: 0;
