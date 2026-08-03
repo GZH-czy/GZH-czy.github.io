@@ -2533,6 +2533,33 @@ maxWidth1200()
   font-size: 1.2em;
   color: var(--anzhiyu-fontcolor);
 }
+⭐ 信号图标占位（名称右侧）,
+.flink-item-info .flink-item-name .flink-signal {
+  display: -webkit-inline-box !important;
+  display: -moz-inline-box !important;
+  display: -webkit-inline-flex !important;
+  display: -ms-inline-flexbox !important;
+  display: inline-box !important;
+  display: inline-flex !important;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center !important;
+  align-items: center !important;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin-left: 4px !important;
+  font-size: 0.6rem !important;
+}
+⭐ 信号图标占位（名称右侧） i,
+.flink-item-info .flink-item-name .flink-signal i {
+  display: inline-block !important;
+}
 .flink-item-info .flink-item-desc {
   padding: 0;
   height: 30px;
@@ -2622,9 +2649,9 @@ maxWidth1200()
   color: #fff;
   padding: 15px;
   background-color: var(--main-color, #49b1f5);
-  opacity: 1;
-  -ms-filter: none;
-  filter: none; /* 👈 整个元素半透明（会影响文字） */
+  opacity: 0.9;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+  filter: alpha(opacity=90); /* 👈 整个元素半透明（会影响文字） */
   -webkit-box-shadow: 0 0 20px var(--main-color, #49b1f5), 0 0 40px var(--main-color, #49b1f5), 0 0 60px var(--main-color, #49b1f5) !important;
   box-shadow: 0 0 20px var(--main-color, #49b1f5), 0 0 40px var(--main-color, #49b1f5), 0 0 60px var(--main-color, #49b1f5) !important;
   -webkit-transform: translateY(-4px) !important;

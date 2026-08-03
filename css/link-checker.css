@@ -21,3 +21,37 @@
   color: #ffffff !important;
 }
 
+/* ========================================
+   友链信号图标样式
+   ======================================== */
+
+/* 信号图标基础 */
+.flink-signal {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-left: 4px !important;
+    font-size: 0.6rem !important;
+    vertical-align: middle !important;
+    flex-shrink: 0 !important;
+}
+
+.flink-signal i {
+    display: inline-block !important;
+}
+
+/* 悬停时信号图标变白（卡片 hover 时） */
+.flink-list-item:hover .flink-signal i,
+.flexcard-flink-list > a:hover .flink-signal i {
+    color: #ffffff !important;
+}
+
+/* 深色模式适配 */
+[data-theme="dark"] .flink-signal i {
+    color: var(--aria-light-fontcolor, #888) !important;
+}
+
+[data-theme="dark"] .flink-list-item:hover .flink-signal i,
+[data-theme="dark"] .flexcard-flink-list > a:hover .flink-signal i {
+    color: #ffffff !important;
+}
