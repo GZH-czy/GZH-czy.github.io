@@ -2517,7 +2517,7 @@ maxWidth1200()
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  padding-left: 10px;
+  padding-left: 100px;
   text-align: left;
   -webkit-box-orient: vertical;
   -moz-box-orient: vertical;
@@ -2535,7 +2535,7 @@ maxWidth1200()
 }
 .flink-item-info .flink-item-desc {
   padding: 0;
-  height: 150px;
+  height: 30px;
   font-size: 0.93em;
   opacity: 0.7;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
