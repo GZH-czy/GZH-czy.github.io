@@ -989,18 +989,25 @@ document.addEventListener('DOMContentLoaded', renderAISummary);
 // ===============================欢迎弹窗====================================//
 //首次访问弹窗
 if (localStorage.getItem("popWelcomeWindow") != "0") {
-    if(document.referrer==undefined||document.referrer.indexOf("love.gzh-czy.cc.cd")!=-1||document.referrer.indexOf("love.gzh-czy.cc.cd")!=-1){ //改成自己域名，注意是referrer!!! qwq
+    let referrer = document.referrer;
+    if (!referrer || referrer.indexOf("love.gzh-czy.cc.cd") !== -1) { // 直接访问或来自本站
         Snackbar.show({
             pos: "top-right",
             showAction: true,
             text: '欢迎访问本站！'
         })
-    }else{
+    } else {
+        let domain = referrer;
+        try {
+            domain = referrer.split("://")[1].split("/")[0];
+        } catch(e) {
+            domain = '未知来源';
+        }
         Snackbar.show({
-                pos: "top-right",
-                showAction: false,
-                text: `欢迎来自${document.referrer.split("://")[1].split("/")[0]}的童鞋访问本站！`
-            })
+            pos: "top-right",
+            showAction: false,
+            text: `欢迎来自${domain}的童鞋访问本站！`
+        })
         localStorage.setItem("popWelcomeWindow", "0");
     }
 }
