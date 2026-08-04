@@ -993,7 +993,7 @@ if (localStorage.getItem("popWelcomeWindow") != "0") {
     if (!referrer || referrer.indexOf("love.gzh-czy.cc.cd") !== -1) { // 直接访问或来自本站
         Snackbar.show({
             pos: "top-right",
-            showAction: true,
+            showAction: false,
             text: '欢迎访问本站！'
         })
     } else {
