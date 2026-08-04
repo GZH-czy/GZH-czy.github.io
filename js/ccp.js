@@ -998,7 +998,7 @@ if (localStorage.getItem("popWelcomeWindow") != "0") {
     }else{
         Snackbar.show({
                 pos: "top-right",
-                showAction: true,
+                showAction: false,
                 text: `欢迎来自${document.referrer.split("://")[1].split("/")[0]}的童鞋访问本站！`
             })
         localStorage.setItem("popWelcomeWindow", "0");
