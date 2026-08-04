@@ -989,16 +989,16 @@ document.addEventListener('DOMContentLoaded', renderAISummary);
 // ===============================欢迎弹窗====================================//
 //首次访问弹窗
 if (localStorage.getItem("popWelcomeWindow") != "0") {
-    if(document.referrer==undefined||document.referrer.indexOf("yaria.top")!=-1||document.referrer.indexOf("ariasaka.top")!=-1){ //改成自己域名，注意是referrer!!! qwq
+    if(document.referrer==undefined||document.referrer.indexOf("love.gzh-czy.cc.cd")!=-1||document.referrer.indexOf("love.gzh-czy.cc.cd")!=-1){ //改成自己域名，注意是referrer!!! qwq
         Snackbar.show({
             pos: "top-right",
-            showAction: false,
+            showAction: true,
             text: '欢迎访问本站！'
         })
     }else{
         Snackbar.show({
                 pos: "top-right",
-                showAction: false,
+                showAction: true,
                 text: `欢迎来自${document.referrer.split("://")[1].split("/")[0]}的童鞋访问本站！`
             })
         localStorage.setItem("popWelcomeWindow", "0");
