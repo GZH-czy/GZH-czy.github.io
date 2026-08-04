@@ -1018,7 +1018,7 @@ if (sessionStorage.getItem("popCookieWindow") != "0") {
             pos: 'top-right',
             actionText: "查看博客声明",
             onActionClick: function (element) {
-                window.open("/license")
+                window.open("/about")
             },
         })
     }, 3000)
