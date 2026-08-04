@@ -1680,6 +1680,15 @@ html[data-theme="dark"] .post-page #post {
     /* border: 1px solid rgba(255, 255, 255, 0.3) !important; */
 }
 
+/* ⭐ 修改 SnackBar 文字颜色 */
+.snackbar-container .snackbar-text,
+.snackbar-container span,
+.snackbar-container p,
+.snackbar-container .snackbar-msg {
+    color: var(--main-color, #49B1F5) !important;
+}
+
+
 /*==========================================================myscript=========================================================*/
 /* source/css/custom.css */
 :root {
