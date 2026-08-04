@@ -1686,6 +1686,11 @@ html[data-theme="dark"] .post-page #post {
 .snackbar-container p,
 .snackbar-container .snackbar-msg {
     color: var(--main-color, #49B1F5) !important;
+     /* ⭐ 字体设置 */
+    font-family: 'Georgia', 'Noto Serif SC', serif !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.5px !important;  /* 字间距 */
 }
 
 
