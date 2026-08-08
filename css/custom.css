@@ -1695,8 +1695,7 @@ html[data-theme="dark"] .post-page #post {
 /* ========== aplayer样式修改 =============== */
 .aplayer .aplayer-list,
 .aplayer-body,
-.aplayer-miniswitcher,
-.aplayer-fixed{
+.aplayer-miniswitcher{
   background: rgba(255, 255, 255, 0.25) !important;
   position: relative;
   border-radius: 11px 11px 0 0 !important;
@@ -1704,8 +1703,7 @@ html[data-theme="dark"] .post-page #post {
 
 .aplayer-list,
 .aplayer-body,
-.aplayer-miniswitcher,
-.aplayer-fixed{
+.aplayer-miniswitcher{
   backdrop-filter: blur(25px);
   border: none !important;
 }
@@ -1742,12 +1740,12 @@ html[data-theme="dark"] .post-page #post {
   width: 3.5px !important;
 }
 
-[data-theme="dark"] .aplayer .aplayer-info .aplayer-controller .aplayer-icon path {
+/*[data-theme="dark"] .aplayer .aplayer-info .aplayer-controller .aplayer-icon path {
   fill: #d4d4d4;
 }
 [data-theme="dark"] .aplayer .aplayer-list ol li.aplayer-list-light {
   background: #564e55 !important;
-}
+}*/
 
 
 
