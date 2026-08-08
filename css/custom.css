@@ -1692,6 +1692,59 @@ html[data-theme="dark"] .post-page #post {
     letter-spacing: 0.5px !important;  /* 字间距 */
 }
 
+/* ========== aplayer样式修改 =============== */
+.aplayer {
+  background: rgba(255, 255, 255, 0.25) !important;
+  position: relative;
+  border-radius: 11px 11px 0 0 !important;
+}
+
+.aplayer-list,
+.aplayer-info {
+  backdrop-filter: blur(25px);
+  border: none !important;
+}
+
+.aplayer.aplayer-fixed .aplayer-list {
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.aplayer.aplayer-fixed .aplayer-miniswitcher {
+  border-radius: 0 6px 6px 0 !important;
+}
+
+.aplayer .aplayer-list ol::-webkit-scrollbar {
+  width: 5px;
+}
+
+.aplayer .aplayer-list ol::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: #1993de;
+}
+
+.aplayer .aplayer-list ol li:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+.aplayer .aplayer-list ol li.aplayer-list-light {
+  background: rgba(159, 158, 158, 0.4) !important;
+  backdrop-filter: blur(30px) !important;
+  border-radius: 6px !important;
+}
+
+.aplayer-list-cur {
+  background-color: #006aec !important;
+  width: 3.5px !important;
+}
+
+[data-theme="dark"] .aplayer .aplayer-info .aplayer-controller .aplayer-icon path {
+  fill: #d4d4d4;
+}
+[data-theme="dark"] .aplayer .aplayer-list ol li.aplayer-list-light {
+  background: #564e55 !important;
+}
+
+
 
 /*==========================================================myscript=========================================================*/
 /* source/css/custom.css */
