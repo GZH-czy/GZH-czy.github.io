@@ -1693,7 +1693,7 @@ html[data-theme="dark"] .post-page #post {
 }
 
 /* ========== aplayer样式修改 =============== */
-.aplayer {
+.aplayer *{
   background: rgba(255, 255, 255, 0.25) !important;
   position: relative;
   border-radius: 11px 11px 0 0 !important;
