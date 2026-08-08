@@ -1702,9 +1702,7 @@ html[data-theme="dark"] .post-page #post {
 .aplayer-list,
 .aplayer-body,
 .aplayer-miniswitcher,
-.aplayer-fixed,
-.aplayer-icon,
-.aplayer-info {
+.aplayer-fixed{
   backdrop-filter: blur(25px);
   border: none !important;
 }
