@@ -1,0 +1,22 @@
+/* ========================================
+   myLink 信号图标样式
+   ======================================== */
+
+.my-link .my-link-signal {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 20px !important;
+  font-size: 0.75rem !important;
+  flex-shrink: 0 !important;
+  margin-left: 8px !important;
+}
+
+.my-link .my-link-signal i {
+  display: inline-block !important;
+}
+
+/* 悬停时信号图标变白 */
+.my-link:hover .my-link-signal i {
+  color: #ffffff !important;
+}
