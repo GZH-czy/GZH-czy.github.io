@@ -50,12 +50,11 @@
   }
   
 /*=================================my_ali_font============================*/
-
 @font-face {
   font-family: "iconfont"; /* Project id 5221239 */
-  src: url('//at.alicdn.com/t/c/font_5221239_992u7h4856u.woff2?t=1786268867882') format('woff2'),
-       url('//at.alicdn.com/t/c/font_5221239_992u7h4856u.woff?t=1786268867882') format('woff'),
-       url('//at.alicdn.com/t/c/font_5221239_992u7h4856u.ttf?t=1786268867882') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_5221239_9xo9q130h47.woff2?t=1786726970841') format('woff2'),
+       url('//at.alicdn.com/t/c/font_5221239_9xo9q130h47.woff?t=1786726970841') format('woff'),
+       url('//at.alicdn.com/t/c/font_5221239_9xo9q130h47.ttf?t=1786726970841') format('truetype');
 }
 
 .iconfont {
@@ -64,6 +63,18 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tu:before {
+  content: "\e61f";
+}
+
+.icon-w_liuyan:before {
+  content: "\e66e";
+}
+
+.icon-tupian:before {
+  content: "\e607";
 }
 
 .icon-bilibili:before {
@@ -105,7 +116,6 @@
 .icon-Nginx:before {
   content: "\e683";
 }
-
 
 /*=================================my_ali_font============================*/
 
