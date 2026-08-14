@@ -1010,7 +1010,7 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
 
 
 /*=============================================一般主题设置放在下面=================================================*/
-
+/*最上面的界面*/
 #nav-right{
     flex:1 1 auto;
     justify-content: flex-end;
@@ -1037,6 +1037,11 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
   改为：*/
   left:50%;
   translate:-50%;
+}
+
+#nav .menus_items .menus_item .menus_item_child li:hover
+{
+  background: var(--main-color);
 }
 
 /*icon的主题随主题色变换*/
