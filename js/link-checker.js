@@ -286,7 +286,7 @@
   'use strict';
 
   const API_URL = 'https://link-checker-api.gzh-czy.cc.cd/api/check?url=';
-  const BATCH_SIZE = 3;                // 每批并发数
+  const BATCH_SIZE = 5;                // 每批并发数
   const POLL_INTERVAL = 15000;          // 15秒检测一次
   const VISIBILITY_DEBOUNCE = 300;     // 可见性变化防抖
 
