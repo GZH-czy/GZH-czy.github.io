@@ -20,3 +20,64 @@
 .my-link:hover .my-link-signal i {
   color: #ffffff !important;
 }
+
+
+
+/* ========================================
+   友链信号 - 左上角 
+   ======================================== */
+.flink-signal-wrapper {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 2px 8px 2px 6px;
+  border-radius: 20px;
+  font-size: 11px;
+  color: #fff;
+  line-height: 1.4;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  user-select: none;
+}
+
+.flink-signal-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  width: 14px;
+  text-align: center;
+}
+
+.flink-signal-ms {
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  min-width: 30px;
+  font-variant-numeric: tabular-nums;
+}
+
+.flink-signal-ms.online {
+  color: #4ade80;
+}
+.flink-signal-ms.slow {
+  color: #facc15;
+}
+.flink-signal-ms.offline {
+  color: #f87171;
+}
+.flink-signal-ms.checking {
+  color: #94a3b8;
+}
+
+/* 卡片本身需要相对定位 */
+.flink-list-card {
+  position: relative;
+}

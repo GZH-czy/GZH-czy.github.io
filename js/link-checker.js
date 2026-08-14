@@ -273,3 +273,155 @@
   };
 
 })();
+
+
+
+
+// ============================================================
+//  友链卡片信号检测（自动为所有友链添加左上角信号）
+// ============================================================
+
+(function() {
+  'use strict';
+
+  const API_URL = 'https://link-checker-api.gzh-czy.cc.cd/api/check?url=';
+  const BATCH_SIZE = 5;
+  const POLL_INTERVAL = 30000;
+
+  // 信号图标
+  const SIGNAL_ICONS = {
+    loading: '<i class="fas fa-spinner fa-spin" style="font-size:10px;"></i>',
+    online: '<i class="fas fa-wifi" style="color:#4ade80;font-size:10px;"></i>',
+    slow: '<i class="fas fa-wifi" style="color:#facc15;font-size:10px;"></i>',
+    offline: '<i class="fas fa-times-circle" style="color:#f87171;font-size:10px;"></i>'
+  };
+
+  // 为单个卡片添加信号DOM
+  function addSignalDOM(card) {
+    // 如果已经有信号容器，跳过
+    if (card.querySelector('.flink-signal-wrapper')) return;
+
+    // 创建信号容器
+    const wrapper = document.createElement('div');
+    wrapper.className = 'flink-signal-wrapper';
+    wrapper.innerHTML = `
+      <span class="flink-signal-icon">${SIGNAL_ICONS.loading}</span>
+      <span class="flink-signal-ms checking">检测中...</span>
+    `;
+    // 插入到卡片最前面（左上角）
+    card.insertBefore(wrapper, card.firstChild);
+  }
+
+  // 更新单个卡片的信号
+  function updateSignal(card, data) {
+    const iconEl = card.querySelector('.flink-signal-icon');
+    const msEl = card.querySelector('.flink-signal-ms');
+    if (!iconEl || !msEl) return;
+
+    if (data.alive) {
+      const icon = data.responseTime < 1000 ? SIGNAL_ICONS.online : SIGNAL_ICONS.slow;
+      iconEl.innerHTML = icon;
+      msEl.textContent = `${data.responseTime}ms`;
+      msEl.className = 'flink-signal-ms online';
+      if (data.responseTime > 1500) {
+        msEl.className = 'flink-signal-ms slow';
+      }
+    } else {
+      iconEl.innerHTML = SIGNAL_ICONS.offline;
+      msEl.textContent = '✕';
+      msEl.className = 'flink-signal-ms offline';
+    }
+  }
+
+  // 检测链接
+  async function checkLink(url) {
+    try {
+      const response = await fetch(API_URL + encodeURIComponent(url));
+      return await response.json();
+    } catch {
+      return { alive: false, signal: 0, message: '检测失败' };
+    }
+  }
+
+  // 检测所有友链
+  async function checkAllLinks() {
+    const cards = document.querySelectorAll('.flink-list-card[data-url]');
+    if (!cards.length) {
+      setTimeout(checkAllLinks, 2000);
+      return;
+    }
+
+    // 为每个卡片添加信号DOM
+    cards.forEach(card => addSignalDOM(card));
+
+    // 收集链接
+    const links = [];
+    cards.forEach(card => {
+      const url = card.getAttribute('data-url');
+      if (url) links.push({ card, url });
+    });
+
+    if (!links.length) return;
+
+    // 分批检测
+    for (let i = 0; i < links.length; i += BATCH_SIZE) {
+      const batch = links.slice(i, i + BATCH_SIZE);
+      const results = await Promise.all(
+        batch.map(async ({ url }) => ({ url, data: await checkLink(url) }))
+      );
+      results.forEach(({ url, data }) => {
+        const item = links.find(l => l.url === url);
+        if (item) updateSignal(item.card, data);
+      });
+      if (i + BATCH_SIZE < links.length) {
+        await new Promise(r => setTimeout(r, 300));
+      }
+    }
+  }
+
+  // 轮询控制
+  let pollTimer = null;
+  let isPolling = false;
+
+  function startPolling() {
+    if (isPolling) return;
+    isPolling = true;
+    // 先给现有卡片添加DOM
+    document.querySelectorAll('.flink-list-card[data-url]').forEach(addSignalDOM);
+    checkAllLinks();
+    pollTimer = setInterval(checkAllLinks, POLL_INTERVAL);
+  }
+
+  function stopPolling() {
+    if (pollTimer) {
+      clearInterval(pollTimer);
+      pollTimer = null;
+    }
+    isPolling = false;
+  }
+
+  // 初始化
+  function init() {
+    stopPolling();
+    startPolling();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  // Pjax兼容
+  document.addEventListener('pjax:complete', () => {
+    stopPolling();
+    setTimeout(init, 500);
+  });
+  document.addEventListener('pjax:success', () => {
+    stopPolling();
+    setTimeout(init, 500);
+  });
+
+  window.linkChecker = { startPolling, stopPolling, checkAllLinks };
+
+})();
