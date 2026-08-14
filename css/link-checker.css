@@ -26,6 +26,7 @@
 /* ========================================
    友链信号 - 左上角 
    ======================================== */
+/* ========== 友链信号 - 左上角（透明背景） ========== */
 .flink-signal-wrapper {
   position: absolute;
   top: 8px;
@@ -34,18 +35,20 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  /* 完全透明背景，只保留毛玻璃效果 */
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   padding: 2px 8px 2px 6px;
   border-radius: 20px;
   font-size: 11px;
   color: #fff;
   line-height: 1.4;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   pointer-events: none;
   user-select: none;
+  transition: opacity 0.2s ease;
 }
 
 .flink-signal-icon {
@@ -77,7 +80,6 @@
   color: #94a3b8;
 }
 
-/* 卡片本身需要相对定位 */
 .flink-list-card {
   position: relative;
 }

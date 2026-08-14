@@ -281,12 +281,19 @@
 //  友链卡片信号检测（自动为所有友链添加左上角信号）
 // ============================================================
 
+
 (function() {
   'use strict';
 
   const API_URL = 'https://link-checker-api.gzh-czy.cc.cd/api/check?url=';
-  const BATCH_SIZE = 5;
-  const POLL_INTERVAL = 30000;
+  const BATCH_SIZE = 3;                // 每批并发数
+  const POLL_INTERVAL = 10000;          // 2秒检测一次
+  const VISIBILITY_DEBOUNCE = 300;     // 可见性变化防抖
+
+  let pollTimer = null;
+  let isPolling = false;
+  let isPageVisible = true;
+  let cachedCards = [];
 
   // 信号图标
   const SIGNAL_ICONS = {
@@ -296,23 +303,49 @@
     offline: '<i class="fas fa-times-circle" style="color:#f87171;font-size:10px;"></i>'
   };
 
-  // 为单个卡片添加信号DOM
-  function addSignalDOM(card) {
-    // 如果已经有信号容器，跳过
-    if (card.querySelector('.flink-signal-wrapper')) return;
+  // ========== 工具函数 ==========
 
-    // 创建信号容器
+  // 判断元素是否在可视区域（露出面积 ≥ 50%）
+  function isElementVisible(element) {
+    if (!element) return false;
+    const rect = element.getBoundingClientRect();
+    const winHeight = window.innerHeight || document.documentElement.clientHeight;
+    const winWidth = window.innerWidth || document.documentElement.clientWidth;
+    
+    if (rect.height === 0 || rect.width === 0) return false;
+    
+    const visibleHeight = Math.min(rect.bottom, winHeight) - Math.max(rect.top, 0);
+    const visibleWidth = Math.min(rect.right, winWidth) - Math.max(rect.left, 0);
+    const visibleRatio = (visibleHeight * visibleWidth) / (rect.height * rect.width);
+    return visibleRatio > 0.5;
+  }
+
+  // 获取当前可见的卡片
+  function getVisibleCards(cards) {
+    return new Promise((resolve) => {
+      requestAnimationFrame(() => {
+        const visible = cards.filter(({ card }) => isElementVisible(card));
+        resolve(visible);
+      });
+    });
+  }
+
+  // ========== DOM 操作 ==========
+
+  // 为卡片添加信号DOM
+  function addSignalDOM(card) {
+    if (card.querySelector('.flink-signal-wrapper')) return;
+    
     const wrapper = document.createElement('div');
     wrapper.className = 'flink-signal-wrapper';
     wrapper.innerHTML = `
       <span class="flink-signal-icon">${SIGNAL_ICONS.loading}</span>
       <span class="flink-signal-ms checking">检测中...</span>
     `;
-    // 插入到卡片最前面（左上角）
     card.insertBefore(wrapper, card.firstChild);
   }
 
-  // 更新单个卡片的信号
+  // 更新信号显示
   function updateSignal(card, data) {
     const iconEl = card.querySelector('.flink-signal-icon');
     const msEl = card.querySelector('.flink-signal-ms');
@@ -333,7 +366,8 @@
     }
   }
 
-  // 检测链接
+  // ========== 核心检测逻辑 ==========
+
   async function checkLink(url) {
     try {
       const response = await fetch(API_URL + encodeURIComponent(url));
@@ -343,53 +377,61 @@
     }
   }
 
-  // 检测所有友链
-  async function checkAllLinks() {
+  async function checkVisibleLinks() {
+    if (!isPageVisible) return;
+
+    // 获取所有友链卡片
     const cards = document.querySelectorAll('.flink-list-card[data-url]');
     if (!cards.length) {
-      setTimeout(checkAllLinks, 2000);
+      setTimeout(checkVisibleLinks, 2000);
       return;
     }
 
-    // 为每个卡片添加信号DOM
-    cards.forEach(card => addSignalDOM(card));
-
-    // 收集链接
-    const links = [];
+    // 更新缓存
+    cachedCards = [];
     cards.forEach(card => {
       const url = card.getAttribute('data-url');
-      if (url) links.push({ card, url });
+      if (url) {
+        addSignalDOM(card);
+        cachedCards.push({ card, url });
+      }
     });
 
-    if (!links.length) return;
+    if (!cachedCards.length) return;
+
+    // 只检测可见的卡片
+    const visibleCards = await getVisibleCards(cachedCards);
+    if (!visibleCards.length) return;
 
     // 分批检测
-    for (let i = 0; i < links.length; i += BATCH_SIZE) {
-      const batch = links.slice(i, i + BATCH_SIZE);
+    for (let i = 0; i < visibleCards.length; i += BATCH_SIZE) {
+      if (!isPageVisible || !isPolling) break;
+
+      const batch = visibleCards.slice(i, i + BATCH_SIZE);
       const results = await Promise.all(
         batch.map(async ({ url }) => ({ url, data: await checkLink(url) }))
       );
-      results.forEach(({ url, data }) => {
-        const item = links.find(l => l.url === url);
-        if (item) updateSignal(item.card, data);
-      });
-      if (i + BATCH_SIZE < links.length) {
-        await new Promise(r => setTimeout(r, 300));
+
+      if (isPageVisible && isPolling) {
+        results.forEach(({ url, data }) => {
+          const item = visibleCards.find(l => l.url === url);
+          if (item) updateSignal(item.card, data);
+        });
+      }
+
+      if (i + BATCH_SIZE < visibleCards.length) {
+        await new Promise(r => setTimeout(r, 200));
       }
     }
   }
 
-  // 轮询控制
-  let pollTimer = null;
-  let isPolling = false;
+  // ========== 轮询控制 ==========
 
   function startPolling() {
     if (isPolling) return;
     isPolling = true;
-    // 先给现有卡片添加DOM
-    document.querySelectorAll('.flink-list-card[data-url]').forEach(addSignalDOM);
-    checkAllLinks();
-    pollTimer = setInterval(checkAllLinks, POLL_INTERVAL);
+    checkVisibleLinks();
+    pollTimer = setInterval(checkVisibleLinks, POLL_INTERVAL);
   }
 
   function stopPolling() {
@@ -400,11 +442,43 @@
     isPolling = false;
   }
 
-  // 初始化
+  // ========== 可见性监听 ==========
+
+  function handleVisibilityChange() {
+    if (document.hidden) {
+      isPageVisible = false;
+      stopPolling();
+    } else {
+      isPageVisible = true;
+      setTimeout(() => {
+        if (isPageVisible && !isPolling) {
+          startPolling();
+        }
+      }, VISIBILITY_DEBOUNCE);
+    }
+  }
+
+  // 滚动防抖
+  let scrollTimeout = null;
+  function handleScroll() {
+    if (scrollTimeout) clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      if (isPageVisible && isPolling) {
+        checkVisibleLinks();
+      }
+    }, 300);
+  }
+
+  // ========== 初始化 ==========
+
   function init() {
     stopPolling();
-    startPolling();
+    isPageVisible = !document.hidden;
+    cachedCards = [];
+    if (isPageVisible) startPolling();
   }
+
+  // ========== 事件注册 ==========
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
@@ -412,16 +486,29 @@
     init();
   }
 
-  // Pjax兼容
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('resize', handleScroll, { passive: true });
+
   document.addEventListener('pjax:complete', () => {
     stopPolling();
-    setTimeout(init, 500);
+    cachedCards = [];
+    setTimeout(init, 400);
   });
   document.addEventListener('pjax:success', () => {
     stopPolling();
-    setTimeout(init, 500);
+    cachedCards = [];
+    setTimeout(init, 400);
   });
 
-  window.linkChecker = { startPolling, stopPolling, checkAllLinks };
+  window.addEventListener('beforeunload', stopPolling);
+
+  // 暴露控制接口
+  window.linkChecker = {
+    startPolling,
+    stopPolling,
+    checkVisibleLinks,
+    isPolling: () => isPolling
+  };
 
 })();
