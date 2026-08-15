@@ -206,7 +206,7 @@
       if (isPageVisible && isPolling) {
         checkVisibleLinks();
       }
-    }, 5000);
+    }, 3000);
   }
 
   // ========== 初始化 ==========
@@ -466,7 +466,7 @@
       if (isPageVisible && isPolling) {
         checkVisibleLinks();
       }
-    }, 5000);
+    }, 3000);
   }
 
   // ========== 初始化 ==========
