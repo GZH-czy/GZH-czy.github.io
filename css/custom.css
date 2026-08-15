@@ -1517,6 +1517,7 @@ html[data-theme="light"] #card-newest-comments {       /*会使anzhiyu音乐馆�
 }
 
 /* 浅色模式 - 悬浮白色边框（通用） */
+html[data-theme="light"] #aside-content .card-announcement:hover,
 html[data-theme="light"] .layout>div:first-child:not(.recent-posts):hover,
 html[data-theme="light"] #recent-posts>.recent-post-item:hover,
 html[data-theme="light"] #page-header.nav-visible #nav:hover,
@@ -1525,7 +1526,7 @@ html[data-theme="light"] #sidebar #sidebar-menus.open:hover,
 html[data-theme="light"] .post-page #post:hover,
 html[data-theme="light"] #card-newest-comments:hover {
   border: 2px solid rgba(var(--main-color, #49B1F5), 1) !important;
-  box-shadow: 0 1px 1px var(--main-color, #49B1F5) !important;
+  box-shadow: 1px 2px 3px var(--main-color, #49B1F5) !important;
 }
 
 /* 深色模式 - 直接复制你原来的代码，没有改动 */
