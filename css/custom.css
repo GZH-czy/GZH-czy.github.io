@@ -1524,7 +1524,7 @@ html[data-theme="light"] #page-header.nav-visible #nav:hover,
 html[data-theme="light"] .search-dialog:hover,
 html[data-theme="light"] #sidebar #sidebar-menus.open:hover,
 html[data-theme="light"] .post-page #post:hover,
-html[data-theme="light"] #card-newest-comments:has(:hover),
+html[data-theme="light"] #card-newest-comments:hover,
 html[data-theme="light"] #aside-content .card-recent-post:hover, 
 html[data-theme="light"] #aside-content .card-webinfo:hover, {
   border: 2px solid rgba(var(--main-color, #49B1F5), 1) !important;
