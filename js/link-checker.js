@@ -206,7 +206,7 @@
       if (isPageVisible && isPolling) {
         checkVisibleLinks();
       }
-    }, 200);
+    }, 5000);
   }
 
   // ========== 初始化 ==========
@@ -282,24 +282,20 @@
 // ============================================================
 
 
-// ============================================================
-//  友链卡片信号检测（滚动仅触发一次 + 定时轮询）
-// ============================================================
-
 (function() {
   'use strict';
 
   const API_URL = 'https://link-checker-api.gzh-czy.cc.cd/api/check?url=';
-  const BATCH_SIZE = 3;
-  const POLL_INTERVAL = 2000;
-  const VISIBILITY_DEBOUNCE = 300;
+  const BATCH_SIZE = 5;                // 每批并发数
+  const POLL_INTERVAL = 15000;          // 15秒检测一次
+  const VISIBILITY_DEBOUNCE = 300;     // 可见性变化防抖
 
   let pollTimer = null;
   let isPolling = false;
   let isPageVisible = true;
   let cachedCards = [];
-  let hasScrolled = false; // 标记是否已经滚动触发过一次
 
+  // 信号图标
   const SIGNAL_ICONS = {
     loading: '<i class="fas fa-spinner fa-spin" style="font-size:10px;"></i>',
     online: '<i class="fas fa-wifi" style="color:#4ade80;font-size:10px;"></i>',
@@ -307,18 +303,24 @@
     offline: '<i class="fas fa-times-circle" style="color:#f87171;font-size:10px;"></i>'
   };
 
+  // ========== 工具函数 ==========
+
+  // 判断元素是否在可视区域（露出面积 ≥ 50%）
   function isElementVisible(element) {
     if (!element) return false;
     const rect = element.getBoundingClientRect();
     const winHeight = window.innerHeight || document.documentElement.clientHeight;
     const winWidth = window.innerWidth || document.documentElement.clientWidth;
+    
     if (rect.height === 0 || rect.width === 0) return false;
+    
     const visibleHeight = Math.min(rect.bottom, winHeight) - Math.max(rect.top, 0);
     const visibleWidth = Math.min(rect.right, winWidth) - Math.max(rect.left, 0);
     const visibleRatio = (visibleHeight * visibleWidth) / (rect.height * rect.width);
     return visibleRatio > 0.5;
   }
 
+  // 获取当前可见的卡片
   function getVisibleCards(cards) {
     return new Promise((resolve) => {
       requestAnimationFrame(() => {
@@ -328,8 +330,12 @@
     });
   }
 
+  // ========== DOM 操作 ==========
+
+  // 为卡片添加信号DOM
   function addSignalDOM(card) {
     if (card.querySelector('.flink-signal-wrapper')) return;
+    
     const wrapper = document.createElement('div');
     wrapper.className = 'flink-signal-wrapper';
     wrapper.innerHTML = `
@@ -339,6 +345,7 @@
     card.insertBefore(wrapper, card.firstChild);
   }
 
+  // 更新信号显示
   function updateSignal(card, data) {
     const iconEl = card.querySelector('.flink-signal-icon');
     const msEl = card.querySelector('.flink-signal-ms');
@@ -359,6 +366,8 @@
     }
   }
 
+  // ========== 核心检测逻辑 ==========
+
   async function checkLink(url) {
     try {
       const response = await fetch(API_URL + encodeURIComponent(url));
@@ -368,18 +377,17 @@
     }
   }
 
-  // 核心检测函数
-  async function checkVisibleLinks(force = false) {
+  async function checkVisibleLinks() {
     if (!isPageVisible) return;
-    // 如果 force=false，且已经有轮询在跑，跳过本次（避免重复）
-    if (!force && pollTimer) return;
 
+    // 获取所有友链卡片
     const cards = document.querySelectorAll('.flink-list-card[data-url]');
     if (!cards.length) {
-      setTimeout(() => checkVisibleLinks(true), 2000);
+      setTimeout(checkVisibleLinks, 2000);
       return;
     }
 
+    // 更新缓存
     cachedCards = [];
     cards.forEach(card => {
       const url = card.getAttribute('data-url');
@@ -391,9 +399,11 @@
 
     if (!cachedCards.length) return;
 
+    // 只检测可见的卡片
     const visibleCards = await getVisibleCards(cachedCards);
     if (!visibleCards.length) return;
 
+    // 分批检测
     for (let i = 0; i < visibleCards.length; i += BATCH_SIZE) {
       if (!isPageVisible || !isPolling) break;
 
@@ -415,27 +425,13 @@
     }
   }
 
-  // 滚动触发（仅首次）
-  function handleScrollOnce() {
-    if (hasScrolled) return; // 已经触发过，不再触发
-    if (!isPageVisible || !isPolling) return;
-    
-    hasScrolled = true;
-    checkVisibleLinks(true); // 强制立即检测
-  }
+  // ========== 轮询控制 ==========
 
   function startPolling() {
     if (isPolling) return;
     isPolling = true;
-    hasScrolled = false; // 重置滚动标记
-    
-    // 立即检测一次
-    checkVisibleLinks(true);
-    
-    // 启动定时轮询
-    pollTimer = setInterval(() => {
-      checkVisibleLinks(false);
-    }, POLL_INTERVAL);
+    checkVisibleLinks();
+    pollTimer = setInterval(checkVisibleLinks, POLL_INTERVAL);
   }
 
   function stopPolling() {
@@ -444,8 +440,9 @@
       pollTimer = null;
     }
     isPolling = false;
-    hasScrolled = false;
   }
+
+  // ========== 可见性监听 ==========
 
   function handleVisibilityChange() {
     if (document.hidden) {
@@ -453,17 +450,31 @@
       stopPolling();
     } else {
       isPageVisible = true;
-      hasScrolled = false;
       setTimeout(() => {
-        if (isPageVisible && !isPolling) startPolling();
+        if (isPageVisible && !isPolling) {
+          startPolling();
+        }
       }, VISIBILITY_DEBOUNCE);
     }
   }
 
+  // 滚动防抖
+  let scrollTimeout = null;
+  function handleScroll() {
+    if (scrollTimeout) clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      if (isPageVisible && isPolling) {
+        checkVisibleLinks();
+      }
+    }, 5000);
+  }
+
+  // ========== 初始化 ==========
+
   function init() {
     stopPolling();
     isPageVisible = !document.hidden;
-    hasScrolled = false;
+    cachedCards = [];
     if (isPageVisible) startPolling();
   }
 
@@ -476,13 +487,9 @@
   }
 
   document.addEventListener('visibilitychange', handleVisibilityChange);
-  
-  // 滚动事件：只触发一次
-  window.addEventListener('scroll', handleScrollOnce, { passive: true, once: true });
-  // resize 同理也只触发一次
-  window.addEventListener('resize', handleScrollOnce, { passive: true, once: true });
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('resize', handleScroll, { passive: true });
 
-  // Pjax 切换后重置
   document.addEventListener('pjax:complete', () => {
     stopPolling();
     cachedCards = [];
@@ -496,12 +503,12 @@
 
   window.addEventListener('beforeunload', stopPolling);
 
+  // 暴露控制接口
   window.linkChecker = {
     startPolling,
     stopPolling,
     checkVisibleLinks,
-    isPolling: () => isPolling,
-    resetScrollFlag: () => { hasScrolled = false; } // 手动重置
+    isPolling: () => isPolling
   };
 
 })();
