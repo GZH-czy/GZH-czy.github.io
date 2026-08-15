@@ -1513,11 +1513,11 @@ html[data-theme="light"] .post-page #post,
 html[data-theme="light"] #card-newest-comments{       /*不要有逗号！！！*/
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
-  border: 2px solid rgba(255, 255, 255, 0.7); !important;
+  border: 2px solid rgba(255, 255, 255, 0); !important;
   box-shadow: none ;
 }
 html[data-theme="light"] #card-toc{
-  border: 2px solid rgba(255, 255, 255, 0.7); !important;
+  border: 2px solid rgba(255, 255, 255, 0); !important;
   box-shadow: none ;
 }
 
