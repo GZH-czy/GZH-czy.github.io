@@ -1529,7 +1529,7 @@ html[data-theme="light"] #card-newest-comments:hover,
 html[data-theme="light"] #aside-content .card-widget:hover {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
-  box-shadow: 0 8px 32px rgba(var(--main-color, #49B1F5), 0.25) !important;
+/*  box-shadow: 0 8px 32px rgba(var(--main-color, #49B1F5), 0.25) !important;*/
   border: 2px solid var(--main-color, #49B1F5);
 }
 
