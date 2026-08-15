@@ -1513,7 +1513,7 @@ html[data-theme="light"] .post-page #post,
 html[data-theme="light"] #card-newest-comments {       /*会使anzhiyu音乐馆进度条异常*/
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
-  border: none ;
+  border: 2px rgb(255 255 255) !important; ;
   box-shadow: none ;
 }
 
