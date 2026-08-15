@@ -1513,7 +1513,7 @@ html[data-theme="light"] .post-page #post,
 html[data-theme="light"] #card-newest-comments {       /*会使anzhiyu音乐馆进度条异常*/
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.12)
+  border: 2px solid rgba(255, 255, 255, 0.12)
 }
 
 /* 深色模式 - 直接复制你原来的代码，没有改动 */
@@ -1533,7 +1533,7 @@ html[data-theme="dark"] .post-page #post,
 html[data-theme="dark"] #card-newest-comments{
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(var(--main-color, #49B1F5), 0.7)
+  border: 2px solid rgba(var(--main-color, #49B1F5), 0.7)
 }
 
 /*文字选择，目录选择光晕*/
