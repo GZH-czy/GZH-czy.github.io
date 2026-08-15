@@ -1514,7 +1514,7 @@ html[data-theme="light"] #card-newest-comments,
 html[data-theme="light"] #aside-content .card-widget {       /*会使anzhiyu音乐馆进度条异常*/
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
-  border: none
+  border: none !important
 }
 
 /* 浅色模式 - 悬浮白色边框（通用） */
