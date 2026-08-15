@@ -1510,8 +1510,7 @@ html[data-theme="light"] #page-header.nav-visible #nav,
 html[data-theme="light"] .search-dialog,
 html[data-theme="light"] #sidebar #sidebar-menus.open,
 html[data-theme="light"] .post-page #post,
-html[data-theme="light"] #card-newest-comments,
-html[data-theme="light"] #card-toc {       /*不要有逗号！！！*/
+html[data-theme="light"] #card-newest-comments{       /*不要有逗号！！！*/
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
   border: 2px solid rgba(255, 255, 255, 0.7); !important;
