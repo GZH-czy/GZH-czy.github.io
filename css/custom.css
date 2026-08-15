@@ -1431,7 +1431,7 @@ html[data-theme="dark"] [glass-selector] {
 .post-nav
 
 /* 8. 目录 */
-.toc-container
+#card-toc
 
 /* ========================================
    四、其他页面
@@ -1510,7 +1510,8 @@ html[data-theme="light"] #page-header.nav-visible #nav,
 html[data-theme="light"] .search-dialog,
 html[data-theme="light"] #sidebar #sidebar-menus.open,
 html[data-theme="light"] .post-page #post,
-html[data-theme="light"] #card-newest-comments {       /*会使anzhiyu音乐馆进度条异常*/
+html[data-theme="light"] #card-newest-comments,
+html[data-theme="light"] #card-toc {       /*不要有逗号！！！*/
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
   border: 2px solid rgba(255, 255, 255, 0.7); !important;
@@ -1527,7 +1528,8 @@ html[data-theme="light"] #sidebar #sidebar-menus.open:hover,
 html[data-theme="light"] .post-page #post:hover,
 html[data-theme="light"] #card-newest-comments:hover,
 html[data-theme="light"] #aside-content .card-recent-post:hover, 
-html[data-theme="light"] #aside-content .card-webinfo:hover{
+html[data-theme="light"] #aside-content .card-webinfo:hover
+html[data-theme="light"] #card-toc:hover {
   border: 2px solid var(--main-color, #49B1F5) !important;
   box-shadow: 0px 0px 4px var(--main-color, #49B1F5) !important;
 }
