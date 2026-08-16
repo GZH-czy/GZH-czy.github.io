@@ -141,8 +141,10 @@
       // 只有在页面仍然可见且轮询未停止时才更新UI
       if (isPageVisible && isPolling) {
         results.forEach(({ url, data }) => {
-          cachedSignalElements.forEach((el, key) => {
-          if (key.startsWith(url)) updateSignal(el, data);
+          const signalEl = cachedSignalElements.get(url);
+          if (signalEl) {
+            updateSignal(signalEl, data);
+          }
         });
       }
     }
