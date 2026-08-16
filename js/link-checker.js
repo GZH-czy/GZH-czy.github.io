@@ -131,22 +131,12 @@
       if (!isPageVisible || !isPolling) break;
 
       const batch = visibleLinks.slice(i, i + BATCH_SIZE);
-      // 先对 URL 去重，只检测一次
-      const uniqueUrls = [...new Set(batch.map(({ url }) => url))];
-      const urlDataMap = new Map();
-
-      await Promise.all(
-        uniqueUrls.map(async (url) => {
-          const data = await checkLink(url);
-          urlDataMap.set(url, data);
-        })
+      const results = await Promise.all(
+        batch.map(async ({ url }) => ({
+          url,
+          data: await checkLink(url)
+        }))
       );
-
-      // 将结果分配给对应的卡片
-      const results = batch.map(({ url }) => ({
-        url,
-        data: urlDataMap.get(url)
-      }));
 
       // 只有在页面仍然可见且轮询未停止时才更新UI
       if (isPageVisible && isPolling) {
