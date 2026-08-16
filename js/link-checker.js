@@ -413,25 +413,31 @@
     const visibleCards = await getVisibleCards(cachedCards);
     if (!visibleCards.length) return;
 
-    // 分批检测
-    for (let i = 0; i < visibleCards.length; i += BATCH_SIZE) {
+    // URL 去重检测（相同 URL 共享结果）
+    const uniqueUrls = [...new Set(visibleCards.map(({ url }) => url))];
+    const urlDataMap = new Map();
+
+    for (let i = 0; i < uniqueUrls.length; i += BATCH_SIZE) {
       if (!isPageVisible || !isPolling) break;
 
-      const batch = visibleCards.slice(i, i + BATCH_SIZE);
+      const batch = uniqueUrls.slice(i, i + BATCH_SIZE);
       const results = await Promise.all(
-        batch.map(async ({ url }) => ({ url, data: await checkLink(url) }))
+        batch.map(async (url) => ({
+          url,
+          data: await checkLink(url)
+        }))
       );
 
-      if (isPageVisible && isPolling) {
-        results.forEach(({ url, data }) => {
-          const item = visibleCards.find(l => l.url === url);
-          if (item) updateSignal(item.card, data);
-        });
-      }
+      results.forEach(({ url, data }) => {
+        urlDataMap.set(url, data);
+      });
+    }
 
-      if (i + BATCH_SIZE < visibleCards.length) {
-        await new Promise(r => setTimeout(r, 200));
-      }
+    if (isPageVisible && isPolling) {
+      visibleCards.forEach(({ card, url }) => {
+        const data = urlDataMap.get(url);
+        if (data) updateSignal(card, data);
+      });
     }
   }
 
