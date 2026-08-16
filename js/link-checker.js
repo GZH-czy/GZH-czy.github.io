@@ -92,57 +92,59 @@
 
   // 检测可见的友链（只检测当前屏幕可见的）
   async function checkVisibleLinks() {
+    // 如果页面不可见，直接跳过
     if (!isPageVisible) return;
 
-    // ====== 改动1：每次重新获取所有卡片 ======
-    const items = document.querySelectorAll('.my-link[data-url]');
-    if (!items.length) {
-      setTimeout(checkVisibleLinks, 1000);
-      return;
-    }
-
-    cachedLinks = [];
-    cachedSignalElements.clear();
-    items.forEach(item => {
-      const url = item.getAttribute('data-url');
-      const signalEl = item.querySelector('.my-link-signal');
-      if (url && signalEl) {
-        cachedLinks.push({ item, url, signalEl });
-        cachedSignalElements.set(url, signalEl);
+    // 如果缓存中没有链接，重新获取
+    if (cachedLinks.length === 0) {
+      const items = document.querySelectorAll('.my-link[data-url]');
+      if (!items.length) {
+        // 如果还没渲染，等待重试（只重试一次）
+        setTimeout(checkVisibleLinks, 1000);
+        return;
       }
-    });
+      
+      cachedLinks = [];
+      items.forEach(item => {
+        const url = item.getAttribute('data-url');
+        const signalEl = item.querySelector('.my-link-signal');
+        if (url && signalEl) {
+          cachedLinks.push({ item, url, signalEl });
+          cachedSignalElements.set(url, signalEl);
+        }
+      });
+    }
 
     if (!cachedLinks.length) return;
 
+    // 获取当前可见的友链
     const visibleLinks = await getVisibleLinks(cachedLinks);
-    if (visibleLinks.length === 0) return;
+    
+    if (visibleLinks.length === 0) {
+      // 如果没有可见的友链，不做任何请求（节省资源）
+      return;
+    }
 
-    // ====== 改动2：URL 去重，相同 URL 只请求一次 ======
-    const uniqueUrls = [...new Set(visibleLinks.map(({ url }) => url))];
-    const urlDataMap = new Map();
-
-    for (let i = 0; i < uniqueUrls.length; i += BATCH_SIZE) {
+    // 分批检测可见的友链
+    for (let i = 0; i < visibleLinks.length; i += BATCH_SIZE) {
+      // 如果页面离开或不可见，立即停止检测
       if (!isPageVisible || !isPolling) break;
 
-      const batch = uniqueUrls.slice(i, i + BATCH_SIZE);
+      const batch = visibleLinks.slice(i, i + BATCH_SIZE);
       const results = await Promise.all(
-        batch.map(async (url) => ({
+        batch.map(async ({ url }) => ({
           url,
           data: await checkLink(url)
         }))
       );
 
-      results.forEach(({ url, data }) => {
-        urlDataMap.set(url, data);
-      });
-    }
-
-    // ====== 改动3：每个卡片独立更新 ======
-    if (isPageVisible && isPolling) {
-      visibleLinks.forEach(({ url, signalEl }) => {
-        const data = urlDataMap.get(url);
-        if (data) updateSignal(signalEl, data);
-      });
+      // 只有在页面仍然可见且轮询未停止时才更新UI
+      if (isPageVisible && isPolling) {
+        results.forEach(({ url, data }) => {
+          cachedSignalElements.forEach((el, key) => {
+          if (key.startsWith(url)) updateSignal(el, data);
+        });
+      }
     }
   }
 
