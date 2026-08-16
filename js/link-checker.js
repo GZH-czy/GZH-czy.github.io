@@ -160,7 +160,12 @@
     checkVisibleLinks();
     
     // 每 2 秒执行一次
-    pollTimer = setInterval(checkVisibleLinks, POLL_INTERVAL);
+    // pollTimer = setInterval(checkVisibleLinks, POLL_INTERVAL);
+    pollTimer = setInterval(() => {
+      cachedLinks = [];
+      cachedSignalElements.clear();
+      checkVisibleLinks();
+    }, POLL_INTERVAL);
   }
 
   function stopPolling() {
