@@ -110,7 +110,8 @@
         const signalEl = item.querySelector('.my-link-signal');
         if (url && signalEl) {
           cachedLinks.push({ item, url, signalEl });
-          cachedSignalElements.set(url, signalEl);
+          const key = url + '_' + Math.random().toString(36).substr(2, 6);
+          cachedSignalElements.set(key, signalEl);
         }
       });
     }
@@ -142,10 +143,9 @@
       if (isPageVisible && isPolling) {
         results.forEach(({ url, data }) => {
           const signalEl = cachedSignalElements.get(url);
-          if (signalEl) {
-            updateSignal(signalEl, data);
-          }
-        });
+          cachedSignalElements.forEach((el, key) => {
+            if (key.startsWith(url)) updateSignal(el, data);
+          });
       }
     }
   }
