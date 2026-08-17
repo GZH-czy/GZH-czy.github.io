@@ -1086,3 +1086,151 @@ if(getCookie('browsertc')!=1){
     }, 1);
     browserVersion();
 }
+
+/*=====================shuoshuo轮播=======================*/
+let talkTimer = null;
+
+const cacheKey = "liushenEchoCacheV2";
+const cacheTimeKey = "liushenEchoCacheTimeV2";
+const cacheDuration = 30 * 60 * 1000;
+
+function getEchoExtension(item) {
+  return item?.extension && typeof item.extension === "object"
+    ? item.extension
+    : null;
+}
+
+function getEchoExtensionType(item) {
+  return getEchoExtension(item)?.type || "";
+}
+
+function getEchoImages(item) {
+  if (!Array.isArray(item?.echo_files)) return [];
+
+  return item.echo_files
+    .map(entry => entry?.file || entry)
+    .filter(file => {
+      const category = String(file?.category || "").toLowerCase();
+      const contentType = String(file?.content_type || "").toLowerCase();
+      return category === "image" || contentType.startsWith("image/");
+    })
+    .map(file => file?.url)
+    .filter(Boolean);
+}
+
+function normalizeTalkItem(item) {
+  return {
+    content: item?.content || "",
+    images: getEchoImages(item),
+    extensionType: getEchoExtensionType(item),
+  };
+}
+
+function getTalkIcons(item, hasMarkdownImage, hasMarkdownLink) {
+  const icons = [];
+
+  if (item.images.length || hasMarkdownImage) icons.push("fa-solid fa-image");
+  if (item.extensionType === "VIDEO") icons.push("fa-solid fa-video");
+  if (item.extensionType === "MUSIC") icons.push("fa-solid fa-music");
+  if (item.extensionType === "WEBSITE" || hasMarkdownLink)
+    icons.push("fa-solid fa-link");
+  if (item.extensionType === "GITHUBPROJ") icons.push("fa-brands fa-github");
+
+  return [...new Set(icons)];
+}
+
+function toText(list) {
+  return list.map(rawItem => {
+    const item = normalizeTalkItem(rawItem);
+    let content = item.content;
+
+    const hasMarkdownImage = /\!\[.*?\]\(.*?\)/.test(content);
+    const hasMarkdownLink = /\[.*?\]\(.*?\)/.test(content);
+
+    content = content
+      .replace(/#(.*?)\s/g, "")
+      .replace(/\{.*?\}/g, "")
+      .replace(/\!\[.*?\]\(.*?\)/g, "")
+      .replace(/\[.*?\]\(.*?\)/g, "$1")
+      .trim();
+
+    const icons = getTalkIcons(item, hasMarkdownImage, hasMarkdownLink);
+    const iconHtml = icons.map(icon => `<i class="${icon}"></i>`).join("");
+
+    if (iconHtml) {
+      content = content
+        ? `${content} <span class="talk-resource-icons">${iconHtml}</span>`
+        : `<span class="talk-resource-icons">${iconHtml}</span>`;
+    }
+
+    return content || "...";
+  });
+}
+
+function renderTalkTicker(items) {
+  let html = "";
+  items.forEach((item, index) => {
+    html += `<li class="item item-${index + 1}">${item}</li>`;
+  });
+
+  const box = document.querySelector("#bber-talk .talk-list");
+  if (!box) return;
+
+  box.innerHTML = html;
+
+  talkTimer = setInterval(() => {
+    if (box.children.length > 0) {
+      box.appendChild(box.children[0]);
+    }
+  }, 3000);
+}
+
+function fetchTalkItems() {
+  return fetch("https://ech0.gzh-czy.de5.net/api/echo/page", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ page: 1, pageSize: 30, search: "" }),
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data?.code === 1 && Array.isArray(data?.data?.items)) {
+        return data.data.items;
+      }
+
+      console.warn("Unexpected API response format:", data);
+      return [];
+    });
+}
+
+function indexTalk() {
+  if (talkTimer) {
+    clearInterval(talkTimer);
+    talkTimer = null;
+  }
+
+  if (!document.getElementById("bber-talk")) return;
+
+  const cachedData = localStorage.getItem(cacheKey);
+  const cachedTime = Number(localStorage.getItem(cacheTimeKey));
+  const now = Date.now();
+
+  if (cachedData && cachedTime && now - cachedTime < cacheDuration) {
+    renderTalkTicker(toText(JSON.parse(cachedData)).slice(0, 6));
+    return;
+  }
+
+  fetchTalkItems()
+    .then(items => {
+      localStorage.setItem(cacheKey, JSON.stringify(items));
+      localStorage.setItem(cacheTimeKey, now.toString());
+      renderTalkTicker(toText(items).slice(0, 6));
+    })
+    .catch(error => console.error("Error fetching data:", error));
+}
+
+function whenDOMReady() {
+  indexTalk();
+}
+
+whenDOMReady();
+document.addEventListener("pjax:complete", whenDOMReady);
