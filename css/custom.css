@@ -1639,7 +1639,8 @@ html[data-theme="dark"] #card-newest-comments{
    ======================================== */
 
 .post-title:hover,
-.article-title:hover {
+.article-title:hover,
+.blog-slider__title:hover {
     color: var(--main-color, #49B1F5) !important;
     text-shadow: 
         0 0 5px var(--main-color, #49B1F5),
@@ -1992,7 +1993,7 @@ html[data-theme="dark"] #card-newest-comments{
 }
 
 #bber-talk .talk-list:hover {
-  color: var(--default-bg-color);
+  color: var(--main-color);
   transition: all 0.2s ease-in-out;
 }
 
