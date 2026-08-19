@@ -13,7 +13,6 @@
 
   // DOM 缓存
   let cachedLinks = [];
-  let cachedSignalElements = new Map();
 
   // 轮询控制
   let pollTimer = null;
@@ -118,7 +117,6 @@
         const signalEl = item.querySelector('.my-link-signal');
         if (url && signalEl) {
           cachedLinks.push({ item, url, signalEl });
-          cachedSignalElements.set(url, signalEl);
         }
       });
     }
@@ -147,12 +145,13 @@
       );
 
       // 只有在页面仍然可见且轮询未停止时才更新UI
+      // 修复：更新所有相同 URL 的元素（不只第一个）
       if (isPageVisible && isPolling) {
         results.forEach(({ url, data }) => {
-          const signalEl = cachedSignalElements.get(url);
-          if (signalEl) {
-            updateSignal(signalEl, data);
-          }
+          const items = visibleLinks.filter(l => l.url === url);
+          items.forEach(({ signalEl }) => {
+            if (signalEl) updateSignal(signalEl, data);
+          });
         });
       }
     }
@@ -177,10 +176,9 @@
       pollTimer = null;
     }
     isPolling = false;
-    
+
     // 清空缓存，下次重新获取
     cachedLinks = [];
-    cachedSignalElements.clear();
   }
 
   // ========== 页面可见性监听 ==========
@@ -252,13 +250,11 @@
     stopPolling();
     // 清空缓存，重新获取
     cachedLinks = [];
-    cachedSignalElements.clear();
     setTimeout(init, 300);
   });
   document.addEventListener('pjax:success', () => {
     stopPolling();
     cachedLinks = [];
-    cachedSignalElements.clear();
     setTimeout(init, 300);
   });
 
@@ -430,8 +426,9 @@
 
       if (isPageVisible && isPolling) {
         results.forEach(({ url, data }) => {
-          const item = visibleCards.find(l => l.url === url);
-          if (item) updateSignal(item.card, data);
+          // 修复：更新所有相同 URL 的卡片（不只第一个）
+          const items = visibleCards.filter(l => l.url === url);
+          items.forEach(item => updateSignal(item.card, data));
         });
       }
 
