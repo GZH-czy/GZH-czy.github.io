@@ -8,7 +8,7 @@
   // 配置 - 修改为你的 API 地址
   const API_URL = 'https://link-checker-api.gzh-czy.cc.cd/api/check?url=';
   const BATCH_SIZE = 2;                    // 每批并发数
-  const POLL_INTERVAL = 10000;              // 10秒检测一次
+  const POLL_INTERVAL = 10000;              // 2秒检测一次
   const VISIBILITY_DEBOUNCE = 500;         // 可见性变化防抖延迟（毫秒）
 
   // DOM 缓存
@@ -26,7 +26,9 @@
     1: '<i class="fas fa-wifi" style="color:#FF9F43;font-size:0.9rem;"></i>',
     2: '<i class="fas fa-wifi" style="color:#FDCB6E;font-size:0.9rem;"></i>',
     3: '<i class="fas fa-wifi" style="color:#4ECDC4;font-size:0.9rem;"></i>',
-    4: '<i class="fas fa-wifi" style="color:#00B894;font-size:0.9rem;"></i>'
+    4: '<i class="fas fa-wifi" style="color:#00B894;font-size:0.9rem;"></i>',
+    // 新增：受限状态（401/403 等服务器在线但拒绝访问）
+    restricted: '<i class="fas fa-lock" style="color:#A29BFE;font-size:0.9rem;"></i>'
   };
 
   // ========== 工具函数 ==========
@@ -76,16 +78,22 @@
     }
   }
 
-  // 更新信号图标
+  // 更新信号图标（修复：区分离线与受限状态）
   function updateSignal(element, data) {
-    const signalMap = {
-      0: SIGNAL_ICONS[0],
-      1: SIGNAL_ICONS[1],
-      2: SIGNAL_ICONS[2],
-      3: SIGNAL_ICONS[3],
-      4: SIGNAL_ICONS[4]
-    };
-    const icon = signalMap[data.signal] || SIGNAL_ICONS[0];
+    let icon;
+    // 401/403 显示为"受限但在线"（锁图标）
+    if (data.alive && (data.status === 401 || data.status === 403 || data.status === 405 || data.status === 429)) {
+      icon = SIGNAL_ICONS.restricted;
+    } else {
+      const signalMap = {
+        0: SIGNAL_ICONS[0],
+        1: SIGNAL_ICONS[1],
+        2: SIGNAL_ICONS[2],
+        3: SIGNAL_ICONS[3],
+        4: SIGNAL_ICONS[4]
+      };
+      icon = signalMap[data.signal] || SIGNAL_ICONS[0];
+    }
     element.innerHTML = icon;
     element.title = data.message || (data.alive ? `${data.responseTime}ms` : '无法访问');
   }
@@ -110,8 +118,7 @@
         const signalEl = item.querySelector('.my-link-signal');
         if (url && signalEl) {
           cachedLinks.push({ item, url, signalEl });
-          const key = url + '_' + Math.random().toString(36).substr(2, 6);
-          cachedSignalElements.set(key, signalEl);
+          cachedSignalElements.set(url, signalEl);
         }
       });
     }
@@ -142,9 +149,10 @@
       // 只有在页面仍然可见且轮询未停止时才更新UI
       if (isPageVisible && isPolling) {
         results.forEach(({ url, data }) => {
-          cachedSignalElements.forEach((el, key) => {
-            if (key.startsWith(url)) updateSignal(el, data);
-          });
+          const signalEl = cachedSignalElements.get(url);
+          if (signalEl) {
+            updateSignal(signalEl, data);
+          }
         });
       }
     }
@@ -206,7 +214,7 @@
       if (isPageVisible && isPolling) {
         checkVisibleLinks();
       }
-    }, 3000);
+    }, 200);
   }
 
   // ========== 初始化 ==========
@@ -286,9 +294,9 @@
   'use strict';
 
   const API_URL = 'https://link-checker-api.gzh-czy.cc.cd/api/check?url=';
-  const BATCH_SIZE = 5;                // 每批并发数
-  const POLL_INTERVAL = 20000;          // 20秒检测一次
-  const VISIBILITY_DEBOUNCE = 500;     // 可见性变化防抖
+  const BATCH_SIZE = 3;                // 每批并发数
+  const POLL_INTERVAL = 15000;          // 15秒检测一次
+  const VISIBILITY_DEBOUNCE = 300;     // 可见性变化防抖
 
   let pollTimer = null;
   let isPolling = false;
@@ -300,6 +308,7 @@
     loading: '<i class="fas fa-spinner fa-spin" style="font-size:10px;"></i>',
     online: '<i class="fas fa-wifi" style="color:#4ade80;font-size:10px;"></i>',
     slow: '<i class="fas fa-wifi" style="color:#facc15;font-size:10px;"></i>',
+    restricted: '<i class="fas fa-lock" style="color:#a78bfa;font-size:10px;"></i>',
     offline: '<i class="fas fa-times-circle" style="color:#f87171;font-size:10px;"></i>'
   };
 
@@ -345,18 +354,25 @@
     card.insertBefore(wrapper, card.firstChild);
   }
 
-  // 更新信号显示
+  // 更新信号显示（修复：区分离线、受限、在线状态）
   function updateSignal(card, data) {
     const iconEl = card.querySelector('.flink-signal-icon');
     const msEl = card.querySelector('.flink-signal-ms');
     if (!iconEl || !msEl) return;
 
     if (data.alive) {
-      const icon = data.responseTime < 1000 ? SIGNAL_ICONS.online : SIGNAL_ICONS.slow;
-      iconEl.innerHTML = icon;
-      msEl.textContent = `${data.responseTime}ms`;
-      msEl.className = 'flink-signal-ms online';
-      if (data.responseTime > 1500) {
+      // 401/403/405/429 显示为"受限但在线"
+      if (data.status === 401 || data.status === 403 || data.status === 405 || data.status === 429) {
+        iconEl.innerHTML = SIGNAL_ICONS.restricted;
+        msEl.textContent = data.status === 401 ? '401' : data.status === 403 ? '403' : String(data.status);
+        msEl.className = 'flink-signal-ms restricted';
+      } else if (data.responseTime < 1000) {
+        iconEl.innerHTML = SIGNAL_ICONS.online;
+        msEl.textContent = `${data.responseTime}ms`;
+        msEl.className = 'flink-signal-ms online';
+      } else {
+        iconEl.innerHTML = SIGNAL_ICONS.slow;
+        msEl.textContent = `${data.responseTime}ms`;
         msEl.className = 'flink-signal-ms slow';
       }
     } else {
@@ -403,31 +419,25 @@
     const visibleCards = await getVisibleCards(cachedCards);
     if (!visibleCards.length) return;
 
-    // URL 去重检测（相同 URL 共享结果）
-    const uniqueUrls = [...new Set(visibleCards.map(({ url }) => url))];
-    const urlDataMap = new Map();
-
-    for (let i = 0; i < uniqueUrls.length; i += BATCH_SIZE) {
+    // 分批检测
+    for (let i = 0; i < visibleCards.length; i += BATCH_SIZE) {
       if (!isPageVisible || !isPolling) break;
 
-      const batch = uniqueUrls.slice(i, i + BATCH_SIZE);
+      const batch = visibleCards.slice(i, i + BATCH_SIZE);
       const results = await Promise.all(
-        batch.map(async (url) => ({
-          url,
-          data: await checkLink(url)
-        }))
+        batch.map(async ({ url }) => ({ url, data: await checkLink(url) }))
       );
 
-      results.forEach(({ url, data }) => {
-        urlDataMap.set(url, data);
-      });
-    }
+      if (isPageVisible && isPolling) {
+        results.forEach(({ url, data }) => {
+          const item = visibleCards.find(l => l.url === url);
+          if (item) updateSignal(item.card, data);
+        });
+      }
 
-    if (isPageVisible && isPolling) {
-      visibleCards.forEach(({ card, url }) => {
-        const data = urlDataMap.get(url);
-        if (data) updateSignal(card, data);
-      });
+      if (i + BATCH_SIZE < visibleCards.length) {
+        await new Promise(r => setTimeout(r, 200));
+      }
     }
   }
 
@@ -472,7 +482,7 @@
       if (isPageVisible && isPolling) {
         checkVisibleLinks();
       }
-    }, 5000);
+    }, 300);
   }
 
   // ========== 初始化 ==========
