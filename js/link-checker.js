@@ -6,7 +6,7 @@
   'use strict';
 
   // 配置 - 修改为你的 API 地址
-  const API_URL = 'https://link-checker-api.gzh-czy.cc.cd/api/check?url=';
+  const API_URL = 'https://linkchecker.gzh-czy.de5.net/api/check?url=';
   const BATCH_SIZE = 2;                    // 每批并发数
   const POLL_INTERVAL = 10000;              // 2秒检测一次
   const VISIBILITY_DEBOUNCE = 500;         // 可见性变化防抖延迟（毫秒）
@@ -293,7 +293,7 @@
 (function() {
   'use strict';
 
-  const API_URL = 'https://link-checker-api.gzh-czy.cc.cd/api/check?url=';
+  const API_URL = 'https://linkchecker.gzh-czy.de5.net/api/check?url=';
   const BATCH_SIZE = 3;                // 每批并发数
   const POLL_INTERVAL = 15000;          // 15秒检测一次
   const VISIBILITY_DEBOUNCE = 300;     // 可见性变化防抖
