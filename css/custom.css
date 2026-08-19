@@ -1536,7 +1536,9 @@ html[data-theme="light"] #card-toc:hover {
   border: 2px solid var(--main-color, #49B1F5) !important;
   box-shadow: 0px 0px 4px var(--main-color, #49B1F5) !important;
 }
-
+#aside-content .aside-list > .aside-list-item:hover{
+  background: var(--main-color, #49B1F5);
+}
 /* 深色模式 - 直接复制你原来的代码，没有改动 */
 html[data-theme="dark"] #aside-content .card-author,
 html[data-theme="dark"] #aside-content .card-announcement,
