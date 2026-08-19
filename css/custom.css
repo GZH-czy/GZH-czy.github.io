@@ -1756,7 +1756,7 @@ html[data-theme="dark"] #card-newest-comments{
 }
 /* ---------- 侧边栏样式 ---------- */
 #aside-content .aside-list > .aside-list-item:hover{
-  border-bottom: 1px dashed #e10000;
+  border-bottom: 1px dashed var(--main-color, #49B1F5);
   background: var(--main-color, #49B1F5);
   box-shadow: 
       0 0 2px var(--main-color, #49B1F5),
