@@ -10,7 +10,6 @@
   --liushen-fancybox-bg: rgba(255, 255, 255, 0.5);
 }
 
-:root,
 [data-theme="dark"] {
   --liushen-card-bg: #181818;
   --liushen-card-secondbg: #30343f;

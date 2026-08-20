@@ -235,7 +235,7 @@
 
       let siteUrl = "";
       let title = "";
-      let background = "https://p.liiiu.cn/i/2024/07/27/66a4632bbf06e.webp";
+      let background = "https://r2img.gzh-czy.de5.net/picgo/1787228621.webp";
 
       if (type === "WEBSITE") {
         siteUrl = payload.site || payload.url || "";
@@ -245,7 +245,7 @@
       if (type === "GITHUBPROJ") {
         siteUrl = payload.repoUrl || payload.url || "";
         title = payload.title || getGithubTitle(siteUrl);
-        background = "https://p.liiiu.cn/i/2024/07/27/66a461a3098aa.webp";
+        background = "https://r2img.gzh-czy.de5.net/picgo/1787228794.webp";
       }
 
       if (!siteUrl) return "";
