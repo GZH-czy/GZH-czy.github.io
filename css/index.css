@@ -3541,6 +3541,64 @@ h1.page-title + .tag-cloud-list {
     font-size: 10px;
   }
 }
+#app-center-nav {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  margin-right: 8px;
+}
+#app-center-nav .app-center-btn {
+  position: relative;
+}
+#app-center-nav .app-center-btn .app-center-trigger {
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.2);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+#app-center-nav .app-center-btn .app-center-trigger:hover {
+  background: rgba(255,255,255,0.25);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -o-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+}
+#app-center-nav .app-center-btn .app-center-panel {
+  top: 42px;
+  left: auto;
+  right: 0;
+  width: 300px;
+  max-height: 60vh;
+  -webkit-transform: translateY(-10px);
+  -moz-transform: translateY(-10px);
+  -o-transform: translateY(-10px);
+  -ms-transform: translateY(-10px);
+  transform: translateY(-10px);
+}
+#app-center-nav .app-center-btn.open .app-center-panel {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -o-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+}
+[data-theme='dark'] #app-center-nav .app-center-btn .app-center-trigger {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.15);
+}
 #aside-content {
   width: 26%;
 }
