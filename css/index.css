@@ -3257,17 +3257,20 @@ h1.page-title + .tag-cloud-list {
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background: var(--card-bg, #fff);
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  border: 1px solid rgba(255,255,255,0.18);
   border-radius: 50%;
-  -webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  -webkit-box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
   transition: all 0.3s ease;
   font-size: 16px;
-  color: var(--font-color, #333);
+  color: var(--font-color, #fff);
 }
 .app-center-btn .app-center-trigger:hover {
   -webkit-transform: scale(1.1);
@@ -3275,18 +3278,20 @@ h1.page-title + .tag-cloud-list {
   -o-transform: scale(1.1);
   -ms-transform: scale(1.1);
   transform: scale(1.1);
-  -webkit-box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  background: rgba(255,255,255,0.2);
 }
 .app-center-btn .app-center-panel {
   position: absolute;
   width: 320px;
   max-height: 70vh;
   overflow-y: auto;
-  background: var(--card-bg, #fff);
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  border: 1px solid rgba(255,255,255,0.18);
   border-radius: 16px;
-  -webkit-box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  -webkit-box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
@@ -3307,7 +3312,7 @@ h1.page-title + .tag-cloud-list {
   width: 4px;
 }
 .app-center-btn .app-center-panel::-webkit-scrollbar-thumb {
-  background: rgba(128,128,128,0.3);
+  background: rgba(255,255,255,0.2);
   border-radius: 2px;
 }
 .app-center-btn .app-center-panel-container {
@@ -3321,7 +3326,7 @@ h1.page-title + .tag-cloud-list {
 }
 .app-center-btn .app-center-group-title {
   font-size: 12px;
-  color: var(--text-muted, #999);
+  color: rgba(255,255,255,0.6);
   margin-bottom: 8px;
   padding-left: 4px;
   font-weight: 500;
@@ -3359,7 +3364,7 @@ h1.page-title + .tag-cloud-list {
   padding: 12px 8px;
   border-radius: 12px;
   text-decoration: none;
-  color: var(--font-color, #333);
+  color: var(--font-color, #fff);
   -webkit-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
@@ -3367,8 +3372,7 @@ h1.page-title + .tag-cloud-list {
   transition: all 0.2s ease;
 }
 .app-center-btn .app-center-item:hover {
-  background: var(--theme-color-op, rgba(66,90,239,0.1));
-  color: var(--theme-color, #425aef);
+  background: rgba(255,255,255,0.15);
 }
 .app-center-btn .app-center-item-icon {
   width: 36px;
@@ -3391,7 +3395,7 @@ h1.page-title + .tag-cloud-list {
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background: var(--secondbg, #f1f3f8);
+  background: rgba(255,255,255,0.1);
   border-radius: 10px;
   margin-bottom: 6px;
   font-size: 14px;
@@ -3402,7 +3406,7 @@ h1.page-title + .tag-cloud-list {
   transition: all 0.2s ease;
 }
 .app-center-btn .app-center-item:hover .app-center-item-icon {
-  background: var(--theme-color, #425aef);
+  background: var(--theme-color, #6cf);
   color: #fff;
 }
 .app-center-btn .app-center-item-text {
@@ -3435,27 +3439,29 @@ h1.page-title + .tag-cloud-list {
   transform: translateY(-50%) translateX(0);
 }
 .app-center-btn.open .app-center-trigger {
-  background: var(--theme-color, #425aef);
+  background: var(--theme-color, #6cf);
   color: #fff;
 }
 [data-theme='dark'] .app-center-btn .app-center-trigger {
-  background: var(--card-bg, #1d1e22);
-  color: var(--font-color, #f7f7fa);
+  background: rgba(0,0,0,0.2);
+  border-color: rgba(255,255,255,0.1);
 }
 [data-theme='dark'] .app-center-btn .app-center-panel {
-  background: var(--card-bg, #1d1e22);
-  -webkit-box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.2);
+  border-color: rgba(255,255,255,0.1);
 }
 [data-theme='dark'] .app-center-btn .app-center-item {
   color: var(--font-color, #f7f7fa);
 }
 [data-theme='dark'] .app-center-btn .app-center-item-icon {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+}
+[data-theme='dark'] .app-center-btn .app-center-group-title {
+  color: rgba(255,255,255,0.5);
 }
 @media screen and (max-width: 768px) {
   .app-center-btn.pos-left-bottom {
-    bottom: 80px;
+    bottom: 70px;
     left: 10px;
   }
   .app-center-btn.pos-left-center {
@@ -3468,16 +3474,16 @@ h1.page-title + .tag-cloud-list {
   .app-center-btn .app-center-panel {
     position: fixed;
     width: calc(100vw - 20px);
-    max-height: 60vh;
+    max-height: 50vh;
     left: 10px !important;
     right: 10px;
     top: auto !important;
-    bottom: 80px !important;
-    -webkit-transform: translateY(10px) !important;
-    -moz-transform: translateY(10px) !important;
-    -o-transform: translateY(10px) !important;
-    -ms-transform: translateY(10px) !important;
-    transform: translateY(10px) !important;
+    bottom: 70px !important;
+    -webkit-transform: translateY(20px) !important;
+    -moz-transform: translateY(20px) !important;
+    -o-transform: translateY(20px) !important;
+    -ms-transform: translateY(20px) !important;
+    transform: translateY(20px) !important;
     border-radius: 12px;
   }
   .app-center-btn.open .app-center-panel {
@@ -3491,6 +3497,21 @@ h1.page-title + .tag-cloud-list {
     width: 36px;
     height: 36px;
     font-size: 14px;
+  }
+  .app-center-btn .app-center-group-list {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+  .app-center-btn .app-center-item {
+    padding: 8px 4px;
+  }
+  .app-center-btn .app-center-item-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+  .app-center-btn .app-center-item-text {
+    font-size: 10px;
   }
 }
 #aside-content {
