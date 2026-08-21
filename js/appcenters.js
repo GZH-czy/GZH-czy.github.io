@@ -2,7 +2,7 @@
 
 // 应用中心 - 悬浮面板 toggle
 (function() {
-  const btn = document.getElementById('app-center-btn');
+  const btn = document.querySelector('#app-center-nav .app-center-btn');
   if (!btn) return;
 
   // 点击按钮切换面板
@@ -32,70 +32,4 @@
       btn.classList.remove('open');
     }
   });
-
-  // ===== 手机端：触摸左侧边缘显示按钮 =====
-  let touchStartX = 0;
-  let touchStartY = 0;
-
-  document.addEventListener('touchstart', function(e) {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-  }, { passive: true });
-
-  document.addEventListener('touchmove', function(e) {
-    const touchX = e.touches[0].clientX;
-    const touchY = e.touches[0].clientY;
-    const deltaX = touchX - touchStartX;
-    const deltaY = touchY - touchStartY;
-
-    // 从左侧边缘右滑显示（触摸起点在左侧 20px 内，且水平滑动距离 > 30px，垂直滑动 < 50px）
-    if (touchStartX < 20 && deltaX > 30 && Math.abs(deltaY) < 50) {
-      btn.classList.add('mobile-show');
-    }
-  }, { passive: true });
-
-  // 点击面板外部时同时隐藏按钮
-  document.addEventListener('click', function() {
-    btn.classList.remove('open');
-    // 手机端延迟隐藏按钮
-    if (window.innerWidth <= 768) {
-      setTimeout(() => {
-        btn.classList.remove('mobile-show');
-      }, 300);
-    }
-  });
-
-  // ===== 桌面端：鼠标靠近左侧边缘自动显示 =====
-  let mouseHideTimeout;
-
-  document.addEventListener('mousemove', function(e) {
-    if (window.innerWidth <= 768) return; // 只在桌面端生效
-
-    clearTimeout(mouseHideTimeout);
-
-    // 鼠标靠近左侧边缘 10px 内
-    if (e.clientX < 10) {
-      btn.classList.add('mobile-show');
-    } else if (e.clientX > 100) {
-      // 鼠标远离左侧且面板未打开时隐藏
-      if (!btn.classList.contains('open')) {
-        mouseHideTimeout = setTimeout(() => {
-          btn.classList.remove('mobile-show');
-        }, 1000);
-      }
-    }
-  }, { passive: true });
-
-  // 面板打开时不隐藏
-  const observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-        if (btn.classList.contains('open')) {
-          clearTimeout(mouseHideTimeout);
-        }
-      }
-    });
-  });
-
-  observer.observe(btn, { attributes: true });
 })();
