@@ -3189,10 +3189,47 @@ h1.page-title + .tag-cloud-list {
 }
 .app-center-btn {
   position: fixed;
-  left: 15px;
-  bottom: 100px;
   z-index: 10000;
   cursor: pointer;
+}
+.app-center-btn.pos-left-bottom {
+  left: 15px;
+  bottom: 100px;
+}
+.app-center-btn.pos-left-bottom .app-center-panel {
+  bottom: 50px;
+  left: 0;
+}
+.app-center-btn.pos-left-center {
+  left: 15px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.app-center-btn.pos-left-center .app-center-panel {
+  top: 50px;
+  left: 0;
+}
+.app-center-btn.pos-left-top {
+  left: 15px;
+  top: 80px;
+}
+.app-center-btn.pos-left-top .app-center-panel {
+  top: 50px;
+  left: 0;
+}
+.app-center-btn.pos-nav {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  top: auto;
+}
+.app-center-btn.pos-nav .app-center-panel {
+  top: 50px;
+  left: 0;
 }
 .app-center-btn .app-center-trigger {
   width: 40px;
@@ -3238,8 +3275,6 @@ h1.page-title + .tag-cloud-list {
 }
 .app-center-btn .app-center-panel {
   position: absolute;
-  bottom: 50px;
-  left: 0;
   width: 320px;
   max-height: 70vh;
   overflow-y: auto;
