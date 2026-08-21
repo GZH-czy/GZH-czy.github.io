@@ -3187,6 +3187,230 @@ h1.page-title + .tag-cloud-list {
     filter: alpha(opacity=0);
   }
 }
+.app-center-btn {
+  position: fixed;
+  left: 15px;
+  bottom: 100px;
+  z-index: 10000;
+  cursor: pointer;
+}
+.app-center-btn .app-center-trigger {
+  width: 40px;
+  height: 40px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  background: var(--card-bg, #fff);
+  border-radius: 50%;
+  -webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  color: var(--font-color, #333);
+}
+.app-center-btn .app-center-trigger:hover {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  -webkit-box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.app-center-btn .app-center-panel {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  width: 320px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: var(--card-bg, #fff);
+  border-radius: 16px;
+  -webkit-box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  visibility: hidden;
+  -webkit-transform: translateY(10px);
+  -moz-transform: translateY(10px);
+  -o-transform: translateY(10px);
+  -ms-transform: translateY(10px);
+  transform: translateY(10px);
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+.app-center-btn .app-center-panel::-webkit-scrollbar {
+  width: 4px;
+}
+.app-center-btn .app-center-panel::-webkit-scrollbar-thumb {
+  background: rgba(128,128,128,0.3);
+  border-radius: 2px;
+}
+.app-center-btn .app-center-panel-container {
+  padding: 16px;
+}
+.app-center-btn .app-center-group {
+  margin-bottom: 16px;
+}
+.app-center-btn .app-center-group:last-child {
+  margin-bottom: 0;
+}
+.app-center-btn .app-center-group-title {
+  font-size: 12px;
+  color: var(--text-muted, #999);
+  margin-bottom: 8px;
+  padding-left: 4px;
+  font-weight: 500;
+}
+.app-center-btn .app-center-group-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.app-center-btn .app-center-item {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 12px 8px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--font-color, #333);
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.app-center-btn .app-center-item:hover {
+  background: var(--theme-color-op, rgba(66,90,239,0.1));
+  color: var(--theme-color, #425aef);
+}
+.app-center-btn .app-center-item-icon {
+  width: 36px;
+  height: 36px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  background: var(--secondbg, #f1f3f8);
+  border-radius: 10px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.app-center-btn .app-center-item:hover .app-center-item-icon {
+  background: var(--theme-color, #425aef);
+  color: #fff;
+}
+.app-center-btn .app-center-item-text {
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.2;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+.app-center-btn.open .app-center-panel {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+  visibility: visible;
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -o-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.app-center-btn.open .app-center-trigger {
+  background: var(--theme-color, #425aef);
+  color: #fff;
+}
+[data-theme='dark'] .app-center-btn .app-center-trigger {
+  background: var(--card-bg, #1d1e22);
+  color: var(--font-color, #f7f7fa);
+}
+[data-theme='dark'] .app-center-btn .app-center-panel {
+  background: var(--card-bg, #1d1e22);
+  -webkit-box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+[data-theme='dark'] .app-center-btn .app-center-item {
+  color: var(--font-color, #f7f7fa);
+}
+[data-theme='dark'] .app-center-btn .app-center-item-icon {
+  background: rgba(255,255,255,0.1);
+}
+@media screen and (max-width: 768px) {
+  .app-center-btn {
+    display: none;
+  }
+}
 #aside-content {
   width: 26%;
 }
