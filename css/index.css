@@ -3227,10 +3227,10 @@ h1.page-title + .tag-cloud-list {
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background: rgba(255,255,255,0.75);
+  background: var(--card-bg, #fff);
   backdrop-filter: blur(20px) saturate(140%);
   -webkit-backdrop-filter: blur(20px) saturate(140%);
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 1px solid var(--card-border, rgba(0,0,0,0.1));
   border-radius: 50%;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
@@ -3255,10 +3255,10 @@ h1.page-title + .tag-cloud-list {
   width: 300px;
   max-height: 60vh;
   overflow-y: auto;
-  background: rgba(255,255,255,0.75);
+  background: var(--card-bg, #fff);
   backdrop-filter: blur(20px) saturate(140%);
   -webkit-backdrop-filter: blur(20px) saturate(140%);
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 1px solid var(--card-border, rgba(0,0,0,0.1));
   border-radius: 16px;
   -webkit-box-shadow: 0 8px 32px rgba(0,0,0,0.15);
   box-shadow: 0 8px 32px rgba(0,0,0,0.15);
@@ -3406,22 +3406,11 @@ h1.page-title + .tag-cloud-list {
   background: var(--theme-color, #6cf);
   color: #fff;
 }
-[data-theme='dark'] .app-center-btn .app-center-trigger {
-  background: rgba(30,30,30,0.8);
-  border-color: rgba(255,255,255,0.15);
-}
-[data-theme='dark'] .app-center-btn .app-center-panel {
-  background: rgba(30,30,30,0.8);
-  border-color: rgba(255,255,255,0.15);
-}
-[data-theme='dark'] .app-center-btn .app-center-item {
-  color: var(--font-color, #f7f7fa);
+[data-theme='dark'] .app-center-btn .app-center-group-title {
+  color: rgba(255,255,255,0.6);
 }
 [data-theme='dark'] .app-center-btn .app-center-item-icon {
   background: rgba(255,255,255,0.1);
-}
-[data-theme='dark'] .app-center-btn .app-center-group-title {
-  color: rgba(255,255,255,0.6);
 }
 #aside-content {
   width: 26%;
