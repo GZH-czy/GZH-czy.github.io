@@ -3460,30 +3460,57 @@ h1.page-title + .tag-cloud-list {
   color: rgba(255,255,255,0.5);
 }
 @media screen and (max-width: 768px) {
+  .app-center-btn {
+    left: -50px !important;
+    -webkit-transition: left 0.3s ease;
+    -moz-transition: left 0.3s ease;
+    -o-transition: left 0.3s ease;
+    -ms-transition: left 0.3s ease;
+    transition: left 0.3s ease;
+  }
+  .app-center-btn::before {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 4px;
+    height: 20px;
+    background: var(--theme-color, #6cf);
+    border-radius: 0 4px 4px 0;
+    opacity: 0.7;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+    filter: alpha(opacity=70);
+  }
   .app-center-btn.pos-left-bottom {
-    bottom: 70px;
-    left: 10px;
+    bottom: 80px;
   }
   .app-center-btn.pos-left-center {
-    left: 10px;
+    top: 50%;
   }
   .app-center-btn.pos-left-top {
     top: 60px;
-    left: 10px;
+  }
+  .app-center-btn.mobile-show {
+    left: 10px !important;
   }
   .app-center-btn .app-center-panel {
     position: fixed;
     width: calc(100vw - 20px);
-    max-height: 50vh;
+    max-height: 45vh;
     left: 10px !important;
     right: 10px;
     top: auto !important;
-    bottom: 70px !important;
-    -webkit-transform: translateY(20px) !important;
-    -moz-transform: translateY(20px) !important;
-    -o-transform: translateY(20px) !important;
-    -ms-transform: translateY(20px) !important;
-    transform: translateY(20px) !important;
+    bottom: 60px !important;
+    -webkit-transform: translateY(10px) !important;
+    -moz-transform: translateY(10px) !important;
+    -o-transform: translateY(10px) !important;
+    -ms-transform: translateY(10px) !important;
+    transform: translateY(10px) !important;
     border-radius: 12px;
   }
   .app-center-btn.open .app-center-panel {
@@ -3494,8 +3521,8 @@ h1.page-title + .tag-cloud-list {
     transform: translateY(0) !important;
   }
   .app-center-btn .app-center-trigger {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     font-size: 14px;
   }
   .app-center-btn .app-center-group-list {
