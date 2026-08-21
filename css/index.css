@@ -3298,7 +3298,7 @@ h1.page-title + .tag-cloud-list {
 }
 .app-center-btn .app-center-group-title {
   font-size: 12px;
-  color: rgba(255,255,255,0.6);
+  color: var(--text-muted, #666);
   margin-bottom: 8px;
   padding-left: 4px;
   font-weight: 500;
@@ -3335,8 +3335,8 @@ h1.page-title + .tag-cloud-list {
   justify-content: center;
   padding: 12px 8px;
   border-radius: 12px;
-  text-decoration: none;
-  color: var(--font-color, #fff);
+  text-decoration: none !important;
+  color: var(--font-color, #333) !important;
   -webkit-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
@@ -3344,7 +3344,7 @@ h1.page-title + .tag-cloud-list {
   transition: all 0.2s ease;
 }
 .app-center-btn .app-center-item:hover {
-  background: rgba(255,255,255,0.15);
+  background: rgba(128,128,128,0.15);
 }
 .app-center-btn .app-center-item-icon {
   width: 36px;
@@ -3367,7 +3367,7 @@ h1.page-title + .tag-cloud-list {
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background: rgba(255,255,255,0.1);
+  background: rgba(128,128,128,0.1);
   border-radius: 10px;
   margin-bottom: 6px;
   font-size: 14px;
@@ -3379,7 +3379,7 @@ h1.page-title + .tag-cloud-list {
 }
 .app-center-btn .app-center-item:hover .app-center-item-icon {
   background: var(--theme-color, #6cf);
-  color: #fff;
+  color: #fff !important;
 }
 .app-center-btn .app-center-item-text {
   font-size: 11px;
@@ -3408,8 +3408,8 @@ h1.page-title + .tag-cloud-list {
   color: #fff;
   border-color: var(--theme-color, #6cf);
 }
-[data-theme='dark'] .app-center-btn .app-center-group-title {
-  color: rgba(255,255,255,0.6);
+[data-theme='dark'] .app-center-btn .app-center-item {
+  color: var(--font-color, #f7f7fa) !important;
 }
 [data-theme='dark'] .app-center-btn .app-center-item-icon {
   background: rgba(255,255,255,0.1);
