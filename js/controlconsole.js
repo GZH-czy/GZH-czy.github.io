@@ -24,17 +24,14 @@ function initControlConsole() {
     document.body.style.overflow = '';
   }
 
-  // 切换中控台
-  function toggle() {
+  // 点击触发按钮
+  trigger.onclick = function() {
     if (overlay.classList.contains('is-open')) {
       close();
     } else {
       open();
     }
-  }
-
-  // 点击触发按钮
-  trigger.onclick = toggle;
+  };
 
   // 点击遮罩关闭
   backdrop.onclick = close;
@@ -71,43 +68,14 @@ function initControlConsole() {
     };
   });
 
-  // 音乐控制（连接 Butterfly 的 Meting/APlayer）
+  // 音乐控制（显示/隐藏 APlayer）
   function toggleMusic(btn) {
-    // 尝试 Meting.js
-    const metingEl = document.querySelector('meting-js');
-    if (metingEl && metingEl.aplayer) {
-      const player = metingEl.aplayer;
-      if (player.paused) {
-        player.play();
-        btn.classList.add('active');
-      } else {
-        player.pause();
-        btn.classList.remove('active');
-      }
-      return;
-    }
-
-    // 尝试全局 APlayer
-    if (typeof APlayer !== 'undefined') {
-      const players = APlayer.players || [];
-      if (players.length > 0) {
-        const player = players[0];
-        if (player.paused) {
-          player.play();
-          btn.classList.add('active');
-        } else {
-          player.pause();
-          btn.classList.remove('active');
-        }
-        return;
-      }
-    }
-
-    // 尝试点击播放按钮
-    const playBtn = document.querySelector('.aplayer-pause, .aplayer-play, .aplayer-button');
-    if (playBtn) {
-      playBtn.click();
-      btn.classList.toggle('active');
+    const aplayer = document.querySelector('.aplayer') || document.querySelector('meting-js');
+    if (aplayer) {
+      const isHidden = aplayer.style.display === 'none';
+      aplayer.style.display = isHidden ? '' : 'none';
+      btn.classList.toggle('active', isHidden);
+      btn.title = isHidden ? '隐藏音乐' : '显示音乐';
     }
   }
 
@@ -132,19 +100,32 @@ function initControlConsole() {
 
   // 右键菜单开关
   function toggleContextMenu(btn) {
-    const isEnabled = btn.classList.toggle('active');
-    btn.setAttribute('aria-pressed', isEnabled);
+    const isDisabled = localStorage.getItem('rightmenu-disabled') === 'true';
+    const newState = !isDisabled;
 
-    // 通过 localStorage 控制右键菜单
-    localStorage.setItem('rightmenu-disabled', !isEnabled);
+    localStorage.setItem('rightmenu-disabled', newState);
+    btn.classList.toggle('active', !newState);
+    btn.setAttribute('aria-pressed', !newState);
 
     // 提示
-    if (typeof rightmenu !== 'undefined' && rightmenu.snackbarShow) {
-      rightmenu.snackbarShow(isEnabled ? '右键菜单已开启' : '右键菜单已关闭');
+    showSnackbar(!newState ? '右键菜单已开启' : '右键菜单已关闭');
+  }
+
+  // 初始化按钮状态
+  const contextMenuBtn = overlay.querySelector('[data-action="contextMenu"]');
+  if (contextMenuBtn) {
+    const isDisabled = localStorage.getItem('rightmenu-disabled') === 'true';
+    contextMenuBtn.classList.toggle('active', !isDisabled);
+    contextMenuBtn.setAttribute('aria-pressed', !isDisabled);
+  }
+
+  // 提示函数
+  function showSnackbar(msg) {
+    if (typeof btf !== 'undefined' && btf.snackbarShow) {
+      btf.snackbarShow(msg);
     } else {
-      // 兜底提示
       const toast = document.createElement('div');
-      toast.textContent = isEnabled ? '右键菜单已开启' : '右键菜单已关闭';
+      toast.textContent = msg;
       toast.style.cssText = 'position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:rgba(0,0,0,0.8);color:#fff;padding:10px 20px;border-radius:8px;z-index:9999;font-size:14px;';
       document.body.appendChild(toast);
       setTimeout(() => toast.remove(), 2000);
