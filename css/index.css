@@ -4221,7 +4221,7 @@ h1.page-title + .tag-cloud-list {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 10020;
+  z-index: 9999;
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
@@ -4231,33 +4231,14 @@ h1.page-title + .tag-cloud-list {
   -o-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
   transition: all 0.3s ease;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: box;
-  display: flex;
-  -webkit-box-align: start;
-  -moz-box-align: start;
-  -o-box-align: start;
-  -ms-flex-align: start;
-  -webkit-align-items: flex-start;
-  align-items: flex-start;
-  -webkit-box-pack: center;
-  -moz-box-pack: center;
-  -o-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  overflow-y: auto;
-  padding-top: 70px;
-  padding-bottom: 80px;
+  pointer-events: none;
 }
 .cc-overlay.is-open {
   opacity: 1;
   -ms-filter: none;
   filter: none;
   visibility: visible;
+  pointer-events: auto;
 }
 .cc-backdrop {
   position: fixed;
@@ -4265,16 +4246,20 @@ h1.page-title + .tag-cloud-list {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: none;
   cursor: pointer;
+  pointer-events: auto;
 }
 .cc-panel {
   position: relative;
   width: 90%;
   max-width: 900px;
+  max-height: 70vh;
+  margin-top: 60px;
+  margin-bottom: 20px;
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(30px) saturate(180%);
   -webkit-backdrop-filter: blur(30px) saturate(180%);
@@ -4282,7 +4267,7 @@ h1.page-title + .tag-cloud-list {
   border-radius: 20px;
   -webkit-box-shadow: 0 20px 60px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
   box-shadow: 0 20px 60px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
-  overflow: hidden;
+  overflow-y: auto;
   -webkit-transform: scale(0.95);
   -moz-transform: scale(0.95);
   -o-transform: scale(0.95);
@@ -4293,7 +4278,8 @@ h1.page-title + .tag-cloud-list {
   -o-transition: -o-transform 0.3s ease;
   -ms-transition: -ms-transform 0.3s ease;
   transition: transform 0.3s ease;
-  z-index: 10021;
+  z-index: 10000;
+  pointer-events: auto;
 }
 .is-open .cc-panel {
   -webkit-transform: scale(1);
@@ -4505,7 +4491,7 @@ h1.page-title + .tag-cloud-list {
   border-radius: 50px;
   -webkit-box-shadow: 0 10px 40px rgba(0,0,0,0.3);
   box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-  z-index: 10022;
+  z-index: 10001;
 }
 .cc-action {
   width: 44px;

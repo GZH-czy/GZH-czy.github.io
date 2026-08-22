@@ -1,5 +1,8 @@
 'use strict';
 
+// 音乐状态：0=正常播放, 1=已暂停, 2=已关闭
+let musicState = 0;
+
 // 全屏幕中控台
 function initControlConsole() {
   const trigger = document.getElementById('cc-trigger');
@@ -8,12 +11,11 @@ function initControlConsole() {
 
   const backdrop = overlay.querySelector('.cc-backdrop');
 
-  // 打开中控台
+  // 打开中控台（不禁止背景滚动）
   function open() {
     trigger.classList.add('open');
     overlay.classList.add('is-open');
     overlay.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
   }
 
   // 关闭中控台
@@ -21,7 +23,6 @@ function initControlConsole() {
     trigger.classList.remove('open');
     overlay.classList.remove('is-open');
     overlay.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
   }
 
   // 点击触发按钮
@@ -68,35 +69,58 @@ function initControlConsole() {
     };
   });
 
-  // 音乐控制（使用 API 关闭 APlayer）
+  // 音乐控制（暂停 → 关闭）
   function toggleMusic(btn) {
-    const aplayer = document.querySelector('.aplayer') || document.querySelector('meting-js');
-    if (aplayer) {
-      const isHidden = aplayer.style.display === 'none';
-      if (isHidden) {
-        // 显示
-        aplayer.style.display = '';
-        btn.classList.add('active');
-        btn.title = '关闭音乐';
-      } else {
-        // 使用 API 关闭
-        try {
-          // Meting.js API
-          if (typeof meting !== 'undefined' && meting.aplayer) {
-            meting.aplayer.pause();
-            meting.aplayer.destroy();
-          }
-          // APlayer API
-          if (typeof APlayer !== 'undefined' && APlayer.players) {
-            Object.values(APlayer.players).forEach(function(p) {
-              if (p && typeof p.destroy === 'function') p.destroy();
-            });
-          }
-        } catch(e) {}
-        aplayer.style.display = 'none';
-        btn.classList.remove('active');
-        btn.title = '开启音乐';
-      }
+    const aplayerEl = document.querySelector('.aplayer') || document.querySelector('meting-js');
+    if (!aplayerEl) return;
+
+    const isHidden = aplayerEl.style.display === 'none';
+
+    if (isHidden) {
+      // 重新显示
+      aplayerEl.style.display = '';
+      musicState = 0;
+      btn.classList.add('active');
+      btn.title = '暂停音乐';
+      return;
+    }
+
+    // 根据状态执行不同操作
+    if (musicState === 0) {
+      // 第一次点击：暂停
+      try {
+        const metingEl = document.querySelector('meting-js');
+        if (metingEl && metingEl.aplayer) {
+          metingEl.aplayer.pause();
+        } else if (typeof APlayer !== 'undefined' && APlayer.players) {
+          Object.values(APlayer.players).forEach(function(p) { if (p) p.pause(); });
+        }
+      } catch(e) {}
+      musicState = 1;
+      btn.title = '关闭音乐';
+    } else if (musicState === 1) {
+      // 第二次点击：关闭
+      try {
+        const metingEl = document.querySelector('meting-js');
+        if (metingEl && metingEl.aplayer) {
+          metingEl.aplayer.pause();
+          metingEl.aplayer.destroy();
+        } else if (typeof APlayer !== 'undefined' && APlayer.players) {
+          Object.values(APlayer.players).forEach(function(p) {
+            if (p && typeof p.destroy === 'function') p.destroy();
+          });
+        }
+      } catch(e) {}
+      aplayerEl.style.display = 'none';
+      musicState = 2;
+      btn.classList.remove('active');
+      btn.title = '开启音乐';
+    } else {
+      // 重新显示
+      aplayerEl.style.display = '';
+      musicState = 0;
+      btn.classList.add('active');
+      btn.title = '暂停音乐';
     }
   }
 
