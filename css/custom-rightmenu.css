@@ -1,0 +1,130 @@
+@charset "UTF-8";
+
+/* ============================================================
+   File: rightmenu.css
+   Desc: 右键菜单样式（仅保留右菜单实际使用的变量）
+   ============================================================ */
+
+/* 亮色主题变量 */
+[data-theme=light] {
+  --heo-theme: #425AEF;
+  --heo-theme-op: #4259ef23;
+  --heo-card-bg: #fff;
+  --heo-fontcolor: #363636;
+  --heo-card-border: #e3e8f7;
+  --heo-maskbg: rgba(255, 255, 255, 0.6);
+}
+
+/* 暗色主题变量 */
+[data-theme=dark] {
+  --heo-theme: #0084FF;
+  --heo-theme-op: #0084FF23;
+  --heo-card-bg: #1d1e22;
+  --heo-fontcolor: #F7F7FA;
+  --heo-card-border: #282829;
+  --heo-maskbg: rgba(0,0,0, 0.6);
+}
+
+/* rightMenu 右键菜单 */
+#rightMenu{
+	display: none;
+	position: fixed;
+	padding: 0 0.25rem;
+	width: 9rem;
+	height: fit-content;
+	top: 10%;
+	left: 10%;
+	background-color: var(--heo-card-bg);
+	color: var(--heo-fontcolor);
+	border-radius: 12px;
+	z-index: 10010;
+	border: 1px solid var(--main-color);
+	transition: 0.3s;
+}
+#rightMenu:hover{
+	border-color: var(--main-color);
+}
+#rightMenu .rightMenu-group{
+	padding: 0.35rem 0.3rem;
+}
+#rightMenu .rightMenu-group:not(:nth-last-child(1)){
+	border-bottom: 1px dashed var(--heo-theme-op);
+}
+#rightMenu .rightMenu-group.rightMenu-small{
+	display: flex;
+	justify-content: space-between;
+}
+#rightMenu .rightMenu-group .rightMenu-item{
+	border-radius: 8px;
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+#rightMenu .rightMenu-line .rightMenu-item{
+	margin: 0.25rem 0;
+	padding: 0.25rem 0;
+}
+#rightMenu .rightMenu-group.rightMenu-line .rightMenu-item{
+	display: flex;
+}
+#rightMenu .rightMenu-group .rightMenu-item:hover{
+	background-color: var(--main-color);
+	color: #fff;
+}
+#rightMenu .rightMenu-group .rightMenu-item i{
+	display: inline-block;
+	text-align: center;
+	line-height: 1.5rem;
+	width: 1.5rem;
+	padding: 0 0.25rem;
+}
+#rightMenu .rightMenu-line .rightMenu-item i{
+	margin: 0 0.25rem;
+}
+#rightMenu .rightMenu-group .rightMenu-item span{
+	line-height: 1.5rem;
+}
+
+/* 遮罩 */
+#rightmenu-mask{
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	background: var(--heo-maskbg);
+	top: 0;
+	left: 0;
+	display: none;
+	z-index: 10009;
+	margin: 0!important;
+}
+
+/* ========== 上下文菜单项（默认隐藏，JS 控制显示） ========== */
+#menu-copy-text,
+#menu-copy-link,
+#menu-open-link,
+#menu-copy-image,
+#menu-open-image,
+#menu-download-image,
+#menu-pastetext{
+	display: none;
+}
+
+/* 菜单项图标颜色区分 */
+#menu-copy-text i{ color: #4285f4; }
+#menu-copy-link i{ color: #34a853; }
+#menu-open-link i{ color: #27ae60; }
+#menu-copy-image i{ color: #e67e22; }
+#menu-open-image i{ color: #8e44ad; }
+#menu-download-image i{ color: #fbbc05; }
+#menu-pastetext i{ color: #9b59b6; }
+
+/* 悬停时图标变白 */
+#menu-copy-text:hover i,
+#menu-copy-link:hover i,
+#menu-open-link:hover i,
+#menu-copy-image:hover i,
+#menu-open-image:hover i,
+#menu-download-image:hover i,
+#menu-pastetext:hover i{
+	color: #fff;
+}
