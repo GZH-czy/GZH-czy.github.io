@@ -365,12 +365,27 @@ $(document).ready(function() {
     // 根据上下文显示/隐藏菜单项
     toggleContextItems();
 
+    // 先显示菜单获取实际尺寸（临时移到屏幕外）
+    kk.showRightMenu(true, -9999, -9999);
+    rmWidth = rightMenuEl.offsetWidth;
+    rmHeight = rightMenuEl.offsetHeight;
+
     let pageX = event.clientX + 10;
     let pageY = event.clientY;
 
-    // 防止超出屏幕
-    if (pageX + rmWidth > window.innerWidth) pageX -= rmWidth;
-    if (pageY + rmHeight > window.innerHeight) pageY -= rmHeight;
+    // 防止超出屏幕右边界
+    if (pageX + rmWidth > window.innerWidth) {
+        pageX = window.innerWidth - rmWidth - 10;
+    }
+    // 防止超出屏幕左边界
+    if (pageX < 10) pageX = 10;
+
+    // 防止超出屏幕下边界
+    if (pageY + rmHeight > window.innerHeight) {
+        pageY = window.innerHeight - rmHeight - 10;
+    }
+    // 防止超出屏幕上边界
+    if (pageY < 10) pageY = 10;
 
     kk.showRightMenu(true, pageY, pageX);
     $('#rightmenu-mask').attr('style', 'display: flex');
