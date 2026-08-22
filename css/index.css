@@ -3187,6 +3187,233 @@ h1.page-title + .tag-cloud-list {
     filter: alpha(opacity=0);
   }
 }
+#app-center-nav {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  margin-right: 8px;
+}
+.app-center-btn {
+  position: relative;
+  cursor: pointer;
+}
+.app-center-btn .app-center-trigger {
+  width: 32px;
+  height: 32px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  background: var(--card-bg, #fff);
+  border: 1px solid var(--card-border, rgba(0,0,0,0.1));
+  border-radius: 50%;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  color: var(--font-color, #333);
+  -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.app-center-btn .app-center-trigger:hover {
+  background: var(--theme-color, #6cf);
+  color: #fff;
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -o-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+}
+.app-center-btn .app-center-panel {
+  position: absolute;
+  top: 42px;
+  right: 0;
+  width: 300px;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: var(--card-bg, #fff);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid var(--card-border, rgba(0,0,0,0.1));
+  border-radius: 16px;
+  -webkit-box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  visibility: hidden;
+  -webkit-transform: translateY(-10px);
+  -moz-transform: translateY(-10px);
+  -o-transform: translateY(-10px);
+  -ms-transform: translateY(-10px);
+  transform: translateY(-10px);
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 10000;
+}
+.app-center-btn .app-center-panel::-webkit-scrollbar {
+  width: 4px;
+}
+.app-center-btn .app-center-panel::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 2px;
+}
+.app-center-btn .app-center-panel-container {
+  padding: 16px;
+}
+.app-center-btn .app-center-group {
+  margin-bottom: 16px;
+}
+.app-center-btn .app-center-group:last-child {
+  margin-bottom: 0;
+}
+.app-center-btn .app-center-group-title {
+  font-size: 12px;
+  color: var(--text-muted, #666);
+  margin-bottom: 8px;
+  padding-left: 4px;
+  font-weight: 500;
+}
+.app-center-btn .app-center-group-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.app-center-btn .app-center-item {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 12px 8px;
+  border-radius: 12px;
+  text-decoration: none !important;
+  color: var(--font-color, #333) !important;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.app-center-btn .app-center-item:hover {
+  background: rgba(128,128,128,0.15);
+}
+.app-center-btn .app-center-item-icon {
+  width: 36px;
+  height: 36px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  background: rgba(128,128,128,0.1);
+  border-radius: 10px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.app-center-btn .app-center-item:hover .app-center-item-icon {
+  background: var(--theme-color, #6cf);
+  color: #fff !important;
+}
+.app-center-btn .app-center-item-text {
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.2;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+.app-center-btn.open .app-center-panel {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+  visibility: visible;
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -o-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.app-center-btn.open .app-center-trigger {
+  background: var(--theme-color, #6cf);
+  color: #fff;
+  border-color: var(--theme-color, #6cf);
+}
+[data-theme='dark'] .app-center-btn .app-center-item {
+  color: var(--font-color, #f7f7fa) !important;
+}
+[data-theme='dark'] .app-center-btn .app-center-item-icon {
+  background: rgba(255,255,255,0.1);
+}
 #aside-content {
   width: 26%;
 }
