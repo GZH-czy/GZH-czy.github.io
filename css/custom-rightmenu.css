@@ -34,7 +34,7 @@
 	height: fit-content;
 	top: 10%;
 	left: 10%;
-	background-color: var(--main-color);
+	background-color: var(--heo-card-bg);
 	color: var(--heo-fontcolor);
 	border-radius: 12px;
 	z-index: 10010;
@@ -42,7 +42,7 @@
 	transition: 0.3s;
 }
 #rightMenu:hover{
-	border-color: var(--heo-theme);
+	border-color: var(--main-color);
 }
 #rightMenu .rightMenu-group{
 	padding: 0.35rem 0.3rem;
@@ -68,7 +68,7 @@
 	display: flex;
 }
 #rightMenu .rightMenu-group .rightMenu-item:hover{
-	background-color: var(--heo-theme);
+	background-color: var(--main-color);
 	color: #fff;
 }
 #rightMenu .rightMenu-group .rightMenu-item i{

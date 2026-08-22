@@ -291,6 +291,9 @@ $(document).ready(function() {
 
   // 使用 jQuery 绑定事件
   $(document).on('contextmenu', function(event) {
+    // 检查用户是否关闭了自定义右键菜单（开启原生菜单）
+    if (localStorage.getItem('rightmenu-disabled') === 'true') return;
+
     // Ctrl+右键 = 原生菜单
     if (event.ctrlKey) return;
 
