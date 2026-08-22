@@ -4249,7 +4249,7 @@ h1.page-title + .tag-cloud-list {
   -ms-flex-align: start;
   -webkit-align-items: flex-start;
   align-items: flex-start;
-  padding-top: 60px;
+  padding-top: 40px;
   pointer-events: none;
 }
 .cc-overlay.is-open {
@@ -4273,9 +4273,9 @@ h1.page-title + .tag-cloud-list {
 }
 .cc-panel {
   position: relative;
-  width: 80%;
-  max-width: 1000px;
-  max-height: calc(100vh - 120px);
+  width: 75%;
+  max-width: 900px;
+  max-height: calc(100vh - 140px);
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(30px) saturate(180%);
   -webkit-backdrop-filter: blur(30px) saturate(180%);
@@ -4355,18 +4355,10 @@ h1.page-title + .tag-cloud-list {
   color: var(--theme-color, #6cf);
 }
 .cc-recent-list {
-  -webkit-column-count: 2;
-  -moz-column-count: 2;
-  column-count: 2;
-  -webkit-column-gap: 12px;
-  -moz-column-gap: 12px;
-  column-gap: 12px;
   padding: 0;
   margin: 0;
 }
 .cc-recent-item {
-  break-inside: avoid;
-  margin-bottom: 12px;
   background: rgba(255,255,255,0.05);
   border-radius: 12px;
   padding: 12px;
@@ -4422,8 +4414,6 @@ h1.page-title + .tag-cloud-list {
   font-size: 13px;
   text-align: center;
   padding: 40px 20px;
-  -webkit-column-span: all;
-  column-span: all;
 }
 .cc-taxonomy {
   width: 260px;
