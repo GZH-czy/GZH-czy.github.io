@@ -68,14 +68,28 @@ function initControlConsole() {
     };
   });
 
-  // 音乐控制（显示/隐藏 APlayer）
+  // 音乐控制（完全关闭/重启 APlayer）
   function toggleMusic(btn) {
     const aplayer = document.querySelector('.aplayer') || document.querySelector('meting-js');
     if (aplayer) {
       const isHidden = aplayer.style.display === 'none';
-      aplayer.style.display = isHidden ? '' : 'none';
-      btn.classList.toggle('active', isHidden);
-      btn.title = isHidden ? '隐藏音乐' : '显示音乐';
+      if (isHidden) {
+        // 显示
+        aplayer.style.display = '';
+        btn.classList.add('active');
+        btn.title = '关闭音乐';
+      } else {
+        // 完全关闭
+        aplayer.style.display = 'none';
+        // 停止播放
+        if (typeof APlayer !== 'undefined' && APlayer.players) {
+          APlayer.players.forEach(function(p) { p.pause(); });
+        }
+        const metingEl = document.querySelector('meting-js');
+        if (metingEl && metingEl.aplayer) metingEl.aplayer.pause();
+        btn.classList.remove('active');
+        btn.title = '开启音乐';
+      }
     }
   }
 
