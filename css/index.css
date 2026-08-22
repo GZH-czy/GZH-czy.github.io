@@ -4281,8 +4281,8 @@ h1.page-title + .tag-cloud-list {
   -webkit-backdrop-filter: blur(30px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 20px;
-  -webkit-box-shadow: 0 20px 60px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+  -webkit-box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
   overflow: hidden;
   -webkit-transform: scale(0.95);
   -moz-transform: scale(0.95);
@@ -4355,23 +4355,25 @@ h1.page-title + .tag-cloud-list {
   font-size: 14px;
   font-weight: 600;
   color: rgba(255,255,255,0.9);
-  margin-bottom: 15px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(255,255,255,0.15);
+  margin-bottom: 12px;
 }
 .cc-section-title i {
   font-size: 14px;
   color: var(--theme-color, #6cf);
 }
 .cc-recent-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 1px;
-  gap: 12px;
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2;
+  -webkit-column-gap: 12px;
+  -moz-column-gap: 12px;
+  column-gap: 12px;
   padding: 0;
   margin: 0;
 }
 .cc-recent-item {
+  break-inside: avoid;
+  margin-bottom: 12px;
   background: rgba(255,255,255,0.05);
   border-radius: 12px;
   padding: 12px;
@@ -4383,11 +4385,6 @@ h1.page-title + .tag-cloud-list {
 }
 .cc-recent-item:hover {
   background: rgba(255,255,255,0.1);
-  -webkit-transform: translateY(-2px);
-  -moz-transform: translateY(-2px);
-  -o-transform: translateY(-2px);
-  -ms-transform: translateY(-2px);
-  transform: translateY(-2px);
 }
 .cc-recent-item a {
   display: block;
@@ -4398,15 +4395,6 @@ h1.page-title + .tag-cloud-list {
   height: 36px;
   border-radius: 50%;
   margin-bottom: 8px;
-}
-.cc-recent-info {
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  -o-box-flex: 1;
-  box-flex: 1;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
 }
 .cc-recent-nick {
   display: block;
@@ -4419,15 +4407,16 @@ h1.page-title + .tag-cloud-list {
   display: block;
   font-size: 12px;
   color: rgba(255,255,255,0.6);
-  line-height: 1.6;
-  word-break: break-word;
+  line-height: 1.5;
+  word-break: break-all;
 }
 .cc-empty {
   color: rgba(255,255,255,0.5);
   font-size: 13px;
   text-align: center;
   padding: 40px 20px;
-  grid-column: 1/-1;
+  -webkit-column-span: all;
+  column-span: all;
 }
 .cc-taxonomy {
   width: 240px;
@@ -4445,21 +4434,18 @@ h1.page-title + .tag-cloud-list {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  background: rgba(0,0,0,0.15);
-  border-left: 1px solid rgba(255,255,255,0.1);
   overflow: hidden;
-}
-.cc-taxonomy-header {
-  padding: 20px 20px 0;
-  -webkit-flex-shrink: 0;
-  flex-shrink: 0;
+  background: rgba(0,0,0,0.1);
+  border-left: 1px solid rgba(255,255,255,0.1);
 }
 .cc-taxonomy .cc-section-title {
   font-size: 13px;
   margin-bottom: 10px;
-  padding-bottom: 6px;
+  padding: 20px 20px 0;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
 }
-.cc-tags-box {
+.cc-tags-wrap {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
@@ -4469,16 +4455,16 @@ h1.page-title + .tag-cloud-list {
   flex: 1;
   overflow-y: auto;
   padding: 0 20px;
-  min-height: 80px;
+  min-height: 60px;
 }
-.cc-tags-box::-webkit-scrollbar {
+.cc-tags-wrap::-webkit-scrollbar {
   width: 4px;
 }
-.cc-tags-box::-webkit-scrollbar-thumb {
+.cc-tags-wrap::-webkit-scrollbar-thumb {
   background: rgba(255,255,255,0.2);
   border-radius: 2px;
 }
-.cc-categories-box {
+.cc-categories-wrap {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -o-box-flex: 1;
@@ -4488,14 +4474,14 @@ h1.page-title + .tag-cloud-list {
   flex: 1;
   overflow-y: auto;
   padding: 0 20px 20px;
-  min-height: 80px;
+  min-height: 60px;
   border-top: 1px solid rgba(255,255,255,0.1);
   margin-top: 10px;
 }
-.cc-categories-box::-webkit-scrollbar {
+.cc-categories-wrap::-webkit-scrollbar {
   width: 4px;
 }
-.cc-categories-box::-webkit-scrollbar-thumb {
+.cc-categories-wrap::-webkit-scrollbar-thumb {
   background: rgba(255,255,255,0.2);
   border-radius: 2px;
 }
@@ -4552,8 +4538,6 @@ h1.page-title + .tag-cloud-list {
   -o-transform: translateY(-2px);
   -ms-transform: translateY(-2px);
   transform: translateY(-2px);
-  -webkit-box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 .cc-tag-count,
 .cc-category-count {
@@ -4633,8 +4617,6 @@ h1.page-title + .tag-cloud-list {
   -o-transform: translateY(-3px);
   -ms-transform: translateY(-3px);
   transform: translateY(-3px);
-  -webkit-box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
 .cc-action.active {
   background: var(--theme-color, #6cf);
@@ -4674,7 +4656,7 @@ h1.page-title + .tag-cloud-list {
   background: rgba(20,20,20,0.3);
 }
 [data-theme='dark'] .cc-taxonomy {
-  background: rgba(0,0,0,0.25);
+  background: rgba(0,0,0,0.2);
 }
 [data-theme='dark'] .cc-actions {
   background: rgba(20,20,20,0.3);
@@ -4682,7 +4664,6 @@ h1.page-title + .tag-cloud-list {
 @media screen and (max-width: 768px) {
   .cc-panel {
     width: 95%;
-    max-height: calc(100vh - 120px);
   }
   .cc-content {
     -webkit-box-orient: vertical;
@@ -4695,10 +4676,12 @@ h1.page-title + .tag-cloud-list {
   .cc-recent {
     border-right: none;
     border-bottom: 1px solid rgba(255,255,255,0.1);
-    max-height: 45vh;
+    max-height: 50vh;
   }
   .cc-recent-list {
-    grid-template-columns: 1fr;
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
   }
   .cc-taxonomy {
     width: 100%;
@@ -4712,10 +4695,11 @@ h1.page-title + .tag-cloud-list {
     border-top: 1px solid rgba(255,255,255,0.1);
     max-height: 35vh;
   }
-  .cc-taxonomy-header {
-    display: none;
+  .cc-taxonomy .cc-section-title {
+    padding: 12px 16px 0;
+    font-size: 12px;
   }
-  .cc-tags-box {
+  .cc-tags-wrap {
     -webkit-box-flex: 1;
     -moz-box-flex: 1;
     -o-box-flex: 1;
@@ -4723,12 +4707,12 @@ h1.page-title + .tag-cloud-list {
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
-    padding: 12px;
+    padding: 0 16px;
     border-right: 1px solid rgba(255,255,255,0.1);
     border-top: none;
     margin-top: 0;
   }
-  .cc-categories-box {
+  .cc-categories-wrap {
     -webkit-box-flex: 1;
     -moz-box-flex: 1;
     -o-box-flex: 1;
@@ -4736,7 +4720,7 @@ h1.page-title + .tag-cloud-list {
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
-    padding: 12px;
+    padding: 0 16px;
     border-top: none;
     margin-top: 0;
   }
