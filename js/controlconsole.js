@@ -116,7 +116,7 @@ function initControlConsole() {
     if (btn) btn.dataset.fullscreen = document.fullscreenElement ? 'exit' : 'enter';
   });
 
-  // 右键菜单开关（通过解绑/绑定 contextmenu 事件控制）
+  // 右键菜单开关（通过 localStorage 控制）
   function toggleContextMenu(btn) {
     const isDisabled = localStorage.getItem('rightmenu-disabled') === 'true';
     const newEnabled = !isDisabled;
@@ -124,14 +124,6 @@ function initControlConsole() {
     localStorage.setItem('rightmenu-disabled', !newEnabled);
     btn.classList.toggle('active', newEnabled);
     btn.setAttribute('aria-pressed', newEnabled);
-
-    if (newEnabled) {
-      // 开启：绑定 rightmenu 的 contextmenu 事件
-      $(document).on('contextmenu.cc-rightmenu', window._ccRightMenuHandler);
-    } else {
-      // 关闭：解绑
-      $(document).off('contextmenu.cc-rightmenu');
-    }
 
     showSnackbar(newEnabled ? '右键菜单已开启' : '右键菜单已关闭（原生）');
   }
