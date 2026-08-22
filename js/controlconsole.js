@@ -152,31 +152,41 @@ function initControlConsole() {
     }
   }
 
-  // 加载最近评论
+  // 加载最近评论（使用 Twikoo 客户端 API）
   const recentHost = overlay.querySelector('[data-recent-comments-host]');
   if (recentHost) loadRecentComments(recentHost);
 
   function loadRecentComments(host) {
-    const server = host.dataset.server;
-    const siteOrigin = host.dataset.siteOrigin;
+    const envId = host.dataset.server;
     const displayCount = parseInt(host.dataset.displayCount) || 10;
-    if (!server) return;
+    if (!envId) return;
 
-    // Twikoo API
-    const apiUrl = server.replace(/\/$/, '') + '/api/comment?path=' + encodeURIComponent(siteOrigin) + '&pageSize=' + displayCount;
+    // 检查 Twikoo 是否加载
+    if (typeof twikoo !== 'undefined') {
+      fetchComments();
+    } else {
+      // 动态加载 Twikoo
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.all.min.js';
+      script.onload = fetchComments;
+      document.head.appendChild(script);
+    }
 
-    fetch(apiUrl)
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        if (data && data.data && data.data.length > 0) {
-          renderComments(host, data.data);
+    function fetchComments() {
+      twikoo.getRecentComments({
+        envId: envId.replace(/\/$/, ''),
+        pageSize: displayCount,
+        includeReply: true
+      }).then(function(res) {
+        if (res && res.length > 0) {
+          renderComments(host, res);
         } else {
           host.innerHTML = '<p class="cc-empty">暂无评论</p>';
         }
-      })
-      .catch(function() {
+      }).catch(function() {
         host.innerHTML = '<p class="cc-empty">评论加载失败</p>';
       });
+    }
   }
 
   function renderComments(host, comments) {
@@ -186,7 +196,7 @@ function initControlConsole() {
       const avatar = comment.avatar || 'https://weavatar.com/avatar/?d=mp';
       const nick = comment.nick || '匿名';
       const content = (comment.comment || '').replace(/<[^>]*>/g, '').substring(0, 50);
-      const url = comment.url || '#';
+      const url = (comment.url || '#') + '#' + (comment.id || '');
       return '<li class="cc-recent-item"><a href="' + url + '" target="_blank">' +
         '<img class="cc-recent-avatar" src="' + avatar + '" alt="">' +
         '<div class="cc-recent-info"><span class="cc-recent-nick">' + nick + '</span>' +
