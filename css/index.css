@@ -4322,7 +4322,9 @@ h1.page-title + .tag-cloud-list {
   -ms-flex: 1;
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 20px;
+  height: 100%;
 }
 .cc-recent::-webkit-scrollbar {
   width: 4px;
