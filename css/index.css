@@ -4221,7 +4221,7 @@ h1.page-title + .tag-cloud-list {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 9999;
+  z-index: 9998;
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
@@ -4293,7 +4293,7 @@ h1.page-title + .tag-cloud-list {
   -o-transition: -o-transform 0.3s ease;
   -ms-transition: -ms-transform 0.3s ease;
   transition: transform 0.3s ease;
-  z-index: 10000;
+  z-index: 9999;
 }
 .is-open .cc-panel {
   -webkit-transform: scale(1);

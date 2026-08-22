@@ -116,14 +116,14 @@ function initControlConsole() {
     if (btn) btn.dataset.fullscreen = document.fullscreenElement ? 'exit' : 'enter';
   });
 
-  // 右键菜单开关（通过 localStorage 控制）
+  // 右键菜单开关
   function toggleContextMenu(btn) {
     const isDisabled = localStorage.getItem('rightmenu-disabled') === 'true';
     const newEnabled = !isDisabled;
 
-    localStorage.setItem('rightmenu-disabled', !newEnabled);
+    localStorage.setItem('rightmenu-disabled', newEnabled ? 'false' : 'true');
     btn.classList.toggle('active', newEnabled);
-    btn.setAttribute('aria-pressed', newEnabled);
+    btn.setAttribute('aria-pressed', newEnabled ? 'true' : 'false');
 
     showSnackbar(newEnabled ? '右键菜单已开启' : '右键菜单已关闭（原生）');
   }
@@ -133,7 +133,7 @@ function initControlConsole() {
   if (contextMenuBtn) {
     const isDisabled = localStorage.getItem('rightmenu-disabled') === 'true';
     contextMenuBtn.classList.toggle('active', !isDisabled);
-    contextMenuBtn.setAttribute('aria-pressed', !isDisabled);
+    contextMenuBtn.setAttribute('aria-pressed', !isDisabled ? 'true' : 'false');
   }
 
   // 提示函数
