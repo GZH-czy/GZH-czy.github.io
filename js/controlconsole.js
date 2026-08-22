@@ -68,7 +68,7 @@ function initControlConsole() {
     };
   });
 
-  // 音乐控制（完全关闭/重启 APlayer）
+  // 音乐控制（使用 API 关闭 APlayer）
   function toggleMusic(btn) {
     const aplayer = document.querySelector('.aplayer') || document.querySelector('meting-js');
     if (aplayer) {
@@ -79,14 +79,21 @@ function initControlConsole() {
         btn.classList.add('active');
         btn.title = '关闭音乐';
       } else {
-        // 完全关闭
+        // 使用 API 关闭
+        try {
+          // Meting.js API
+          if (typeof meting !== 'undefined' && meting.aplayer) {
+            meting.aplayer.pause();
+            meting.aplayer.destroy();
+          }
+          // APlayer API
+          if (typeof APlayer !== 'undefined' && APlayer.players) {
+            Object.values(APlayer.players).forEach(function(p) {
+              if (p && typeof p.destroy === 'function') p.destroy();
+            });
+          }
+        } catch(e) {}
         aplayer.style.display = 'none';
-        // 停止播放
-        if (typeof APlayer !== 'undefined' && APlayer.players) {
-          APlayer.players.forEach(function(p) { p.pause(); });
-        }
-        const metingEl = document.querySelector('meting-js');
-        if (metingEl && metingEl.aplayer) metingEl.aplayer.pause();
         btn.classList.remove('active');
         btn.title = '开启音乐';
       }
@@ -112,17 +119,21 @@ function initControlConsole() {
     if (btn) btn.dataset.fullscreen = document.fullscreenElement ? 'exit' : 'enter';
   });
 
-  // 右键菜单开关
+  // 右键菜单开关（与 rightmenu 集成）
   function toggleContextMenu(btn) {
     const isDisabled = localStorage.getItem('rightmenu-disabled') === 'true';
-    const newState = !isDisabled;
+    const newEnabled = !isDisabled;
 
-    localStorage.setItem('rightmenu-disabled', newState);
-    btn.classList.toggle('active', !newState);
-    btn.setAttribute('aria-pressed', !newState);
+    // 保存状态到 localStorage
+    localStorage.setItem('rightmenu-disabled', !newEnabled);
+    btn.classList.toggle('active', newEnabled);
+    btn.setAttribute('aria-pressed', newEnabled);
+
+    // 触发自定义事件通知 rightmenu
+    document.dispatchEvent(new CustomEvent('rightmenu:toggle', { detail: { enabled: newEnabled } }));
 
     // 提示
-    showSnackbar(!newState ? '右键菜单已开启' : '右键菜单已关闭');
+    showSnackbar(newEnabled ? '右键菜单已开启' : '右键菜单已关闭（原生）');
   }
 
   // 初始化按钮状态
