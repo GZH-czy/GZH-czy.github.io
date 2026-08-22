@@ -4231,6 +4231,24 @@ h1.page-title + .tag-cloud-list {
   -o-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
   transition: all 0.3s ease;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
   pointer-events: none;
 }
 .cc-overlay.is-open {
@@ -4241,7 +4259,7 @@ h1.page-title + .tag-cloud-list {
   pointer-events: auto;
 }
 .cc-backdrop {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -4251,15 +4269,12 @@ h1.page-title + .tag-cloud-list {
   -webkit-backdrop-filter: blur(8px);
   border: none;
   cursor: pointer;
-  pointer-events: auto;
 }
 .cc-panel {
   position: relative;
   width: 90%;
   max-width: 900px;
-  max-height: 70vh;
-  margin-top: 60px;
-  margin-bottom: 20px;
+  max-height: 80vh;
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(30px) saturate(180%);
   -webkit-backdrop-filter: blur(30px) saturate(180%);
@@ -4279,7 +4294,6 @@ h1.page-title + .tag-cloud-list {
   -ms-transition: -ms-transform 0.3s ease;
   transition: transform 0.3s ease;
   z-index: 10000;
-  pointer-events: auto;
 }
 .is-open .cc-panel {
   -webkit-transform: scale(1);

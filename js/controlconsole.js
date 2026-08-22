@@ -69,7 +69,7 @@ function initControlConsole() {
     };
   });
 
-  // 音乐控制（暂停 → 关闭）
+  // 音乐控制（开启/关闭，关闭前先暂停）
   function toggleMusic(btn) {
     const aplayerEl = document.querySelector('.aplayer') || document.querySelector('meting-js');
     if (!aplayerEl) return;
@@ -77,17 +77,12 @@ function initControlConsole() {
     const isHidden = aplayerEl.style.display === 'none';
 
     if (isHidden) {
-      // 重新显示
+      // 开启：显示播放器
       aplayerEl.style.display = '';
-      musicState = 0;
       btn.classList.add('active');
-      btn.title = '暂停音乐';
-      return;
-    }
-
-    // 根据状态执行不同操作
-    if (musicState === 0) {
-      // 第一次点击：暂停
+      btn.title = '关闭音乐';
+    } else {
+      // 关闭：先暂停，再隐藏
       try {
         const metingEl = document.querySelector('meting-js');
         if (metingEl && metingEl.aplayer) {
@@ -96,31 +91,9 @@ function initControlConsole() {
           Object.values(APlayer.players).forEach(function(p) { if (p) p.pause(); });
         }
       } catch(e) {}
-      musicState = 1;
-      btn.title = '关闭音乐';
-    } else if (musicState === 1) {
-      // 第二次点击：关闭
-      try {
-        const metingEl = document.querySelector('meting-js');
-        if (metingEl && metingEl.aplayer) {
-          metingEl.aplayer.pause();
-          metingEl.aplayer.destroy();
-        } else if (typeof APlayer !== 'undefined' && APlayer.players) {
-          Object.values(APlayer.players).forEach(function(p) {
-            if (p && typeof p.destroy === 'function') p.destroy();
-          });
-        }
-      } catch(e) {}
       aplayerEl.style.display = 'none';
-      musicState = 2;
       btn.classList.remove('active');
       btn.title = '开启音乐';
-    } else {
-      // 重新显示
-      aplayerEl.style.display = '';
-      musicState = 0;
-      btn.classList.add('active');
-      btn.title = '暂停音乐';
     }
   }
 
@@ -143,21 +116,42 @@ function initControlConsole() {
     if (btn) btn.dataset.fullscreen = document.fullscreenElement ? 'exit' : 'enter';
   });
 
-  // 右键菜单开关（与 rightmenu 集成）
+  // 右键菜单开关
   function toggleContextMenu(btn) {
     const isDisabled = localStorage.getItem('rightmenu-disabled') === 'true';
     const newEnabled = !isDisabled;
 
-    // 保存状态到 localStorage
     localStorage.setItem('rightmenu-disabled', !newEnabled);
     btn.classList.toggle('active', newEnabled);
     btn.setAttribute('aria-pressed', newEnabled);
 
-    // 触发自定义事件通知 rightmenu
-    document.dispatchEvent(new CustomEvent('rightmenu:toggle', { detail: { enabled: newEnabled } }));
+    if (newEnabled) {
+      // 开启：绑定 rightmenu 事件
+      bindRightMenu();
+    } else {
+      // 关闭：解绑 rightmenu 事件，恢复原生菜单
+      unbindRightMenu();
+    }
 
-    // 提示
     showSnackbar(newEnabled ? '右键菜单已开启' : '右键菜单已关闭（原生）');
+  }
+
+  // 绑定右键菜单
+  function bindRightMenu() {
+    $(document).on('contextmenu.rightmenu', function(event) {
+      if (event.ctrlKey) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      if (typeof rightmenu !== 'undefined' && rightmenu.showRightMenu) {
+        // 调用 rightmenu 的处理逻辑
+        rightmenu.showRightMenu(true, event.clientY, event.clientX + 10);
+      }
+    });
+  }
+
+  // 解绑右键菜单
+  function unbindRightMenu() {
+    $(document).off('contextmenu.rightmenu');
   }
 
   // 初始化按钮状态
@@ -166,6 +160,10 @@ function initControlConsole() {
     const isDisabled = localStorage.getItem('rightmenu-disabled') === 'true';
     contextMenuBtn.classList.toggle('active', !isDisabled);
     contextMenuBtn.setAttribute('aria-pressed', !isDisabled);
+    // 根据状态绑定/解绑
+    if (!isDisabled) {
+      bindRightMenu();
+    }
   }
 
   // 提示函数
