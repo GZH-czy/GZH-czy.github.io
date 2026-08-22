@@ -71,35 +71,42 @@ function initControlConsole() {
     };
   });
 
-  // 音乐控制（连接 APlayer/Meting）
+  // 音乐控制（连接 Butterfly 的 Meting/APlayer）
   function toggleMusic(btn) {
-    const ap = document.querySelector('aplayer-audio') || document.querySelector('.aplayer');
-    const meting = document.querySelector('meting-js');
+    // 尝试 Meting.js
+    const metingEl = document.querySelector('meting-js');
+    if (metingEl && metingEl.aplayer) {
+      const player = metingEl.aplayer;
+      if (player.paused) {
+        player.play();
+        btn.classList.add('active');
+      } else {
+        player.pause();
+        btn.classList.remove('active');
+      }
+      return;
+    }
 
-    if (meting && meting.aplayer) {
-      // Meting.js 播放器
-      const player = meting.aplayer;
-      if (player.paused) {
-        player.play();
-        btn.classList.add('active');
-      } else {
-        player.pause();
-        btn.classList.remove('active');
+    // 尝试全局 APlayer
+    if (typeof APlayer !== 'undefined') {
+      const players = APlayer.players || [];
+      if (players.length > 0) {
+        const player = players[0];
+        if (player.paused) {
+          player.play();
+          btn.classList.add('active');
+        } else {
+          player.pause();
+          btn.classList.remove('active');
+        }
+        return;
       }
-    } else if (ap && window.aplayer) {
-      // 原生 APlayer
-      const player = window.aplayer;
-      if (player.paused) {
-        player.play();
-        btn.classList.add('active');
-      } else {
-        player.pause();
-        btn.classList.remove('active');
-      }
-    } else {
-      // 尝试触发 meting 的播放按钮
-      const playBtn = document.querySelector('.aplayer-pause') || document.querySelector('.aplayer-play');
-      if (playBtn) playBtn.click();
+    }
+
+    // 尝试点击播放按钮
+    const playBtn = document.querySelector('.aplayer-pause, .aplayer-play, .aplayer-button');
+    if (playBtn) {
+      playBtn.click();
       btn.classList.toggle('active');
     }
   }
@@ -128,35 +135,19 @@ function initControlConsole() {
     const isEnabled = btn.classList.toggle('active');
     btn.setAttribute('aria-pressed', isEnabled);
 
-    // 通过 unbind/bind contextmenu 控制右键菜单
-    if (isEnabled) {
-      // 开启：重新绑定
-      $(document).on('contextmenu.rightmenu', rightMenuHandler);
-    } else {
-      // 关闭：解绑
-      $(document).off('contextmenu.rightmenu');
-    }
-
-    // 保存状态
+    // 通过 localStorage 控制右键菜单
     localStorage.setItem('rightmenu-disabled', !isEnabled);
 
     // 提示
     if (typeof rightmenu !== 'undefined' && rightmenu.snackbarShow) {
       rightmenu.snackbarShow(isEnabled ? '右键菜单已开启' : '右键菜单已关闭');
-    }
-  }
-
-  // 右键菜单处理函数
-  function rightMenuHandler(event) {
-    if (event.ctrlKey) return;
-    event.preventDefault();
-    event.stopImmediatePropagation();
-
-    // 调用 rightmenu 的显示逻辑
-    if (typeof rightmenu !== 'undefined') {
-      // 这里需要调用 rightmenu 的内部方法
-      // 由于 rightmenu 绑定了自己的事件，我们需要手动触发
-      $(document).trigger('contextmenu:custom', [event]);
+    } else {
+      // 兜底提示
+      const toast = document.createElement('div');
+      toast.textContent = isEnabled ? '右键菜单已开启' : '右键菜单已关闭';
+      toast.style.cssText = 'position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:rgba(0,0,0,0.8);color:#fff;padding:10px 20px;border-radius:8px;z-index:9999;font-size:14px;';
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2000);
     }
   }
 
@@ -170,7 +161,7 @@ function initControlConsole() {
     const displayCount = parseInt(host.dataset.displayCount) || 10;
     if (!server) return;
 
-    // Twikoo API: /api/comment?path=&pageSize=
+    // Twikoo API
     const apiUrl = server.replace(/\/$/, '') + '/api/comment?path=' + encodeURIComponent(siteOrigin) + '&pageSize=' + displayCount;
 
     fetch(apiUrl)
@@ -191,10 +182,14 @@ function initControlConsole() {
     const list = host.querySelector('.cc-recent-list');
     if (!list) return;
     list.innerHTML = comments.slice(0, 10).map(function(comment) {
-      return '<li class="cc-recent-item"><a href="' + (comment.url || '#') + '" target="_blank">' +
-        '<img class="cc-recent-avatar" src="' + (comment.avatar || 'https://weavatar.com/avatar/?d=mp') + '" alt="">' +
-        '<div class="cc-recent-info"><span class="cc-recent-nick">' + (comment.nick || '匿名') + '</span>' +
-        '<span class="cc-recent-content">' + (comment.comment || '').replace(/<[^>]*>/g, '').substring(0, 50) + '</span></div></a></li>';
+      const avatar = comment.avatar || 'https://weavatar.com/avatar/?d=mp';
+      const nick = comment.nick || '匿名';
+      const content = (comment.comment || '').replace(/<[^>]*>/g, '').substring(0, 50);
+      const url = comment.url || '#';
+      return '<li class="cc-recent-item"><a href="' + url + '" target="_blank">' +
+        '<img class="cc-recent-avatar" src="' + avatar + '" alt="">' +
+        '<div class="cc-recent-info"><span class="cc-recent-nick">' + nick + '</span>' +
+        '<span class="cc-recent-content">' + content + '</span></div></a></li>';
     }).join('');
   }
 }
