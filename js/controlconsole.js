@@ -118,9 +118,12 @@ function initControlConsole() {
 
   // 右键菜单开关
   function toggleContextMenu(btn) {
-    const isDisabled = localStorage.getItem('rightmenu-disabled') === 'true';
-    const newEnabled = !isDisabled;
+    // 当前是否启用（默认启用）
+    const isEnabled = localStorage.getItem('rightmenu-disabled') !== 'true';
+    // 切换为相反状态
+    const newEnabled = !isEnabled;
 
+    // 保存状态：'false'=启用, 'true'=禁用
     localStorage.setItem('rightmenu-disabled', newEnabled ? 'false' : 'true');
     btn.classList.toggle('active', newEnabled);
     btn.setAttribute('aria-pressed', newEnabled ? 'true' : 'false');
@@ -131,9 +134,9 @@ function initControlConsole() {
   // 初始化按钮状态
   const contextMenuBtn = overlay.querySelector('[data-action="contextMenu"]');
   if (contextMenuBtn) {
-    const isDisabled = localStorage.getItem('rightmenu-disabled') === 'true';
-    contextMenuBtn.classList.toggle('active', !isDisabled);
-    contextMenuBtn.setAttribute('aria-pressed', !isDisabled ? 'true' : 'false');
+    const isEnabled = localStorage.getItem('rightmenu-disabled') !== 'true';
+    contextMenuBtn.classList.toggle('active', isEnabled);
+    contextMenuBtn.setAttribute('aria-pressed', isEnabled ? 'true' : 'false');
   }
 
   // 提示函数
