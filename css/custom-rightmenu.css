@@ -38,8 +38,21 @@
 	color: var(--heo-fontcolor);
 	border-radius: 12px;
 	z-index: 10010;
-	border: 1px solid var(--main-color);
-	transition: 0.3s;
+	border: 1px solid var(--heo-card-border);
+}
+#rightMenu.rightmenu-visible {
+	animation: rightMenuIn 0.15s ease;
+}
+@keyframes rightMenuIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+#rightMenu.rightmenu-closing {
+	animation: rightMenuOut 0.15s ease forwards;
+}
+@keyframes rightMenuOut {
+	from { opacity: 1; }
+	to { opacity: 0; }
 }
 #rightMenu:hover{
 	border-color: var(--main-color);

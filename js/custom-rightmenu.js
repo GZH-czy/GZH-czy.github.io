@@ -47,17 +47,47 @@ kk.register = function(apis) {
  */
 kk.showRightMenu = function(isTrue, x = 0, y = 0) {
   let $rightMenu = $('#rightMenu');
-  $rightMenu.css('top', x + 'px').css('left', y + 'px');
-  isTrue ? $rightMenu.show() : $rightMenu.hide();
+  if (isTrue) {
+    // 如果正在关闭动画，立即结束它
+    if ($rightMenu.hasClass('rightmenu-closing')) {
+      $rightMenu.off('animationend');
+      $rightMenu.hide().removeClass('rightmenu-closing');
+    }
+    if ($rightMenu.hasClass('rightmenu-visible')) {
+      // 已显示：先关闭动画 → 再定位 → 再打开
+      $rightMenu.removeClass('rightmenu-visible').addClass('rightmenu-closing');
+      $rightMenu.one('animationend', function() {
+        $rightMenu.hide().removeClass('rightmenu-closing');
+        $rightMenu.css('top', x + 'px').css('left', y + 'px');
+        void $rightMenu[0].offsetWidth;
+        $rightMenu.show().addClass('rightmenu-visible');
+      });
+    } else {
+      $rightMenu.css('top', x + 'px').css('left', y + 'px');
+      $rightMenu.show().addClass('rightmenu-visible');
+    }
+  } else {
+    $rightMenu.hide().removeClass('rightmenu-visible').removeClass('rightmenu-closing');
+  }
 };
 
 /**
  * 隐藏右键菜单
  */
 kk.hideRightMenu = function() {
-  kk.showRightMenu(false);
-  let mask = document.getElementById('rightmenu-mask');
-  if (mask) mask.style.display = 'none';
+  let $rightMenu = $('#rightMenu');
+  if ($rightMenu.hasClass('rightmenu-visible') && $rightMenu.css('display') !== 'none') {
+    $rightMenu.removeClass('rightmenu-visible').addClass('rightmenu-closing');
+    $rightMenu.one('animationend', function() {
+      $rightMenu.hide().removeClass('rightmenu-closing');
+      let mask = document.getElementById('rightmenu-mask');
+      if (mask) mask.style.display = 'none';
+    });
+  } else {
+    $rightMenu.hide().removeClass('rightmenu-visible').removeClass('rightmenu-closing');
+    let mask = document.getElementById('rightmenu-mask');
+    if (mask) mask.style.display = 'none';
+  }
 };
 
 /**
@@ -279,8 +309,13 @@ let globalEvent = null;
 function init() {
   let rightMenuEl = document.getElementById('rightMenu');
   if (rightMenuEl) {
+    // 临时显示以获取实际尺寸
+    rightMenuEl.style.visibility = 'hidden';
+    rightMenuEl.style.display = 'block';
     rmWidth = rightMenuEl.offsetWidth;
     rmHeight = rightMenuEl.offsetHeight;
+    rightMenuEl.style.display = 'none';
+    rightMenuEl.style.visibility = '';
   }
   log('initialized', { rmWidth, rmHeight });
 }
