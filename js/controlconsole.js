@@ -193,8 +193,8 @@ function initControlConsole() {
     const list = host.querySelector('.cc-recent-list');
     if (!list) return;
 
-    // 生成评论 HTML
-    const html = comments.slice(0, 15).map(function(comment) {
+    // 生成评论 HTML（双列布局）
+    list.innerHTML = comments.slice(0, 15).map(function(comment) {
       const avatar = comment.avatar || 'https://weavatar.com/avatar/?d=mp';
       const nick = comment.nick || '匿名';
       const content = (comment.comment || '').replace(/<[^>]*>/g, '');
@@ -204,48 +204,6 @@ function initControlConsole() {
         '<div class="cc-recent-info"><span class="cc-recent-nick">' + nick + '</span>' +
         '<span class="cc-recent-content">' + content + '</span></div></a></li>';
     }).join('');
-
-    list.innerHTML = html;
-
-    // 瀑布流布局
-    requestAnimationFrame(function() {
-      masonryLayout(list);
-    });
-  }
-
-  // 瀑布流布局算法
-  function masonryLayout(list) {
-    const items = list.querySelectorAll('.cc-recent-item');
-    if (!items.length) return;
-
-    const containerWidth = list.offsetWidth;
-    const columnCount = window.innerWidth < 768 ? 1 : 2;
-    const columnWidth = (containerWidth - (columnCount - 1) * 12) / columnCount;
-    const columnHeights = new Array(columnCount).fill(0);
-
-    items.forEach(function(item) {
-      item.style.width = columnWidth + 'px';
-      item.style.marginBottom = '12px';
-
-      // 找到最短的列
-      const minHeight = Math.min(...columnHeights);
-      const minIndex = columnHeights.indexOf(minHeight);
-
-      // 计算位置
-      const left = minIndex * (columnWidth + 12);
-      const top = minHeight;
-
-      item.style.position = 'absolute';
-      item.style.left = left + 'px';
-      item.style.top = top + 'px';
-
-      // 更新列高
-      columnHeights[minIndex] += item.offsetHeight + 12;
-    });
-
-    // 设置容器高度
-    list.style.position = 'relative';
-    list.style.height = Math.max(...columnHeights) + 'px';
   }
 }
 
