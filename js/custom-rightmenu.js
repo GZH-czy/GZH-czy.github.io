@@ -302,6 +302,7 @@ let rmSelectedText = '';
 let rmLinkUrl = '';
 let rmImageUrl = '';
 let rmIsInput = false;
+let rmIsMusicCapsule = false;  // 是否在音乐胶囊上右键
 let rmInputEl = null;  // 保存右键时的输入框引用
 let globalEvent = null;
 
@@ -344,6 +345,7 @@ $(document).ready(function() {
     rmLinkUrl = '';
     rmImageUrl = '';
     rmIsInput = false;
+    rmIsMusicCapsule = false;
 
     let target = event.target;
 
@@ -395,7 +397,13 @@ $(document).ready(function() {
       }
     }
 
-    log('contextmenu', { rmLinkUrl, rmImageUrl, rmSelectedText, rmIsInput });
+    // ===== 4. 检测音乐胶囊 =====
+    let musicCapsule = target.closest('#nav-music');
+    if (musicCapsule) {
+      rmIsMusicCapsule = true;
+    }
+
+    log('contextmenu', { rmLinkUrl, rmImageUrl, rmSelectedText, rmIsInput, rmIsMusicCapsule });
 
     // 根据上下文显示/隐藏菜单项
     toggleContextItems();
@@ -475,15 +483,55 @@ $(document).ready(function() {
   $('#menu-radompage').on('click', function() {
     kk.randomPost();
   });
+
+  // 音乐控制
+  $('#menu-music-play').on('click', function() {
+    kk.hideRightMenu();
+    if (typeof anzhiyu !== 'undefined' && anzhiyu.musicToggle) {
+      if (!navMusicIsPlaying()) anzhiyu.musicToggle();
+    }
+  });
+
+  $('#menu-music-pause').on('click', function() {
+    kk.hideRightMenu();
+    if (typeof anzhiyu !== 'undefined' && anzhiyu.musicToggle) {
+      if (navMusicIsPlaying()) anzhiyu.musicToggle();
+    }
+  });
+
+  $('#menu-music-prev').on('click', function() {
+    kk.hideRightMenu();
+    if (typeof anzhiyu !== 'undefined' && anzhiyu.musicSkipBack) {
+      anzhiyu.musicSkipBack();
+    }
+  });
+
+  $('#menu-music-next').on('click', function() {
+    kk.hideRightMenu();
+    if (typeof anzhiyu !== 'undefined' && anzhiyu.musicSkipForward) {
+      anzhiyu.musicSkipForward();
+    }
+  });
 });
 
 // ==================== 上下文菜单项显示/隐藏 ====================
 function toggleContextItems() {
   // 重置所有新功能菜单项
   $('#menu-copy-text, #menu-copy-link, #menu-open-link, #menu-copy-image, #menu-open-image, #menu-download-image, #menu-pastetext').hide();
+  $('#menu-music-play, #menu-music-pause, #menu-music-prev, #menu-music-next').hide();
 
-  // 优先级：输入框 > 图片 > 链接 > 选中文字
-  if (rmIsInput) {
+  // 优先级：音乐胶囊 > 输入框 > 图片 > 链接 > 选中文字
+  if (rmIsMusicCapsule) {
+    // 音乐胶囊：显示播放控制
+    let isPlaying = navMusicIsPlaying();
+    if (isPlaying) {
+      $('#menu-music-pause').show();
+    } else {
+      $('#menu-music-play').show();
+    }
+    $('#menu-music-prev').show();
+    $('#menu-music-next').show();
+  } else if (rmIsInput) {
     $('#menu-pastetext').show();
   } else if (rmImageUrl) {
     $('#menu-copy-image').show();
@@ -503,6 +551,15 @@ function toggleContextItems() {
 
   // 隐藏空分组
   hideEmptyGroups();
+}
+
+// 检查音乐是否在播放
+function navMusicIsPlaying() {
+  let navMusicEl = document.getElementById('nav-music');
+  if (navMusicEl) {
+    return navMusicEl.classList.contains('playing');
+  }
+  return false;
 }
 
 // ==================== 隐藏空分组 ====================
