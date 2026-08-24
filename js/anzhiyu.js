@@ -1,4 +1,53 @@
+var navMusicEl = document.getElementById("nav-music");
 var anzhiyu = {
+  // 切换音乐播放状态
+  musicToggle: function (changePaly = true) {
+    if (!anzhiyu_musicFirst) {
+      musicBindEvent();
+      anzhiyu_musicFirst = true;
+    }
+    if (anzhiyu_musicPlaying) {
+      navMusicEl.classList.remove("playing");
+      document.getElementById("nav-music-hoverTips").innerHTML = "音乐已暂停";
+      anzhiyu_musicPlaying = false;
+      navMusicEl.classList.remove("stretch");
+    } else {
+      navMusicEl.classList.add("playing");
+      anzhiyu_musicPlaying = true;
+      navMusicEl.classList.add("stretch");
+    }
+    if (changePaly) document.querySelector("#nav-music meting-js").aplayer.toggle();
+  },
+
+  // 音乐伸缩
+  musicTelescopic: function () {
+    if (navMusicEl.classList.contains("stretch")) {
+      navMusicEl.classList.remove("stretch");
+    } else {
+      navMusicEl.classList.add("stretch");
+    }
+  },
+
+  // 音乐上一曲
+  musicSkipBack: function () {
+    document.querySelector("#nav-music meting-js").aplayer.skipBack();
+  },
+
+  // 音乐下一曲
+  musicSkipForward: function () {
+    document.querySelector("#nav-music meting-js").aplayer.skipForward();
+  },
+
+  // 获取音乐中的名称
+  musicGetName: function () {
+    var x = $(".aplayer-title");
+    var arr = [];
+    for (var i = x.length - 1; i >= 0; i--) {
+      arr[i] = x[i].innerText;
+    }
+    return arr[0];
+  },
+
   // 音乐节目切换背景
   changeMusicBg: function (isChangeBg = true) {
     if (window.location.pathname != "/music/") {
@@ -53,6 +102,43 @@ var anzhiyu = {
     });
   },
 };
+
+
+// 监听播放器状态变化，同步 UI
+document.addEventListener("DOMContentLoaded", function () {
+  var checkPlayer = setInterval(function () {
+    var player = document.querySelector("#nav-music meting-js");
+    if (player && player.aplayer) {
+      clearInterval(checkPlayer);
+      player.aplayer.on("play", function () {
+        anzhiyu_musicPlaying = true;
+        navMusicEl.classList.add("playing", "stretch");
+      });
+      player.aplayer.on("pause", function () {
+        anzhiyu_musicPlaying = false;
+        navMusicEl.classList.remove("playing", "stretch");
+      });
+    }
+  }, 200);
+});
+
+// PJAX 兼容
+document.addEventListener("pjax:complete", function () {
+  var checkPlayer = setInterval(function () {
+    var player = document.querySelector("#nav-music meting-js");
+    if (player && player.aplayer) {
+      clearInterval(checkPlayer);
+      player.aplayer.on("play", function () {
+        anzhiyu_musicPlaying = true;
+        navMusicEl.classList.add("playing", "stretch");
+      });
+      player.aplayer.on("pause", function () {
+        anzhiyu_musicPlaying = false;
+        navMusicEl.classList.remove("playing", "stretch");
+      });
+    }
+  }, 200);
+});
 
 // 调用
 anzhiyu.changeMusicBg(false);
