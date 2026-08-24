@@ -82,7 +82,7 @@
 <body>
 
     <h1>🧹 Diff 去符号工具</h1>
-    <p class="sub">粘贴带有 <code>+</code> / <code>-</code> 的 diff 文本，一键清理 <span style="color:#8b949e;font-size:12px;">（保留缩进）</span></p>
+    <p class="sub">粘贴带有 <code>+</code> / <code>-</code> 的 diff 文本，一键清理 <span style="color:#8b949e;font-size:12px;"></span></p>
 
     <div class="info-bar">
         <span>🔹 规则：移除行首的 <kbd>+</kbd> 或 <kbd>-</kbd>（无论后面是否有空格）</span>
@@ -94,18 +94,18 @@
     <div class="label-row">
         <span>📥 输入 Diff</span>
     </div>
-    <textarea id="inputText" placeholder="粘贴你的 diff 代码在这里..." spellcheck="false">+function hello() {
-+  console.log(&quot;Hello&quot;);
-+    if (true) {
-+      return 1;
-+    }
-+}
--function old() {
--  console.log(&quot;Old&quot;);
--    if (false) {
--      return 0;
--    }
--}</textarea>
+    <textarea id="inputText" placeholder="粘贴你的 diff 代码在这里..." spellcheck="false">+ function hello() {
++   console.log(&quot;Hello&quot;);
++     if (true) {
++       return 1;
++     }
++ }
+- function old() {
+-   console.log(&quot;Old&quot;);
+-     if (false) {
+-       return 0;
+-     }
+- }</textarea>
 
     <div class="btn-group">
         <button class="btn-primary" onclick="removeSymbols()">✨ 移除 + / - 符号</button>
@@ -122,7 +122,7 @@
 
     <!-- 输出区：改为可编辑的 textarea -->
     <div class="label-row">
-        <span>📤 输出结果（可直接编辑）</span>
+        <span>📤 输出结果<code>可编辑</code></span>
         <span class="badge-edit">✏️ 可编辑</span>
     </div>
     <textarea id="resultBox" placeholder="点击上方按钮处理文本" spellcheck="false"></textarea>
