@@ -536,6 +536,8 @@
             panel.classList.remove('panel-visible');
             panel.classList.add('panel-hidden');
         }
+        // 修复：关闭主面板时同时关闭颜色选择器
+        hideColorPicker();
         // 隐藏蒙版
         hideOverlay();
     }
@@ -555,6 +557,7 @@
         if (picker) {
             picker.classList.remove('picker-visible');
             picker.classList.add('picker-hidden');
+            picker.style.zIndex = ''; // 重置 z-index
         }
     }
 
@@ -913,6 +916,63 @@
             }, { passive: false });
         }
     }
+
+    // ================================================================
+    //  自定义字体接口（预留）
+    //
+    //  使用方式：
+    //    1. 在面板 HTML 中添加输入框（id: custom-font-url, custom-font-name）
+    //    2. 添加加载按钮（id: load-custom-font-btn）
+    //    3. 调用 loadCustomFont(url, fontName)
+    //
+    //  参数：
+    //    - url: 字体引入链接
+    //    - fontName: 字体名称（可选，不填则自动从 URL 提取）
+    //
+    //  支持的格式：
+    //    - Google Fonts CSS: https://fonts.googleapis.com/css2?family=Noto+Sans+SC
+    //    - @import 语句: @import url('https://cdn.example.com/font.css');
+    //    - 字体 CDN 链接: https://cdn.example.com/font.css
+    //
+    //  示例代码（取消注释即可使用）：
+    //
+    //  function loadCustomFont(url, fontName) {
+    //      if (!url) return alert('请输入字体链接');
+    //      if (!fontName) {
+    //          const match = url.match(/family=([^:&]+)/);
+    //          fontName = match ? decodeURIComponent(match[1].replace(/\+/g, ' ')) : '自定义字体';
+    //      }
+    //      const styleId = 'custom-font-' + fontName.replace(/\s+/g, '-');
+    //      if (!document.getElementById(styleId)) {
+    //          const style = document.createElement('style');
+    //          style.id = styleId;
+    //          style.textContent = url.includes('@import') ? url : "@import url('" + url + "');";
+    //          document.head.appendChild(style);
+    //      }
+    //      var fontValue = "'" + fontName + "', sans-serif";
+    //      document.documentElement.style.setProperty('--main-font', fontValue);
+    //      var fontSelect = document.getElementById('font-select');
+    //      if (fontSelect) {
+    //          var option = document.createElement('option');
+    //          option.value = fontValue;
+    //          option.textContent = fontName;
+    //          fontSelect.appendChild(option);
+    //          fontSelect.value = fontValue;
+    //      }
+    //      var settings = getSettings();
+    //      settings.font = fontValue;
+    //      saveSettings(settings);
+    //  }
+    //
+    //  // 事件绑定（放在 rebindEvents 中）
+    //  document.getElementById('load-custom-font-btn').addEventListener('click', function(e) {
+    //      e.stopPropagation();
+    //      var url = document.getElementById('custom-font-url').value.trim();
+    //      var name = document.getElementById('custom-font-name').value.trim();
+    //      loadCustomFont(url, name);
+    //  });
+    // ================================================================
+
 })();
 
 

@@ -7936,7 +7936,7 @@ blockquote.pullquote.right {
 .author-content-item {
   width: 49%;
   border-radius: 24px;
-  background: var(--anzhiyu-card-bg);
+  background: transparent;
   border: var(--style-border-always);
   box-shadow: var(--anzhiyu-shadow-border);
   position: relative;
