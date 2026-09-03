@@ -557,7 +557,7 @@
         if (picker) {
             picker.classList.remove('picker-visible');
             picker.classList.add('picker-hidden');
-            picker.style.zIndex = ''; // 重置 z-index
+            // picker.style.zIndex = ''; // 重置 z-index
         }
     }
 
