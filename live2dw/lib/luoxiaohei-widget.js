@@ -130,7 +130,8 @@
       '#l2d-menu .l2d-btn:active{transform:translate(-50%,-50%) scale(0.95)!important}' +
 
       // --- 模型区域悬停检测 ---
-      '#l2d-hover-area{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:auto}' +
+      // z-index要高于旧版L2Dwidget的canvas(z-index通常是9999)
+      '#l2d-hover-area{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:auto;z-index:10001}' +
 
       // --- 移动端适配 ---
       '@media (max-width:768px){' +
@@ -175,7 +176,7 @@
     // 计算总高度，垂直居中排列
     const totalHeight = buttonCount * buttonSize + (buttonCount - 1) * gap;
     const startY = -totalHeight / 2; // 从中心向上偏移一半高度
-    const x = containerWidth / 2 + buttonSize / 2 + 5; // 在容器右侧
+    const x = containerWidth - buttonSize / 2 + 2; // 在容器右侧（距离模型更近）
 
     FUNCTION_BUTTONS.forEach(function (btn, index) {
       // 纵向排列：在模型右侧
