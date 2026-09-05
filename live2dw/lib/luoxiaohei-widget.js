@@ -132,15 +132,13 @@
         resolve();
         return;
       }
-      // 加载 pixi.js (v6 correct path)
-      loadScript('https://cdn.jsdelivr.net/npm/pixi.js@6.5.10/dist/browser/pixi.min.js')
+      // Load local vendor libraries (faster & more reliable than CDN)
+      loadScript('/live2dw/lib/vendor/pixi.min.js')
         .then(function () {
-          // 加载 Cubism 4 Core (required for .moc3 models)
-          return loadScript('https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js');
+          return loadScript('/live2dw/lib/vendor/live2dcubismcore.min.js');
         })
         .then(function () {
-          // 加载 pixi-live2d-display (index.js includes both cubism2 and cubism4)
-          return loadScript('https://cdn.jsdelivr.net/npm/pixi-live2d-display@0.4.0/dist/index.min.js');
+          return loadScript('/live2dw/lib/vendor/live2d-display.min.js');
         })
         .then(function () {
           isInitialized = true;
