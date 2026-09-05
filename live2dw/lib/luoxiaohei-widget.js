@@ -125,7 +125,7 @@
     if (oldCanvas) oldCanvas.style.display = '';
   }
 
-  // 初始化 PIXI 和 Live2d Display
+  // 初始化 PIXI 和 Live2d Display (Cubism 4 for .moc3 models)
   function initPixi() {
     return new Promise(function (resolve, reject) {
       if (isInitialized) {
@@ -135,7 +135,11 @@
       // 加载 pixi.js (v6 correct path)
       loadScript('https://cdn.jsdelivr.net/npm/pixi.js@6.5.10/dist/browser/pixi.min.js')
         .then(function () {
-          // 加载 pixi-live2d-display
+          // 加载 Cubism 4 Core (required for .moc3 models)
+          return loadScript('https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js');
+        })
+        .then(function () {
+          // 加载 pixi-live2d-display (index.js includes both cubism2 and cubism4)
           return loadScript('https://cdn.jsdelivr.net/npm/pixi-live2d-display@0.4.0/dist/index.min.js');
         })
         .then(function () {
