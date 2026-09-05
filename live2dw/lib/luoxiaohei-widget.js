@@ -132,13 +132,14 @@
         resolve();
         return;
       }
-      // Load local vendor libraries (faster & more reliable than CDN)
+      // Load local vendor libraries in correct order:
+      // 1. PIXI.js → 2. Cubism Core → 3. pixi-live2d-display (cubism4 bundle)
       loadScript('/live2dw/lib/vendor/pixi.min.js')
         .then(function () {
           return loadScript('/live2dw/lib/vendor/live2dcubismcore.min.js');
         })
         .then(function () {
-          return loadScript('/live2dw/lib/vendor/live2d-display.min.js');
+          return loadScript('/live2dw/lib/vendor/cubism4.min.js');
         })
         .then(function () {
           isInitialized = true;
