@@ -4189,7 +4189,7 @@ h1.page-title + .tag-cloud-list {
   border: none;
   cursor: pointer;
   font-size: 16px;
-  color: var(--light-grey, #333);
+  color: var(--main-color, #333);
   border-radius: 50%;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
@@ -4198,10 +4198,10 @@ h1.page-title + .tag-cloud-list {
   transition: all 0.3s ease;
   position: relative;
   padding: 10px 10px 6px;
-  margin: 0 8px 0 0;
+  margin: 3px 8px 0 0;
 }
 .cc-trigger:hover {
-  color: var(--main-color, #333);
+  color: var(--light-grey, #333);
   padding: 10px 10px 6px;
   background: rgba(128,128,128,0.15);
   -webkit-transform: scale(1.05);
