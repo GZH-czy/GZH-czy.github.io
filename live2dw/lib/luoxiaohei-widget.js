@@ -132,8 +132,8 @@
         resolve();
         return;
       }
-      // 加载 pixi.js
-      loadScript('https://cdn.jsdelivr.net/npm/pixi.js@6.5.10/dist/pixi.min.js')
+      // 加载 pixi.js (v6 correct path)
+      loadScript('https://cdn.jsdelivr.net/npm/pixi.js@6.5.10/dist/browser/pixi.min.js')
         .then(function () {
           // 加载 pixi-live2d-display
           return loadScript('https://cdn.jsdelivr.net/npm/pixi-live2d-display@0.4.0/dist/index.min.js');
