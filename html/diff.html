@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diff 去符号工具</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            max-width: 900px; margin: 40px auto; padding: 20px;
+            background: #0d1117; color: #e6edf3;
+        }
+        h1 { font-size: 24px; margin-bottom: 8px; }
+        .sub { color: #8b949e; margin-bottom: 20px; font-size: 14px; }
+        textarea {
+            width: 100%;
+            background: #161b22; color: #e6edf3;
+            border: 1px solid #30363d; border-radius: 8px;
+            padding: 16px; font-size: 14px; font-family: "JetBrains Mono", monospace;
+            resize: vertical; outline: none; tab-size: 2;
+        }
+        textarea:focus { border-color: #58a6ff; }
+        #inputText { height: 200px; }
+        #resultBox {
+            height: 200px;
+            margin-top: 12px;
+        }
+        .btn-group { display: flex; gap: 12px; margin: 16px 0; flex-wrap: wrap; }
+        button {
+            padding: 10px 24px; border: none; border-radius: 8px;
+            font-size: 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-primary { background: #238636; color: #fff; }
+        .btn-primary:hover { background: #2ea043; }
+        .btn-secondary { background: #21262d; color: #c9d1d9; border: 1px solid #30363d; }
+        .btn-secondary:hover { background: #30363d; }
+        .btn-danger { background: #da3633; color: #fff; }
+        .btn-danger:hover { background: #f85149; }
+        .stats { color: #8b949e; font-size: 13px; margin-top: 8px; }
+        .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+        .badge {
+            display: inline-block; padding: 2px 10px; border-radius: 12px;
+            font-size: 12px; font-weight: 600;
+        }
+        .badge-added { background: #2ea04333; color: #3fb950; }
+        .badge-removed { background: #da363333; color: #f85149; }
+        .badge-clean { background: #23863633; color: #3fb950; }
+        .info-bar {
+            display: flex; gap: 16px; flex-wrap: wrap;
+            padding: 8px 12px; background: #161b22; border-radius: 6px;
+            border: 1px solid #30363d; font-size: 13px; color: #8b949e;
+            margin-bottom: 12px;
+        }
+        .info-bar span { display: flex; align-items: center; gap: 4px; }
+        kbd {
+            background: #21262d; padding: 1px 6px; border-radius: 4px;
+            font-size: 12px; border: 1px solid #30363d;
+        }
+        .toast {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: #21262d; color: #e6edf3; padding: 12px 28px;
+            border-radius: 8px; border: 1px solid #30363d;
+            font-size: 14px; z-index: 999;
+            opacity: 0; transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .toast.show { opacity: 1; }
+        .toast.success { border-color: #238636; }
+        .toast.error { border-color: #da3633; }
+        .label-row {
+            display: flex; justify-content: space-between; align-items: center;
+            margin: 16px 0 4px 0; font-size: 13px; color: #8b949e;
+        }
+        .label-row .badge-edit {
+            font-size: 11px; background: #21262d; padding: 2px 10px;
+            border-radius: 12px; border: 1px solid #30363d;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🧹 Diff 去符号工具</h1>
+    <p class="sub">粘贴带有 <code>+</code> / <code>-</code> 的 diff 文本，一键清理 <span style="color:#8b949e;font-size:12px;"></span></p>
+
+    <div class="info-bar">
+        <span>🔹 规则：移除行首的 <kbd>+</kbd> 或 <kbd>-</kbd>（无论后面是否有空格）</span>
+        <span>🔸 保留原有的所有缩进（空格 / Tab）</span>
+        <span>⏎ 快捷键 <kbd>Ctrl</kbd> + <kbd>Enter</kbd> 快速执行</span>
+    </div>
+
+    <!-- 输入区 -->
+    <div class="label-row">
+        <span>📥 输入 Diff</span>
+    </div>
+    <textarea id="inputText" placeholder="粘贴你的 diff 代码在这里..." spellcheck="false">+ function hello() {
++   console.log(&quot;Hello&quot;);
++     if (true) {
++       return 1;
++     }
++ }
+- function old() {
+-   console.log(&quot;Old&quot;);
+-     if (false) {
+-       return 0;
+-     }
+- }</textarea>
+
+    <div class="btn-group">
+        <button class="btn-primary" onclick="removeSymbols()">✨ 移除 + / - 符号</button>
+        <button class="btn-secondary" onclick="removeAddedOnly()">🟢 只保留新增 (+)</button>
+        <button class="btn-secondary" onclick="removeRemovedOnly()">🔴 只保留删除 (-)</button>
+        <button class="btn-secondary" onclick="clearAll()">🗑️ 清空</button>
+        <button class="btn-primary" onclick="copyResult()">📋 复制结果</button>
+    </div>
+
+    <div class="row">
+        <span class="stats" id="stats">等待处理...</span>
+        <span class="stats" id="copyStatus" style="color:#8b949e;"></span>
+    </div>
+
+    <!-- 输出区：改为可编辑的 textarea -->
+    <div class="label-row">
+        <span>📤 输出结果<code>可编辑</code></span>
+        <span class="badge-edit">✏️ 可编辑</span>
+    </div>
+    <textarea id="resultBox" placeholder="点击上方按钮处理文本" spellcheck="false"></textarea>
+
+    <!-- Toast 提示 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // Toast 提示函数
+        function showToast(msg, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.className = 'toast ' + type + ' show';
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        // ===== 核心函数：移除行首的 +/- 符号，保留所有缩进 =====
+        function cleanDiff(text, keepPrefix = null) {
+            return text.split('\n')
+                .map(line => {
+                    if (line.trim() === '') return '';
+                    if (keepPrefix === 'add' && !line.startsWith('+')) return null;
+                    if (keepPrefix === 'remove' && !line.startsWith('-')) return null;
+                    // 匹配行首的 + 或 -，后面的空格可有可无
+                    return line.replace(/^[+-] ?/, '');
+                })
+                .filter(line => line !== null)
+                .join('\n');
+        }
+
+        function getInput() {
+            return document.getElementById('inputText').value;
+        }
+
+        function setResult(text) {
+            const displayText = text || '';
+            document.getElementById('resultBox').value = displayText;
+            updateStats(text);
+        }
+
+        function updateStats(text) {
+            const lines = text ? text.split('\n') : [];
+            const nonEmptyLines = lines.filter(l => l.trim().length > 0);
+            const added = text ? text.split('\n').filter(l => l.startsWith('+')).length : 0;
+            const removed = text ? text.split('\n').filter(l => l.startsWith('-')).length : 0;
+            const total = nonEmptyLines.length;
+
+            let statsHTML = `共 ${total} 行 &nbsp;|&nbsp;`;
+            statsHTML += `<span class="badge badge-added">+ ${added} 行新增</span> `;
+            statsHTML += `<span class="badge badge-removed">- ${removed} 行删除</span> `;
+            if (text && total > 0) {
+                statsHTML += `<span class="badge badge-clean">✅ 已清理</span>`;
+            }
+            document.getElementById('stats').innerHTML = statsHTML;
+        }
+
+        function removeSymbols() {
+            const input = getInput();
+            if (!input.trim()) {
+                showToast('⚠️ 请先粘贴 diff 内容', 'error');
+                return;
+            }
+            const result = cleanDiff(input);
+            setResult(result);
+            showToast('✅ 已移除 +/- 符号，缩进已保留', 'success');
+        }
+
+        function removeAddedOnly() {
+            const input = getInput();
+            if (!input.trim()) {
+                showToast('⚠️ 请先粘贴 diff 内容', 'error');
+                return;
+            }
+            const result = cleanDiff(input, 'add');
+            setResult(result);
+            showToast('✅ 已提取新增 (+) 内容', 'success');
+        }
+
+        function removeRemovedOnly() {
+            const input = getInput();
+            if (!input.trim()) {
+                showToast('⚠️ 请先粘贴 diff 内容', 'error');
+                return;
+            }
+            const result = cleanDiff(input, 'remove');
+            setResult(result);
+            showToast('✅ 已提取删除 (-) 内容', 'success');
+        }
+
+        function clearAll() {
+            document.getElementById('inputText').value = '';
+            document.getElementById('resultBox').value = '';
+            document.getElementById('stats').textContent = '等待处理...';
+            document.getElementById('copyStatus').textContent = '';
+        }
+
+        // ===== 复制功能 =====
+        function copyResult() {
+            const resultBox = document.getElementById('resultBox');
+            const text = resultBox.value;
+
+            if (!text || text.trim() === '') {
+                showToast('⚠️ 没有内容可复制，请先处理 diff', 'error');
+                return;
+            }
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text)
+                    .then(() => {
+                        showToast('✅ 已复制到剪贴板！（' + text.split('\n').length + ' 行）', 'success');
+                    })
+                    .catch(() => {
+                        fallbackCopy(text);
+                    });
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            try {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.left = '-9999px';
+                ta.style.top = '-9999px';
+                document.body.appendChild(ta);
+                ta.focus();
+                ta.select();
+                const success = document.execCommand('copy');
+                document.body.removeChild(ta);
+                if (success) {
+                    showToast('✅ 已复制到剪贴板！（' + text.split('\n').length + ' 行）', 'success');
+                } else {
+                    showToast('⚠️ 复制失败，请手动 Ctrl+A 全选后 Ctrl+C 复制', 'error');
+                }
+            } catch (e) {
+                showToast('❌ 复制失败，请手动选中结果框内容复制', 'error');
+            }
+        }
+
+        // 键盘快捷键：Ctrl+Enter 执行
+        document.getElementById('inputText').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+                removeSymbols();
+            }
+        });
+
+        // 结果框也支持 Ctrl+Enter 重新处理（方便编辑后重新清理）
+        document.getElementById('resultBox').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+                // 把结果框内容作为输入重新处理
+                const currentText = document.getElementById('resultBox').value;
+                document.getElementById('inputText').value = currentText;
+                removeSymbols();
+            }
+        });
+
+        // 初始化示例
+        const defaultExample = `+function hello() {
++  console.log("Hello");
++    if (true) {
++      return 1;
++    }
++}
+-function old() {
+-  console.log("Old");
+-    if (false) {
+-      return 0;
+-    }
+-}`;
+        // 如果有内容就不覆盖
+        if (!document.getElementById('inputText').value) {
+            document.getElementById('inputText').value = defaultExample;
+        }
+    </script>
+
+</body>
+</html>

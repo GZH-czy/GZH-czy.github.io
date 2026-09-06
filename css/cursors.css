@@ -1,0 +1,76 @@
+/* ===== 自定义鼠标光标样式 - 完整版 ===== */
+
+/* 默认光标 */
+body {
+  cursor: url('/cursors/HK/normal.cur') 0 0, auto;
+}
+
+/* 链接和可点击元素 */
+a,
+a *,
+button,
+button *,
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+label,
+select,
+summary,
+[role="button"],
+[onclick] {
+  cursor: url('/cursors/HK/link.cur') 0 0, pointer;
+}
+
+/* 文本输入区域 */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+textarea,
+[contenteditable="true"] {
+  cursor: url('/cursors/HK/text.cur') 0 0, text;
+}
+
+/* 忙碌状态（加载中） */
+.busy,
+.loading {
+  cursor: url('/cursors/HK/normal.cur') 0 0, wait;
+}
+
+/* 水平调整大小 */
+.col-resize,
+[data-resize="horizontal"] {
+  cursor: url('/cursors/HK/horiz.cur') 0 0, ew-resize;
+}
+
+/* 垂直调整大小 */
+.row-resize,
+[data-resize="vertical"] {
+  cursor: url('/cursors/HK/vert.cur') 0 0, ns-resize;
+}
+
+/* 移动/拖拽 */
+.move,
+[draggable="true"] {
+  cursor: url('/cursors/HK/move.cur') 0 0, move;
+}
+
+/* 精确选择/十字光标 */
+.crosshair,
+.precise-select {
+  cursor: url('/cursors/HK/normal.cur') 0 0, crosshair;
+}
+
+/* 不可用/禁用 */
+.disabled,
+[disabled] {
+  cursor: url('/cursors/HK/normal.cur') 0 0, not-allowed;
+}
+
+/* 帮助选择 */
+.help-select {
+  cursor: url('/cursors/HK/help.cur') 0 0, help;
+}
+CSS
