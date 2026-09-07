@@ -1022,7 +1022,7 @@ body:has(#anMusic-page) .aplayer .aplayer-info .aplayer-controller .aplayer-time
 /*=============================================一般主题设置放在下面=================================================*/
 /*最上面的界面*/
 #nav-right{
-    flex:1 1 auto;
+    flex:0.75 1 auto;
     justify-content: flex-end;
     margin-left: auto;
     display: flex;
