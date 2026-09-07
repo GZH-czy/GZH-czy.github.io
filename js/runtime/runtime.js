@@ -10,7 +10,7 @@ function createtime() {
  width="40" height="40" title='距离月入25k也就还差一个大佬带我~'><span class='textTip'>
  <br> 本站居然运行了 ${a} 天</span>
  <span id='runtime'> ${r} 小时 ${i} 分 ${l} 秒 </span> <i class='fas fa-heartbeat' style='color:red'>
- </i>`: `<img class='boardsign' src='https://picx.zhimg.com/80/v2-3602778a69a13bc5650d30a99a89feeb_720w.webp?source=1def8aca' 
+ </i>`: `<img class='boardsign' src='http://nextcloud.gzh-czy.de5.net/s/4EHzGR9sAi7PYDf/preview' 
  width="40" height="40" title='下班了就该开开心心的玩耍，嘿嘿~'><span class='textTip'> 
  <br> 本站居然运行了 ${a} 天</span><span id='runtime'> ${r} 小时 ${i} 分 ${l} 秒 </span> <i class='fas fa-heartbeat' style='color:red'>
  </i>`, document.getElementById("workboard") && (document.getElementById("workboard").innerHTML = g)
